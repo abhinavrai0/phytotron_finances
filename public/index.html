@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html ng-app="billing">
+<head>
+<title>Phytotron Billing Application</title>
+<link rel="stylesheet" href="css/main.css" type="text/css" />
+<!-- <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.css"> -->
+<!-- NC State Bootstrap CSS -->
+<link
+	href="https://cdn.ncsu.edu/brand-assets/bootstrap/css/bootstrap.css"
+	rel="stylesheet" media="screen" type="text/css" />
+<link href="https://cdn.ncsu.edu/brand-assets/fonts/include.css"
+	rel="stylesheet" type="text/css" />
+<!-- jQuery 2.1.0 -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script
+	src="https://cdn.ncsu.edu/brand-assets/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body
+	class="home page-template-default page page-id-4 custom-background siteorigin-panels siteorigin-panels-home no-sidebar content-width excerpt-image-left sfsi_1.64">
+
+	<div>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="myclass">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a href="https://phytotron.ncsu.edu/index.php">Phytotron</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#/billing_info">Billing Information <span
+								class="sr-only">(current)</span></a></li>
+						<!-- <li><a href="#">Link</a></li> -->
+						<!-- <li><a href="#">Billing Information</a></li> -->
+						<li><a href="#/tracking_usage">Tracking Usage</a></li>
+						<li><a href="#/chamber_list">Chambers</a></li>
+						<li><a href="#/department_list">Department</a></li>
+						<li><a href="#/crop_list">Crop</a></li>
+						<!-- <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Billing Information</a></li>
+            <li><a href="#">Tracking Usage</a></li>
+            <li><a href="#">Chambers</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li> -->
+					</ul>
+					<!-- <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form> -->
+					<!-- <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul> -->
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+	</div>
+
+
+
+	<!-- <div class="row">
+
+<nav class="navbar navar-default" role="navigation">
+	<div class="container-fluid">
+    	<div class="navbar-header">
+        	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsedNav">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        	</button>
+
+        	<a href="https://www.csc.ncsu.edu/index.php" class="navbar-brand">Computer Science</a>
+        </div>
+
+			<div class="collapse navbar-collapse" id="collapsedNav">
+				<ul class="nav navbar-nav">
+                	<li class="bb">
+						<a href="/about_us.php">About</a>
+						</li><li class="dropdown">
+							  <a href="/academics/" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Academics <span class="caret"></span></a>
+							  <ul class="dropdown-menu" role="menu">
+								  <li class="bb"><a href="/academics/undergrad/index.php">Undergraduate Program</a></li><li class="divider"></li>
+								  <li class="bb"><a href="/academics/graduate/index.php">Graduate Program</a></li><li class="divider"></li>
+								  <li><a href="/courses/index.php">Courses</a></li><li class="divider"></li>
+							  </ul>
+
+						</li>
+
+						<li class="bb"><a href="https://www.csc.ncsu.edu/research/index.php">Research</a></li>
+
+						<li class="dropdown">
+							<a href="/directories/" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">People <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li class="bb"><a href="/directories/admin.php">Administration</a></li><li class="divider"></li>
+								<li class="bb"><a href="/directories/faculty.php">Faculty</a></li><li class="divider"></li>
+								<li class="bb"><a href="/directories/staff.php">Staff</a></li><li class="divider"></li>
+								<li class="bb"><a href="/directories/students.php">Students</a></li><li class="divider"></li>
+								<li class="bb"><a href="/alumni/index.php">Alumni</a></li><li class="divider"></li>
+								<li><a href="/directories/sab/index.php">Strategic Advisory Board</a></li>
+
+							</ul>
+                         </li>
+
+
+                    <li class="bb"><a href="/news/index.php">News</a></li>
+                    <li class="bb"><a href="/contactus.php">Contact</a></li>
+				</ul>
+			</div>
+
+	</div>
+</nav>
+</div> -->
+
+
+
+
+
+	<!-- {{3+9}}	 -->
+	<ng-view></ng-view>
+	<script
+		src="https://cdn.ncsu.edu/brand-assets/utility-bar/ub.php?googleCustomSearchCode=Search ncsu.edu&placeholder=Search ncsu.edu&maxWidth=1100&color=gray&showBrick=1"></script>
+	<script src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
+	<script type="text/javascript" src="js/services.js"></script>
+
+
+</body>
+</html>

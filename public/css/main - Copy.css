@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+.navbar {margin-top: 50px;}
+
+.navbar-brand {color: black;
+	font-size: 32px;}
+a:hover.navbar-brand {color: #c00;}
+
+
+.icon-bar {background-color: #c00;}
+
+nav #collapsedNav {float: right;
+	font-size: 16px;}
+nav #collapsedNav a {color: black;}
+nav #collapsedNav a:hover {color: #c00;
+	background-color: white;}
+nav li.dropdown>a:visited {background-color: white;}
+nav li.dropdown.open {background-color: #f2f2f2;}
+nav #collapsedNav .dropdown li {color: #ccc;}
+nav #collapsedNav .dropdown li a {color: black;}
+nav #collapsedNav .dropdown li a:hover {color: #900;}
+
+
+nav .caret {display: none;}
+
+nav .dropdown-menu {background-color: #f2f2f2;
+	border: none;}
+	
+.nav li a:hover, .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {background-color: #f2f2f2;}
+	
+nav .dropdown-menu li a:hover {background-color: #ccc;}
+
+nav .dropdown-menu .divider {margin: 0;}
+
+
+
+/* for whole site */
+button {outline: none;}
+
+p a {text-decoration: none;}
+/* */
+
+@media (max-width: 992px) {
+	.navbar-brand {font-size: 18px;}
+	nav #collapsedNav {font-size: 14px;}
+}
+
+
+/* navbar collapses */
+
+@media (max-width: 767px) {
+	
+	.container-fluid {padding: 0;
+		overflow: hidden;}
+	
+	.navbar-header {padding: 0 15px;}
+	
+	.navbar-brand {font-size: 28px;}
+   
+   	.navbar-collapse {max-height: none;}
+   
+	nav #collapsedNav {float: left;
+		width: 100%;
+		font-family: "UniversLight";
+		font-size: 16px;
+		margin-left: 0;}
+		
+	nav #collapsedNav .bb {border-bottom: solid 1px #ccc;}
+	
+	nav #collapsedNav .dropdown li a {color: black;}
+	
+	nav .dropdown {border-bottom: solid 1px #ccc;}
+	
+	nav .dropdown-menu li a {margin-left: 0;}
+		
+	nav .navbar-nav .open .dropdown-menu>li>a, .navbar-nav .open .dropdown-menu .dropdown-header {padding-left: 50px;}
+	
+	nav .caret {display: inline-block;}
+	
+	nav .divider {display: none;}
+	
+	
+}
+
+
+/*@media (-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) { 
+	
+}*/
+
+
+@media (max-width: 480px) {
+	.navbar-brand {font-size: 24px;}
+}
+
+
