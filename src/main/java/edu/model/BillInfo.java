@@ -9,12 +9,11 @@ import javax.persistence.Table;*/
 //import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.Size;
 
-
 @Entity
 public class BillInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	private String acc_number;
 	private String project_user_name;
 	private String project_user_email;
@@ -22,11 +21,24 @@ public class BillInfo {
 	private String address;
 	private String project_name;
 	private float bill_rate;
-
-	public Integer getId() {
+	
+	public BillInfo(){
+	}
+	public BillInfo(String acc_number, String project_user_name, String project_user_email, String dept_name,
+			String address, String project_name, float bill_rate) {
+		super();
+		this.acc_number = acc_number;
+		this.project_user_name = project_user_name;
+		this.project_user_email = project_user_email;
+		this.dept_name = dept_name;
+		this.address = address;
+		this.project_name = project_name;
+		this.bill_rate = bill_rate;
+	}
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getAcc_number() {
