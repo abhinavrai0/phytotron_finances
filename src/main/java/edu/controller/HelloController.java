@@ -1,4 +1,4 @@
-package edu.ncsu.phytotron.finances;
+package edu.controller;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
