@@ -8,33 +8,12 @@
 			<th>Rate</th>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td>Hello</td>
-				<td>Akash</td>
-				<td>Computer Science</td>
-				<td>$15</td>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>Hello</td>
-				<td>Akash</td>
-				<td>Computer Science</td>
-				<td>$15</td>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>Hello</td>
-				<td>Akash</td>
-				<td>Computer Science</td>
-				<td>$15</td>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>Hello</td>
-				<td>Akash</td>
-				<td>Computer Science</td>
-				<td>$15</td>
+			<tr ng-repeat="savedInfo in BillList">
+					<td><a href="#/edit_billing_info" ng-click="editBillingInfo(savedInfo)">{{savedInfo.id}}</a></td>
+					<td><a href="#/edit_billing_info">{{savedInfo.project_name}}</a></td>
+					<td><a href="#/edit_billing_info">{{savedInfo.project_user_name}}</a></td>
+					<td><a href="#/edit_billing_info">{{savedInfo.dept_name}}</a></td>
+					<td><a href="#/edit_billing_info">{{savedInfo.bill_rate}}</a></td>
 			</tr>
 		</tbody>
 	</table>

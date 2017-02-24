@@ -1,4 +1,6 @@
-var billingApp = angular.module( "billing", ["ngRoute"] )
+'use strict';
+
+var billingApp = angular.module( "billing", ["ngRoute","ngResource"] )
   .config(function ($routeProvider){
     $routeProvider
     .when("/",{
@@ -12,6 +14,10 @@ var billingApp = angular.module( "billing", ["ngRoute"] )
     .when("/add_billing_info",{
       templateUrl: "./partials/add_billing_info.html",
 			controller: "add_billing_info_Controller"
+    })
+    .when("/edit_billing_info",{
+      templateUrl: "./partials/edit_billing_info.html",
+			controller: "edit_billing_info_Controller"
     })
     .when("/tracking_usage",{
       templateUrl: "./partials/tracking_usage.html",
