@@ -29,9 +29,9 @@ billingApp.controller("edit_billing_info_Controller", function($rootScope,$scope
 			$scope.status = response.data;
 			$log.info(response);
 	});
-
 	$scope.submit=function(){
-		$http.post("/bill-info/",billing_form)
+
+		$http.post("/bill-info/",$scope.billing_form)
 		.success(function(billing_form, status, headers, config) {
 			$scope.message = billing_form;
 		})
@@ -44,7 +44,7 @@ billingApp.controller("edit_billing_info_Controller", function($rootScope,$scope
 
 billingApp.controller("add_billing_info_Controller", function($scope,$http){
 	$scope.message="Add Billing Info";
-	billing_form={
+	var billing_form={
 			project_user_name:"",
 			project_user_email:"",
 			dept_name:"",

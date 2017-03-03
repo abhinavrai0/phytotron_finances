@@ -10,10 +10,10 @@
 		<tbody>
 			<tr ng-repeat="savedInfo in BillList">
 					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.id}}</a></td>
-					<td><a href="#/edit_billing_info">{{savedInfo.project_name}}</a></td>
-					<td><a href="#/edit_billing_info">{{savedInfo.project_user_name}}</a></td>
-					<td><a href="#/edit_billing_info">{{savedInfo.dept_name}}</a></td>
-					<td><a href="#/edit_billing_info">{{savedInfo.bill_rate}}</a></td>
+					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.project_name}}</a></td>
+					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.project_user_name}}</a></td>
+					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.dept_name}}</a></td>
+					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.bill_rate}}</a></td>
 			</tr>
 		</tbody>
 	</table>
