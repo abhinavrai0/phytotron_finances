@@ -1,4 +1,4 @@
-package edu.controller;
+/*package edu.controller;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +23,4 @@ public class HelloController {
 		System.out.println("==== in LoginApp ====");
 		return "reached";
 }
-}
+}*/

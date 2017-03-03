@@ -1,5 +1,6 @@
-package edu.model;
-
+/*package edu.model;
+import javax.persistence.Entity;
+@Entity
 public class User {
 	String email;
 	String pwd;
@@ -22,4 +23,4 @@ public class User {
 	public String getPwd() {
 		return pwd;
 	}
-}
+}*/
