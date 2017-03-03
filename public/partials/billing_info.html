@@ -9,7 +9,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="savedInfo in BillList">
-					<td><a href="#/edit_billing_info" ng-click="editBillingInfo(savedInfo)">{{savedInfo.id}}</a></td>
+					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.id}}</a></td>
 					<td><a href="#/edit_billing_info">{{savedInfo.project_name}}</a></td>
 					<td><a href="#/edit_billing_info">{{savedInfo.project_user_name}}</a></td>
 					<td><a href="#/edit_billing_info">{{savedInfo.dept_name}}</a></td>
