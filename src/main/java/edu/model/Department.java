@@ -24,6 +24,6 @@ public class Department {
 	}
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
-	}
+	} 
 
 }

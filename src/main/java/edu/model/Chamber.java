@@ -31,6 +31,6 @@ public class Chamber {
 	}
 	public void setChamberCarts(String chamberCarts) {
 		this.chamberCarts = chamberCarts;
-	}
+	} 
 
 }

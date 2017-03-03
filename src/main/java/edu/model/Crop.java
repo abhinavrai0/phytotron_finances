@@ -27,5 +27,5 @@ public class Crop {
 	}
 	public void setCropName(String cropName) {
 		this.cropName = cropName;
-	}
+	} 
 }

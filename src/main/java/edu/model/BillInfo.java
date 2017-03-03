@@ -23,7 +23,7 @@ public class BillInfo {
 	private float bill_rate;
 	
 	public BillInfo(){
-	}
+	} 
 	public BillInfo(String acc_number, String project_user_name, String project_user_email, String dept_name,
 			String address, String project_name, float bill_rate) {
 		super();

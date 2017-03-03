@@ -26,7 +26,7 @@ public class ChamberController {
 		List<Chamber> chamberList =new ArrayList<Chamber>();
 		chamberList = (List<Chamber>) chamberRepo.findAll();
 		return chamberList;
-	}
+	} 
 	@RequestMapping(value="/chamber/{id}",method=RequestMethod.GET)
 	public Chamber getChamber(@PathVariable("id") Long id) {
 		Chamber chamber=new Chamber();

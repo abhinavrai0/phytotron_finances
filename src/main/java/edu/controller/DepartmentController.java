@@ -36,7 +36,7 @@ public class DepartmentController {
             logger.error(e.getMessage());
         }
 		return Department;
-	}
+	} 
 
 	@RequestMapping(value="/Department/",method=RequestMethod.POST)
 	public Department createDepartment(@RequestBody Department Department) {

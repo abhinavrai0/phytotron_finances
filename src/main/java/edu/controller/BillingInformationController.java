@@ -57,7 +57,7 @@ public class BillingInformationController {
 		}
 		return bill;
 //		return "creation successful: " + String.valueOf(bill.getId());
-	}
+	} 
 	@RequestMapping(value="/bill-info/{id}",method=RequestMethod.PUT)
 	public BillInfo updateBill(@PathVariable("id") Long id,@RequestBody BillInfo updateBill) {
 		BillInfo bill= new BillInfo();
