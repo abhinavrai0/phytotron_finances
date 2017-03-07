@@ -4,22 +4,19 @@
 			<th>#</th>
 			<th>Chamber Type</th>
 			<th>Chamber Number</th>
+			<th>Carts</th>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td>A</td>
-				<td>01</td>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>A</td>
-				<td>02</td>
+			<tr ng-repeat="chamber in chamberList">
+				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.id}}</a></td>
+				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberType}}</a></td>
+				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberId}}</a></td>
+				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberCarts}}</a></td>
 			</tr>
 		</tbody>
 	</table>
 	<div>
-        <button type="submit" ng-click="addNewChamber()" class="btn btn-primary">Add New Chamber</button>
-    </div>
-	
+      <a class="btn btn-success" ng-href="#/add_chamber_info">Add New Chamber</a>
+  </div>
+
 </div>

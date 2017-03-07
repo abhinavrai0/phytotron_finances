@@ -109,22 +109,69 @@ billingApp.controller("add_tracking_usage_Controller", function($scope,$http){
 	// 	});
 	// }
 });
-billingApp.controller("chamber_list_Controller", function($scope,$http){
+billingApp.controller("chamber_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.message="Garg";
-	// var form={
-	// 		name:"",
-	// 		phone:"",
-	// 		email:"",
-	// 		address:""
-	// }
-	// $scope.form=form;
-	// $scope.submit=function(){
-	// 	$http.post("/saveSampleForm",form)
-	// 	.success(function(form, status, headers, config) {
-	// 		$scope.message = form;
-	// 	})
-	// 	.error(function(data, status, headers, config) {
-	// 		alert( "failure message: " + JSON.stringify({data: data}));
-	// 	});
-	// }
+	$scope.savedBillInfo=$http.get('/chamber/')
+		.then(function success(response) {
+			$scope.chamberList = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.chamberList = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+});
+billingApp.controller("add_chamber_info_Controller", function($scope,$http){
+	$scope.message="Add Chamber Info";
+	var chamber_form={
+			chamberType:"",
+			chamberId:"",
+			chamberCarts:""
+	};
+	$scope.chamber_form = chamber_form;
+	$scope.list=[];		// EMpty list to show data on page. TEsting purposes
+	$scope.submit=function(){
+		$scope.list.push(this.chamber_form);
+		if($scope.chamber_form){
+				$http.post("/chamber/",chamber_form)
+				.success(function(response) {
+					// remove this later
+					// console.log("pass"+JSON.stringify(response));
+				})
+				.error(function(response) {
+					console.log( "failure message: " + JSON.stringify(response));
+				});
+				$scope.chamber_form='';
+		}
+}
+});
+billingApp.controller("edit_chamber_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+	$scope.message="Edit Chamber Info";
+	$scope.id = $routeParams.id;
+	$scope.editChamberInfo=$http.get('/chamber/'+$scope.id)
+		.then(function success(response) {
+			$scope.chamber_form = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.selectedInfo = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+	$scope.submit=function(){
+
+		$http.post("/chamber/",$scope.chamber_form)
+		.success(function(chamber_form, status, headers, config) {
+			$scope.message = chamber_form;
+		})
+		.error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+		$scope.chamber_form='';
+	}
 });
