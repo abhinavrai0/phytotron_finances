@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import edu.model.Crop;
 import edu.service.CropCRUD;
 
-@RequestMapping
+@RestController
 public class CropController {
 	@Autowired
 	private CropCRUD CropRepo;
