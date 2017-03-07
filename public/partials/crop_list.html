@@ -1,0 +1,20 @@
+<div class="table-responsive col-sm-10">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<th>#</th>
+			<th>Crop Type</th>
+			<th>Crop Name</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="crop in cropList">
+				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.id}}</a></td>
+				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropType}}</a></td>
+				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropName}}</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+      <a class="btn btn-success" ng-href="#/add_crop_info">Add New Crop</a>
+  </div>
+
+</div>
