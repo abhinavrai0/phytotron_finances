@@ -10,30 +10,26 @@ import javax.persistence.Table;*/
 //import javax.validation.constraints.Size;
 import javax.persistence.*;
 @Entity
-public class BillInfo {
+public class ClientInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String acc_number;
 	private String project_user_name;
 	private String project_user_email;
 	private String dept_name;
 	private String address;
-	private String project_name;
-	private float bill_rate;
 	
-	public BillInfo(){
+	public ClientInfo(){
 	} 
-	public BillInfo(String acc_number, String project_user_name, String project_user_email, String dept_name,
-			String address, String project_name, float bill_rate) {
+	public ClientInfo(String project_user_name, String project_user_email, String dept_name,
+			String address) {
 		super();
-		this.acc_number = acc_number;
+		
 		this.project_user_name = project_user_name;
 		this.project_user_email = project_user_email;
 		this.dept_name = dept_name;
 		this.address = address;
-		this.project_name = project_name;
-		this.bill_rate = bill_rate;
+		
 	}
 	public Long getId() {
 		return id;
@@ -41,12 +37,7 @@ public class BillInfo {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getAcc_number() {
-		return acc_number;
-	}
-	public void setAcc_number(String acc_number) {
-		this.acc_number = acc_number;
-	}
+	
 	public String getProject_user_name() {
 		return project_user_name;
 	}
@@ -71,17 +62,4 @@ public class BillInfo {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getProject_name() {
-		return project_name;
-	}
-	public void setProject_name(String project_name) {
-		this.project_name = project_name;
-	}
-	public float getBill_rate() {
-		return bill_rate;
-	}
-	public void setBill_rate(float bill_rate) {
-		this.bill_rate = bill_rate;
-	}
-
 }

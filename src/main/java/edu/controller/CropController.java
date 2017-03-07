@@ -18,7 +18,7 @@ import edu.service.CropCRUD;
 public class CropController {
 	@Autowired
 	private CropCRUD CropRepo;
-	static final Logger logger = LogManager.getLogger(BillingInformationController.class.getName());
+	static final Logger logger = LogManager.getLogger(CropController.class.getName());
 
 
 	@RequestMapping(value="/Crop/",method=RequestMethod.GET)

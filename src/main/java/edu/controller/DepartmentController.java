@@ -18,7 +18,7 @@ import edu.service.DepartmentCRUD;
 public class DepartmentController {
 	@Autowired
 	private DepartmentCRUD DepartmentRepo;
-	static final Logger logger = LogManager.getLogger(BillingInformationController.class.getName());
+	static final Logger logger = LogManager.getLogger(DepartmentController.class.getName());
 
 
 	@RequestMapping(value="/Department/",method=RequestMethod.GET)

@@ -18,7 +18,7 @@ import edu.service.ChamberCRUD;
 public class ChamberController {
 	@Autowired
 	private ChamberCRUD chamberRepo;
-	static final Logger logger = LogManager.getLogger(BillingInformationController.class.getName());
+	static final Logger logger = LogManager.getLogger(ChamberController.class.getName());
 
 
 	@RequestMapping(value="/chamber/",method=RequestMethod.GET)
