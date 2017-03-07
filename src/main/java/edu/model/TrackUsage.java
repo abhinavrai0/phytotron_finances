@@ -13,6 +13,7 @@ public class TrackUsage {
 	private String project_name;
 	private Float rate;
 	private String acc_number;
+	private String chambers;
 	private Integer carts;
 	private Date startDate;
 	private Date endDate;

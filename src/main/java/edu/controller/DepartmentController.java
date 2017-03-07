@@ -21,13 +21,13 @@ public class DepartmentController {
 	static final Logger logger = LogManager.getLogger(DepartmentController.class.getName());
 
 
-	@RequestMapping(value="/Department/",method=RequestMethod.GET)
+	@RequestMapping(value="/department/",method=RequestMethod.GET)
 	public List<Department> getAllDepartments() {
 		List<Department> DepartmentList =new ArrayList<Department>();
 		DepartmentList = (List<Department>) DepartmentRepo.findAll();
 		return DepartmentList;
 	}
-	@RequestMapping(value="/Department/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/department/{id}",method=RequestMethod.GET)
 	public Department getDepartment(@PathVariable("id") Long id) {
 		Department Department=new Department();
 		try {
@@ -38,7 +38,7 @@ public class DepartmentController {
 		return Department;
 	} 
 
-	@RequestMapping(value="/Department/",method=RequestMethod.POST)
+	@RequestMapping(value="/department/",method=RequestMethod.POST)
 	public Department createDepartment(@RequestBody Department Department) {
 		logger.info("Creating Bill : {}", Department);
 		try {

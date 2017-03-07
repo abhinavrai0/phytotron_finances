@@ -21,13 +21,13 @@ public class CropController {
 	static final Logger logger = LogManager.getLogger(CropController.class.getName());
 
 
-	@RequestMapping(value="/Crop/",method=RequestMethod.GET)
+	@RequestMapping(value="/crop/",method=RequestMethod.GET)
 	public List<Crop> getAllCrops() {
 		List<Crop> CropList =new ArrayList<Crop>();
 		CropList = (List<Crop>) CropRepo.findAll();
 		return CropList;
 	} 
-	@RequestMapping(value="/Crop/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/crop/{id}",method=RequestMethod.GET)
 	public Crop getCrop(@PathVariable("id") Long id) {
 		Crop Crop=new Crop();
 		try {
@@ -38,7 +38,7 @@ public class CropController {
 		return Crop;
 	}
 
-	@RequestMapping(value="/Crop/",method=RequestMethod.POST)
+	@RequestMapping(value="/crop/",method=RequestMethod.POST)
 	public Crop createCrop(@RequestBody Crop Crop) {
 		logger.info("Creating Bill : {}", Crop);
 		try {
