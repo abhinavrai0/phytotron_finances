@@ -1,0 +1,27 @@
+<form class="form-horizontal" name="ChamberInfoForm" role = "form" ng-submit = "ChamberInfoForm.$valid && submit()">
+  <h3 align="center">Add New Chamber</h3>
+  <div class="form-group">
+    <label for="chamberType" class="col-sm-2 control-label">Chamber Type</label>
+    <div class="col-sm-8">
+      <input type="name" class="form-control" id="chamberType" ng-model="chamber_form.chamberType" placeholder="Enter the Chamber Type">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="id" class="col-sm-2 control-label">Chamber Id</label>
+    <div class="col-sm-8">
+      <input type="id" class="form-control" id="chamberId" ng-model="chamber_form.chamberId" placeholder="Enter Chamber Id/Number">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="carts" class="col-sm-2 control-label">Carts</label>
+    <div class="col-sm-8">
+      <input type="number" class="form-control" id="chamberCarts" ng-model= "chamber_form.chamberCarts" placeholder="Enter number of Carts available">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <button type="submit" class="btn btn-default">Save</button>
+      <a class="btn btn-default" ng-href="#/chamber_list">Go Back</a>
+    </div>
+  </div>
+</form>

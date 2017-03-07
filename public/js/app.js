@@ -30,5 +30,13 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource"] )
     .when("/chamber_list",{
       templateUrl: "./partials/chamber_list.html",
 			controller: "chamber_list_Controller"
+    })
+    .when("/add_chamber_info",{
+      templateUrl: "./partials/add_chamber_info.html",
+			controller: "add_chamber_info_Controller"
+    })
+    .when("/edit_chamber_info/:id",{
+      templateUrl: "./partials/edit_chamber_info.html",
+			controller: "edit_chamber_info_Controller"
     });
   });
