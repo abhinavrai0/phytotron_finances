@@ -41,7 +41,6 @@ billingApp.controller("edit_billing_info_Controller", function($rootScope,$scope
 		$scope.billing_form='';
 	}
 });
-
 billingApp.controller("add_billing_info_Controller", function($scope,$http){
 	$scope.message="Add Billing Info";
 	var billing_form={
@@ -69,7 +68,7 @@ billingApp.controller("add_billing_info_Controller", function($scope,$http){
 				});
 				$scope.billing_form='';
 		}
-}
+	}
 });
 billingApp.controller("tracking_usage_Controller", function($scope,$http){
 	$scope.message="Ankit";
@@ -111,7 +110,7 @@ billingApp.controller("add_tracking_usage_Controller", function($scope,$http){
 });
 billingApp.controller("chamber_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.message="Garg";
-	$scope.savedBillInfo=$http.get('/chamber/')
+	$scope.savedChamberInfo=$http.get('/chamber/')
 		.then(function success(response) {
 			$scope.chamberList = response.data;
 			$scope.config = response.config;
@@ -146,7 +145,7 @@ billingApp.controller("add_chamber_info_Controller", function($scope,$http){
 				});
 				$scope.chamber_form='';
 		}
-}
+	}
 });
 billingApp.controller("edit_chamber_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.message="Edit Chamber Info";
@@ -173,5 +172,136 @@ billingApp.controller("edit_chamber_info_Controller", function($rootScope,$scope
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
 		$scope.chamber_form='';
+	}
+});
+billingApp.controller("department_list_Controller", function($rootScope,$scope,$http,$log){
+	$scope.message="Department List";
+	$scope.savedDepartmentInfo=$http.get('/department/')
+		.then(function success(response) {
+			$scope.departmentList = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.departmentList = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+});
+billingApp.controller("add_department_info_Controller", function($scope,$http){
+	$scope.message="Add Department Info";
+	var department_form={
+			departmentId:"",
+			departmentName:""
+	};
+	$scope.department_form = department_form;
+	$scope.list=[];		// EMpty list to show data on page. TEsting purposes
+	$scope.submit=function(){
+		$scope.list.push(this.department_form);
+		if($scope.department_form){
+				$http.post("/department/",department_form)
+				.success(function(response) {
+					// remove this later
+					// console.log("pass"+JSON.stringify(response));
+				})
+				.error(function(response) {
+					console.log( "failure message: " + JSON.stringify(response));
+				});
+				$scope.department_form='';
+		}
+	}
+});
+billingApp.controller("edit_department_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+	$scope.message="Edit Department Info";
+	$scope.id = $routeParams.id;
+	$scope.editDepartmentInfo=$http.get('/department/'+$scope.id)
+		.then(function success(response) {
+			$scope.department_form = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.selectedInfo = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+	$scope.submit=function(){
+
+		$http.post("/department/",$scope.department_form)
+		.success(function(department_form, status, headers, config) {
+			$scope.message = department_form;
+		})
+		.error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+		$scope.department_form='';
+	}
+});
+
+billingApp.controller("crop_list_Controller", function($rootScope,$scope,$http,$log){
+	$scope.message="Crop List";
+	$scope.savedCropInfo=$http.get('/crop/')
+		.then(function success(response) {
+			$scope.cropList = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.cropList = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+});
+billingApp.controller("add_crop_info_Controller", function($scope,$http){
+	$scope.message="Add Crop Info";
+	var crop_form={
+			cropType:"",
+			cropName:""
+	};
+	$scope.crop_form = crop_form;
+	$scope.list=[];		// EMpty list to show data on page. TEsting purposes
+	$scope.submit=function(){
+		$scope.list.push(this.crop_form);
+		if($scope.crop_form){
+				$http.post("/crop/",crop_form)
+				.success(function(response) {
+					// remove this later
+					// console.log("pass"+JSON.stringify(response));
+				})
+				.error(function(response) {
+					console.log( "failure message: " + JSON.stringify(response));
+				});
+				$scope.crop_form='';
+		}
+	}
+});
+billingApp.controller("edit_crop_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+	$scope.message="Edit Crop Info";
+	$scope.id = $routeParams.id;
+	$scope.editCropInfo=$http.get('/crop/'+$scope.id)
+		.then(function success(response) {
+			$scope.crop_form = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.selectedInfo = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+	$scope.submit=function(){
+
+		$http.post("/crop/",$scope.crop_form)
+		.success(function(crop_form, status, headers, config) {
+			$scope.message = crop_form;
+		})
+		.error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+		$scope.crop_form='';
 	}
 });

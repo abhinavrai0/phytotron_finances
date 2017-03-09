@@ -38,5 +38,29 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource"] )
     .when("/edit_chamber_info/:id",{
       templateUrl: "./partials/edit_chamber_info.html",
 			controller: "edit_chamber_info_Controller"
+    })
+    .when("/department_list",{
+      templateUrl: "./partials/department_list.html",
+			controller: "department_list_Controller"
+    })
+    .when("/add_department_info",{
+      templateUrl: "./partials/add_department_info.html",
+			controller: "add_department_info_Controller"
+    })
+    .when("/edit_department_info/:id",{
+      templateUrl: "./partials/edit_department_info.html",
+			controller: "edit_department_info_Controller"
+    })
+    .when("/crop_list",{
+      templateUrl: "./partials/crop_list.html",
+			controller: "crop_list_Controller"
+    })
+    .when("/add_crop_info",{
+      templateUrl: "./partials/add_crop_info.html",
+			controller: "add_crop_info_Controller"
+    })
+    .when("/edit_crop_info/:id",{
+      templateUrl: "./partials/edit_crop_info.html",
+			controller: "edit_crop_info_Controller"
     });
   });
