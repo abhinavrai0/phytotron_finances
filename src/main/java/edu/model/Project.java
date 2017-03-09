@@ -1,43 +1,22 @@
 package edu.model;
+import edu.*;
 import java.util.Date;
 
 import javax.persistence.*;
-/*import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;*/
 @Entity
-public class TrackUsage {
+public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-//	private ClientInfo client;
-	
-	/*@ManyToOne
-    @JoinColumn(name = "book_category_id")
-	public ClientInfo getClient() {
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="client_id")
+	private Client client;
+
+	public Client getClient() {
 		return client;
 	}
-	public void setClient(ClientInfo client) {
+	public void setClient(Client client) {
 		this.client = client;
-	}*/
-	public String getChambers() {
-		return chambers;
-	}
-	public void setChambers(String chambers) {
-		this.chambers = chambers;
-	}
-	public Double getBillPaidTotal() {
-		return billPaidTotal;
-	}
-	public void setBillPaidTotal(Double billPaidTotal) {
-		this.billPaidTotal = billPaidTotal;
-	}
-	public Double getBillPay() {
-		return billPay;
-	}
-	public void setBillPay(Double billPay) {
-		this.billPay = billPay;
 	}
 	private String project_name;
 	private Float rate;
@@ -110,6 +89,24 @@ public class TrackUsage {
 	}
 	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
+	}
+	public String getChambers() {
+		return chambers;
+	}
+	public void setChambers(String chambers) {
+		this.chambers = chambers;
+	}
+	public Double getBillPaidTotal() {
+		return billPaidTotal;
+	}
+	public void setBillPaidTotal(Double billPaidTotal) {
+		this.billPaidTotal = billPaidTotal;
+	}
+	public Double getBillPay() {
+		return billPay;
+	}
+	public void setBillPay(Double billPay) {
+		this.billPay = billPay;
 	}
 
 }

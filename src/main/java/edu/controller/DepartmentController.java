@@ -20,7 +20,6 @@ public class DepartmentController {
 	private DepartmentCRUD DepartmentRepo;
 	static final Logger logger = LogManager.getLogger(DepartmentController.class.getName());
 
-
 	@RequestMapping(value="/department/",method=RequestMethod.GET)
 	public List<Department> getAllDepartments() {
 		List<Department> DepartmentList =new ArrayList<Department>();

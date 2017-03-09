@@ -14,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
-public class ClientInformationController {
+public class ClientController {
 	@Autowired
-	private ClientInfoCRUD clientCrudRepo;
+	private ClientCRUD clientCrudRepo;
 
-	static final Logger logger = LogManager.getLogger(ClientInformationController.class.getName());
+	static final Logger logger = LogManager.getLogger(ClientController.class.getName());
 
 	@RequestMapping(value="/client-info/",method=RequestMethod.GET)
-	public List<ClientInfo> getAllClients() {
-		List<ClientInfo> clientList =new ArrayList<ClientInfo>();
+	public List<Client> getAllClients() {
+		List<Client> clientList =new ArrayList<Client>();
 		System.out.println("aaaaaaa"+clientList);
-		clientList = (List<ClientInfo>) clientCrudRepo.findAll();
+		clientList = (List<Client>) clientCrudRepo.findAll();
 		System.out.println("a :"+clientList);
 		return clientList;
 	}
 	@RequestMapping(value="/client-info/{id}",method=RequestMethod.GET)
-	public ClientInfo getClient(@PathVariable("id") Long id) {
-		ClientInfo client=new ClientInfo();
+	public Client getClient(@PathVariable("id") Long id) {
+		Client client=new Client();
 		try {
 			client = clientCrudRepo.findOne(id);
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class ClientInformationController {
 	}
 
 	@RequestMapping(value="/client-info/",method=RequestMethod.POST)
-	public ClientInfo createClient(@RequestBody ClientInfo client) {
+	public Client createClient(@RequestBody Client client) {
 		System.out.println("--====Post Request=====--");
 		logger.info("Creating Client : {}", client);
 		/* if (clientCrudRepo.exists(client.getId()) {
@@ -59,8 +59,8 @@ public class ClientInformationController {
 //		return "creation successful: " + String.valueOf(client.getId());
 	} 
 	@RequestMapping(value="/client-info/{id}",method=RequestMethod.PUT)
-	public ClientInfo updateClient(@PathVariable("id") Long id,@RequestBody ClientInfo updateClient) {
-		ClientInfo client= new ClientInfo();
+	public Client updateClient(@PathVariable("id") Long id,@RequestBody Client updateClient) {
+		Client client= new Client();
 		client=clientCrudRepo.findOne(id);
 		if(client.getAddress()!=updateClient.getAddress()){
 			client.setAddress(updateClient.getAddress());

@@ -1,5 +1,7 @@
 package edu.model;
 
+import java.util.Set;
+
 /*import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,8 @@ import javax.persistence.Table;*/
 //import javax.validation.constraints.Size;
 import javax.persistence.*;
 @Entity
-public class ClientInfo {
+//@Table(name = "client_info")
+public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -19,9 +22,12 @@ public class ClientInfo {
 	private String dept_name;
 	private String address;
 	
-	public ClientInfo(){
+	@OneToMany(mappedBy="client")
+	private Set<Project> projects;
+	
+	public Client(){
 	} 
-	public ClientInfo(String project_user_name, String project_user_email, String dept_name,
+	public Client(String project_user_name, String project_user_email, String dept_name,
 			String address) {
 		super();
 		
