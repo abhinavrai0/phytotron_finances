@@ -20,7 +20,7 @@ public class ClientController {
 
 	static final Logger logger = LogManager.getLogger(ClientController.class.getName());
 
-	@RequestMapping(value="/client-info/",method=RequestMethod.GET)
+	@RequestMapping(value="/client/",method=RequestMethod.GET)
 	public List<Client> getAllClients() {
 		List<Client> clientList =new ArrayList<Client>();
 		System.out.println("aaaaaaa"+clientList);
@@ -28,7 +28,7 @@ public class ClientController {
 		System.out.println("a :"+clientList);
 		return clientList;
 	}
-	@RequestMapping(value="/client-info/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/client/{id}",method=RequestMethod.GET)
 	public Client getClient(@PathVariable("id") Long id) {
 		Client client=new Client();
 		try {
@@ -41,7 +41,7 @@ public class ClientController {
 		return client;
 	}
 
-	@RequestMapping(value="/client-info/",method=RequestMethod.POST)
+	@RequestMapping(value="/client/",method=RequestMethod.POST)
 	public Client createClient(@RequestBody Client client) {
 		System.out.println("--====Post Request=====--");
 		logger.info("Creating Client : {}", client);
@@ -58,7 +58,7 @@ public class ClientController {
 		return client;
 //		return "creation successful: " + String.valueOf(client.getId());
 	} 
-	@RequestMapping(value="/client-info/{id}",method=RequestMethod.PUT)
+	@RequestMapping(value="/client/{id}",method=RequestMethod.PUT)
 	public Client updateClient(@PathVariable("id") Long id,@RequestBody Client updateClient) {
 		Client client= new Client();
 		client=clientCrudRepo.findOne(id);
@@ -77,7 +77,7 @@ public class ClientController {
         clientCrudRepo.save(client);
 		return client;
 	}
-	@RequestMapping(value="/client-info/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value="/client/{id}",method=RequestMethod.DELETE)
 	public String deleteClient(@PathVariable("id") Long id) {
 		return "Greetings from Spring Boot!";
 	}
