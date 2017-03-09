@@ -11,13 +11,6 @@ public class Project {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="client_id")
 	private Client client;
-
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
 	private String project_name;
 	private Float rate;
 	private String acc_number;
@@ -35,6 +28,12 @@ public class Project {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	public String getProject_name() {
 		return project_name;

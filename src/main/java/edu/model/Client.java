@@ -17,8 +17,8 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String project_user_name;
-	private String project_user_email;
+	private String project_client_name;
+	private String project_client_email;
 	private String dept_name;
 	private String address;
 	
@@ -27,12 +27,12 @@ public class Client {
 	
 	public Client(){
 	} 
-	public Client(String project_user_name, String project_user_email, String dept_name,
+	public Client(String project_client_name, String project_client_email, String dept_name,
 			String address) {
 		super();
 		
-		this.project_user_name = project_user_name;
-		this.project_user_email = project_user_email;
+		this.project_client_name = project_client_name;
+		this.project_client_email = project_client_email;
 		this.dept_name = dept_name;
 		this.address = address;
 		
@@ -44,17 +44,17 @@ public class Client {
 		this.id = id;
 	}
 	
-	public String getProject_user_name() {
-		return project_user_name;
+	public String getProject_client_name() {
+		return project_client_name;
 	}
-	public void setProject_user_name(String project_user_name) {
-		this.project_user_name = project_user_name;
+	public void setProject_client_name(String project_client_name) {
+		this.project_client_name = project_client_name;
 	}
-	public String getProject_user_email() {
-		return project_user_email;
+	public String getProject_client_email() {
+		return project_client_email;
 	}
-	public void setProject_user_email(String project_user_email) {
-		this.project_user_email = project_user_email;
+	public void setProject_client_email(String project_client_email) {
+		this.project_client_email = project_client_email;
 	}
 	public String getDept_name() {
 		return dept_name;
