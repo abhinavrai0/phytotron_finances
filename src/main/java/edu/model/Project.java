@@ -8,7 +8,7 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="client_id")
 	private Client client;
 	private String project_name;
