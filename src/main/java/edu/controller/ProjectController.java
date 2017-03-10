@@ -47,7 +47,6 @@ public class ProjectController {
 			project = projectCrudRepo.findOne(id);
         } catch (Exception e) {
             logger.error(e.getMessage());
-//            return e.getMessage();
         }
 		System.out.println("Project :"+project);
 		return project;
@@ -76,16 +75,17 @@ public class ProjectController {
 	
 	@RequestMapping(value="/project/{id}",method=RequestMethod.PUT)
 	public Project updateProject(@PathVariable("id") Long id,@RequestBody Project updateProject) {
-		Project project= new Project();
-		project=projectCrudRepo.findOne(id);
+		/*Project project= new Project();
+		project=projectCrudRepo.findOne(id);*/
 		/*if(client.getAddress()!=updateProject.getAddress()){
 			client.setAddress(updateProject.getAddress());
 		}
 		if(client.getDept_name()!=updateProject.getDept_name()){
 			client.setDept_name(updateProject.getDept_name());
 		}*/
-        projectCrudRepo.save(project);
-		return project;
+		updateProject.setId(id);
+        projectCrudRepo.save(updateProject);
+		return updateProject;
 	}
 
 	
