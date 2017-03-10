@@ -14,8 +14,8 @@ billingApp.controller("client_list_Controller", function($rootScope,$scope,$http
 				$log.info(response);
 		});
 });
-billingApp.controller("edit_billing_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
-	$scope.message="Edit Billing Info";
+billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+	$scope.message="Edit Client";
 	$scope.id = $routeParams.id;
 	$scope.editBillInfo=$http.get('/bill-info/'+$scope.id)
 		.then(function success(response) {
@@ -55,8 +55,6 @@ billingApp.controller("add_client_info_Controller", function($scope,$http){
 		//$scope.list.push(this.client_form);
 		//$scope.HoldList.pust(this.billing_form);
 		if($scope.client_form){
-				// $scope.client_form.dept_name = $scope.client_form.dept_name.departmentName;
-				// console.log($scope.client_form.dept_name);
 				$http.post("/client/",$scope.client_form)
 				.success(function(response) {
 					// remove this later
