@@ -1,7 +1,7 @@
 'use strict';
 billingApp.controller("client_list_Controller", function($rootScope,$scope,$http,$log){
 		$scope.message="Client List";
-		$scope.savedClientInfo=$http.get('/client/')
+		$scope.savedClientInfo=$http.get('/client')
 			.then(function success(response) {
 				$scope.ClientList = response.data;
 				$scope.config = response.config;
@@ -13,13 +13,14 @@ billingApp.controller("client_list_Controller", function($rootScope,$scope,$http
 				$scope.status = response.data;
 				$log.info(response);
 		});
+		$scope.selectedClient="";
 });
 billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.message="Edit Client";
 	$scope.id = $routeParams.id;
-	$scope.editBillInfo=$http.get('/bill-info/'+$scope.id)
+	$scope.editClientInfo=$http.get('/client/'+$scope.id)
 		.then(function success(response) {
-			$scope.billing_form = response.data;
+			$scope.client_form = response.data;
 			$scope.config = response.config;
 			$scope.headers = response.headers;
 			$scope.status = response.status;
@@ -31,15 +32,28 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 	});
 	$scope.submit=function(){
 
-		$http.post("/bill-info/",$scope.billing_form)
-		.success(function(billing_form, status, headers, config) {
-			$scope.message = billing_form;
+		$http.post("/client",$scope.client_form)
+		.success(function(client_form, status, headers, config) {
+			$scope.message = client_form;
 		})
 		.error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
-		$scope.billing_form='';
+		$scope.client_form='';
 	}
+
+	$scope.savedDepartments=$http.get('/department/')
+		.then(function success(response) {
+			$scope.departments = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.departments = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
 });
 billingApp.controller("add_client_info_Controller", function($scope,$http){
 	$scope.message="Add Client Info";
@@ -249,7 +263,6 @@ billingApp.controller("edit_department_info_Controller", function($rootScope,$sc
 		$scope.department_form='';
 	}
 });
-
 billingApp.controller("crop_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.message="Crop List";
 	$scope.savedCropInfo=$http.get('/crop/')
@@ -313,5 +326,56 @@ billingApp.controller("edit_crop_info_Controller", function($rootScope,$scope,$h
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
 		$scope.crop_form='';
+	}
+});
+
+billingApp.controller("start_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+	$scope.message="Start Project";
+	/*get request returns a promise.
+	 http://stackoverflow.com/questions/31714821/access-http-get-json-property-in-angular-controller
+	*/
+  var uneditableEntry={content: {}};;
+	$scope.id = $routeParams.id;
+	uneditableEntry.$promise=$http.get('/client/'+$scope.id)
+		.then(function success(response) {
+			angular.copy(response.data, uneditableEntry.content);
+			$scope.client_unedit_form = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.selectedInfo = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+	var project_form={
+			client : uneditableEntry.content,
+			project_name :"",
+			rate:"",
+			acc_number:"",
+			chambers:"",
+			carts:"",
+			startDate:"",
+			endDate:"",
+			lastBillDate:"",
+			currentBill:"",
+			billPaidTotal:"",
+			billPay:"",
+			accountStatus:""
+	};
+	$scope.project_form = project_form;
+	$scope.submit=function(){
+		if($scope.project_form){
+				$http.post("/project/",$scope.project_form)
+				.success(function(response) {
+					// remove this later
+					// console.log("pass"+JSON.stringify(response));
+				})
+				.error(function(response) {
+					console.log( "failure message: " + JSON.stringify(response));
+				});
+				$scope.project_form='';
+		}
 	}
 });

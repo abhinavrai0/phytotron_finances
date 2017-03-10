@@ -8,15 +8,19 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="savedClient in ClientList">
-					<td><a href="#/edit_client_info/{{savedClient.id}}">{{savedClient.id}}</a></td>
+					<!-- ng-repeat creates a new scope of its own. That's why for ng-model you need to put parent
+					ng-value puts the given value in the ng-model
+					groupName is to select only one radio button.
+				  -->
+					<td><input type="radio" name="groupName" ng-model="$parent.selectedClient" ng-checked="false" ng-value="{{savedClient.id}}"></td>
 					<td><a href="#/edit_client_info/{{savedClient.id}}">{{savedClient.project_client_name}}</a></td>
 					<td><a href="#/edit_client_info/{{savedClient.id}}">{{savedClient.project_client_email}}</a></td>
 					<td><a href="#/edit_client_info/{{savedClient.id}}">{{savedClient.dept_name}}</a></td>
 			</tr>
 		</tbody>
 	</table>
-
 	<div>
 		<a class="btn btn-success" ng-href="#/add_client_info">Add New</a>
+		<a class="btn btn-success" ng-disabled = "!selectedClient" ng-href="#/start_project/{{selectedClient}}">Start New Project</a>
 	</div>
 </div>
