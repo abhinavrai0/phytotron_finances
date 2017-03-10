@@ -1,0 +1,31 @@
+<div class="table-responsive col-sm-10">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<th>#</th>
+			<th>Client Name</th>
+			<th>Client Email</th>
+			<th>Department</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="savedInfo in BillList">
+					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.id}}</a></td>
+					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.project_client_name}}</a></td>
+					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.project_client_email}}</a></td>
+					<td><a href="#/edit_billing_info/{{savedInfo.id}}">{{savedInfo.dept_name}}</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div>
+		<a class="btn btn-success" ng-href="#/add_client_info">Add New</a>
+	</div>
+</div>
+<!-- <div>
+	<select>
+	<option ng-repeat="x in chambers">{{x.chamberType}}</option>
+	</select>
+
+	<select>
+	<option ng-repeat="x in departments">{{x.departmentName}}</option>
+	</select>
+</div> -->

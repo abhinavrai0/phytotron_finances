@@ -4,16 +4,16 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource"] )
   .config(function ($routeProvider){
     $routeProvider
     .when("/",{
-      templateUrl: "./partials/billing_info.html",
-			controller: "billing_info_Controller"
+      templateUrl: "./partials/client_list.html",
+			controller: "client_list_Controller"
     })
-    .when("/billing_info",{
-      templateUrl: "./partials/billing_info.html",
-			controller: "billing_info_Controller"
+    .when("/client_list",{
+      templateUrl: "./partials/client_list.html",
+			controller: "client_list_Controller"
     })
-    .when("/add_billing_info",{
-      templateUrl: "./partials/add_billing_info.html",
-			controller: "add_billing_info_Controller"
+    .when("/add_client_info",{
+      templateUrl: "./partials/add_client_info.html",
+			controller: "add_client_info_Controller"
     })
     .when("/edit_billing_info/:id",{
       templateUrl: "./partials/edit_billing_info.html",

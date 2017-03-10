@@ -1,15 +1,15 @@
 'use strict';
-billingApp.controller("billing_info_Controller", function($rootScope,$scope,$http,$log){
-		$scope.message="AKash";
-		$scope.savedBillInfo=$http.get('/bill-info/')
+billingApp.controller("client_list_Controller", function($rootScope,$scope,$http,$log){
+		$scope.message="Client List";
+		$scope.savedClientInfo=$http.get('/client/')
 			.then(function success(response) {
-				$scope.BillList = response.data;
+				$scope.ClientList = response.data;
 				$scope.config = response.config;
 				$scope.headers = response.headers;
 				$scope.status = response.status;
 				$scope.statusText = response.statusText;
 			},function failure(response){
-				$scope.BillList = response.statusText;
+				$scope.ClientList = response.statusText;
 				$scope.status = response.data;
 				$log.info(response);
 		});
@@ -41,24 +41,23 @@ billingApp.controller("edit_billing_info_Controller", function($rootScope,$scope
 		$scope.billing_form='';
 	}
 });
-billingApp.controller("add_billing_info_Controller", function($scope,$http){
-	$scope.message="Add Billing Info";
-	var billing_form={
-			project_user_name:"",
-			project_user_email:"",
+billingApp.controller("add_client_info_Controller", function($scope,$http){
+	$scope.message="Add Client Info";
+	var client_form={
+			project_client_name:"",
+			project_client_email:"",
 			dept_name:"",
-			address:"",
-			project_name:"",
-			acc_number:"",
-			bill_rate:""
+			address:""
 	};
-	$scope.billing_form = billing_form;
-	$scope.list=[];		// EMpty list to show data on page. TEsting purposes
+	$scope.client_form = client_form;
+	//$scope.list=[];		// EMpty list to show data on page. TEsting purposes
 	$scope.submit=function(){
-		$scope.list.push(this.billing_form);
+		//$scope.list.push(this.client_form);
 		//$scope.HoldList.pust(this.billing_form);
-		if($scope.billing_form){
-				$http.post("/bill-info/",billing_form)
+		if($scope.client_form){
+				// $scope.client_form.dept_name = $scope.client_form.dept_name.departmentName;
+				// console.log($scope.client_form.dept_name);
+				$http.post("/client/",$scope.client_form)
 				.success(function(response) {
 					// remove this later
 					// console.log("pass"+JSON.stringify(response));
@@ -66,9 +65,22 @@ billingApp.controller("add_billing_info_Controller", function($scope,$http){
 				.error(function(response) {
 					console.log( "failure message: " + JSON.stringify(response));
 				});
-				$scope.billing_form='';
+				$scope.client_form='';
 		}
 	}
+
+	$scope.savedDepartments=$http.get('/department/')
+		.then(function success(response) {
+			$scope.departments = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.departments = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
 });
 billingApp.controller("tracking_usage_Controller", function($scope,$http){
 	$scope.message="Ankit";
@@ -131,11 +143,11 @@ billingApp.controller("add_chamber_info_Controller", function($scope,$http){
 			chamberCarts:""
 	};
 	$scope.chamber_form = chamber_form;
-	$scope.list=[];		// EMpty list to show data on page. TEsting purposes
+	//$scope.list=[];		// EMpty list to show data on page. TEsting purposes
 	$scope.submit=function(){
-		$scope.list.push(this.chamber_form);
+		//$scope.list.push(this.chamber_form);
 		if($scope.chamber_form){
-				$http.post("/chamber/",chamber_form)
+				$http.post("/chamber/",$scope.chamber_form)
 				.success(function(response) {
 					// remove this later
 					// console.log("pass"+JSON.stringify(response));
@@ -200,7 +212,7 @@ billingApp.controller("add_department_info_Controller", function($scope,$http){
 	$scope.submit=function(){
 		$scope.list.push(this.department_form);
 		if($scope.department_form){
-				$http.post("/department/",department_form)
+				$http.post("/department/",$scope.department_form)
 				.success(function(response) {
 					// remove this later
 					// console.log("pass"+JSON.stringify(response));
@@ -266,7 +278,7 @@ billingApp.controller("add_crop_info_Controller", function($scope,$http){
 	$scope.submit=function(){
 		$scope.list.push(this.crop_form);
 		if($scope.crop_form){
-				$http.post("/crop/",crop_form)
+				$http.post("/crop/",$scope.crop_form)
 				.success(function(response) {
 					// remove this later
 					// console.log("pass"+JSON.stringify(response));
