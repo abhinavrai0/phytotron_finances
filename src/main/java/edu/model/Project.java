@@ -3,6 +3,9 @@ import edu.*;
 import java.util.Date;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
+
 @Entity
 public class Project {
 	@Id
@@ -16,8 +19,11 @@ public class Project {
 	private String acc_number;
 	private String chambers;
 	private Integer carts;
+	@Type(type="date")
 	private Date startDate;
+	@Type(type="date")
 	private Date endDate;
+	@Type(type="date")
 	private Date lastBillDate;
 	private Double currentBill;
 	private Double billPaidTotal;
