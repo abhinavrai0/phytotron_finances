@@ -16,8 +16,12 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource"] )
 			controller: "add_client_info_Controller"
     })
     .when("/edit_client_info/:id",{
-      templateUrl: "./partials/edit_client_info_Controller.html",
+      templateUrl: "./partials/edit_client_info.html",
 			controller: "edit_client_info_Controller"
+    })
+    .when("/start_project/:id",{
+      templateUrl: "./partials/start_project.html",
+      controller: "start_project_Controller"
     })
     .when("/tracking_usage",{
       templateUrl: "./partials/tracking_usage.html",

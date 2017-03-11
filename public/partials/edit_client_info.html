@@ -1,0 +1,36 @@
+<form class="form-horizontal" name="ClientInfoForm" role = "form" ng-submit = "ClientInfoForm.$valid && submit()">
+  <h3 align="center">Client Information</h3>
+  <div class="form-group">
+    <label for="Name" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-8">
+      <input type="name" class="form-control" id="project_client_name" ng-model="client_form.project_client_name" placeholder="Enter the individual's or organization's name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email" class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-8">
+      <input type="email" class="form-control" id="project_client_email" ng-model="client_form.project_client_email" placeholder="Enter the individual's or organization's email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="department" class="col-sm-2 control-label">Department</label>
+    <div class="col-sm-8">
+
+      <select ng-model="client_form.dept_name" ng-options="x.departmentName as x.departmentName for x in departments">
+      </select>
+
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="address" class="col-sm-2 control-label">Address</label>
+    <div class="col-sm-8">
+      <textarea class="form-control" rows="3" id="address" ng-model="client_form.address" placeholder="Enter address of individual or organization here"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <button type="submit" class="btn btn-default">Finish Editing</button>
+      <a class="btn btn-default" ng-href="#/client_list">Go Back</a>
+    </div>
+  </div>
+</form>
