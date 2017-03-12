@@ -1,34 +1,97 @@
 <form class="form-horizontal" name="ProjectInfoForm" role = "form" ng-submit = "ProjectInfoForm.$valid && submit()">
   <h3 align="center">Client Information</h3>
-  <div class="form-group">
-    <label for="Name" class="col-sm-2 control-label">Name</label>
+  <div id = "container" class="col-sm-8" style = "float:center">
+      <div style = "float:left">
+        <div class="form-group">
+          <label for="Name" class="control-label">Name: </label>
+          <label for="Name" class="control-label">{{client_unedit_form.project_client_name}}</label>
+        </div>
+        <div class="form-group">
+          <label for="email" class="control-label">Email</label>
+          <label for="email" class="control-label">{{client_unedit_form.project_client_email}}</label>
+        </div>
+      </div>
+      <div style = "float:right">
+        <div class="form-group">
+          <label for="department" class="control-label">Department</label>
+          <label for="department" class="control-label">{{client_unedit_form.dept_name}}</label>
+        </div>
+        <div class="form-group">
+          <label for="address" class="control-label">Address</label>
+          <label for="address" class="control-label">{{client_unedit_form.address}}</label>
+        </div>
+      </div>
+  </div>
 
+  <div class="form-group">
+    <label for="project_name" class="col-sm-2 control-label">Project Name</label>
     <div class="col-sm-8">
-      <input type="name" class="form-control" id="project_client_name" ng-model="client_form.project_client_name" placeholder="Enter the individual's or organization's name">
+      <input type="name" class="form-control" id="project_name" ng-model="project_form.project_name" placeholder="Enter the Project Name">
     </div>
   </div>
   <div class="form-group">
-    <label for="email" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-8">
-      <input type="email" class="form-control" id="project_client_email" ng-model="client_form.project_client_email" placeholder="Enter the individual's or organization's email">
+    <label for="rate" class="col-sm-2 control-label">Rate</label>
+    <div class="col-sm-2">
+      <input type="number" class="form-control" id="rate" ng-model="project_form.rate" placeholder="Enter the rate">
     </div>
   </div>
   <div class="form-group">
-    <label for="department" class="col-sm-2 control-label">Department</label>
+    <label for="acc_number" class="col-sm-2 control-label">Account Number</label>
     <div class="col-sm-8">
+      <input type="name" class="form-control" id="acc_number" ng-model= "project_form.acc_number" placeholder="Enter the account number">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="chambers" class="col-sm-2 control-label">Chambers</label>
+    <div class="col-sm-8">
+      <input type="name" class="form-control" id="chambers" ng-model= "project_form.chambers" placeholder="Enter the chambers associated with this project, separated by commas">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="carts" class="col-sm-2 control-label">Carts</label>
+    <div class="col-sm-8">
+      <input type="name" class="form-control" id="carts" ng-model= "project_form.carts" placeholder="Enter the number of carts">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="carts" class="col-sm-2 control-label">Carts</label>
+    <div class="col-sm-8">
+      <input type="name" class="form-control" id="carts" ng-model= "project_form.carts" placeholder="Enter the number of carts">
+    </div>
+  </div>
+  <!-- <div class="form-group">
+    <div flex-gt-xs>
+        <label for="startDate" class="col-sm-2 control-label">Start Date</label>
+        <md-datepicker ng-model="project_form.startDate" md-placeholder="Enter date"></md-datepicker>
+    </div>
+  </div> -->
+  <div class="form-group">
+    <label for="startDate" class="col-sm-2 control-label">Start Date</label>
+    <div class="col-sm-8">
+      <input type="date" class="form-control" id="startDate" ng-model= "project_form.startDate">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="endDate" class="col-sm-2 control-label">End Date</label>
+    <div class="col-sm-8">
+      <input type="date" class="form-control" id="endDate" ng-model= "project_form.endDate">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="accountStatus" class="col-sm-2 control-label">Account Status</label>
+    <div class="col-sm-8">
+      <input type="name" class="form-control" id="accountStatus" ng-model= "project_form.accountStatus" placeholder="Account's current status">
+    </div>
+  </div>
 
-      <select ng-model="client_form.dept_name" ng-options="x.departmentName as x.departmentName for x in departments">
-      </select>
-      <!-- <select>
-      <option id="dept_name" ng-model= "client_form.dept_name" ng-repeat="x in departments">{{x.departmentName}}</option>
-      </select> -->
-
-    </div>
-  </div>
   <div class="form-group">
-    <label for="address" class="col-sm-2 control-label">Address</label>
-    <div class="col-sm-8">
-      <textarea class="form-control" rows="3" id="address" ng-model="client_form.address" placeholder="Enter address of individual or organization here"></textarea>
+    <div class="col-sm-offset-2 col-sm-8">
+      <button type="submit" class="btn btn-default">Save</button>
+      <a class="btn btn-default" ng-href="#/client_list">Go Back</a>
     </div>
   </div>
+<!-- generate bill label: date picker; Generate Button(date, project id); 5/generate_bill
+paybill: text box; Pay button(id, amount)
+-->
+
 </form>
