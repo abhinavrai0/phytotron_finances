@@ -25,9 +25,9 @@ public class Project {
 	private Date endDate;
 	@Type(type="date")
 	private Date lastBillDate;
-	private Double currentBill;
-	private Double billPaidTotal;
-	private Double billPay;
+	private Double currentBill=0.0;
+	private Double billPaidTotal=0.0;
+	private Double billPay=0.0;
 	private String accountStatus;
 	public Long getId() {
 		return id;

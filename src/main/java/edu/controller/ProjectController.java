@@ -59,57 +59,58 @@ public class ProjectController {
 
 	@RequestMapping(method=RequestMethod.POST)
 	public Project createProject(@RequestBody Project project) {
-		System.out.println("--====Post Request=====--"+project);
+		System.out.println("--====Post Request=====-- start date"+project.getStartDate() + " end date :"+ project.getEndDate());
 		System.out.println("project id :"+project.getClient().getId());
 		logger.info("Creating project : {}", project);
 		try {
+			project.setLastBillDate(project.getStartDate());
+			project.setCurrentBill(0d);;
 			projectCrudRepo.save(project);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return project;
-//		return "creation successful: " + String.valueOf(client.getId());
 	} 
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	public Project updateProject(@PathVariable("id") Long id,@RequestBody Project updateProject) {
-		/*Project project= new Project();
-		project=projectCrudRepo.findOne(id);*/
-		/*if(client.getAddress()!=updateProject.getAddress()){
-			client.setAddress(updateProject.getAddress());
-		}
-		if(client.getDept_name()!=updateProject.getDept_name()){
-			client.setDept_name(updateProject.getDept_name());
-		}*/
 		updateProject.setId(id);
         projectCrudRepo.save(updateProject);
 		return updateProject;
 	}
 	
 	@RequestMapping(value="/{id}/generatebill",method=RequestMethod.POST)
-	public String  generateBill(@PathVariable("id") Long id,@RequestBody BillGenerate generateBill){
-		Project p=getProject(id);
-		Date d1=p.getLastBillDate();
-		Date d2=generateBill.getDate();
-		long diff = Math.abs(generateBill.getDate().getTime() - p.getLastBillDate().getTime());
-		System.out.println(diff);
+//	public double  generateBill(@PathVariable("id") Long id,@RequestBody Date generateBill){
+	public double  generateBill(@PathVariable("id") Long id,@RequestBody BillGenerate generateBill){
+//		System.out.println("-------------------------------------------");
+		Project currentProject=getProject(id);
+		Date lastBillDate=currentProject.getLastBillDate();
+		Date generateBillDate=generateBill.getDate();
+//		Date generateBillDate=generateBill;
+		System.out.println("bill gen date" +generateBillDate +" last date"+lastBillDate);
+//		long diff = Math.abs(generateBill.getDate().getTime() - p.getLastBillDate().getTime());
+//		long diff = Math.abs(generateBillDate.getTime() - lastBillDate.getTime());
+		long diff = generateBillDate.getTime() - lastBillDate.getTime();
+		System.out.println("Difference in dates :"+diff+" in days :"+TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+//		long diffDays=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 		long diffDays = diff / (24 * 60 * 60 * 1000);
-		System.out.println(diffDays);
-		System.out.println( p.getRate());
-		System.out.println( p.getCarts());
+		System.out.println("diffDays :"+diffDays+ "dd :"+ diff / (24 * 60 * 60 * 1000));
 //		System.out.println(diffDays);
-		double bill= (double)p.getRate() * (double)diffDays;
-		System.out.println(bill);
-		bill *= p.getCarts();
-		System.out.println(bill);
-		p.setLastBillDate(d2);;
-		p.setCurrentBill(bill);
-		updateProject(id,p);
+//		System.out.println( p.getRate());
+//		System.out.println( p.getCarts());
+		double bill= currentProject.getCurrentBill();
+		bill= bill + ((double)currentProject.getRate() * (double)diffDays * currentProject.getCarts());
+//		System.out.println(bill);
+//		bill *= p.getCarts();
+		System.out.println("final bill :"+bill);
+		currentProject.setLastBillDate(generateBillDate);;
+		currentProject.setCurrentBill(bill);
+		updateProject(id,currentProject);
 //		TimeUnit timeUnit = null;
 //		System.out.println("timeunit :"+timeUnit.convert(diff,TimeUnit.DAYS));
 //		Interval interval = new Interval(oldInstant, new Instant());
 //		Days.daysBetween(d1, d2).getDays();
-		return "done";
+		return currentProject.getCurrentBill();
 	}
 
 	
