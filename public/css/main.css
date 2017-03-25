@@ -17,3 +17,25 @@ font-family: "GlyphaRoman";
     margin: 0px auto;
     float: none;
 } */
+
+.fields {
+  padding: 0 10px;
+}
+#container {
+  overflow: auto;
+  padding: 0;
+}
+.header {
+  position:relative;
+  overflow:auto;
+  padding: 0 0 20px 0;
+}
+
+.adjacentPanels {
+  float: left;
+  padding: 0 !important;
+}
+
+.ncstate-utility-bar-options {
+  display: none;
+}

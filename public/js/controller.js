@@ -94,44 +94,6 @@ billingApp.controller("add_client_info_Controller", function($scope,$http){
 			$log.info(response);
 	});
 });
-billingApp.controller("tracking_usage_Controller", function($scope,$http){
-	$scope.message="Ankit";
-	// var form={
-	// 		name:"",
-	// 		phone:"",
-	// 		email:"",
-	// 		address:""
-	// }
-	// $scope.form=form;
-	// $scope.submit=function(){
-	// 	$http.post("/saveSampleForm",form)
-	// 	.success(function(form, status, headers, config) {
-	// 		$scope.message = form;
-	// 	})
-	// 	.error(function(data, status, headers, config) {
-	// 		alert( "failure message: " + JSON.stringify({data: data}));
-	// 	});
-	// }
-});
-billingApp.controller("add_tracking_usage_Controller", function($scope,$http){
-	$scope.message="Agrawal";
-	// var form={
-	// 		name:"",
-	// 		phone:"",
-	// 		email:"",
-	// 		address:""
-	// }
-	// $scope.form=form;
-	// $scope.submit=function(){
-	// 	$http.post("/saveSampleForm",form)
-	// 	.success(function(form, status, headers, config) {
-	// 		$scope.message = form;
-	// 	})
-	// 	.error(function(data, status, headers, config) {
-	// 		alert( "failure message: " + JSON.stringify({data: data}));
-	// 	});
-	// }
-});
 billingApp.controller("chamber_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.message="Garg";
 	$scope.savedChamberInfo=$http.get('/chamber/')
@@ -362,7 +324,7 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 			currentBill:"",
 			billPaidTotal:"",
 			billPay:"",
-			accountStatus:""
+			accountStatus:"NEW PROJECT"
 	};
 	$scope.project_form = project_form;
 	$scope.submit=function(){
@@ -377,5 +339,57 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 				});
 				$scope.project_form='';
 		}
+	}
+});
+billingApp.controller("usage_list_Controller", function($scope,$http){
+	$scope.message="Tracking usage list";
+	$scope.savedTrackingUsage=$http.get('/project')
+		.then(function success(response) {
+			$scope.projectList = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.projectList = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+});
+billingApp.controller("edit_usage_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+	$scope.message="Edit Usage Info";
+	$scope.id = $routeParams.id;
+	$scope.editUsageForm=$http.get('/project/'+$scope.id)
+		.then(function success(response) {
+			$scope.usage_form = response.data;
+			var start = $scope.usage_form.startDate;
+			var end = $scope.usage_form.endDate;
+  		//var pattern = /(\d{4})(\d{2})(\d{2})/;
+			var startDateObject = Date.parse(start);
+			var endDateObject = Date.parse(end);
+			var m = new Date(startDateObject).getMonth();
+
+  		//$scope.usage_form.startDate = new Date(start.replace(pattern, '$2/$1/$3'));
+			//console.log($scope.usage_form.startDate);
+  		//$scope.usage_form.endDate = new Date(end.replace(pattern, '$2/$1/$3'));
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.selectedInfo = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+	$scope.submit=function(){
+
+		$http.post("/project/",$scope.usage_form)
+		.success(function(usage_form, status, headers, config) {
+			$scope.message = usage_form;
+		})
+		.error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+		$scope.usage_form='';
 	}
 });

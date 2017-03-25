@@ -1,28 +1,30 @@
-<form class="form-horizontal" name="ProjectInfoForm" role = "form" ng-submit = "ProjectInfoForm.$valid && submit()">
-  <h3 align="center">Client Information</h3>
-  <div id = "container" class="col-sm-8" style = "float:center">
-      <div style = "float:left">
-        <div class="form-group">
-          <label for="Name" class="control-label">Name: </label>
-          <label for="Name" class="control-label">{{client_unedit_form.project_client_name}}</label>
+<div class = "header">
+    <h3 align="center">Client Information</h3>
+    <div id = "container" class="col-sm-12">
+        <div class = "adjacentPanels col-sm-2"></div>
+        <div class = "adjacentPanels col-sm-4">
+          <div class="form-group">
+            <label for="Name" class="control-label">Name: </label>
+            <span for="Name" class = "fields">{{client_unedit_form.project_client_name}}</span>
+          </div>
+          <div class="form-group">
+            <label for="email" class="control-label">Email:</label>
+            <span for="email" class = "fields">{{client_unedit_form.project_client_email}}</span>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="email" class="control-label">Email</label>
-          <label for="email" class="control-label">{{client_unedit_form.project_client_email}}</label>
+        <div class = "adjacentPanels col-sm-4">
+          <div class="form-group">
+            <label for="department" class="control-label">Department:</label>
+            <span for="department" class = "fields">{{client_unedit_form.dept_name}}</span>
+          </div>
+          <div class="form-group">
+            <label for="address" class="control-label">Address:</label>
+            <span for="address" class = "fields">{{client_unedit_form.address}}</span>
+          </div>
         </div>
-      </div>
-      <div style = "float:right">
-        <div class="form-group">
-          <label for="department" class="control-label">Department</label>
-          <label for="department" class="control-label">{{client_unedit_form.dept_name}}</label>
-        </div>
-        <div class="form-group">
-          <label for="address" class="control-label">Address</label>
-          <label for="address" class="control-label">{{client_unedit_form.address}}</label>
-        </div>
-      </div>
+    </div>
   </div>
-
+<form class="form-horizontal" name="ProjectInfoForm" role = "form" ng-submit = "ProjectInfoForm.$valid && submit()">
   <div class="form-group">
     <label for="project_name" class="col-sm-2 control-label">Project Name</label>
     <div class="col-sm-8">
@@ -53,12 +55,13 @@
       <input type="name" class="form-control" id="carts" ng-model= "project_form.carts" placeholder="Enter the number of carts">
     </div>
   </div>
+  <!-- Missing CROP in MODELS and Controllers.
   <div class="form-group">
-    <label for="carts" class="col-sm-2 control-label">Carts</label>
+    <label for="crop" class="col-sm-2 control-label">Crop(s)</label>
     <div class="col-sm-8">
       <input type="name" class="form-control" id="carts" ng-model= "project_form.carts" placeholder="Enter the number of carts">
     </div>
-  </div>
+  </div> -->
   <!-- <div class="form-group">
     <div flex-gt-xs>
         <label for="startDate" class="col-sm-2 control-label">Start Date</label>
@@ -80,7 +83,7 @@
   <div class="form-group">
     <label for="accountStatus" class="col-sm-2 control-label">Account Status</label>
     <div class="col-sm-8">
-      <input type="name" class="form-control" id="accountStatus" ng-model= "project_form.accountStatus" placeholder="Account's current status">
+      <label id="accountStatus" ng-model= "project_form.accountStatus">
     </div>
   </div>
 

@@ -1,0 +1,28 @@
+<div class="table-responsive col-sm-10">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<th>#</th>
+			<th>Project Name</th>
+			<th>Client Name</th>
+			<th>Start date</th>
+			<th>End date</th>
+			<th>Last Bill Generation date</th>
+			<th>Current Bill</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="project in projectList">
+				<td><a href="#/edit_usage_info/{{project.id}}">{{project.id}}</a></td>
+				<td><a href="#/edit_usage_info/{{project.id}}">{{project.project_name}}</a></td>
+				<td><a href="#/edit_usage_info/{{project.id}}">{{project.client.project_client_name}}</a></td>
+				<td><a href="#/edit_usage_info/{{project.id}}">{{project.startDate}}</a></td>
+				<td><a href="#/edit_usage_info/{{project.id}}">{{project.endDate}}</a></td>
+				<td><a href="#/edit_usage_info/{{project.id}}">{{project.lastBillDate}}</a></td>
+				<td><a href="#/edit_tracking_usage_info/{{project.id}}">{{project.currentBill}}</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div>
+		<a class="btn btn-success" ng-href="#/">Generate</a>
+	</div>
+</div>

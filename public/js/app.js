@@ -23,13 +23,13 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource"] )
       templateUrl: "./partials/start_project.html",
       controller: "start_project_Controller"
     })
-    .when("/tracking_usage",{
-      templateUrl: "./partials/tracking_usage.html",
-			controller: "tracking_usage_Controller"
+    .when("/usage_list",{
+      templateUrl: "./partials/usage_list.html",
+			controller: "usage_list_Controller"
     })
-    .when("/add_tracking_usage",{
-      templateUrl: "./partials/add_tracking_usage.html",
-			controller: "add_tracking_usage_Controller"
+    .when("/edit_usage_info/:id",{
+      templateUrl: "./partials/edit_usage_info.html",
+			controller: "edit_usage_info_Controller"
     })
     .when("/chamber_list",{
       templateUrl: "./partials/chamber_list.html",
