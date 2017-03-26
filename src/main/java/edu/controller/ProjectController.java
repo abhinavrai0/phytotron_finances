@@ -1,6 +1,9 @@
 package edu.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -65,7 +68,8 @@ public class ProjectController {
 		logger.info("Creating project : {}", project);
 		try {
 			project.setLastBillDate(project.getStartDate());
-			project.setCurrentBill(0d);;
+			project.setCurrentBill(0d);
+			project.setBillPaidTotal(0d);
 			projectCrudRepo.save(project);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -85,10 +89,14 @@ public class ProjectController {
 		Project currentProject=getProject(id);
 		Date lastBillDate=currentProject.getLastBillDate();
 		Date generateBillDate=generateBill.getDate();
+		if(lastBillDate==null){
+			lastBillDate=currentProject.getStartDate();
+		}
 //		System.out.println("bill gen date normal" +generateBillDate +" last date"+lastBillDate);
 		long diff = generateBillDate.getTime() - lastBillDate.getTime();
 //		System.out.println("Difference in dates :"+diff+" in days :"+TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
 		long diffDays=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+		
 		if(lastBillDate.equals(currentProject.getStartDate())){
 			diffDays++;
 		}
@@ -102,15 +110,32 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/{id}/paybill",method=RequestMethod.POST)
+	public String  payBill(@PathVariable("id") Long id,@RequestBody Double paybill){
+		System.out.println("here........." + paybill);
+		Project currentProject=getProject(id);
+		double billPaidTotal=currentProject.getBillPaidTotal()+paybill;
+		double remainingCurrentBill=currentProject.getCurrentBill()-paybill;
+		currentProject.setBillPaidTotal(billPaidTotal);
+		currentProject.setCurrentBill(remainingCurrentBill);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//		Date date = new Date();
+//		System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
+		currentProject.setLastBillPaidDate(Calendar.getInstance().getTime());
+		updateProject(id,currentProject);
+		System.out.println(billPaidTotal+","+remainingCurrentBill);
+		return billPaidTotal+","+remainingCurrentBill;
+	}
+/*
+	@RequestMapping(value="/{id}/paybill",method=RequestMethod.POST)
 	public String  payBill(@PathVariable("id") Long id,@RequestParam double paybill){
 		Project currentProject=getProject(id);
 		double billPaidTotal=currentProject.getBillPaidTotal()+paybill;
 		double remainingCurrentBill=currentProject.getCurrentBill()-paybill;
 		currentProject.setBillPaidTotal(billPaidTotal);
 		currentProject.setCurrentBill(remainingCurrentBill);
+		currentProject.getLastBillPaidDate();
 		updateProject(id,currentProject);
 		return billPaidTotal+","+remainingCurrentBill;
-	}
-
+	}*/
 	
 }
