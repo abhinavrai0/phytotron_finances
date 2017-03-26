@@ -123,7 +123,10 @@ public class ProjectController {
 		currentProject.setLastBillPaidDate(Calendar.getInstance().getTime());
 		updateProject(id,currentProject);
 		System.out.println(billPaidTotal+","+remainingCurrentBill);
-		return billPaidTotal+","+remainingCurrentBill;
+		String s= "{\"billPaidTotal\":"+billPaidTotal +",\"remainingCurrentBill\":"+remainingCurrentBill+"}";
+		System.out.println(s);
+		return s;
+//		return billPaidTotal+","+remainingCurrentBill;
 	}
 /*
 	@RequestMapping(value="/{id}/paybill",method=RequestMethod.POST)
