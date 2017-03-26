@@ -329,6 +329,8 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	$scope.project_form = project_form;
 	$scope.submit=function(){
 		if($scope.project_form){
+			console.log($scope.project_form.startDate);
+			console.log(typeof $scope.project_form.startDate);
 				$http.post("/project/",$scope.project_form)
 				.success(function(response) {
 					// remove this later
@@ -356,22 +358,20 @@ billingApp.controller("usage_list_Controller", function($scope,$http){
 			$log.info(response);
 	});
 });
-billingApp.controller("edit_usage_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
-	$scope.message="Edit Usage Info";
+billingApp.controller("track_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+	$scope.message="Tracking usage";
 	$scope.id = $routeParams.id;
 	$scope.editUsageForm=$http.get('/project/'+$scope.id)
 		.then(function success(response) {
 			$scope.usage_form = response.data;
-			var start = $scope.usage_form.startDate;
-			var end = $scope.usage_form.endDate;
-  		//var pattern = /(\d{4})(\d{2})(\d{2})/;
-			var startDateObject = Date.parse(start);
-			var endDateObject = Date.parse(end);
-			var m = new Date(startDateObject).getMonth();
-
-  		//$scope.usage_form.startDate = new Date(start.replace(pattern, '$2/$1/$3'));
-			//console.log($scope.usage_form.startDate);
-  		//$scope.usage_form.endDate = new Date(end.replace(pattern, '$2/$1/$3'));
+			console.log(typeof $scope.usage_form.billPaidTotal);
+			console.log(typeof $scope.usage_form.startDate);
+			var start = $scope.usage_form.startDate.split('-');
+			var end = $scope.usage_form.endDate.split('-');
+			var lastBill = $scope.usage_form.lastBillDate.split('-');
+			$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
+			$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
+			$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
 			$scope.config = response.config;
 			$scope.headers = response.headers;
 			$scope.status = response.status;
@@ -381,8 +381,7 @@ billingApp.controller("edit_usage_info_Controller", function($rootScope,$scope,$
 			$scope.status = response.data;
 			$log.info(response);
 	});
-	$scope.submit=function(){
-
+	$scope.save=function(){
 		$http.post("/project/",$scope.usage_form)
 		.success(function(usage_form, status, headers, config) {
 			$scope.message = usage_form;
@@ -390,6 +389,38 @@ billingApp.controller("edit_usage_info_Controller", function($rootScope,$scope,$
 		.error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
-		$scope.usage_form='';
+	}
+
+	var generateBillDate = {
+		date: ""
+	};
+
+	$scope.generateBillDate = generateBillDate;
+	$scope.generate = function(){
+		$http.post("/project/"+$scope.id+"/generatebill/",$scope.generateBillDate)
+		.success(function(lastBill, status, headers, config) {
+			$scope.usage_form.lastBillDate = $scope.generateBillDate.date;
+			$scope.usage_form.currentBill = lastBill;
+		})
+		.error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+	}
+
+
+  // $scope.usage_form.billPaidTotal
+	var pay_amount = 0;
+	$scope.pay_amount = pay_amount;
+	$scope.pay = function(){
+
+		$http.post("/project/"+$scope.id+"/paybill", $scope.pay_amount)
+		.success(function(pay_bill, status, headers, config) {
+			console.log("Success");
+			console.log(pay_bill);
+
+		})
+		.error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
 	}
 });

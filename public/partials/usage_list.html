@@ -11,18 +11,18 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="project in projectList">
-				<td><a href="#/edit_usage_info/{{project.id}}">{{project.id}}</a></td>
-				<td><a href="#/edit_usage_info/{{project.id}}">{{project.project_name}}</a></td>
-				<td><a href="#/edit_usage_info/{{project.id}}">{{project.client.project_client_name}}</a></td>
-				<td><a href="#/edit_usage_info/{{project.id}}">{{project.startDate}}</a></td>
-				<td><a href="#/edit_usage_info/{{project.id}}">{{project.endDate}}</a></td>
-				<td><a href="#/edit_usage_info/{{project.id}}">{{project.lastBillDate}}</a></td>
-				<td><a href="#/edit_tracking_usage_info/{{project.id}}">{{project.currentBill}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.id}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.project_name}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.client.project_client_name}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.startDate}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.endDate}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.lastBillDate}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.currentBill}}</a></td>
 			</tr>
 		</tbody>
 	</table>
 
 	<div>
-		<a class="btn btn-success" ng-href="#/">Generate</a>
+		<a class="btn btn-success" ng-href="#/">DOES NOTHING :P</a>
 	</div>
 </div>

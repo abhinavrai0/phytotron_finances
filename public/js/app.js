@@ -27,9 +27,9 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource"] )
       templateUrl: "./partials/usage_list.html",
 			controller: "usage_list_Controller"
     })
-    .when("/edit_usage_info/:id",{
-      templateUrl: "./partials/edit_usage_info.html",
-			controller: "edit_usage_info_Controller"
+    .when("/track_project/:id",{
+      templateUrl: "./partials/track_project.html",
+			controller: "track_project_Controller"
     })
     .when("/chamber_list",{
       templateUrl: "./partials/chamber_list.html",

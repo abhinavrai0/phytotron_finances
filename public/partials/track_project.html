@@ -26,7 +26,7 @@
 </div>
 
 
-<form class="form-horizontal" name="ProjectInfoForm" role = "form" ng-submit = "ProjectInfoForm.$valid && submit()">
+<form class="form-horizontal" name="ProjectInfoForm" role = "form" ng-submit = "ProjectInfoForm.$valid">
   <div class="form-group">
     <label for="project_name" class="col-sm-2 control-label">Project Name</label>
     <div class="col-sm-8">
@@ -82,6 +82,12 @@
       <input type="date" class="form-control" id="endDate" ng-model= "usage_form.endDate">
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="lastBillDate" class="col-sm-2 control-label">Last Bill Date: </label>
+    <span for="Name" class = "fields">{{usage_form.lastBillDate | date:'MM/dd/yyyy'}}</span>
+  </div>
+
   <div class="form-group">
     <label for="accountStatus" class="col-sm-2 control-label">Account Status</label>
     <div class="col-sm-8">
@@ -90,8 +96,41 @@
   </div>
 
   <div class="form-group">
+    <label for="generateBill" class="col-sm-2 control-label">Generate Bill</label>
+    <div class="col-sm-2">
+      <input type="date" class="form-control" ng-model= "generateBillDate.date">
+    </div>
+    <button ng-click="generate()" class="btn btn-default">Generate</button>
+  </div>
+
+  <div class="form-group">
+    <label for="currentBill" class="col-sm-2 control-label">Current Bill: </label>
+    <span for="Name" class = "fields">{{usage_form.currentBill}}</span>
+  </div>
+
+
+  <div class="form-group">
+    <label for="payBill" class="col-sm-2 control-label">Pay Bill</label>
+    <div class="col-sm-2">
+      <input type="Number" class="form-control" ng-model= "pay_amount">
+    </div>
+    <button ng-click="pay()" class="btn btn-default">Pay</button>
+  </div>
+
+
+  <!-- <div class="form-group">
+    <label for="billPaidTotal" class="col-sm-2 control-label">Bill Paid Total:</label>
+    <span for="Name" class = "fields">{{usage_form.billPaidTotal}}</span>
+  </div> -->
+
+  <!-- <div class="form-group">
+    <label for="accountStatus" class="col-sm-2 control-label">Account Status</label>
+    <span for="Name" class = "fields">{{usage_form.accountStatus}}</span>
+  </div> -->
+
+  <div class="form-group">
     <div class="col-sm-offset-2 col-sm-8">
-      <button type="submit" class="btn btn-default">Save</button>
+      <button ng-click="save()" class="btn btn-default">Save</button>
       <a class="btn btn-default" ng-href="#/usage_list">Go Back</a>
     </div>
   </div>
