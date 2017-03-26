@@ -117,13 +117,15 @@ public class ProjectController {
 		double remainingCurrentBill=currentProject.getCurrentBill()-paybill;
 		currentProject.setBillPaidTotal(billPaidTotal);
 		currentProject.setCurrentBill(remainingCurrentBill);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 //		Date date = new Date();
 //		System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
 		currentProject.setLastBillPaidDate(Calendar.getInstance().getTime());
-		updateProject(id,currentProject);
+		currentProject=updateProject(id,currentProject);
 		System.out.println(billPaidTotal+","+remainingCurrentBill);
-		String s= "{\"billPaidTotal\":"+billPaidTotal +",\"remainingCurrentBill\":"+remainingCurrentBill+",\"lastBillPaidDate\":"+currentProject.getLastBillPaidDate()+"}";
+//		Date date = new Date();
+//		System.out.println(dateFormat.format(currentProject.getLastBillPaidDate()));
+		String s= "{\"billPaidTotal\":"+billPaidTotal +",\"remainingCurrentBill\":"+remainingCurrentBill+",\"lastBillPaidDate\":\""+dateFormat.format(currentProject.getLastBillPaidDate())+"\"}";
 		System.out.println(s);
 		return s;
 //		return billPaidTotal+","+remainingCurrentBill;
