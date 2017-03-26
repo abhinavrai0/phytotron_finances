@@ -57,7 +57,7 @@ public class ProjectController {
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
-		System.out.println("Project :"+project);
+		System.out.println("Project :"+project.toString());
 		return project;
 	}
 
@@ -123,7 +123,7 @@ public class ProjectController {
 		currentProject.setLastBillPaidDate(Calendar.getInstance().getTime());
 		updateProject(id,currentProject);
 		System.out.println(billPaidTotal+","+remainingCurrentBill);
-		String s= "{\"billPaidTotal\":"+billPaidTotal +",\"remainingCurrentBill\":"+remainingCurrentBill+"}";
+		String s= "{\"billPaidTotal\":"+billPaidTotal +",\"remainingCurrentBill\":"+remainingCurrentBill+",\"lastBillPaidDate\":"+currentProject.getLastBillPaidDate()+"}";
 		System.out.println(s);
 		return s;
 //		return billPaidTotal+","+remainingCurrentBill;
