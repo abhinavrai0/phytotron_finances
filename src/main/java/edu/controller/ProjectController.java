@@ -80,36 +80,24 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/{id}/generatebill",method=RequestMethod.POST)
-//	public double  generateBill(@PathVariable("id") Long id,@RequestBody Date generateBill){
 	public double  generateBill(@PathVariable("id") Long id,@RequestBody BillGenerate generateBill){
-//		System.out.println("-------------------------------------------");
 		Project currentProject=getProject(id);
 		Date lastBillDate=currentProject.getLastBillDate();
 		Date generateBillDate=generateBill.getDate();
-//		Date generateBillDate=generateBill;
-		System.out.println("bill gen date" +generateBillDate +" last date"+lastBillDate);
-//		long diff = Math.abs(generateBill.getDate().getTime() - p.getLastBillDate().getTime());
-//		long diff = Math.abs(generateBillDate.getTime() - lastBillDate.getTime());
+//		System.out.println("bill gen date normal" +generateBillDate +" last date"+lastBillDate);
 		long diff = generateBillDate.getTime() - lastBillDate.getTime();
-		System.out.println("Difference in dates :"+diff+" in days :"+TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-//		long diffDays=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-		long diffDays = diff / (24 * 60 * 60 * 1000);
+//		System.out.println("Difference in dates :"+diff+" in days :"+TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+		long diffDays=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+		if(lastBillDate.equals(currentProject.getStartDate())){
+			diffDays++;
+		}
 		System.out.println("diffDays :"+diffDays+ "dd :"+ diff / (24 * 60 * 60 * 1000));
-//		System.out.println(diffDays);
-//		System.out.println( p.getRate());
-//		System.out.println( p.getCarts());
 		double bill= currentProject.getCurrentBill();
 		bill= bill + ((double)currentProject.getRate() * (double)diffDays * currentProject.getCarts());
-//		System.out.println(bill);
-//		bill *= p.getCarts();
-		System.out.println("final bill :"+bill);
+//		System.out.println("final bill :"+bill);
 		currentProject.setLastBillDate(generateBillDate);;
 		currentProject.setCurrentBill(bill);
 		updateProject(id,currentProject);
-//		TimeUnit timeUnit = null;
-//		System.out.println("timeunit :"+timeUnit.convert(diff,TimeUnit.DAYS));
-//		Interval interval = new Interval(oldInstant, new Instant());
-//		Days.daysBetween(d1, d2).getDays();
 		return currentProject.getCurrentBill();
 	}
 
