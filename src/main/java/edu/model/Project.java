@@ -25,9 +25,10 @@ public class Project {
 	private Date endDate;
 	@Type(type="date")
 	private Date lastBillDate;
+	@Type(type="date")
+	private Date lastBillPaidDate;
 	private Double currentBill=0.0;
 	private Double billPaidTotal=0.0;
-	private Double billPay=0.0;
 	private String accountStatus;
 	public Long getId() {
 		return id;
@@ -83,6 +84,12 @@ public class Project {
 	public void setLastBillDate(Date lastBillDate) {
 		this.lastBillDate = lastBillDate;
 	}
+	public Date getLastBillPaidDate() {
+		return lastBillPaidDate;
+	}
+	public void setLastBillPaidDate(Date lastBillPaidDate) {
+		this.lastBillPaidDate = lastBillPaidDate;
+	}
 	public Double getCurrentBill() {
 		return currentBill;
 	}
@@ -107,11 +114,11 @@ public class Project {
 	public void setBillPaidTotal(Double billPaidTotal) {
 		this.billPaidTotal = billPaidTotal;
 	}
-	public Double getBillPay() {
+	/*public Double getBillPay() {
 		return billPay;
 	}
 	public void setBillPay(Double billPay) {
 		this.billPay = billPay;
-	}
+	}*/
 
 }

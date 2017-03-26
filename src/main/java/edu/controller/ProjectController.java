@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.model.Project;
@@ -94,11 +95,21 @@ public class ProjectController {
 		System.out.println("diffDays :"+diffDays+ "dd :"+ diff / (24 * 60 * 60 * 1000));
 		double bill= currentProject.getCurrentBill();
 		bill= bill + ((double)currentProject.getRate() * (double)diffDays * currentProject.getCarts());
-//		System.out.println("final bill :"+bill);
-		currentProject.setLastBillDate(generateBillDate);;
+		currentProject.setLastBillDate(generateBillDate);
 		currentProject.setCurrentBill(bill);
 		updateProject(id,currentProject);
 		return currentProject.getCurrentBill();
+	}
+	
+	@RequestMapping(value="/{id}/paybill",method=RequestMethod.POST)
+	public String  payBill(@PathVariable("id") Long id,@RequestParam double paybill){
+		Project currentProject=getProject(id);
+		double billPaidTotal=currentProject.getBillPaidTotal()+paybill;
+		double remainingCurrentBill=currentProject.getCurrentBill()-paybill;
+		currentProject.setBillPaidTotal(billPaidTotal);
+		currentProject.setCurrentBill(remainingCurrentBill);
+		updateProject(id,currentProject);
+		return billPaidTotal+","+remainingCurrentBill;
 	}
 
 	
