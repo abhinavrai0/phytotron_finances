@@ -329,8 +329,6 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	$scope.project_form = project_form;
 	$scope.submit=function(){
 		if($scope.project_form){
-			console.log($scope.project_form.startDate);
-			console.log(typeof $scope.project_form.startDate);
 				$http.post("/project/",$scope.project_form)
 				.success(function(response) {
 					// remove this later
@@ -417,7 +415,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		.success(function(pay_bill, status, headers, config) {
 			$scope.usage_form.currentBill = pay_bill.remainingCurrentBill;
 			$scope.usage_form.billPaidTotal = pay_bill.billPaidTotal;
-			console.log(pay_bill);
+			$scope.usage_form.lastBillPaidDate = pay_bill.lastBillPaidDate;
 		})
 		.error(function(response) {
 			console.log( "failure message: " + response);
