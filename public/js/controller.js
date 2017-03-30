@@ -32,7 +32,7 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 	});
 	$scope.submit=function(){
 
-		$http.post("/client",$scope.client_form)
+		$http.put("/client",$scope.client_form)
 		.success(function(client_form, status, headers, config) {
 			$scope.message = client_form;
 		})
@@ -364,14 +364,14 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	$scope.editUsageForm=$http.get('/project/'+$scope.id)
 		.then(function success(response) {
 			$scope.usage_form = response.data;
-			console.log(typeof $scope.usage_form.billPaidTotal);
-			console.log(typeof $scope.usage_form.startDate);
 			var start = $scope.usage_form.startDate.split('-');
 			var end = $scope.usage_form.endDate.split('-');
 			var lastBill = $scope.usage_form.lastBillDate.split('-');
+			//var lastBillPaid = $scope.usage_form.lastBillPaidDate.split('-');
 			$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
 			$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
 			$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
+			//$scope.usage_form.lastBillPaidDate = new Date(lastBillPaid[1]+"/"+lastBillPaid[2]+"/"+lastBillPaid[0]);
 			$scope.config = response.config;
 			$scope.headers = response.headers;
 			$scope.status = response.status;
@@ -382,7 +382,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$log.info(response);
 	});
 	$scope.save=function(){
-		$http.post("/project/",$scope.usage_form)
+		$http.put("/project/"+$scope.id, $scope.usage_form)
 		.success(function(usage_form, status, headers, config) {
 			$scope.message = usage_form;
 		})
@@ -403,7 +403,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.usage_form.currentBill = lastBill;
 		})
 		.error(function(data, status, headers, config) {
-			alert( "failure message: " + JSON.stringify({data: data}));
+			console.log( "failure message: " + JSON.stringify({data: data}));
 		});
 	}
 
@@ -415,12 +415,12 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 
 		$http.post("/project/"+$scope.id+"/paybill", $scope.pay_amount)
 		.success(function(pay_bill, status, headers, config) {
-			console.log("Success");
+			$scope.usage_form.currentBill = pay_bill.remainingCurrentBill;
+			$scope.usage_form.billPaidTotal = pay_bill.billPaidTotal;
 			console.log(pay_bill);
-
 		})
-		.error(function(data, status, headers, config) {
-			alert( "failure message: " + JSON.stringify({data: data}));
+		.error(function(response) {
+			console.log( "failure message: " + response);
 		});
 	}
 });

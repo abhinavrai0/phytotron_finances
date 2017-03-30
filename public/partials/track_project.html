@@ -84,15 +84,8 @@
   </div>
 
   <div class="form-group">
-    <label for="lastBillDate" class="col-sm-2 control-label">Last Bill Date: </label>
+    <label for="lastBillDate" class="col-sm-2 control-label">Last Bill Generated Date: </label>
     <span for="Name" class = "fields">{{usage_form.lastBillDate | date:'MM/dd/yyyy'}}</span>
-  </div>
-
-  <div class="form-group">
-    <label for="accountStatus" class="col-sm-2 control-label">Account Status</label>
-    <div class="col-sm-8">
-      <label id="accountStatus" ng-model= "usage_form.accountStatus">
-    </div>
   </div>
 
   <div class="form-group">
@@ -118,10 +111,15 @@
   </div>
 
 
-  <!-- <div class="form-group">
+  <div class="form-group">
     <label for="billPaidTotal" class="col-sm-2 control-label">Bill Paid Total:</label>
     <span for="Name" class = "fields">{{usage_form.billPaidTotal}}</span>
-  </div> -->
+  </div>
+
+  <div class="form-group">
+    <label for="lastBillDate" class="col-sm-2 control-label">Last Bill Date: </label>
+    <span for="Name" class = "fields">{{usage_form.lastBillPaidDate | date:'MM/dd/yyyy'}}</span>
+  </div>
 
   <!-- <div class="form-group">
     <label for="accountStatus" class="col-sm-2 control-label">Account Status</label>
