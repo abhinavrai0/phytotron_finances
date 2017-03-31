@@ -1,6 +1,7 @@
 package edu.model;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ public class Crop {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable = false)
 	private String cropCommonName;
 	private String cropScientificName;
 	/*@OneToMany(mappedBy="crop")

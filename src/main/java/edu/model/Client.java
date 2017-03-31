@@ -25,6 +25,7 @@ public class Client {
 	private String client_email;
 	private String dept_name;
 	private String client_address;
+	
 	private String client_phone;
 	private String client_status;
 	@OneToMany(mappedBy="client")
@@ -62,16 +63,16 @@ public class Client {
 	public void setDept_name(String dept_name) {
 		this.dept_name = dept_name;
 	}
-	public String getClientAddress() {
+	public String getClient_address() {
 		return client_address;
 	}
-	public void setClientAddress(String client_address) {
+	public void setClient_address(String client_address) {
 		this.client_address = client_address;
 	}
-	public String getClientPhone() {
+	public String getClient_phone() {
 		return client_phone;
 	}
-	public void setClientPhone(String client_phone) {
+	public void setClient_phone(String client_phone) {
 		this.client_phone = client_phone;
 	}
 	public String getClient_status() {
