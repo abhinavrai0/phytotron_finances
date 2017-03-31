@@ -59,8 +59,11 @@ public class ClientController {
 //	@RequestMapping(value="/client/{id}",method=RequestMethod.PUT)
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	public Client updateClient(@PathVariable("id") Long id,@RequestBody Client updateClient) {
-		Client client= new Client();
-		client=clientCrudRepo.findOne(id);
+//		Client client= new Client();
+//		client=clientCrudRepo.findOne(id);
+		updateClient.setId(id);
+//		updateRate.setId(id);
+//		rateCrudRepo.save(updateRate);
 		/*if(client.getClientAddress()!=updateClient.getClientAddress()){
 			client.setClientAddress(updateClient.getClientAddress());
 		}
@@ -76,8 +79,8 @@ public class ClientController {
 		if(client.getClient_last_name()!=updateClient.getClient_last_name()){
 			client.setClient_last_name(updateClient.getClient_last_name());
 		}*/
-        clientCrudRepo.save(client);
-		return client;
+        clientCrudRepo.save(updateClient);
+		return updateClient;
 	}
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public String deleteClient(@PathVariable("id") Long id) {
