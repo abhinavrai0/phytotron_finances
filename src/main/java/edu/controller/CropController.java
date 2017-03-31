@@ -16,37 +16,45 @@ import edu.model.Crop;
 import edu.service.CropCRUD;
 
 @RestController
+@RequestMapping("/crop")
 public class CropController {
 	@Autowired
-	private CropCRUD CropRepo;
+	private CropCRUD cropCrudRepo;
 	static final Logger logger = LogManager.getLogger(CropController.class.getName());
 
 
-	@RequestMapping(value="/crop/",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public List<Crop> getAllCrops() {
 		List<Crop> CropList =new ArrayList<Crop>();
-		CropList = (List<Crop>) CropRepo.findAll();
+		CropList = (List<Crop>) cropCrudRepo.findAll();
 		return CropList;
 	} 
-	@RequestMapping(value="/crop/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public Crop getCrop(@PathVariable("id") Long id) {
-		Crop Crop=new Crop();
+		Crop crop=new Crop();
 		try {
-			Crop = CropRepo.findOne(id);
+			crop = cropCrudRepo.findOne(id);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
-		return Crop;
+		return crop;
 	}
 
-	@RequestMapping(value="/crop/",method=RequestMethod.POST)
-	public Crop createCrop(@RequestBody Crop Crop) {
-		logger.info("Creating Bill : {}", Crop);
+	@RequestMapping(method=RequestMethod.POST)
+	public Crop createCrop(@RequestBody Crop crop) {
+		logger.info("Creating Bill : {}", crop);
 		try {
-			CropRepo.save(Crop);
+			cropCrudRepo.save(crop);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		return Crop;
+		return crop;
+	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
+	public Crop updateRate(@PathVariable("id") Long id,@RequestBody Crop updateCrop) {
+		updateCrop.setId(id);
+		cropCrudRepo.save(updateCrop);
+		return updateCrop;
 	}
 }

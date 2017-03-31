@@ -84,7 +84,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/{id}/generatebill",method=RequestMethod.POST)
-	public double  generateBill(@PathVariable("id") Long id,@RequestBody BillGenerate generateBill){
+	public double  generateBill(@PathVariable("id") Long id,@RequestBody BillGenerate generateBill){ //Calculate Invoice
 		Project currentProject=getProject(id);
 		Date lastBillDate=currentProject.getLastBillDate();
 		Date generateBillDate=generateBill.getDate();

@@ -29,11 +29,11 @@ public class Project {
 	@Type(type="date")
 	private Date endDate;
 	@Type(type="date")
-	private Date lastBillDate;
+	private Date lastBillDate;//Last Invoice Date
 	@Type(type="date")
-	private Date lastBillPaidDate;
+	private Date lastBillPaidDate;//Last Date Paid
 	private Double currentBill=0.0;
-	private Double billPaidTotal=0.0;
+	private Double billPaidTotal=0.0;//Total Paid
 	private String accountStatus;
 	public Long getId() {
 		return id;

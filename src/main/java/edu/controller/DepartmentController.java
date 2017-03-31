@@ -11,40 +11,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import edu.model.Department;
 import edu.service.DepartmentCRUD;
 
 @RestController
+@RequestMapping("/department")
 public class DepartmentController {
 	@Autowired
-	private DepartmentCRUD DepartmentRepo;
+	private DepartmentCRUD departmentCrudRepo;
 	static final Logger logger = LogManager.getLogger(DepartmentController.class.getName());
 
-	@RequestMapping(value="/department/",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public List<Department> getAllDepartments() {
 		List<Department> DepartmentList =new ArrayList<Department>();
-		DepartmentList = (List<Department>) DepartmentRepo.findAll();
+		DepartmentList = (List<Department>) departmentCrudRepo.findAll();
 		return DepartmentList;
 	}
-	@RequestMapping(value="/department/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public Department getDepartment(@PathVariable("id") Long id) {
 		Department Department=new Department();
 		try {
-			Department = DepartmentRepo.findOne(id);
+			Department = departmentCrudRepo.findOne(id);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
 		return Department;
 	} 
 
-	@RequestMapping(value="/department/",method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public Department createDepartment(@RequestBody Department Department) {
 		logger.info("Creating Bill : {}", Department);
 		try {
-			DepartmentRepo.save(Department);
+			departmentCrudRepo.save(Department);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		return Department;
+	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
+	public Department updateDepartment(@PathVariable("id") Long id,@RequestBody Department updateDepartment) {
+		updateDepartment.setId(id);
+		departmentCrudRepo.save(updateDepartment);
+		return updateDepartment;
 	}
 }
