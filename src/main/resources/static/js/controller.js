@@ -32,7 +32,7 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 	});
 	$scope.submit=function(){
 
-		$http.put("/client",$scope.client_form)
+		$http.put("/client/"+$scope.id,$scope.client_form)
 		.success(function(client_form, status, headers, config) {
 			$scope.message = client_form;
 		})
@@ -54,16 +54,25 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 			$scope.status = response.data;
 			$log.info(response);
 	});
+
+	$scope.options = ["Active", "Inactive"];
+	$scope.client_form.client_status = $scope.options[0];
 });
 billingApp.controller("add_client_info_Controller", function($scope,$http){
 	$scope.message="Add Client Info";
 	var client_form={
-			project_client_name:"",
-			project_client_email:"",
+			client_first_name:"",
+			client_last_name:"",
+			client_email:"",
+			client_phone:"",
 			dept_name:"",
-			address:""
+			client_status:"",
+			client_address:""
 	};
+	$scope.options = ["Active", "Inactive"];
 	$scope.client_form = client_form;
+	$scope.client_form.client_status = $scope.options[0];
+
 	//$scope.list=[];		// EMpty list to show data on page. TEsting purposes
 	$scope.submit=function(){
 		//$scope.list.push(this.client_form);
@@ -290,7 +299,6 @@ billingApp.controller("edit_crop_info_Controller", function($rootScope,$scope,$h
 		$scope.crop_form='';
 	}
 });
-
 billingApp.controller("start_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.message="Start Project";
 	/*get request returns a promise.
