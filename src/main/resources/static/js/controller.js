@@ -31,7 +31,7 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 			$log.info(response);
 	});
 	$scope.submit=function(){
-
+		console.log($scope.client_form);
 		$http.put("/client/"+$scope.id,$scope.client_form)
 		.success(function(client_form, status, headers, config) {
 			$scope.message = client_form;
@@ -39,7 +39,6 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 		.error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
-		$scope.client_form='';
 	}
 
 	$scope.savedDepartments=$http.get('/department/')
@@ -56,7 +55,6 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 	});
 
 	$scope.options = ["Active", "Inactive"];
-	$scope.client_form.client_status = $scope.options[0];
 });
 billingApp.controller("add_client_info_Controller", function($scope,$http){
 	$scope.message="Add Client Info";
@@ -103,6 +101,8 @@ billingApp.controller("add_client_info_Controller", function($scope,$http){
 			$log.info(response);
 	});
 });
+
+
 billingApp.controller("chamber_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.message="Garg";
 	$scope.savedChamberInfo=$http.get('/chamber/')
