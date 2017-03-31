@@ -1,31 +1,36 @@
 package edu.model;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 @Entity
 public class Crop {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String cropType;
-	private String cropName;
+	private String cropCommonName;
+	private String cropScientificName;
+	/*@OneToMany(mappedBy="crop")
+	private Set<Project> projects;*/
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getCropType() {
-		return cropType;
+	public String getCropCommonName() {
+		return cropCommonName;
 	}
-	public void setCropType(String cropType) {
-		this.cropType = cropType;
+	public void setCropCommonName(String cropCommonName) {
+		this.cropCommonName = cropCommonName;
 	}
-	public String getCropName() {
-		return cropName;
+	public String getCropScientificName() {
+		return cropScientificName;
 	}
-	public void setCropName(String cropName) {
-		this.cropName = cropName;
-	} 
+	public void setCropScientificName(String cropScientificName) {
+		this.cropScientificName = cropScientificName;
+	}
 }

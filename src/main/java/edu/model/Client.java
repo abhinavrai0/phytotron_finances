@@ -17,30 +17,20 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String project_client_first_name;
-	private String project_client_last_name;
-	private String project_client_email;
+	@Column(nullable = false)
+	private String client_first_name;
+	@Column(nullable = false)
+	private String client_last_name;
+	@Column(nullable = false)
+	private String client_email;
 	private String dept_name;
-	private String address;
-	private String phone;
+	private String client_address;
+	private String client_phone;
 	private String client_status;
-	
-	
 	@OneToMany(mappedBy="client")
 	private Set<Project> projects;
-	
 	public Client(){
 	} 
-	/*public Client(String project_client_name, String project_client_email, String dept_name,
-			String address) {
-		super();
-		this.project_client_first_name = project_client_name;
-		this.project_client_last_name = project_client_name;
-		this.project_client_email = project_client_email;
-		this.dept_name = dept_name;
-		this.address = address;
-		
-	}*/
 	public Long getId() {
 		return id;
 	}
@@ -48,23 +38,23 @@ public class Client {
 		this.id = id;
 	}
 	
-	public String getProject_client_first_name() {
-		return project_client_first_name;
+	public String getClient_first_name() {
+		return client_first_name;
 	}
-	public void setProject_client_first_name(String project_client_first_name) {
-		this.project_client_first_name = project_client_first_name;
+	public void setClient_first_name(String client_first_name) {
+		this.client_first_name = client_first_name;
 	}
-	public String getProject_client_last_name() {
-		return project_client_last_name;
+	public String getClient_last_name() {
+		return client_last_name;
 	}
-	public void setProject_client_last_name(String project_client_last_name) {
-		this.project_client_last_name = project_client_last_name;
+	public void setClient_last_name(String client_last_name) {
+		this.client_last_name = client_last_name;
 	}
-	public String getProject_client_email() {
-		return project_client_email;
+	public String getClient_email() {
+		return client_email;
 	}
-	public void setProject_client_email(String project_client_email) {
-		this.project_client_email = project_client_email;
+	public void setClient_email(String client_email) {
+		this.client_email = client_email;
 	}
 	public String getDept_name() {
 		return dept_name;
@@ -72,17 +62,17 @@ public class Client {
 	public void setDept_name(String dept_name) {
 		this.dept_name = dept_name;
 	}
-	public String getAddress() {
-		return address;
+	public String getClientAddress() {
+		return client_address;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setClientAddress(String client_address) {
+		this.client_address = client_address;
 	}
-	public String getPhone() {
-		return phone;
+	public String getClientPhone() {
+		return client_phone;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setClientPhone(String client_phone) {
+		this.client_phone = client_phone;
 	}
 	public String getClient_status() {
 		return client_status;

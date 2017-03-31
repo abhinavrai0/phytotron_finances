@@ -25,9 +25,7 @@ public class ClientController {
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Client> getAllClients() {
 		List<Client> clientList =new ArrayList<Client>();
-		System.out.println("aaaaaaa"+clientList);
 		clientList = (List<Client>) clientCrudRepo.findAll();
-		System.out.println("a :"+clientList);
 		return clientList;
 	}
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
@@ -39,14 +37,11 @@ public class ClientController {
             logger.error(e.getMessage());
 //            return e.getMessage();
         }
-		System.out.println("Client :"+client);
 		return client;
 	}
 
-//	@RequestMapping(value="/client/",method=RequestMethod.POST)
 	@RequestMapping(method=RequestMethod.POST)
 	public Client createClient(@RequestBody Client client) {
-		System.out.println("--====Post Request=====--");
 		logger.info("Creating Client : {}", client);
 		/* if (clientCrudRepo.exists(client.getId()) {
             logger.error("Unable to create. A User with name {} already exist", user.getName());
@@ -66,20 +61,20 @@ public class ClientController {
 	public Client updateClient(@PathVariable("id") Long id,@RequestBody Client updateClient) {
 		Client client= new Client();
 		client=clientCrudRepo.findOne(id);
-		if(client.getAddress()!=updateClient.getAddress()){
-			client.setAddress(updateClient.getAddress());
+		if(client.getClientAddress()!=updateClient.getClientAddress()){
+			client.setClientAddress(updateClient.getClientAddress());
 		}
 		if(client.getDept_name()!=updateClient.getDept_name()){
 			client.setDept_name(updateClient.getDept_name());
 		}
-		if(client.getProject_client_email()!=updateClient.getProject_client_email()){
-			client.setProject_client_email(updateClient.getProject_client_email());
+		if(client.getClient_email()!=updateClient.getClient_email()){
+			client.setClient_email(updateClient.getClient_email());
 		}
-		if(client.getProject_client_first_name()!=updateClient.getProject_client_first_name()){
-			client.setProject_client_first_name(updateClient.getProject_client_first_name());
+		if(client.getClient_first_name()!=updateClient.getClient_first_name()){
+			client.setClient_first_name(updateClient.getClient_first_name());
 		}
-		if(client.getProject_client_last_name()!=updateClient.getProject_client_last_name()){
-			client.setProject_client_last_name(updateClient.getProject_client_last_name());
+		if(client.getClient_last_name()!=updateClient.getClient_last_name()){
+			client.setClient_last_name(updateClient.getClient_last_name());
 		}
         clientCrudRepo.save(client);
 		return client;

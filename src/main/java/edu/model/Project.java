@@ -1,5 +1,4 @@
 package edu.model;
-import edu.*;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -14,7 +13,13 @@ public class Project {
 	@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="client_id")
 	private Client client;
-	private String project_name;
+	/*@ManyToOne//(fetch=FetchType.LAZY)
+	@JoinColumn(name="crop_id")
+	private Crop crop;*/
+	@Column(nullable = false)
+	private String project_id;
+	@Column(nullable = false)
+	private String project_Title;
 	private Float rate;
 	private String acc_number;
 	private String chambers;
@@ -42,11 +47,17 @@ public class Project {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public String getProject_name() {
-		return project_name;
+	public String getProject_id() {
+		return project_id;
 	}
-	public void setProject_name(String project_name) {
-		this.project_name = project_name;
+	public void setProject_id(String project_id) {
+		this.project_id = project_id;
+	}
+	public String getProject_Title() {
+		return project_Title;
+	}
+	public void setProject_Title(String project_Title) {
+		this.project_Title = project_Title;
 	}
 	public Float getRate() {
 		return rate;
