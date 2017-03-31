@@ -171,7 +171,7 @@ billingApp.controller("edit_chamber_info_Controller", function($rootScope,$scope
 });
 billingApp.controller("department_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.message="Department List";
-	$scope.savedDepartmentInfo=$http.get('/department/')
+	$scope.savedDepartmentInfo=$http.get('/department')
 		.then(function success(response) {
 			$scope.departmentList = response.data;
 			$scope.config = response.config;
@@ -195,7 +195,7 @@ billingApp.controller("add_department_info_Controller", function($scope,$http){
 	$scope.submit=function(){
 		$scope.list.push(this.department_form);
 		if($scope.department_form){
-				$http.post("/department/",$scope.department_form)
+				$http.post("/department",$scope.department_form)
 				.success(function(response) {
 					// remove this later
 					// console.log("pass"+JSON.stringify(response));
@@ -224,7 +224,7 @@ billingApp.controller("edit_department_info_Controller", function($rootScope,$sc
 	});
 	$scope.submit=function(){
 
-		$http.post("/department/",$scope.department_form)
+		$http.put("/department/"+$scope.id,$scope.department_form)
 		.success(function(department_form, status, headers, config) {
 			$scope.message = department_form;
 		})
@@ -252,8 +252,8 @@ billingApp.controller("crop_list_Controller", function($rootScope,$scope,$http,$
 billingApp.controller("add_crop_info_Controller", function($scope,$http){
 	$scope.message="Add Crop Info";
 	var crop_form={
-			cropType:"",
-			cropName:""
+			cropCommonName:"",
+			cropScientificName:""
 	};
 	$scope.crop_form = crop_form;
 	$scope.list=[];		// EMpty list to show data on page. TEsting purposes
