@@ -2,14 +2,14 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th>#</th>
-			<th>Crop Type</th>
-			<th>Crop Name</th>
+			<th>Common Name</th>
+			<th>Scientific Name</th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="crop in cropList">
 				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.id}}</a></td>
-				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropType}}</a></td>
-				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropName}}</a></td>
+				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropCommonName}}</a></td>
+				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropScientificName}}</a></td>
 			</tr>
 		</tbody>
 	</table>

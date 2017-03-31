@@ -61,7 +61,7 @@ public class ClientController {
 	public Client updateClient(@PathVariable("id") Long id,@RequestBody Client updateClient) {
 		Client client= new Client();
 		client=clientCrudRepo.findOne(id);
-		if(client.getClientAddress()!=updateClient.getClientAddress()){
+		/*if(client.getClientAddress()!=updateClient.getClientAddress()){
 			client.setClientAddress(updateClient.getClientAddress());
 		}
 		if(client.getDept_name()!=updateClient.getDept_name()){
@@ -75,7 +75,7 @@ public class ClientController {
 		}
 		if(client.getClient_last_name()!=updateClient.getClient_last_name()){
 			client.setClient_last_name(updateClient.getClient_last_name());
-		}
+		}*/
         clientCrudRepo.save(client);
 		return client;
 	}

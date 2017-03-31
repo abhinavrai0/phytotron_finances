@@ -1,15 +1,15 @@
 <form class="form-horizontal" name="CropInfoForm" role = "form" ng-submit = "CropInfoForm.$valid && submit()">
   <h3 align="center">Edit a Crop</h3>
   <div class="form-group">
-    <label for="cropType" class="col-sm-2 control-label">Crop Type</label>
+    <label for="cropCommonName" class="col-sm-2 control-label">Crop Type</label>
     <div class="col-sm-8">
-      <input type="name" class="form-control" id="cropType" ng-model="crop_form.cropType" placeholder="Enter the Crop Type">
+      <input type="name" class="form-control" id="cropCommonName" ng-model="crop_form.cropCommonName" placeholder="Enter the crop common name">
     </div>
   </div>
   <div class="form-group">
-    <label for="cropName" class="col-sm-2 control-label">Crop Name</label>
+    <label for="cropScientificName" class="col-sm-2 control-label">Crop Name</label>
     <div class="col-sm-8">
-      <input type="name" class="form-control" id="cropName" ng-model= "crop_form.cropName" placeholder="Enter the crop name">
+      <input type="name" class="form-control" id="cropScientificName" ng-model= "crop_form.cropScientificName" placeholder="Enter the crop scientific name">
     </div>
   </div>
   <div class="form-group">
