@@ -75,8 +75,11 @@ public class ClientController {
 		if(client.getProject_client_email()!=updateClient.getProject_client_email()){
 			client.setProject_client_email(updateClient.getProject_client_email());
 		}
-		if(client.getProject_client_name()!=updateClient.getProject_client_name()){
-			client.setProject_client_name(updateClient.getProject_client_name());
+		if(client.getProject_client_first_name()!=updateClient.getProject_client_first_name()){
+			client.setProject_client_first_name(updateClient.getProject_client_first_name());
+		}
+		if(client.getProject_client_last_name()!=updateClient.getProject_client_last_name()){
+			client.setProject_client_last_name(updateClient.getProject_client_last_name());
 		}
         clientCrudRepo.save(client);
 		return client;

@@ -17,26 +17,30 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String project_client_name;
+	private String project_client_first_name;
+	private String project_client_last_name;
 	private String project_client_email;
 	private String dept_name;
 	private String address;
+	private String phone;
+	private String client_status;
+	
 	
 	@OneToMany(mappedBy="client")
 	private Set<Project> projects;
 	
 	public Client(){
 	} 
-	public Client(String project_client_name, String project_client_email, String dept_name,
+	/*public Client(String project_client_name, String project_client_email, String dept_name,
 			String address) {
 		super();
-		
-		this.project_client_name = project_client_name;
+		this.project_client_first_name = project_client_name;
+		this.project_client_last_name = project_client_name;
 		this.project_client_email = project_client_email;
 		this.dept_name = dept_name;
 		this.address = address;
 		
-	}
+	}*/
 	public Long getId() {
 		return id;
 	}
@@ -44,11 +48,17 @@ public class Client {
 		this.id = id;
 	}
 	
-	public String getProject_client_name() {
-		return project_client_name;
+	public String getProject_client_first_name() {
+		return project_client_first_name;
 	}
-	public void setProject_client_name(String project_client_name) {
-		this.project_client_name = project_client_name;
+	public void setProject_client_first_name(String project_client_first_name) {
+		this.project_client_first_name = project_client_first_name;
+	}
+	public String getProject_client_last_name() {
+		return project_client_last_name;
+	}
+	public void setProject_client_last_name(String project_client_last_name) {
+		this.project_client_last_name = project_client_last_name;
 	}
 	public String getProject_client_email() {
 		return project_client_email;
@@ -67,5 +77,17 @@ public class Client {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getClient_status() {
+		return client_status;
+	}
+	public void setClient_status(String client_status) {
+		this.client_status = client_status;
 	}
 }
