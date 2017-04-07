@@ -125,11 +125,28 @@ public class Project {
 	public void setBillPaidTotal(Double billPaidTotal) {
 		this.billPaidTotal = billPaidTotal;
 	}
+	
+	
+
 	/*public Double getBillPay() {
 		return billPay;
 	}
 	public void setBillPay(Double billPay) {
 		this.billPay = billPay;
+	}*/
+	/*private Crop[] crops;
+	public Crop[] getCrops() {
+		return crops;
+	}
+	public void setCrops(Crop[] crops) {
+		this.crops = crops;
+	}*/
+	/*private Chamber[] chamber;
+	public Chamber[] getChamber() {
+		return chamber;
+	}
+	public void setChamber(Chamber[] chamber) {
+		this.chamber = chamber;
 	}*/
 
 }
