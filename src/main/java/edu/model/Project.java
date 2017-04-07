@@ -22,7 +22,7 @@ public class Project {
 	private String project_Title;
 	private Float rate;
 	private String acc_number;
-	private String chambers;
+//	private String chambers;
 	private Integer carts;
 	@Type(type="date")
 	private Date startDate;
@@ -113,12 +113,12 @@ public class Project {
 	public void setAccountStatus(String accountStatus) {
 		this.accountStatus = accountStatus;
 	}
-	public String getChambers() {
+/*	public String getChambers() {
 		return chambers;
 	}
 	public void setChambers(String chambers) {
 		this.chambers = chambers;
-	}
+	}*/
 	public Double getBillPaidTotal() {
 		return billPaidTotal;
 	}
@@ -141,12 +141,12 @@ public class Project {
 	public void setCrops(Crop[] crops) {
 		this.crops = crops;
 	}*/
-	/*private Chamber[] chamber;
-	public Chamber[] getChamber() {
-		return chamber;
+	private Chamber[] chambers;
+	public Chamber[] getChambers() {
+		return chambers;
 	}
-	public void setChamber(Chamber[] chamber) {
-		this.chamber = chamber;
-	}*/
+	public void setChambers(Chamber[] chamber) {
+		this.chambers = chambers;
+	}
 
 }

@@ -58,6 +58,18 @@ public class Payment {
 	public void setPaidDate(Date paidDate) {
 		this.paidDate = paidDate;
 	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
+	public Project getProject() {
+		return project;
+	}
+	public void setProject(Project project) {
+		this.project = project;
+	}
 	
 
 

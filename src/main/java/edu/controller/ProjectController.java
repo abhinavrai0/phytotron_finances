@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.model.Project;
 import edu.model.Client;
+import edu.model.Payment;
 import edu.model.BillGenerate;
 import edu.service.ProjectCRUD;
 
@@ -108,6 +109,10 @@ public class ProjectController {
 	@RequestMapping(value="/{id}/paybill",method=RequestMethod.POST)
 	public String  payBill(@PathVariable("id") Long id,@RequestBody Double paybill){
 		Project currentProject=getProject(id);
+		/*Payment pay=new Payment();
+		pay.setClient(currentProject.getClient());
+		pay.setProject(currentProject);
+		pay.setAmount(paybill);*/
 		double billPaidTotal=currentProject.getBillPaidTotal()+paybill;
 		double remainingCurrentBill=currentProject.getCurrentBill()-paybill;
 		currentProject.setBillPaidTotal(billPaidTotal);
