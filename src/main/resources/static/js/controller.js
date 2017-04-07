@@ -39,6 +39,7 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 		.error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
+		$scope.client_form='';
 	}
 
 	$scope.savedDepartments=$http.get('/department/')
@@ -78,10 +79,16 @@ billingApp.controller("add_client_info_Controller", function($scope,$http){
 		if($scope.client_form){
 				$http.post("/client/",$scope.client_form)
 				.success(function(response) {
-					// remove this later
-					// console.log("pass"+JSON.stringify(response));
+					var message = "Client Saved Successfully";
+					(function alertSuccess(){
+						$('#alert_placeholder').html('<div class="alert alert-success alert-dismissable fade in"><a class="close" data-dismiss="alert">&times;</a><span>'+message+'</span></div>')
+					})()
 				})
 				.error(function(response) {
+					var message = "Couldn't save Error";
+					(function alertSuccess(){
+						$('#alert_placeholder').html('<div class="alert alert-danger alert-dismissable fade in"><a class="close" data-dismiss="alert">&times;</a><span>'+message+'</span></div>')
+					})()
 					console.log( "failure message: " + JSON.stringify(response));
 				});
 				$scope.client_form='';
@@ -101,8 +108,6 @@ billingApp.controller("add_client_info_Controller", function($scope,$http){
 			$log.info(response);
 	});
 });
-
-
 billingApp.controller("chamber_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.message="Garg";
 	$scope.savedChamberInfo=$http.get('/chamber/')
@@ -321,7 +326,8 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	});
 	var project_form={
 			client : uneditableEntry.content,
-			project_name :"",
+			project_id : "",
+			project_Title :"",
 			rate:"",
 			acc_number:"",
 			chambers:"",
@@ -331,14 +337,15 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 			lastBillDate:"",
 			currentBill:"",
 			billPaidTotal:"",
-			billPay:"",
-			accountStatus:"NEW PROJECT"
+			accountStatus:""
 	};
 	$scope.project_form = project_form;
 	$scope.submit=function(){
 		if($scope.project_form){
+			console.log($scope.project_form);
 				$http.post("/project/",$scope.project_form)
 				.success(function(response) {
+					console.log(JSON.stringify(response));
 					// remove this later
 					// console.log("pass"+JSON.stringify(response));
 				})

@@ -1,4 +1,4 @@
-package edu.ncsu.phytotron.finances;
+/*package edu.ncsu.phytotron.finances;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,9 +15,9 @@ import edu.controller.ClientController;
 @SpringBootTest
 public class ApplicationTest {
 
-/*    @Test
+    @Test
     public void contextLoads() throws Exception {
-    }*/
+    }
     @Autowired
     private ClientController controller;
 
@@ -27,3 +27,4 @@ public class ApplicationTest {
     }
 
 }
+*/

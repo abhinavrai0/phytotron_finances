@@ -4,8 +4,8 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource"] )
   .config(function ($routeProvider){
     $routeProvider
     .when("/",{
-      templateUrl: "./partials/client_list.html",
-			controller: "client_list_Controller"
+      templateUrl: "./partials/usage_list.html",
+			controller: "usage_list_Controller"
     })
     .when("/client_list",{
       templateUrl: "./partials/client_list.html",
