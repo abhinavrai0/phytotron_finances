@@ -342,14 +342,18 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	$scope.project_form = project_form;
 	$scope.submit=function(){
 		if($scope.project_form){
-			console.log($scope.project_form);
 				$http.post("/project/",$scope.project_form)
 				.success(function(response) {
-					console.log(JSON.stringify(response));
-					// remove this later
-					// console.log("pass"+JSON.stringify(response));
+					var message = "Project "+ response.project_Title + " Saved Successfully";
+					(function alertSuccess(){
+						$('#alert_placeholder').html('<div class="alert alert-success alert-dismissable fade in"><a class="close" data-dismiss="alert">&times;</a><span>'+message+'</span></div>')
+					})()
 				})
 				.error(function(response) {
+					var message = "Couldn't start new project Error";
+					(function alertSuccess(){
+						$('#alert_placeholder').html('<div class="alert alert-danger alert-dismissable fade in"><a class="close" data-dismiss="alert">&times;</a><span>'+message+'</span></div>')
+					})()
 					console.log( "failure message: " + JSON.stringify(response));
 				});
 				$scope.project_form='';
