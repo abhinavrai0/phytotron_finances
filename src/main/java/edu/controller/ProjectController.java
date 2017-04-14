@@ -79,6 +79,9 @@ public class ProjectController {
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	public Project updateProject(@PathVariable("id") Long id,@RequestBody Project updateProject) {
+		System.out.println("iiiiiiiiiiiddddddd :"+id);
+		System.out.println("updateProject छ : : "+updateProject);
+		System.out.println(id+"===title===="+updateProject.getProject_Title()+"prj id : "+updateProject.getProject_id()+"Carts : "+updateProject.getCarts());
 		updateProject.setId(id);
         projectCrudRepo.save(updateProject);
 		return updateProject;
@@ -106,24 +109,26 @@ public class ProjectController {
 		return currentProject.getCurrentBill();
 	}
 	
-	@RequestMapping(value="/{id}/paybill",method=RequestMethod.POST)
+	/*@RequestMapping(value="/{id}/paybill",method=RequestMethod.POST)
 	public String  payBill(@PathVariable("id") Long id,@RequestBody Double paybill){
 		Project currentProject=getProject(id);
-		/*Payment pay=new Payment();
+		Payment pay=new Payment();
 		pay.setClient(currentProject.getClient());
 		pay.setProject(currentProject);
-		pay.setAmount(paybill);*/
+		pay.setAmount(paybill);
 		double billPaidTotal=currentProject.getBillPaidTotal()+paybill;
 		double remainingCurrentBill=currentProject.getCurrentBill()-paybill;
 		currentProject.setBillPaidTotal(billPaidTotal);
 		currentProject.setCurrentBill(remainingCurrentBill);
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		currentProject.setLastBillPaidDate(Calendar.getInstance().getTime());
+		System.out.println(id+"project page-----------id, currentProject------------"+currentProject);
+		System.out.println(id+"project page-----------id, stuff----title--------"+currentProject.getProject_Title()+"prj id : "+currentProject.getProject_id()+"Carts : "+currentProject.getCarts());
 		currentProject=updateProject(id,currentProject);
 		System.out.println(billPaidTotal+","+remainingCurrentBill);
 		String s= "{\"billPaidTotal\":"+billPaidTotal +",\"remainingCurrentBill\":"+remainingCurrentBill+",\"lastBillPaidDate\":\""+dateFormat.format(currentProject.getLastBillPaidDate())+"\"}";
 		System.out.println(s);
 		return s;
 	}
-	
+	*/
 }

@@ -23,11 +23,18 @@ public class Payment {
 //	@GeneratedValue(strategy = GenerationType.AUTO,generator = "payment")
 //	@TableGenerator( initialValue = 10000, name = "")
 //	@GeneratedValue(strategy = GenerationType.TABLE, generator = "Address_Gen")
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String s="id :"+id+", amount: "+amount+", poject id : "+project+", client id : "+client+" & paid date : "+paidDate;
+		return super.toString();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	
 	@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="client_id")
 	private Client client;

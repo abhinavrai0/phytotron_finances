@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.springframework.beans.factory.annotation.Required;
 @Entity
 public class Crop {
 	@Id
@@ -26,12 +28,14 @@ public class Crop {
 	public String getCropCommonName() {
 		return cropCommonName;
 	}
+	@Required
 	public void setCropCommonName(String cropCommonName) {
 		this.cropCommonName = cropCommonName;
 	}
 	public String getCropScientificName() {
 		return cropScientificName;
 	}
+	@Required
 	public void setCropScientificName(String cropScientificName) {
 		this.cropScientificName = cropScientificName;
 	}

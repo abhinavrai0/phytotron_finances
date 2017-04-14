@@ -1,4 +1,6 @@
 package edu.model;
+import java.util.Set;
+
 import javax.persistence.*;
 @Entity
 public class Chamber {
@@ -8,6 +10,9 @@ public class Chamber {
 	private String chamberType;
 	private String chamberId;
 	private String chamberCarts;
+	@OneToMany(mappedBy="chambers")
+	private Set<Project> projects;
+	
 	public Long getId() {
 		return id;
 	}

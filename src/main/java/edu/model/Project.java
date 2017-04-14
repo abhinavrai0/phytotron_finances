@@ -13,6 +13,11 @@ public class Project {
 	@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="client_id")
 	private Client client;
+	@ManyToOne//(fetch=FetchType.LAZY)
+	@JoinColumn(name="chambers_id")
+	private Chamber chambers;
+	
+	
 	/*@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="crop_id")
 	private Crop crop;*/
@@ -125,6 +130,12 @@ public class Project {
 	public void setBillPaidTotal(Double billPaidTotal) {
 		this.billPaidTotal = billPaidTotal;
 	}
+	public Chamber getChambers() {
+		return chambers;
+	}
+	public void setChambers(Chamber chambers) {
+		this.chambers = chambers;
+	}
 	
 	
 
@@ -141,12 +152,6 @@ public class Project {
 	public void setCrops(Crop[] crops) {
 		this.crops = crops;
 	}*/
-	private Chamber[] chambers;
-	public Chamber[] getChambers() {
-		return chambers;
-	}
-	public void setChambers(Chamber[] chamber) {
-		this.chambers = chambers;
-	}
+	
 
 }
