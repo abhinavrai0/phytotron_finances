@@ -9,7 +9,7 @@
 			<th>Status</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="savedClient in ClientList">
+			<tr dir-paginate="savedClient in ClientList | itemsPerPage: 10">
 					<!-- ng-repeat creates a new scope of its own. That's why for ng-model you need to put parent
 					ng-value puts the given value in the ng-model
 					groupName is to select only one radio button.
@@ -23,6 +23,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
 	<div>
 		<a class="btn btn-success" ng-href="#/add_client_info">Add New</a>
 		<a class="btn btn-success" ng-disabled = "!selectedClient" ng-href="#/start_project/{{selectedClient}}">Start New Project</a>
