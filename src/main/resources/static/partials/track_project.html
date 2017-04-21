@@ -60,8 +60,12 @@
   </div>
   <div class="form-group">
     <label for="chambers" class="col-sm-2 control-label">Chambers</label>
-    <div class="col-sm-8">
-      <input type="name" class="form-control" id="chambers" ng-model= "usage_form.chambers" placeholder="Enter the chambers associated with this project, separated by commas">
+    <div class="col-sm-2">
+
+      <select ng-model="usage_form.chambers" ng-options="x.chamberType as x.chamberType for x in chambers">
+      </select>
+
+
     </div>
   </div>
   <div class="form-group">

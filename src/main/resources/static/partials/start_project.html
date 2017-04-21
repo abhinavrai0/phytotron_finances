@@ -5,29 +5,29 @@
         <div class = "adjacentPanels col-sm-4">
           <div class="form-group">
             <label for="Name" class="control-label">First Name: </label>
-            <span for="Name" class = "fields">{{client_unedit_form.client_first_name}}</span>
+            <span for="Name" class = "fields">{{project_form.client.client_first_name}}</span>
           </div>
           <div class="form-group">
             <label for="email" class="control-label">Email:</label>
-            <span for="email" class = "fields">{{client_unedit_form.client_email}}</span>
+            <span for="email" class = "fields">{{project_form.client.client_email}}</span>
           </div>
           <div class="form-group">
             <label for="department" class="control-label">Department:</label>
-            <span for="department" class = "fields">{{client_unedit_form.dept_name}}</span>
+            <span for="department" class = "fields">{{project_form.client.dept_name}}</span>
           </div>
         </div>
         <div class = "adjacentPanels col-sm-4">
           <div class="form-group">
             <label for="Name" class="control-label">Last Name: </label>
-            <span for="Name" class = "fields">{{client_unedit_form.client_last_name}}</span>
+            <span for="Name" class = "fields">{{project_form.client.client_last_name}}</span>
           </div>
           <div class="form-group">
             <label for="Phone" class="control-label">Phone: </label>
-            <span for="Phone" class = "fields">{{client_unedit_form.client_phone}}</span>
+            <span for="Phone" class = "fields">{{project_form.client.client_phone}}</span>
           </div>
           <div class="form-group">
             <label for="address" class="control-label">Address:</label>
-            <span for="address" class = "fields">{{client_unedit_form.client_address}}</span>
+            <span for="address" class = "fields">{{project_form.client.client_address}}</span>
           </div>
         </div>
     </div>
@@ -60,7 +60,32 @@
   <div class="form-group">
     <label for="chambers" class="col-sm-2 control-label">Chambers</label>
     <div class="col-sm-8">
-      <input type="name" class="form-control" id="chambers" ng-model= "project_form.chambers" placeholder="Enter the chambers associated with this project, separated by commas">
+      <select ng-model="selectedChamber" ng-options="x.chamberType for x in chambers">
+        <option value="" disabled selected>Chamber Type</option>
+      </select>
+      <!-- <label for="numberCarts" class="control-label">Number of carts: </label>
+      <span for="numberCarts" class = "fields">{{project_form.chambers.chamberCarts}}</span>
+      <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-plus">Remove Chamber</i></button> -->
+      <button type="button" ng-click="addChamberRow()" class="btn btn-default addButton"><i class="fa fa-minus">Add Chamber</i></button>
+    </div>
+    <div class="table-responsive col-sm-8">
+    	<table class="table table-hover table-bordered">
+        <thead>
+          <th>Chamber Name</th>
+      		<th>Carts</th>
+          <th>Action</th>
+    		</thead>
+
+        <tbody>
+        	<tr ng-repeat="chamber in localChamberData">
+        		<td>{{chamber.chamberType}}</td>
+        		<td>{{chamber.chamberCarts}}</td>
+        		<td>
+        		    <input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow($index)"/>
+        		</td>
+        	</tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="form-group">
@@ -69,19 +94,6 @@
       <input type="number" class="form-control" id="carts" ng-model= "project_form.carts" placeholder="Enter the number of carts">
     </div>
   </div>
-  <!-- Missing CROP in MODELS and Controllers.
-  <div class="form-group">
-    <label for="crop" class="col-sm-2 control-label">Crop(s)</label>
-    <div class="col-sm-8">
-      <input type="name" class="form-control" id="carts" ng-model= "project_form.carts" placeholder="Enter the number of carts">
-    </div>
-  </div> -->
-  <!-- <div class="form-group">
-    <div flex-gt-xs>
-        <label for="startDate" class="col-sm-2 control-label">Start Date</label>
-        <md-datepicker ng-model="project_form.startDate" md-placeholder="Enter date"></md-datepicker>
-    </div>
-  </div> -->
   <div class="form-group">
     <label for="startDate" class="col-sm-2 control-label">Start Date</label>
     <div class="col-sm-2">
@@ -112,4 +124,9 @@ paybill: text box; Pay button(id, amount)
 -->
 
 </form>
-<div id = "alert_placeholder" class="col-sm-offset-2 col-sm-8"></div>
+<div ng-show = "showAlertMessage" id = "alert_placeholder" class="col-sm-offset-2 col-sm-8">
+  <div ng-class = "savedSuccessfully ? 'alert-success' : 'alert-danger'" class="alert alert-dismissable fade in">
+    <a class="close" data-dismiss="alert">&times;</a>
+    <span>{{message}}</span>
+  </div>
+</div>
