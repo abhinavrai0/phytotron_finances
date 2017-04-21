@@ -23,7 +23,7 @@
 			<th ng-click="sort('client_status')">Status</th>
 		</thead>
 		<tbody>
-			<tr dir-paginate="savedClient in ClientList | itemsPerPage: 20 | filter:clientName | orderBy:sortKey:reverse">
+			<tr dir-paginate="savedClient in ClientList | filter:clientName | orderBy:sortKey:reverse | itemsPerPage: 20 ">
 					<!-- ng-repeat creates a new scope of its own. That's why for ng-model you need to put parent
 					ng-value puts the given value in the ng-model
 					groupName is to select only one radio button.
