@@ -2,7 +2,7 @@ package edu.model;
 import java.util.Date;
 
 import javax.persistence.*;
-
+import java.util.*;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -13,10 +13,8 @@ public class Project {
 	@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="client_id")
 	private Client client;
-	@ManyToOne//(fetch=FetchType.LAZY)
-	@JoinColumn(name="chambers_id")
-	private Chamber chambers;
-	
+	public Project(){
+	}
 	
 	/*@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="crop_id")
@@ -130,12 +128,34 @@ public class Project {
 	public void setBillPaidTotal(Double billPaidTotal) {
 		this.billPaidTotal = billPaidTotal;
 	}
+	
+/*	
+    @ManyToOne//(fetch=FetchType.LAZY)
+	@JoinColumn(name="chambers_id")
+	private Chamber chambers;
 	public Chamber getChambers() {
 		return chambers;
 	}
 	public void setChambers(Chamber chambers) {
 		this.chambers = chambers;
+	}*/
+	
+	
+	///working with minor issues like null columns
+//	@ManyToMany//(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.REMOVE)
+	@JoinTable(name = "project_chamber", joinColumns = { @JoinColumn(name = "project_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "chamber_id", referencedColumnName = "id") })
+	private Set<Chamber> chambers=new HashSet<Chamber>(0);
+	public Set<Chamber> getChambers(){
+		return this.chambers;
 	}
+	public void setChambers(Set<Chamber> chambers){
+		this.chambers=chambers;
+	}
+	
+	
+	
+	
 	
 	
 
