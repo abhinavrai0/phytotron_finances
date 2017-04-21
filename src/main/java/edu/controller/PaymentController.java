@@ -55,13 +55,12 @@ public class PaymentController {
 
 	@RequestMapping(method=RequestMethod.POST)
 	public Payment makePayment(@RequestBody Payment payment) {
-		System.out.println(payment.getClient());
-		System.out.println(payment.getProject());
 		System.out.println(payment.getAmount());
 		System.out.println(payment.getPaidDate());
 		try {
 			paymentCrudRepo.save(payment);
 		} catch (Exception e) {
+			System.out.println("payment failed !!!");
 			e.printStackTrace();
 		}
 		return payment;
@@ -75,8 +74,9 @@ public class PaymentController {
 		//		Project currentProject= projectCrudRepo.findOne(id);;
 		System.out.println(currentProject.getProject_Title()+"000000000000"+currentProject.getCarts());
 		Payment pay=new Payment();
-		pay.setClient(currentProject.getClient());
-		pay.setProject(currentProject);
+//		pay.setClient(currentProject.getClient());
+//		pay.setProject(currentProject);
+		pay.setProjectId(currentProject.getId());
 		pay.setAmount(paybill);
 		makePayment(pay);
 		double billPaidTotal=currentProject.getBillPaidTotal()+paybill;

@@ -14,6 +14,7 @@ import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -23,29 +24,39 @@ public class Payment {
 //	@GeneratedValue(strategy = GenerationType.AUTO,generator = "payment")
 //	@TableGenerator( initialValue = 10000, name = "")
 //	@GeneratedValue(strategy = GenerationType.TABLE, generator = "Address_Gen")
-	@Override
+	/*@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		String s="id :"+id+", amount: "+amount+", poject id : "+project+", client id : "+client+" & paid date : "+paidDate;
 		return super.toString();
-	}
+	}*/
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	
-	@ManyToOne//(fetch=FetchType.LAZY)
+	/*@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="client_id")
-	private Client client;
+	private Client client;*/
 	
-	@ManyToOne//(fetch=FetchType.LAZY)
+	/*@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="project_id")
 	private Project project;
+	*/
+	private Long projectId;
 
 	private Double amount;
+	
+	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(updatable = false)
 	private Date paidDate;
+	
+/*	 @Temporal(TemporalType.TIMESTAMP)
+	    @Column(name = "CREATED_DATE", updatable = false)
+	    private Date createdDate;*/
+	
 	
 	public Long getId() {
 		return id;
@@ -65,17 +76,23 @@ public class Payment {
 	public void setPaidDate(Date paidDate) {
 		this.paidDate = paidDate;
 	}
-	public Client getClient() {
+/*	public Client getClient() {
 		return client;
 	}
 	public void setClient(Client client) {
 		this.client = client;
-	}
-	public Project getProject() {
+	}*/
+	/*public Project getProject() {
 		return project;
 	}
 	public void setProject(Project project) {
 		this.project = project;
+	}*/
+	public Long getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 	
 
