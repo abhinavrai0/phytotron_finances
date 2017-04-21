@@ -39,3 +39,7 @@ font-family: "GlyphaRoman";
 .ncstate-utility-bar-options {
   display: none;
 }
+
+dir-pagination-controls{
+	float: right;
+}

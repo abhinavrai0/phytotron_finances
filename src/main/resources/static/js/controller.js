@@ -14,6 +14,10 @@ billingApp.controller("client_list_Controller", function($rootScope,$scope,$http
 				$log.info(response);
 		});
 		$scope.selectedClient="";
+		$scope.sort = function(keyname){
+	        $scope.sortKey = keyname;   //set the sortKey to the param passed
+	        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+	    }
 });
 billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.message="Edit Client";

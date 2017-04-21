@@ -1,6 +1,6 @@
 'use strict';
 
-var billingApp = angular.module( "billing", ["ngRoute","ngResource"] )
+var billingApp = angular.module( "billing", ["ngRoute","ngResource","angularUtils.directives.dirPagination"] )
   .config(function ($routeProvider){
     $routeProvider
     .when("/",{

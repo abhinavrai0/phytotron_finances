@@ -46,6 +46,7 @@ public class CropController {
 		try {
 			cropCrudRepo.save(crop);
 		} catch (Exception e) {
+			System.out.println("errrro -----------");
 			logger.error(e.getMessage());
 		}
 		return crop;
