@@ -308,60 +308,102 @@ billingApp.controller("edit_crop_info_Controller", function($rootScope,$scope,$h
 		$scope.crop_form='';
 	}
 });
+
+/**
+ * This controller starts a new project for the user selected client.
+ */
 billingApp.controller("start_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
-	$scope.message="Start Project";
-	/*get request returns a promise.
-	 http://stackoverflow.com/questions/31714821/access-http-get-json-property-in-angular-controller
-	*/
-  var uneditableEntry={content: {}};;
+	var currentClient = null;
+	var initializeProject = function() {
+		return {
+				client : null, project_id : "", project_Title :"", rate:"", acc_number:"", chambers: [], carts:0, startDate:"", endDate:"", lastBillDate:"", currentBill:"", billPaidTotal:"", accountStatus:""
+		};
+	}
+	// Saves all information regarding a new project for a selected client.
+	$scope.project_form = initializeProject();
+	// Get the selected client from the routeParams.
 	$scope.id = $routeParams.id;
-	uneditableEntry.$promise=$http.get('/client/'+$scope.id)
+	// Save all the finalised chambers locally in the table. We will push only ids when we submit.
+	$scope.localChamberData = [];
+	// To remove the selected chamber from the list and display it in the table.
+	$scope.selectedChamber = undefined;
+
+	/**
+	 * 'Get' the client details for the selected client by id.
+	 */
+	$http.get('/client/'+$scope.id)
 		.then(function success(response) {
-			angular.copy(response.data, uneditableEntry.content);
-			$scope.client_unedit_form = response.data;
-			$scope.config = response.config;
-			$scope.headers = response.headers;
-			$scope.status = response.status;
-			$scope.statusText = response.statusText;
+			if(response.status == 200) {
+				$scope.project_form.client = response.data;
+				currentClient = response.data;
+			} else {
+				$log.error(response.statusText);
+			}
 		},function failure(response){
-			$scope.selectedInfo = response.statusText;
-			$scope.status = response.data;
-			$log.info(response);
+			$log.error(response.statusText);
 	});
-	var project_form={
-			client : uneditableEntry.content,
-			project_id : "",
-			project_Title :"",
-			rate:"",
-			acc_number:"",
-			chambers:"",
-			carts:"",
-			startDate:"",
-			endDate:"",
-			lastBillDate:"",
-			currentBill:"",
-			billPaidTotal:"",
-			accountStatus:""
-	};
-	$scope.project_form = project_form;
+
+	/**
+	 * Submit Functionality.
+	 */
 	$scope.submit=function(){
 		if($scope.project_form){
 				$http.post("/project/",$scope.project_form)
 				.success(function(response) {
-					var message = "Project "+ response.project_Title + " Saved Successfully";
-					(function alertSuccess(){
-						$('#alert_placeholder').html('<div class="alert alert-success alert-dismissable fade in"><a class="close" data-dismiss="alert">&times;</a><span>'+message+'</span></div>')
-					})()
+					$scope.message = "Project "+ response.project_Title + " Saved Successfully";
+					$scope.savedSuccessfully = true; // show success message
+					$scope.showAlertMessage = true;
+					$scope.project_form = initializeProject(); // Empty the form to be able to start a new project.
+					$scope.project_form.client = currentClient; // Show the uneditableEntry fields.
 				})
 				.error(function(response) {
-					var message = "Couldn't start new project Error";
-					(function alertSuccess(){
-						$('#alert_placeholder').html('<div class="alert alert-danger alert-dismissable fade in"><a class="close" data-dismiss="alert">&times;</a><span>'+message+'</span></div>')
-					})()
-					console.log( "failure message: " + JSON.stringify(response));
+					$scope.message = "Couldn't start new project Error";
+					$scope.savedSuccessfully = false; // show failure message
+					$scope.showAlertMessage = true;
 				});
-				$scope.project_form='';
+		} else {
+			// TODO
 		}
+	}
+
+	/**
+	 * Get All chambers from the chambers page and display in the drop down
+	 */
+	$scope.savedChambers=$http.get('/chamber/')
+		.then(function success(response) {
+			$scope.chambers = response.data;
+		},function failure(response){
+			$scope.chambers = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+
+	/**
+	 * Adds rows to the selected chamber table, removing chamber from the drop down and adding it to the table.
+	 */
+	$scope.addChamberRow = function(){
+		for(var i = 0; i < $scope.chambers.length; i++){
+			if($scope.selectedChamber.chamberId === $scope.chambers[i].chamberId){
+				$scope.chambers.splice(i,1);
+			}
+		}
+		// Display the total sum of the carts in each chamber in the finalised chambers.
+		$scope.project_form.carts = parseInt($scope.project_form.carts) + parseInt($scope.selectedChamber.chamberCarts);
+		// Save the selected chamber id in the chamberId variable to send to back-end
+		$scope.project_form.chambers.push($scope.selectedChamber.chamberId);
+		$scope.localChamberData.push($scope.selectedChamber);
+	};
+
+	/**
+	 * Removes rows from the table, and adds them back to the drop down.
+	 */
+	$scope.removeRow = function ($index) {
+		$scope.project_form.carts = parseInt($scope.project_form.carts) - parseInt($scope.localChamberData[$index].chamberCarts);
+		// adding the removed chamber back to the list.
+		$scope.chambers.push($scope.localChamberData[$index]);
+		// Removing the chamber from the local chambers data as well as from the final chamber ids to be sent.
+		$scope.project_form.chambers.splice($index, 1);
+		$scope.localChamberData.splice($index, 1);
 	}
 });
 billingApp.controller("usage_list_Controller", function($scope,$http){
