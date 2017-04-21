@@ -1,15 +1,29 @@
 <div class="table-responsive col-sm-10">
+	<div>
+		<div>
+			<div>
+				<label>Name :</label>
+				<input type="text" ng-model="clientName">
+			</div>
+		</div>
+	</div>
+
+
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th>Select</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Email</th>
-			<th>Department</th>
-			<th>Status</th>
+			<th ng-click="sort('client_first_name')">First Name
+			<span class="glyphicon sort-icon" ng-show="sortKey=='client_first_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+			</th>
+			<th ng-click="sort('client_last_name')">Last Name
+			<span class="glyphicon sort-icon" ng-show="sortKey=='client_last_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+			</th>
+			<th ng-click="sort('client_email')">Email</th>
+			<th ng-click="sort('dept_name')">Department</th>
+			<th ng-click="sort('client_status')">Status</th>
 		</thead>
 		<tbody>
-			<tr dir-paginate="savedClient in ClientList | itemsPerPage: 10">
+			<tr dir-paginate="savedClient in ClientList | itemsPerPage: 20 | filter:clientName | orderBy:sortKey:reverse">
 					<!-- ng-repeat creates a new scope of its own. That's why for ng-model you need to put parent
 					ng-value puts the given value in the ng-model
 					groupName is to select only one radio button.
@@ -24,7 +38,7 @@
 		</tbody>
 	</table>
 	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
-	<div>
+	<div class="form-group">
 		<a class="btn btn-success" ng-href="#/add_client_info">Add New</a>
 		<a class="btn btn-success" ng-disabled = "!selectedClient" ng-href="#/start_project/{{selectedClient}}">Start New Project</a>
 	</div>
