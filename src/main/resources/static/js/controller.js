@@ -113,14 +113,9 @@ billingApp.controller("add_client_info_Controller", function($scope,$http){
 	});
 });
 billingApp.controller("chamber_list_Controller", function($rootScope,$scope,$http,$log){
-	$scope.message="Garg";
 	$scope.savedChamberInfo=$http.get('/chamber/')
 		.then(function success(response) {
 			$scope.chamberList = response.data;
-			$scope.config = response.config;
-			$scope.headers = response.headers;
-			$scope.status = response.status;
-			$scope.statusText = response.statusText;
 		},function failure(response){
 			$scope.chamberList = response.statusText;
 			$scope.status = response.data;
@@ -130,8 +125,7 @@ billingApp.controller("chamber_list_Controller", function($rootScope,$scope,$htt
 billingApp.controller("add_chamber_info_Controller", function($scope,$http){
 	$scope.message="Add Chamber Info";
 	var chamber_form={
-			chamberType:"",
-			chamberId:"",
+			chamberName:"",
 			chamberCarts:""
 	};
 	$scope.chamber_form = chamber_form;
@@ -377,20 +371,28 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	$scope.savedRates=$http.get('/rate')
+		.then(function success(response) {
+			$scope.rates = response.data;
+		},function failure(response){
+			$scope.chambers = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
 
 	/**
 	 * Adds rows to the selected chamber table, removing chamber from the drop down and adding it to the table.
 	 */
 	$scope.addChamberRow = function(){
 		for(var i = 0; i < $scope.chambers.length; i++){
-			if($scope.selectedChamber.chamberId === $scope.chambers[i].chamberId){
+			if($scope.selectedChamber === $scope.chambers[i]){
 				$scope.chambers.splice(i,1);
 			}
 		}
 		// Display the total sum of the carts in each chamber in the finalised chambers.
 		$scope.project_form.carts = parseInt($scope.project_form.carts) + parseInt($scope.selectedChamber.chamberCarts);
 		// Save the selected chamber id in the chamberId variable to send to back-end
-		$scope.project_form.chambers.push($scope.selectedChamber.chamberId);
+		$scope.project_form.chambers.push($scope.selectedChamber.id);
 		$scope.localChamberData.push($scope.selectedChamber);
 	};
 
@@ -469,14 +471,19 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			console.log( "failure message: " + JSON.stringify({data: data}));
 		});
 	}
-
+	/**
+	 * Sets the current project id to a variable. This variable is used to track the project payment history.
+	 */
+	$scope.currentProject = function(){
+		$scope.currentProjectID = $scope.id;
+	}
 
   // $scope.usage_form.billPaidTotal
 	var pay_amount = 0;
 	$scope.pay_amount = pay_amount;
 	$scope.pay = function(){
 
-		$http.post("/project/"+$scope.id+"/paybill", $scope.pay_amount)
+		$http.post("/payment/"+$scope.id+"/paybill", $scope.pay_amount)
 		.success(function(pay_bill, status, headers, config) {
 			$scope.usage_form.currentBill = pay_bill.remainingCurrentBill;
 			$scope.usage_form.billPaidTotal = pay_bill.billPaidTotal;
@@ -485,5 +492,72 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		.error(function(response) {
 			console.log( "failure message: " + response);
 		});
+	}
+});
+billingApp.controller("payment_list_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+	$scope.id = $routeParams.id;
+	$scope.paymentList=$http.get('/payment/'+$scope.id)
+		.then(function success(response) {
+			$scope.paymentHistory = response.data;
+			console.log($scope.paymentHistory);
+			// var payDate = $scope.paymentHistory.startDate.split('-');
+			// $scope.paymentHistory.paidDate = new Date(payDate[1]+"/"+payDate[2]+"/"+payDate[0]);
+		},function failure(response){
+			$scope.selectedInfo = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+});
+
+billingApp.controller("rate_list_Controller", function($rootScope,$scope,$http,$log){
+	$scope.savedRateInfo=$http.get('/rate/')
+		.then(function success(response) {
+			$scope.rateList = response.data;
+		},function failure(response){
+			$scope.rateList = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+});
+billingApp.controller("add_rate_info_Controller", function($scope,$http){
+	var rate_form={
+			rateType:"",
+			rate:0
+	};
+	$scope.rate_form = rate_form;
+	$scope.submit=function(){
+		if($scope.rate_form){
+				$http.post("/rate/",$scope.rate_form)
+				.success(function(response) {
+					// remove this later
+					// console.log("pass"+JSON.stringify(response));
+				})
+				.error(function(response) {
+					console.log( "failure message: " + JSON.stringify(response));
+				});
+				$scope.rate_form='';
+		}
+	}
+});
+billingApp.controller("edit_rate_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+	$scope.id = $routeParams.id;
+	$scope.editRateInfo=$http.get('/rate/'+$scope.id)
+		.then(function success(response) {
+			$scope.rate_form = response.data;
+		},function failure(response){
+			$scope.selectedInfo = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+	$scope.submit=function(){
+
+		$http.post("/rate/",$scope.rate_form)
+		.success(function(rate_form, status, headers, config) {
+			$scope.message = rate_form;
+		})
+		.error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+		$scope.rate_form='';
 	}
 });

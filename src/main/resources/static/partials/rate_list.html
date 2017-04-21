@@ -1,0 +1,19 @@
+<div class="table-responsive col-sm-10">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<th>#</th>
+			<th>Rate Type</th>
+			<th>Rate</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="rate in rateList">
+				<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.id}}</a></td>
+				<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rateType}}</a></td>
+				<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rate}}</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+      <a class="btn btn-success" ng-href="#/add_rate_info">Add New Rate</a>
+  </div>
+</div>

@@ -2,15 +2,13 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th>#</th>
-			<th>Chamber Type</th>
-			<th>Chamber Number</th>
+			<th>Chamber Name</th>
 			<th>Carts</th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="chamber in chamberList">
 				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.id}}</a></td>
-				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberType}}</a></td>
-				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberId}}</a></td>
+				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberName}}</a></td>
 				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberCarts}}</a></td>
 			</tr>
 		</tbody>

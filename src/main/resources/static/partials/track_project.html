@@ -101,16 +101,16 @@
   </div>
 
   <div class="form-group">
-    <label for="lastBillDate" class="col-sm-2 control-label">Last Bill Generated Date: </label>
+    <label for="lastBillDate" class="col-sm-2 control-label">Last Invoice Date: </label>
     <span for="Name" class = "fields">{{usage_form.lastBillDate | date:'MM/dd/yyyy'}}</span>
   </div>
 
   <div class="form-group">
-    <label for="generateBill" class="col-sm-2 control-label">Generate Bill</label>
+    <label for="generateBill" class="col-sm-2 control-label">Calculate Invoice</label>
     <div class="col-sm-2">
       <input type="date" class="form-control" ng-model= "generateBillDate.date">
     </div>
-    <button ng-click="generate()" class="btn btn-default">Generate</button>
+    <button ng-click="generate()" class="btn btn-default">Calculate</button>
   </div>
 
   <div class="form-group">
@@ -120,7 +120,7 @@
 
 
   <div class="form-group">
-    <label for="payBill" class="col-sm-2 control-label">Pay Bill</label>
+    <label for="payBill" class="col-sm-2 control-label">Amount Paid</label>
     <div class="col-sm-2">
       <input type="Number" class="form-control" ng-model= "pay_amount">
     </div>
@@ -129,12 +129,12 @@
 
 
   <div class="form-group">
-    <label for="billPaidTotal" class="col-sm-2 control-label">Bill Paid Total:</label>
+    <label for="billPaidTotal" class="col-sm-2 control-label">Total Paid:</label>
     <span for="Name" class = "fields">{{usage_form.billPaidTotal}}</span>
   </div>
 
   <div class="form-group">
-    <label for="lastBillDate" class="col-sm-2 control-label">Last Bill Date: </label>
+    <label for="lastBillDate" class="col-sm-2 control-label">Last Date Paid: </label>
     <span for="Name" class = "fields">{{usage_form.lastBillPaidDate | date:'MM/dd/yyyy'}}</span>
   </div>
 

@@ -1,0 +1,59 @@
+<div class = "header">
+  <h3 align="center">Client Information</h3>
+  <div id = "container" class="col-sm-12">
+      <div class = "adjacentPanels col-sm-2"></div>
+      <div class = "adjacentPanels col-sm-4">
+        <div class="form-group">
+          <label for="Name" class="control-label">First Name: </label>
+          <span for="Name" class = "fields">{{paymentHistory[0].client.client_first_name}}</span>
+        </div>
+        <div class="form-group">
+          <label for="email" class="control-label">Email:</label>
+          <span for="email" class = "fields">{{paymentHistory[0].client.client_email}}</span>
+        </div>
+        <div class="form-group">
+          <label for="department" class="control-label">Department:</label>
+          <span for="department" class = "fields">{{paymentHistory[0].client.dept_name}}</span>
+        </div>
+      </div>
+      <div class = "adjacentPanels col-sm-4">
+        <div class="form-group">
+          <label for="Name" class="control-label">Last Name: </label>
+          <span for="Name" class = "fields">{{paymentHistory[0].client.client_last_name}}</span>
+        </div>
+        <div class="form-group">
+          <label for="Phone" class="control-label">Phone: </label>
+          <span for="Phone" class = "fields">{{paymentHistory[0].client.client_phone}}</span>
+        </div>
+        <div class="form-group">
+          <label for="address" class="control-label">Address:</label>
+          <span for="address" class = "fields">{{paymentHistory[0].client.client_address}}</span>
+        </div>
+
+      </div>
+  </div>
+</div>
+<div class="table-responsive col-sm-10">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<th>#</th>
+      <th>Project Id</th>
+      <th>Project Title</th>
+			<th>Payment Date</th>
+			<th>Amount</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="payment in paymentHistory">
+				<td>{{payment.id}}</td>
+        <td>{{payment.project.project_id}}</td>
+        <td>{{payment.project.project_Title}}</td>
+				<td>{{payment.paidDate}}</td>
+				<td>{{payment.amount}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- <div>
+      <a class="btn btn-success" ng-href="#/add_crop_info">Add New Crop</a>
+  </div> -->
+
+</div>
