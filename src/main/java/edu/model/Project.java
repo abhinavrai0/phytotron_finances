@@ -13,6 +13,9 @@ public class Project {
 	@ManyToOne//(fetch=FetchType.LAZY)
 	@JoinColumn(name="client_id")
 	private Client client;
+	@ManyToOne//(fetch=FetchType.LAZY)
+	@JoinColumn(name="rate_id")
+	private Rate rateValue;
 	public Project(){
 	}
 	
@@ -23,7 +26,7 @@ public class Project {
 	private String project_id;
 	@Column(nullable = false)
 	private String project_Title;
-	private Float rate;
+//	private Float rate;
 	private String acc_number;
 //	private String chambers;
 	private Integer carts;
@@ -62,12 +65,12 @@ public class Project {
 	public void setProject_Title(String project_Title) {
 		this.project_Title = project_Title;
 	}
-	public Float getRate() {
+/*	public Float getRate() {
 		return rate;
 	}
 	public void setRate(Float rate) {
 		this.rate = rate;
-	}
+	}*/
 	public String getAcc_number() {
 		return acc_number;
 	}
@@ -151,6 +154,12 @@ public class Project {
 	}
 	public void setChambers(Set<Chamber> chambers){
 		this.chambers=chambers;
+	}
+	public Rate getRateValue() {
+		return rateValue;
+	}
+	public void setRateValue(Rate rateValue) {
+		this.rateValue = rateValue;
 	}
 	
 	

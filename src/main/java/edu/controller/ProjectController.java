@@ -102,7 +102,7 @@ public class ProjectController {
 		}
 //		System.out.println("diffDays :"+diffDays+ "dd :"+ diff / (24 * 60 * 60 * 1000));
 		double bill= currentProject.getCurrentBill();
-		bill= bill + ((double)currentProject.getRate() * (double)diffDays * currentProject.getCarts());
+		bill= bill + ((double)currentProject.getRateValue().getRate() * (double)diffDays * currentProject.getCarts());
 		currentProject.setLastBillDate(generateBillDate);
 		currentProject.setCurrentBill(bill);
 		updateProject(id,currentProject);
