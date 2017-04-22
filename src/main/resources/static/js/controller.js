@@ -310,7 +310,7 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	var currentClient = null;
 	var initializeProject = function() {
 		return {
-				client : null, project_id : "", project_Title :"", rateValue:"", rate:"", acc_number:"", chambers: [], carts:0, startDate:"", endDate:"", lastBillDate:"", currentBill:"", billPaidTotal:"", accountStatus:""
+				client : null, project_id : "", project_Title :"", rateValue:"", acc_number:"", chambers: [], carts:0, startDate:"", endDate:"", lastBillDate:"", currentBill:"", billPaidTotal:"", accountStatus:""
 		};
 	}
 	// Saves all information regarding a new project for a selected client.
@@ -419,12 +419,16 @@ billingApp.controller("usage_list_Controller", function($scope,$http){
 			$log.info(response);
 	});
 });
-billingApp.controller("track_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+billingApp.controller("track_project_Controller", function($rootScope,$scope,$http, $log, $routeParams, project_service){
 	$scope.selectedChamber = undefined;
 	$scope.id = $routeParams.id;
 	$scope.editUsageForm=$http.get('/project/'+$scope.id)
 		.then(function success(response) {
 			$scope.usage_form = response.data;
+					// project_service.setProject($scope.usage_form);
+
+
+			$scope.currentRate = $scope.usage_form.rateValue;
 			var start = $scope.usage_form.startDate.split('-');
 			var end = $scope.usage_form.endDate.split('-');
 			var lastBill = $scope.usage_form.lastBillDate.split('-');
@@ -433,6 +437,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
 			$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
 			//$scope.usage_form.lastBillPaidDate = new Date(lastBillPaid[1]+"/"+lastBillPaid[2]+"/"+lastBillPaid[0]);
+
 			$scope.config = response.config;
 			$scope.headers = response.headers;
 			$scope.status = response.status;
@@ -453,17 +458,9 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	$scope.savedChambers=$http.get('/chamber/')
 		.then(function success(response) {
 			$scope.chambers = response.data;
-			// for(var j = 0 ; j < $scope.chambers.length; j++){
-			// 	for(var i = 0; i < $scope.usage_form.chambers.length; i++){
-			// 		if($scope.usage_form.chambers[i].chamberName !== $scope.chambers[j].chamberName){
-			// 			$scope.existingChambers.push($scope.chambers[j]);
-			// 			break;
-			// 		}
-			// 	}
-			// }
 
 			// Return chambers that are in $scope.chambers but not in usage_form
-			if($scope.chambers!=null){
+			if($scope.chambers!=null && $scope.usage_form.chambers!= null){
 				$scope.existingChambers = $scope.chambers.filter(function(obj) {
 				    return !$scope.usage_form.chambers.some(function(obj2) {
 				        return obj.chamberName == obj2.chamberName;
@@ -528,6 +525,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	 */
 	$scope.currentProject = function(){
 		$scope.currentProjectID = $scope.id;
+		$scope.usage_form = project_service.project_info;
 	}
 
   // $scope.usage_form.billPaidTotal
@@ -546,21 +544,35 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		});
 	}
 });
-billingApp.controller("payment_list_Controller", function($rootScope,$scope,$http, $log, $routeParams){
+billingApp.controller("payment_list_Controller", function($rootScope,$scope,$http, $log, $routeParams, project_service){
 	$scope.id = $routeParams.id;
 	$scope.paymentList=$http.get('/payment/'+$scope.id)
 		.then(function success(response) {
 			$scope.paymentHistory = response.data;
-			console.log($scope.paymentHistory);
-			// var payDate = $scope.paymentHistory.startDate.split('-');
+			// var payDate = $scope.paymentHistory.paidDate.split('-');
 			// $scope.paymentHistory.paidDate = new Date(payDate[1]+"/"+payDate[2]+"/"+payDate[0]);
 		},function failure(response){
 			$scope.selectedInfo = response.statusText;
 			$scope.status = response.data;
 			$log.info(response);
 	});
-});
+	$scope.project = project_service.project_info;
 
+
+});
+billingApp.service('project_service', function(){
+  var _project_info = {};
+  // return{
+  //   getProject: function(){
+  //     return project_info;
+  //   },
+  //   setProject: function(value){
+  //     project_info = value;
+  //   }
+  // };
+  this.project_info = _project_info;
+  console.log(_project_info);
+});
 billingApp.controller("rate_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.savedRateInfo=$http.get('/rate/')
 		.then(function success(response) {
