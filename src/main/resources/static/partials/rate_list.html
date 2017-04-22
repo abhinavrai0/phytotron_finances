@@ -1,19 +1,46 @@
-<div class="table-responsive col-sm-10">
-	<table class="table table-hover table-bordered">
-		<thead>
-			<th>#</th>
-			<th>Rate Type</th>
-			<th>Rate</th>
-		</thead>
-		<tbody>
-			<tr ng-repeat="rate in rateList">
-				<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.id}}</a></td>
-				<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rateType}}</a></td>
-				<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rate}}</a></td>
-			</tr>
-		</tbody>
-	</table>
-	<div>
-      <a class="btn btn-success" ng-href="#/add_rate_info">Add New Rate</a>
-  </div>
+<div id="search_boxes" class="container">
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchRateType">Rate Type :</label>
+						<input type="text" ng-model="searchAll.rateType" id="searchRateType" class="form-control"/>
+					</div>
+				</form>
+			</div>			
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchRate">Rate :</label>
+						<input type="text" ng-model="searchAll.rate" id="searchRate" class="form-control"/>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="table-responsive col-xs-12">
+		<table class="table table-hover table-bordered">
+			<thead>
+				<th>#</th>
+				<th>Rate Type</th>
+				<th>Rate</th>
+			</thead>
+			<tbody>
+				<tr dir-paginate="rate in rateList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
+					<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.id}}</a></td>
+					<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rateType}}</a></td>
+					<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rate}}</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+		
+		<div>
+		     <a class="btn btn-success" ng-href="#/add_rate_info">Add New Rate</a>
+		</div>
+	</div>
 </div>

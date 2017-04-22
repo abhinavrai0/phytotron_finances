@@ -1,4 +1,27 @@
-<div class="table-responsive col-sm-10">
+<div id="search_boxes" class="container">
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchCropCommonName">Common Name :</label>
+						<input type="text" ng-model="searchAll.cropCommonName" id="searchCropCommonName" class="form-control"/>
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchCropScientificName">Scientific Name :</label>
+						<input type="text" ng-model="searchAll.cropScientificName" id="searchCropScientificName" class="form-control"/>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+<div class="table-responsive col-sm-12">
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th>#</th>
@@ -6,15 +29,17 @@
 			<th>Scientific Name</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="crop in cropList">
+			<tr dir-paginate="crop in cropList |filter:searchAll| orderBy:sortKey:reverse | itemsPerPage: 10">
 				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.id}}</a></td>
 				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropCommonName}}</a></td>
 				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropScientificName}}</a></td>
 			</tr>
 		</tbody>
 	</table>
+	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+	
 	<div>
       <a class="btn btn-success" ng-href="#/add_crop_info">Add New Crop</a>
   </div>
-
+</div>
 </div>
