@@ -1,4 +1,72 @@
-<div class="table-responsive col-sm-10">
+<div id="search_boxes" class="container">
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-xs-4">
+				<form>
+					<div class="form-group">
+						<label for="searchAll">Global Search :</label>
+						<input type="text" ng-model="searchAll.$" id="searchAll" class="form-control"/>
+					</div>
+				</form>
+			</div>
+			<!-- ng-model="searchAll.client_status" -->
+			<div class="col-xs-4">
+				<form>
+					<div class="form-group">
+						  <label for="searchStatus">Start Date :</label>
+					      <input type="date" class="form-control" id="searchStatus" ng-model="searchAll.client_status">
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-4">
+				<form>
+					<div class="form-group">
+						  <label for="searchStatus">End Date :</label>
+					      <input type="date" class="form-control" id="searchStatus" ng-model="searchAll.client_status">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchFirstName">Client First Name :</label>
+						<input type="text" ng-model="searchAll.client.client_first_name" id="searchFirstName" class="form-control"/>
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchLastName">Client Last Name :</label>
+						<input type="text" ng-model="searchAll.client.client_last_name" id="searchLastName" class="form-control"/>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchProject_id">Project id :</label>
+						<input type="text" ng-model="searchAll.project_id" id="searchProject_id" class="form-control"/>
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchProject_Title">Project Title :</label>
+						<input type="text" ng-model="searchAll.project_Title" id="searchProject_Title" class="form-control"/>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+<div class="table-responsive col-sm-12">
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th>#</th>
@@ -12,7 +80,7 @@
 			<th>Current Bill</th>
 		</thead>
 		<tbody>
-			<tr dir-paginate="project in projectList | orderBy:sortKey:reverse | itemsPerPage: 10">
+			<tr dir-paginate="project in projectList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
 				<td><a href="#/track_project/{{project.id}}">{{project.id}}</a></td>
 				<td><a href="#/track_project/{{project.id}}">{{project.project_id}}</a></td>
 				<td><a href="#/track_project/{{project.id}}">{{project.project_Title}}</a></td>
@@ -31,4 +99,5 @@
 	<div>
 		<a class="btn btn-success" ng-href="#/">DOES NOTHING :P</a>
 	</div>
+</div>
 </div>
