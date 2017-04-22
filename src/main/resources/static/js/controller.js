@@ -313,12 +313,11 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 				client : null, project_id : "", project_Title :"", rate:"", acc_number:"", chambers: [], carts:0, startDate:"", endDate:"", lastBillDate:"", currentBill:"", billPaidTotal:"", accountStatus:""
 		};
 	}
+	$scope.rateValue = null;
 	// Saves all information regarding a new project for a selected client.
 	$scope.project_form = initializeProject();
 	// Get the selected client from the routeParams.
 	$scope.id = $routeParams.id;
-	// Save all the finalised chambers locally in the table. We will push only ids when we submit.
-	$scope.localChamberData = [];
 	// To remove the selected chamber from the list and display it in the table.
 	$scope.selectedChamber = undefined;
 
@@ -392,20 +391,18 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 		// Display the total sum of the carts in each chamber in the finalised chambers.
 		$scope.project_form.carts = parseInt($scope.project_form.carts) + parseInt($scope.selectedChamber.chamberCarts);
 		// Save the selected chamber id in the chamberId variable to send to back-end
-		$scope.project_form.chambers.push($scope.selectedChamber.id);
-		$scope.localChamberData.push($scope.selectedChamber);
+		$scope.project_form.chambers.push($scope.selectedChamber);
 	};
 
 	/**
 	 * Removes rows from the table, and adds them back to the drop down.
 	 */
 	$scope.removeRow = function ($index) {
-		$scope.project_form.carts = parseInt($scope.project_form.carts) - parseInt($scope.localChamberData[$index].chamberCarts);
+		$scope.project_form.carts = parseInt($scope.project_form.carts) - parseInt($scope.project_form.chambers[$index].chamberCarts);
 		// adding the removed chamber back to the list.
-		$scope.chambers.push($scope.localChamberData[$index]);
-		// Removing the chamber from the local chambers data as well as from the final chamber ids to be sent.
+		$scope.chambers.push($scope.project_form.chambers[$index]);
+		// Removing the chamber from the final chamber ids to be sent.
 		$scope.project_form.chambers.splice($index, 1);
-		$scope.localChamberData.splice($index, 1);
 	}
 });
 billingApp.controller("usage_list_Controller", function($scope,$http){
@@ -424,7 +421,7 @@ billingApp.controller("usage_list_Controller", function($scope,$http){
 	});
 });
 billingApp.controller("track_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
-	$scope.message="Tracking usage";
+	$scope.selectedChamber = undefined;
 	$scope.id = $routeParams.id;
 	$scope.editUsageForm=$http.get('/project/'+$scope.id)
 		.then(function success(response) {
@@ -446,6 +443,60 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	$scope.savedRates=$http.get('/rate')
+		.then(function success(response) {
+			$scope.rates = response.data;
+		},function failure(response){
+			$scope.chambers = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+	$scope.savedChambers=$http.get('/chamber/')
+		.then(function success(response) {
+			$scope.chambers = response.data;
+			// for(var j = 0 ; j < $scope.chambers.length; j++){
+			// 	for(var i = 0; i < $scope.usage_form.chambers.length; i++){
+			// 		if($scope.usage_form.chambers[i] !== $scope.chambers[j]){
+			// 			$scope.existingChambers.push($scope.chambers[j]);
+			// 			break;
+			// 		}
+			// 	}
+			// }
+			if($scope.chambers!== null){
+					$scope.existingChambers = $scope.chambers.filter(function(i) {return $scope.usage_form.chambers.indexOf(i) < 0;});
+			}
+		},function failure(response){
+			$scope.chambers = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
+
+	// Array.prototype.diff = function(a) {
+	// 	return this.filter(function(i) {return a.indexOf(i) < 0;});
+	// };
+	$scope.addChamberRow = function(){
+		for(var i = 0; i < $scope.existingChambers.length; i++){
+			if($scope.selectedChamber === $scope.existingChambers[i]){
+				$scope.existingChambers.splice(i,1);
+			}
+		}
+		// Display the total sum of the carts in each chamber in the finalised chambers.
+		$scope.usage_form.carts = parseInt($scope.usage_form.carts) + parseInt($scope.selectedChamber.chamberCarts);
+		// Save the selected chamber id in the chamberId variable to send to back-end
+		$scope.usage_form.chambers.push($scope.selectedChamber);
+	};
+
+	/**
+	 * Removes rows from the table, and adds them back to the drop down.
+	 */
+	$scope.removeRow = function ($index) {
+		$scope.usage_form.carts = parseInt($scope.usage_form.carts) - parseInt($scope.usage_form.chambers[$index].chamberCarts);
+		// adding the removed chamber back to the list.
+		$scope.existingChambers.push($scope.usage_form.chambers[$index]);
+		// Removing the chamber from the final chamber ids to be sent.
+		$scope.usage_form.chambers.splice($index, 1);
+	}
+
 	$scope.save=function(){
 		$http.put("/project/"+$scope.id, $scope.usage_form)
 		.success(function(usage_form, status, headers, config) {

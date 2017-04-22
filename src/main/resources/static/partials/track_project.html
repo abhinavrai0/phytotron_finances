@@ -47,9 +47,14 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="rate" class="col-sm-2 control-label">Rate</label>
+    <label for="rateType" class="col-sm-2 control-label">Rate Type: </label>
+    <div class="col-sm-1">
+      <select ng-model="rateValue" ng-options="x.rateType for x in rates">
+      </select>
+    </div>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="rate" ng-model="usage_form.rate" placeholder="Enter the rate">
+      <label for="rate" class="col-sm-4 control-label">Rate: </label>
+      <span for="rate" ng-model = "usage_form.rate">{{rateValue.rate}}</span>
     </div>
   </div>
   <div class="form-group">
@@ -60,12 +65,33 @@
   </div>
   <div class="form-group">
     <label for="chambers" class="col-sm-2 control-label">Chambers</label>
-    <div class="col-sm-2">
-
-      <select ng-model="usage_form.chambers" ng-options="x.chamberType as x.chamberType for x in chambers">
+    <div class="col-sm-8">
+      <select ng-model="selectedChamber" ng-options="x.chamberName for x in existingChambers">
+        <option value="" disabled selected>Chamber Type</option>
       </select>
+      <!-- <label for="numberCarts" class="control-label">Number of carts: </label>
+      <span for="numberCarts" class = "fields">{{project_form.chambers.chamberCarts}}</span>
+      <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-plus">Remove Chamber</i></button> -->
+      <button type="button" ng-click="addChamberRow()" class="btn btn-default addButton"><i class="fa fa-minus">Add Chamber</i></button>
+    </div>
+    <div class="table-responsive col-sm-8">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <th>Chamber Name</th>
+          <th>Carts</th>
+          <th>Action</th>
+        </thead>
 
-
+        <tbody>
+          <tr ng-repeat="chamber in usage_form.chambers">
+            <td>{{chamber.chamberName}}</td>
+            <td>{{chamber.chamberCarts}}</td>
+            <td>
+                <input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow($index)"/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="form-group">

@@ -46,9 +46,14 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="rate" class="col-sm-2 control-label">Rate</label>
+    <label for="rateType" class="col-sm-2 control-label">Rate Type: </label>
+    <div class="col-sm-1">
+      <select ng-model="rateValue" ng-options="x.rateType for x in rates">
+      </select>
+    </div>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="rate" ng-model="project_form.rate" placeholder="Enter the rate">
+      <label for="rate" class="col-sm-4 control-label">Rate: </label>
+      <span for="rate" ng-model = "project_form.rate">{{rateValue.rate}}</span>
     </div>
   </div>
   <div class="form-group">
@@ -60,7 +65,7 @@
   <div class="form-group">
     <label for="chambers" class="col-sm-2 control-label">Chambers</label>
     <div class="col-sm-8">
-      <select ng-model="selectedChamber" ng-options="x.chamberType for x in chambers">
+      <select ng-model="selectedChamber" ng-options="x.chamberName for x in chambers">
         <option value="" disabled selected>Chamber Type</option>
       </select>
       <!-- <label for="numberCarts" class="control-label">Number of carts: </label>
@@ -77,8 +82,8 @@
     		</thead>
 
         <tbody>
-        	<tr ng-repeat="chamber in localChamberData">
-        		<td>{{chamber.chamberType}}</td>
+        	<tr ng-repeat="chamber in project_form.chambers">
+        		<td>{{chamber.chamberName}}</td>
         		<td>{{chamber.chamberCarts}}</td>
         		<td>
         		    <input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow($index)"/>
