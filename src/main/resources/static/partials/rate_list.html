@@ -6,13 +6,15 @@
 			<th>Rate</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="rate in rateList">
+			<tr dir-paginate="rate in rateList | orderBy:sortKey:reverse | itemsPerPage: 10">
 				<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.id}}</a></td>
 				<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rateType}}</a></td>
 				<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rate}}</a></td>
 			</tr>
 		</tbody>
 	</table>
+	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+	
 	<div>
       <a class="btn btn-success" ng-href="#/add_rate_info">Add New Rate</a>
   </div>

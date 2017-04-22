@@ -6,13 +6,15 @@
 			<th>Department Name</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="department in departmentList">
+			<tr dir-paginate="department in departmentList | orderBy:sortKey:reverse | itemsPerPage: 10">
 				<td><a href="#/edit_department_info/{{department.id}}">{{department.id}}</a></td>
 				<td><a href="#/edit_department_info/{{department.id}}">{{department.departmentId}}</a></td>
 				<td><a href="#/edit_department_info/{{department.id}}">{{department.departmentName}}</a></td>
 			</tr>
 		</tbody>
 	</table>
+	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+	
 	<div>
       <a class="btn btn-success" ng-href="#/add_department_info">Add New Department</a>
   </div>
