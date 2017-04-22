@@ -48,12 +48,12 @@
   <div class="form-group">
     <label for="rateType" class="col-sm-2 control-label">Rate Type: </label>
     <div class="col-sm-1">
-      <select ng-model="rateValue" ng-options="x.rateType for x in rates">
+      <select ng-model="project_form.rateValue" ng-options="x.rateType for x in rates">
       </select>
     </div>
     <div class="col-sm-2">
       <label for="rate" class="col-sm-4 control-label">Rate: </label>
-      <span for="rate" ng-model = "project_form.rate">{{rateValue.rate}}</span>
+      <span for="rate" ng-model = "project_form.rate">{{project_form.rateValue.rate}}</span>
     </div>
   </div>
   <div class="form-group">

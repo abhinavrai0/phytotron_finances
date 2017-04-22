@@ -310,10 +310,9 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	var currentClient = null;
 	var initializeProject = function() {
 		return {
-				client : null, project_id : "", project_Title :"", rate:"", acc_number:"", chambers: [], carts:0, startDate:"", endDate:"", lastBillDate:"", currentBill:"", billPaidTotal:"", accountStatus:""
+				client : null, project_id : "", project_Title :"", rateValue:"", rate:"", acc_number:"", chambers: [], carts:0, startDate:"", endDate:"", lastBillDate:"", currentBill:"", billPaidTotal:"", accountStatus:""
 		};
 	}
-	$scope.rateValue = null;
 	// Saves all information regarding a new project for a selected client.
 	$scope.project_form = initializeProject();
 	// Get the selected client from the routeParams.
@@ -456,24 +455,26 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.chambers = response.data;
 			// for(var j = 0 ; j < $scope.chambers.length; j++){
 			// 	for(var i = 0; i < $scope.usage_form.chambers.length; i++){
-			// 		if($scope.usage_form.chambers[i] !== $scope.chambers[j]){
+			// 		if($scope.usage_form.chambers[i].chamberName !== $scope.chambers[j].chamberName){
 			// 			$scope.existingChambers.push($scope.chambers[j]);
 			// 			break;
 			// 		}
 			// 	}
 			// }
-			if($scope.chambers!== null){
-					$scope.existingChambers = $scope.chambers.filter(function(i) {return $scope.usage_form.chambers.indexOf(i) < 0;});
+
+			// Return chambers that are in $scope.chambers but not in usage_form
+			if($scope.chambers!=null){
+				$scope.existingChambers = $scope.chambers.filter(function(obj) {
+				    return !$scope.usage_form.chambers.some(function(obj2) {
+				        return obj.chamberName == obj2.chamberName;
+				    });
+				});
 			}
 		},function failure(response){
 			$scope.chambers = response.statusText;
 			$scope.status = response.data;
 			$log.info(response);
 	});
-
-	// Array.prototype.diff = function(a) {
-	// 	return this.filter(function(i) {return a.indexOf(i) < 0;});
-	// };
 	$scope.addChamberRow = function(){
 		for(var i = 0; i < $scope.existingChambers.length; i++){
 			if($scope.selectedChamber === $scope.existingChambers[i]){
