@@ -1,34 +1,79 @@
-<div class="table-responsive col-sm-10">
-	<div id="search_boxes">
-		<div>
-			<div>
-				<label>Global Search :</label>
-				<input type="text" ng-model="clientName">
+<div id="search_boxes" class="container">
+	<div class="col-xs-12">
+		<div class="row">
+			<div class="col-xs-10">
+				<form>
+					<div class="form-group">
+						<label for="searchAll">Global Search :</label>
+						<input type="text" ng-model="searchAll.$" id="searchAll" class="form-control"/>
+					</div>
+				</form>
+			</div>
+			<!-- ng-model="searchAll.client_status" -->
+			<div class="col-xs-2">
+				<form>
+					<div class="form-group">
+						<!-- <label for="searchAll">Status :</label>
+						<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Client Status
+						    	<span class="caret"></span>
+						    </button>
+						    <ul class="dropdown-menu">
+						    	<li><a href="#">Active</a></li>
+						    	<li><a href="#">Inactive</a></li>
+						    </ul>
+						  </div> -->
+						  <label for="searchStatus">Select Status :</label>
+					      <select class="form-control" id="searchStatus" ng-model="searchAll.client_status">
+					        <option>Active</option>
+					        <option>Inactive</option>
+					      </select>
+
+						  
+					</div>
+				</form>
 			</div>
 		</div>
-		<div class="form-group">
-			<div >
-				<label>First Name :</label>
-				<input type="text" ng-model="clientName">
+		<div class="row">
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchFirstName">First Name :</label>
+						<input type="text" ng-model="searchAll.client_first_name" id="searchFirstName" class="form-control"/>
+					</div>
+				</form>
 			</div>
-			<div>
-				<label>Last Name :</label>
-				<input type="text" ng-model="clientName">
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchLastName">Last Name :</label>
+						<input type="text" ng-model="searchAll.client_last_name" id="searchLastName" class="form-control"/>
+					</div>
+				</form>
 			</div>
 		</div>
-		<div class="form-group">
-			<div >
-				<label>Email :</label>
-				<input type="text" ng-model="clientName">
+		<div class="row">
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchEmail">Email :</label>
+						<input type="text" ng-model="searchAll.client_email" id="searchEmail" class="form-control"/>
+					</div>
+				</form>
 			</div>
-			<div>
-				<label>Department :</label>
-				<input type="text" ng-model="clientName">
+			<div class="col-xs-6">
+				<form>
+					<div class="form-group">
+						<label for="searchDepartment">Department :</label>
+						<input type="text" ng-model="searchAll.dept_name" id="searchDepartment" class="form-control"/>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-
-
+</div>
+<div class="container">
+<div class="table-responsive col-sm-12">
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th>Select</th>
@@ -43,7 +88,7 @@
 			<th ng-click="sort('client_status')">Status</th>
 		</thead>
 		<tbody>
-			<tr dir-paginate="savedClient in ClientList | filter:clientName | orderBy:sortKey:reverse | itemsPerPage: 20 ">
+			<tr dir-paginate="savedClient in ClientList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 15 ">
 					<!-- ng-repeat creates a new scope of its own. That's why for ng-model you need to put parent
 					ng-value puts the given value in the ng-model
 					groupName is to select only one radio button.
@@ -62,4 +107,5 @@
 		<a class="btn btn-success" ng-href="#/add_client_info">Add New</a>
 		<a class="btn btn-success" ng-disabled = "!selectedClient" ng-href="#/start_project/{{selectedClient}}">Start New Project</a>
 	</div>
+</div>
 </div>
