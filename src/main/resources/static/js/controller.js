@@ -121,6 +121,10 @@ billingApp.controller("chamber_list_Controller", function($rootScope,$scope,$htt
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	$scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 });
 billingApp.controller("add_chamber_info_Controller", function($scope,$http){
 	$scope.message="Add Chamber Info";
@@ -186,6 +190,10 @@ billingApp.controller("department_list_Controller", function($rootScope,$scope,$
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	$scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 });
 billingApp.controller("add_department_info_Controller", function($scope,$http){
 	$scope.message="Add Department Info";
@@ -251,6 +259,10 @@ billingApp.controller("crop_list_Controller", function($rootScope,$scope,$http,$
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	$scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 });
 billingApp.controller("add_crop_info_Controller", function($scope,$http){
 	$scope.message="Add Crop Info";
@@ -418,6 +430,10 @@ billingApp.controller("usage_list_Controller", function($scope,$http){
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	$scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 });
 billingApp.controller("track_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.selectedChamber = undefined;
@@ -559,6 +575,10 @@ billingApp.controller("payment_list_Controller", function($rootScope,$scope,$htt
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	$scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 });
 
 billingApp.controller("rate_list_Controller", function($rootScope,$scope,$http,$log){
@@ -570,6 +590,10 @@ billingApp.controller("rate_list_Controller", function($rootScope,$scope,$http,$
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	$scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
 });
 billingApp.controller("add_rate_info_Controller", function($scope,$http){
 	var rate_form={

@@ -1,7 +1,7 @@
 <div id="search_boxes" class="container">
-	<div class="col-xs-12">
+	<div class="col-sm-12">
 		<div class="row">
-			<div class="col-xs-10">
+			<div class="col-sm-10">
 				<form>
 					<div class="form-group">
 						<label for="searchAll">Global Search :</label>
@@ -10,7 +10,7 @@
 				</form>
 			</div>
 			<!-- ng-model="searchAll.client_status" -->
-			<div class="col-xs-2">
+			<div class="col-sm-2">
 				<form>
 					<div class="form-group">
 						<!-- <label for="searchAll">Status :</label>
@@ -28,14 +28,12 @@
 					        <option>Active</option>
 					        <option>Inactive</option>
 					      </select>
-
-						  
 					</div>
 				</form>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchFirstName">First Name :</label>
@@ -43,7 +41,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchLastName">Last Name :</label>
@@ -53,7 +51,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchEmail">Email :</label>
@@ -61,7 +59,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchDepartment">Department :</label>
@@ -78,14 +76,21 @@
 		<thead>
 			<th>Select</th>
 			<th ng-click="sort('client_first_name')">First Name
-			<span class="glyphicon sort-icon" ng-show="sortKey=='client_first_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+<!-- 			<span class="glyphicon" ng-show="sortKey=='client_first_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span> -->
+			<span class="glyphicon" ng-show="sortKey=='client_first_name'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
 			<th ng-click="sort('client_last_name')">Last Name
-			<span class="glyphicon sort-icon" ng-show="sortKey=='client_last_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+			<span  ng-show="sortKey=='client_last_name'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
-			<th ng-click="sort('client_email')">Email</th>
-			<th ng-click="sort('dept_name')">Department</th>
-			<th ng-click="sort('client_status')">Status</th>
+			<th ng-click="sort('client_email')">Email
+			<span class="glyphicon" ng-show="sortKey=='client_email'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			</th>
+			<th ng-click="sort('dept_name')">Department
+			<span class="glyphicon" ng-show="sortKey=='dept_name'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			</th>
+			<th ng-click="sort('client_status')">Status
+			<span class="glyphicon" ng-show="sortKey=='client_status'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			</th>
 		</thead>
 		<tbody>
 			<tr dir-paginate="savedClient in ClientList | filter:searchAll | filter:{'client_status':  searchAll.client_status}: true  | orderBy:sortKey:reverse | itemsPerPage: 15 ">

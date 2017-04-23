@@ -1,5 +1,64 @@
-body{
+
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url(../fonts/glyphicons-halflings-regular.eot);
+	src: url(../fonts/glyphicons-halflings-regular.eot?#iefix)
+		format('embedded-opentype'),
+		url(../fonts/glyphicons-halflings-regular.woff2) format('woff2'),
+		url(../fonts/glyphicons-halflings-regular.woff) format('woff'),
+		url(../fonts/glyphicons-halflings-regular.ttf) format('truetype'),
+		url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular)
+		format('svg')
 }
+
+.glyphicon {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale
+}
+table th{
+    cursor: pointer;
+}
+
+.glyphicon-chevron-left:before {
+	content: "\e079"
+}
+
+.glyphicon-chevron-right:before {
+	content: "\e080"
+}
+
+
+.glyphicon-chevron-up:before {
+	content: "\e113"
+}
+
+.glyphicon-chevron-down:before {
+	content: "\e114"
+}
+
+.glyphicon-hand-right:before {
+	content: "\e127"
+}
+
+.glyphicon-hand-left:before {
+	content: "\e128"
+}
+
+.glyphicon-hand-up:before {
+	content: "\e129"
+}
+
+.glyphicon-hand-down:before {
+	content: "\e130"
+}
+
 
 .myclass {
 
@@ -43,3 +102,16 @@ font-family: "GlyphaRoman";
 dir-pagination-controls{
 	float: right;
 }
+
+
+/* 
+.nav{
+	float: left;
+	margin-left: 0;
+	padding-left: 0;
+}
+.navbar{
+	float: left;
+	margin-left: 0;
+	padding-left: 0;
+} */

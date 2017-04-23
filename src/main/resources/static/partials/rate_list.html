@@ -1,7 +1,7 @@
 <div id="search_boxes" class="container">
-	<div class="col-xs-12">
+	<div class="col-sm-12">
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchRateType">Rate Type :</label>
@@ -9,7 +9,7 @@
 					</div>
 				</form>
 			</div>			
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchRate">Rate :</label>
@@ -22,12 +22,18 @@
 	</div>
 </div>
 <div class="container">
-	<div class="table-responsive col-xs-12">
+	<div class="table-responsive col-sm-12">
 		<table class="table table-hover table-bordered">
 			<thead>
-				<th>#</th>
-				<th>Rate Type</th>
-				<th>Rate</th>
+				<th ng-click="sort('id')">#
+				<span  ng-show="sortKey=='id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('rateType')">Rate Type
+				<span  ng-show="sortKey=='rateType'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('rate')">Rate
+				<span  ng-show="sortKey=='rate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
 			</thead>
 			<tbody>
 				<tr dir-paginate="rate in rateList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">

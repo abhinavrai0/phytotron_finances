@@ -1,7 +1,7 @@
 <div id="search_boxes" class="container">
-	<div class="col-xs-12">
+	<div class="col-sm-12">
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchCropCommonName">Common Name :</label>
@@ -9,7 +9,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchCropScientificName">Scientific Name :</label>
@@ -25,8 +25,12 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th>#</th>
-			<th>Common Name</th>
-			<th>Scientific Name</th>
+			<th ng-click="sort('cropCommonName')">Common Name <!-- <i class="fa fa-fw fa-sort"></i> -->
+			<span class="glyphicon" ng-show="sortKey=='cropCommonName'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			</th>
+			<th ng-click="sort('cropScientificName')">Scientific Name <!-- ng-class="glyphicon glyphicon-hand-up"  -->
+			<span class="glyphicon" ng-show="sortKey=='cropScientificName'"  ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			</th>
 		</thead>
 		<tbody>
 			<tr dir-paginate="crop in cropList |filter:searchAll| orderBy:sortKey:reverse | itemsPerPage: 10">
