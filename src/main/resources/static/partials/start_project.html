@@ -47,13 +47,13 @@
   </div>
   <div class="form-group">
     <label for="rateType" class="col-sm-2 control-label">Rate Type: </label>
-    <div class="col-sm-1">
+    <div class="col-sm-2">
       <select class="form-control" ng-model="project_form.rateValue" ng-options="x.rateType for x in rates">
       </select>
     </div>
-    <div class="col-sm-2">
-      <label for="rate" class="col-sm-4 control-label">Rate: </label>
-      <span for="rate">{{project_form.rateValue.rate}}</span>
+    <div class="col-sm-4">
+      <label for="rate" class="col-sm-4 control-label">Rate: {{project_form.rateValue.rate}}</label>
+      <!-- <span for="rate">{{project_form.rateValue.rate}}</span> -->
     </div>
   </div>
   <div class="form-group">
@@ -64,16 +64,21 @@
   </div>
   <div class="form-group">
     <label for="chambers" class="col-sm-2 control-label">Chambers</label>
-    <div class="col-sm-8">
-      <select ng-model="selectedChamber" ng-options="x.chamberName for x in chambers">
+    <div class="col-sm-2">
+      <select class="form-control" ng-model="selectedChamber" ng-options="x.chamberName for x in chambers">
         <option value="" disabled selected>Chamber Type</option>
       </select>
+      </div>
+      <div class="col-sm-2">
+    
       <!-- <label for="numberCarts" class="control-label">Number of carts: </label>
       <span for="numberCarts" class = "fields">{{project_form.chambers.chamberCarts}}</span>
       <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-plus">Remove Chamber</i></button> -->
       <button type="button" ng-click="addChamberRow()" class="btn btn-default addButton"><i class="fa fa-minus">Add Chamber</i></button>
     </div>
-    <div class="table-responsive col-sm-8">
+    </div>
+    <div class="form-group">
+    <div class="table-responsive col-sm-8 col-sm-push-2">
     	<table class="table table-hover table-bordered">
         <thead>
           <th>Chamber Name</th>

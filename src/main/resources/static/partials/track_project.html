@@ -1,52 +1,76 @@
-<div class = "header">
-  <h3 align="center">Client Information</h3>
-  <div id = "container" class="col-sm-12">
-      <div class = "adjacentPanels col-sm-2"></div>
-      <div class = "adjacentPanels col-sm-4">
-        <div class="form-group">
-          <label for="Name" class="control-label">First Name: </label>
-          <span for="Name" class = "fields">{{usage_form.client.client_first_name}}</span>
-        </div>
-        <div class="form-group">
-          <label for="email" class="control-label">Email:</label>
-          <span for="email" class = "fields">{{usage_form.client.client_email}}</span>
-        </div>
-        <div class="form-group">
-          <label for="department" class="control-label">Department:</label>
-          <span for="department" class = "fields">{{usage_form.client.dept_name}}</span>
-        </div>
-      </div>
-      <div class = "adjacentPanels col-sm-4">
-        <div class="form-group">
-          <label for="Name" class="control-label">Last Name: </label>
-          <span for="Name" class = "fields">{{usage_form.client.client_last_name}}</span>
-        </div>
-        <div class="form-group">
-          <label for="Phone" class="control-label">Phone: </label>
-          <span for="Phone" class = "fields">{{usage_form.client.client_phone}}</span>
-        </div>
-        <div class="form-group">
-          <label for="address" class="control-label">Address:</label>
-          <span for="address" class = "fields">{{usage_form.client.client_address}}</span>
-        </div>
+<div class="header">
+	<h3 align="center">Client Information</h3>
+	<div id="container" class="col-sm-12">
+		<div class="adjacentPanels col-sm-2"></div>
+		<div class="adjacentPanels col-sm-4">
+			<div class="form-group">
+				<label for="Name" class="control-label">First Name: </label> <span
+					for="Name" class="fields">{{usage_form.client.client_first_name}}</span>
+			</div>
+			<div class="form-group">
+				<label for="email" class="control-label">Email:</label> <span
+					for="email" class="fields">{{usage_form.client.client_email}}</span>
+			</div>
+			<div class="form-group">
+				<label for="department" class="control-label">Department:</label> <span
+					for="department" class="fields">{{usage_form.client.dept_name}}</span>
+			</div>
+		</div>
+		<div class="adjacentPanels col-sm-4">
+			<div class="form-group">
+				<label for="Name" class="control-label">Last Name: </label> <span
+					for="Name" class="fields">{{usage_form.client.client_last_name}}</span>
+			</div>
+			<div class="form-group">
+				<label for="Phone" class="control-label">Phone: </label> <span
+					for="Phone" class="fields">{{usage_form.client.client_phone}}</span>
+			</div>
+			<div class="form-group">
+				<label for="address" class="control-label">Address:</label> <span
+					for="address" class="fields">{{usage_form.client.client_address}}</span>
+			</div>
 
-      </div>
-  </div>
+		</div>
+	</div>
 </div>
-<form class="form-horizontal" name="ProjectInfoForm" role = "form" ng-submit = "ProjectInfoForm.$valid">
-  <div class="form-group">
-    <label for="project_id" class="col-sm-2 control-label">Project Id</label>
-    <div class="col-sm-8">
-      <input type="name" class="form-control" id="project_id" ng-model="usage_form.project_id" placeholder="Enter the Project Id">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="project_Title" class="col-sm-2 control-label">Project Title</label>
-    <div class="col-sm-8">
-      <input type="name" class="form-control" id="project_Title" ng-model="usage_form.project_Title" placeholder="Enter the Project Title">
-    </div>
-  </div>
-  <div class="form-group">
+<form class="form-horizontal" name="ProjectInfoForm" role="form"
+	ng-submit="ProjectInfoForm.$valid">
+	<div class="form-group">
+		<label for="project_id" class="col-sm-2 control-label">Project
+			Id</label>
+		<div class="col-sm-8">
+			<input type="name" class="form-control" id="project_id"
+				ng-model="usage_form.project_id" placeholder="Enter the Project Id">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="project_Title" class="col-sm-2 control-label">Project
+			Title</label>
+		<div class="col-sm-8">
+			<input type="name" class="form-control" id="project_Title"
+				ng-model="usage_form.project_Title"
+				placeholder="Enter the Project Title">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="rateType" class="col-sm-2 control-label">Rate
+			Type: </label>
+		<div class="col-sm-2">
+			<select ng-init="usage_form.rateValue = currentRate"
+				class="form-control" ng-model="usage_form.rateValue"
+				ng-options="x.rateType for x in rates">
+			</select>
+		</div>
+		<div class="col-sm-4">
+			<label for="rate" class="col-sm-4 control-label">Rate:
+				{{usage_form.rateValue.rate}}</label>
+			<!-- <span for="rate">{{project_form.rateValue.rate}}</span> -->
+		</div>
+	</div>
+
+
+	<!-- <div class="form-group">
     <label for="rateType" class="col-sm-2 control-label">Rate Type: </label>
     <div class="col-sm-1">
       <select ng-init="usage_form.rateValue = currentRate" ng-model="usage_form.rateValue" ng-options="x.rateType for x in rates">
@@ -56,126 +80,146 @@
       <label for="rate" class="col-sm-4 control-label">Rate: </label>
       <span for="rate">{{usage_form.rateValue.rate}}</span>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="acc_number" class="col-sm-2 control-label">Account Number</label>
-    <div class="col-sm-8">
-      <input type="name" class="form-control" id="acc_number" ng-model= "usage_form.acc_number" placeholder="Enter the account number">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="chambers" class="col-sm-2 control-label">Chambers</label>
-    <div class="col-sm-8">
-      <select ng-model="selectedChamber" ng-options="x.chamberName for x in existingChambers">
-        <option value="" disabled selected>Chamber Type</option>
-      </select>
-      <!-- <label for="numberCarts" class="control-label">Number of carts: </label>
+  </div> -->
+	<div class="form-group">
+		<label for="acc_number" class="col-sm-2 control-label">Account
+			Number</label>
+		<div class="col-sm-8">
+			<input type="name" class="form-control" id="acc_number"
+				ng-model="usage_form.acc_number"
+				placeholder="Enter the account number">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="chambers" class="col-sm-2 control-label">Chambers</label>
+		<div class="col-sm-2">
+			<select class="form-control" ng-model="selectedChamber"
+				ng-options="x.chamberName for x in existingChambers">
+				<option value="" disabled selected>Chamber Type</option>
+			</select>
+		</div>
+		<div class="col-sm-2">
+			<!-- <label for="numberCarts" class="control-label">Number of carts: </label>
       <span for="numberCarts" class = "fields">{{project_form.chambers.chamberCarts}}</span>
       <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-plus">Remove Chamber</i></button> -->
-      <button type="button" ng-click="addChamberRow()" class="btn btn-default addButton"><i class="fa fa-minus">Add Chamber</i></button>
-    </div>
-    <div class="table-responsive col-sm-8">
-      <table class="table table-hover table-bordered">
-        <thead>
-          <th>Chamber Name</th>
-          <th>Carts</th>
-          <th>Action</th>
-        </thead>
+			<button type="button" ng-click="addChamberRow()"
+				class="btn btn-default addButton">
+				<i class="fa fa-minus">Add Chamber</i>
+			</button>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="table-responsive col-sm-8 col-sm-push-2">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<th>Chamber Name</th>
+					<th>Carts</th>
+					<th>Action</th>
+				</thead>
 
-        <tbody>
-          <tr ng-repeat="chamber in usage_form.chambers">
-            <td>{{chamber.chamberName}}</td>
-            <td>{{chamber.chamberCarts}}</td>
-            <td>
-                <input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow($index)"/>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="carts" class="col-sm-2 control-label">Carts</label>
-    <div class="col-sm-2">
-      <input type="number" class="form-control" id="carts" ng-model= "usage_form.carts" placeholder="Enter the number of carts">
-    </div>
-  </div>
-  <!-- Missing CROP in MODELS and Controllers.
+				<tbody>
+					<tr ng-repeat="chamber in usage_form.chambers">
+						<td>{{chamber.chamberName}}</td>
+						<td>{{chamber.chamberCarts}}</td>
+						<td><input type="button" value="Remove"
+							class="btn btn-primary" ng-click="removeRow($index)" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="carts" class="col-sm-2 control-label">Carts</label>
+		<div class="col-sm-2">
+			<input type="number" class="form-control" id="carts"
+				ng-model="usage_form.carts" placeholder="Enter the number of carts">
+		</div>
+	</div>
+	<!-- Missing CROP in MODELS and Controllers.
   <div class="form-group">
     <label for="crop" class="col-sm-2 control-label">Crop(s)</label>
     <div class="col-sm-8">
       <input type="name" class="form-control" id="carts" ng-model= "project_form.carts" placeholder="Enter the number of carts">
     </div>
   </div> -->
-  <!-- <div class="form-group">
+	<!-- <div class="form-group">
     <div flex-gt-xs>
         <label for="startDate" class="col-sm-2 control-label">Start Date</label>
         <md-datepicker ng-model="project_form.startDate" md-placeholder="Enter date"></md-datepicker>
     </div>
   </div> -->
-  <div class="form-group">
-    <label for="startDate" class="col-sm-2 control-label">Start Date</label>
-    <div class="col-sm-2">
-      <input type="date" class="form-control" id="startDate" ng-model= "usage_form.startDate">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="endDate" class="col-sm-2 control-label">End Date</label>
-    <div class="col-sm-2">
-      <input type="date" class="form-control" id="endDate" ng-model= "usage_form.endDate">
-    </div>
-  </div>
+	<div class="form-group">
+		<label for="startDate" class="col-sm-2 control-label">Start
+			Date</label>
+		<div class="col-sm-2">
+			<input type="date" class="form-control" id="startDate"
+				ng-model="usage_form.startDate">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="endDate" class="col-sm-2 control-label">End Date</label>
+		<div class="col-sm-2">
+			<input type="date" class="form-control" id="endDate"
+				ng-model="usage_form.endDate">
+		</div>
+	</div>
 
-  <div class="form-group">
-    <label for="lastBillDate" class="col-sm-2 control-label">Last Invoice Date: </label>
-    <span for="Name" class = "fields">{{usage_form.lastBillDate | date:'MM/dd/yyyy'}}</span>
-  </div>
+	<div class="form-group">
+		<label for="lastBillDate" class="col-sm-2 control-label">Last
+			Invoice Date: </label> <span for="Name" class="fields">{{usage_form.lastBillDate
+			| date:'MM/dd/yyyy'}}</span>
+	</div>
 
-  <div class="form-group">
-    <label for="generateBill" class="col-sm-2 control-label">Calculate Invoice</label>
-    <div class="col-sm-2">
-      <input type="date" class="form-control" ng-model= "generateBillDate.date">
-    </div>
-    <button ng-click="generate()" class="btn btn-default">Calculate</button>
-  </div>
+	<div class="form-group">
+		<label for="generateBill" class="col-sm-2 control-label">Calculate
+			Invoice</label>
+		<div class="col-sm-2">
+			<input type="date" class="form-control"
+				ng-model="generateBillDate.date">
+		</div>
+		<button ng-click="generate()" class="btn btn-default">Calculate</button>
+	</div>
 
-  <div class="form-group">
-    <label for="currentBill" class="col-sm-2 control-label">Current Bill: </label>
-    <span for="Name" class = "fields">{{usage_form.currentBill}}</span>
-  </div>
-
-
-  <div class="form-group">
-    <label for="payBill" class="col-sm-2 control-label">Amount Paid</label>
-    <div class="col-sm-2">
-      <input type="Number" class="form-control" ng-model= "pay_amount">
-    </div>
-    <button ng-click="pay()" class="btn btn-default">Pay</button>
-  </div>
+	<div class="form-group">
+		<label for="currentBill" class="col-sm-2 control-label">Current
+			Bill: </label> <span for="Name" class="fields">{{usage_form.currentBill}}</span>
+	</div>
 
 
-  <div class="form-group">
-    <label for="billPaidTotal" class="col-sm-2 control-label">Total Paid:</label>
-    <span for="Name" class = "fields">{{usage_form.billPaidTotal}}</span>
-  </div>
+	<div class="form-group">
+		<label for="payBill" class="col-sm-2 control-label">Amount
+			Paid</label>
+		<div class="col-sm-2">
+			<input type="Number" class="form-control" ng-model="pay_amount">
+		</div>
+		<button ng-click="pay()" class="btn btn-default">Pay</button>
+	</div>
 
-  <div class="form-group">
-    <label for="lastBillDate" class="col-sm-2 control-label">Last Date Paid: </label>
-    <span for="Name" class = "fields">{{usage_form.lastBillPaidDate | date:'MM/dd/yyyy'}}</span>
-  </div>
 
-  <!-- <div class="form-group">
+	<div class="form-group">
+		<label for="billPaidTotal" class="col-sm-2 control-label">Total
+			Paid:</label> <span for="Name" class="fields">{{usage_form.billPaidTotal}}</span>
+	</div>
+
+	<div class="form-group">
+		<label for="lastBillDate" class="col-sm-2 control-label">Last
+			Date Paid: </label> <span for="Name" class="fields">{{usage_form.lastBillPaidDate
+			| date:'MM/dd/yyyy'}}</span>
+	</div>
+
+	<!-- <div class="form-group">
     <label for="accountStatus" class="col-sm-2 control-label">Account Status</label>
     <span for="Name" class = "fields">{{usage_form.accountStatus}}</span>
   </div> -->
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-8">
-      <button ng-click="save()" class="btn btn-default">Save</button>
-      <a ng-click = "currentProject()" class="btn btn-default" ng-href="#/payment_list/{{currentProjectID}}">Payment History</a>
-      <a class="btn btn-default" ng-href="#/usage_list">Go Back</a>
-    </div>
-  </div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-8">
+			<button ng-click="save()" class="btn btn-default">Save</button>
+			<a ng-click="currentProject()" class="btn btn-default"
+				ng-href="#/payment_list/{{currentProjectID}}">Payment History</a> <a
+				class="btn btn-default" ng-href="#/usage_list">Go Back</a>
+		</div>
+	</div>
 
 </form>
-<div id = "alert_placeholder" class="col-sm-offset-2 col-sm-8"></div>
+<div id="alert_placeholder" class="col-sm-offset-2 col-sm-8"></div>
