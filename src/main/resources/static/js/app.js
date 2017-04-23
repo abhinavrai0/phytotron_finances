@@ -78,6 +78,10 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource","angularUtil
     .when("/edit_rate_info/:id",{
       templateUrl: "./partials/edit_rate_info.html",
 			controller: "edit_rate_info_Controller"
-    });;
+    })
+    .when("/payment_list/:id",{
+      templateUrl: "./partials/payment_list.html",
+			controller: "payment_list_Controller"
+    });
 
   });

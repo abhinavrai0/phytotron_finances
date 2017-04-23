@@ -5,29 +5,37 @@
       <div class = "adjacentPanels col-sm-4">
         <div class="form-group">
           <label for="Name" class="control-label">First Name: </label>
-          <span for="Name" class = "fields">{{paymentHistory[0].client.client_first_name}}</span>
+          <span for="Name" class = "fields">{{project.project_info.client.client_first_name}}</span>
         </div>
         <div class="form-group">
           <label for="email" class="control-label">Email:</label>
-          <span for="email" class = "fields">{{paymentHistory[0].client.client_email}}</span>
+          <span for="email" class = "fields">{{project.client.client_email}}</span>
         </div>
         <div class="form-group">
           <label for="department" class="control-label">Department:</label>
-          <span for="department" class = "fields">{{paymentHistory[0].client.dept_name}}</span>
+          <span for="department" class = "fields">{{project_info_short.client.dept_name}}</span>
+        </div>
+        <div class="form-group">
+          <label for="project_id" class="control-label">Project Id:</label>
+          <span for="project_id" class = "fields">{{project_info_short.project_id}}</span>
         </div>
       </div>
       <div class = "adjacentPanels col-sm-4">
         <div class="form-group">
           <label for="Name" class="control-label">Last Name: </label>
-          <span for="Name" class = "fields">{{paymentHistory[0].client.client_last_name}}</span>
+          <span for="Name" class = "fields">{{project_info_short.client.client_last_name}}</span>
         </div>
         <div class="form-group">
           <label for="Phone" class="control-label">Phone: </label>
-          <span for="Phone" class = "fields">{{paymentHistory[0].client.client_phone}}</span>
+          <span for="Phone" class = "fields">{{project_info_short.client.client_phone}}</span>
         </div>
         <div class="form-group">
           <label for="address" class="control-label">Address:</label>
-          <span for="address" class = "fields">{{paymentHistory[0].client.client_address}}</span>
+          <span for="address" class = "fields">{{project_info_short.client.client_address}}</span>
+        </div>
+        <div class="form-group">
+          <label for="project_Title" class="control-label">Project Title:</label>
+          <span for="project_Title" class = "fields">{{project_info_short.project_Title}}</span>
         </div>
 
       </div>
@@ -37,16 +45,12 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th>#</th>
-      <th>Project Id</th>
-      <th>Project Title</th>
 			<th>Payment Date</th>
 			<th>Amount</th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="payment in paymentHistory">
 				<td>{{payment.id}}</td>
-        <td>{{payment.project.project_id}}</td>
-        <td>{{payment.project.project_Title}}</td>
 				<td>{{payment.paidDate}}</td>
 				<td>{{payment.amount}}</td>
 			</tr>
