@@ -436,16 +436,18 @@ billingApp.controller("usage_list_Controller", function($scope,$http){
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     }
 });
-billingApp.controller("track_project_Controller", function($rootScope,$scope,$http, $log, $routeParams, project_service){
+billingApp.controller("track_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.selectedChamber = undefined;
 	$scope.id = $routeParams.id;
+	// Create a string value for the existing rate. created a dictionary with string, rateObject pair. In the list of rates, we are showing
+	// the strings. Whenever we select a new string from the select rate option, we call ng-change, which will look for the key value pair and
+	// update $scope.usage_form.rateValue with the value of the selected(changed) rate string.
+	$scope.currentRateValue = "";
 	$scope.editUsageForm=$http.get('/project/'+$scope.id)
 		.then(function success(response) {
 			$scope.usage_form = response.data;
-					// project_service.setProject($scope.usage_form);
-
-
-			$scope.currentRate = $scope.usage_form.rateValue;
+			// setting the input ratetype into currentRateValue. Will use this as ng-model to show the current selected.
+			$scope.currentRateValue = $scope.usage_form.rateValue.rateType;
 			var start = $scope.usage_form.startDate.split('-');
 			var end = $scope.usage_form.endDate.split('-');
 			var lastBill = $scope.usage_form.lastBillDate.split('-');
@@ -454,7 +456,6 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
 			$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
 			//$scope.usage_form.lastBillPaidDate = new Date(lastBillPaid[1]+"/"+lastBillPaid[2]+"/"+lastBillPaid[0]);
-
 			$scope.config = response.config;
 			$scope.headers = response.headers;
 			$scope.status = response.status;
@@ -464,14 +465,28 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	/**
+	 * This get request will fetch all rates, and create a dictionary of it. (rateType as String, the object associated with it)
+	 */
 	$scope.savedRates=$http.get('/rate')
 		.then(function success(response) {
-			$scope.rates = response.data;
+			var rateObjArray = response.data;
+			$scope.rates = {};
+			for( var i in rateObjArray) {
+				$scope.rates[rateObjArray[i]['rateType']] = rateObjArray[i];
+			}
 		},function failure(response){
-			$scope.chambers = response.statusText;
+			$scope.rates = response.statusText;
 			$scope.status = response.data;
 			$log.info(response);
 	});
+	/**
+	 * This is the ng-change method. This binds the usage_form.rateValue with the select string. We find the associated object in the dictionary and
+	 * bind it to usage_form.rateValue.
+	 */
+	$scope.changeRateValue = function() {
+		$scope.usage_form.rateValue = $scope.rates[$scope.currentRateValue];
+	};
 	$scope.savedChambers=$http.get('/chamber/')
 		.then(function success(response) {
 			$scope.chambers = response.data;
@@ -542,7 +557,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	 */
 	$scope.currentProject = function(){
 		$scope.currentProjectID = $scope.id;
-		$scope.usage_form = project_service.project_info;
+		//$scope.usage_form = project_service.project_info;
 	}
 
   // $scope.usage_form.billPaidTotal
@@ -561,7 +576,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		});
 	}
 });
-billingApp.controller("payment_list_Controller", function($rootScope,$scope,$http, $log, $routeParams, project_service){
+billingApp.controller("payment_list_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.id = $routeParams.id;
 	$scope.paymentList=$http.get('/payment/'+$scope.id)
 		.then(function success(response) {
@@ -573,26 +588,27 @@ billingApp.controller("payment_list_Controller", function($rootScope,$scope,$htt
 			$scope.status = response.data;
 			$log.info(response);
 	});
+
+	$scope.projectDetails=$http.get('/project/'+$scope.id)
+		.then(function success(response) {
+			$scope.project_details = response.data;
+			$scope.config = response.config;
+			$scope.headers = response.headers;
+			$scope.status = response.status;
+			$scope.statusText = response.statusText;
+		},function failure(response){
+			$scope.selectedInfo = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+	});
 	$scope.sort = function(keyname){
         $scope.sortKey = keyname;   //set the sortKey to the param passed
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     }
-	$scope.project = project_service.project_info;
+	//$scope.project = project_service.project_info;
 });
 
-billingApp.service('project_service', function(){
-  var _project_info = {};
-  // return{
-  //   getProject: function(){
-  //     return project_info;
-  //   },
-  //   setProject: function(value){
-  //     project_info = value;
-  //   }
-  // };
-  this.project_info = _project_info;
-  console.log(_project_info);
-});
+
 billingApp.controller("rate_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.savedRateInfo=$http.get('/rate/')
 		.then(function success(response) {
