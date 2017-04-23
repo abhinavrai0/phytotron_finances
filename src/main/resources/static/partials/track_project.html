@@ -57,11 +57,12 @@
 		<label for="rateType" class="col-sm-2 control-label">Rate
 			Type: </label>
 		<div class="col-sm-2">
-			<select ng-init="usage_form.rateValue = currentRate"
-				class="form-control" ng-model="usage_form.rateValue"
-				ng-options="x.rateType for x in rates">
+			<select
+				class="form-control" ng-model="currentRateValue"
+				ng-options="key as key for (key, value) in rates" ng-change = "changeRateValue()">
 			</select>
 		</div>
+
 		<div class="col-sm-4">
 			<label for="rate" class="col-sm-4 control-label">Rate:
 				{{usage_form.rateValue.rate}}</label>
