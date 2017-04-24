@@ -1,8 +1,13 @@
 <div class = "header">
-  <h3 align="center">Client Information</h3>
+  <!-- <h3 align="center">Client Information</h3> -->
+  <div class="container">
+	  <div class="col-sm-push-2 col-sm-5">
+		  	<h3 class="text-center">Client Information</h3>
+	  </div>
+  </div>
   <div id = "container" class="col-sm-12">
-      <div class = "adjacentPanels col-sm-2"></div>
-      <div class = "adjacentPanels col-sm-4">
+	  <div class="adjacentPanels col-sm-2"></div>
+		<div class="adjacentPanels col-sm-4">
         <div class="form-group">
           <label for="Name" class="control-label">First Name: </label>
           <span for="Name" class = "fields">{{project_details.client.client_first_name}}</span>
@@ -20,7 +25,7 @@
           <span for="project_id" class = "fields">{{project_details.project_id}}</span>
         </div>
       </div>
-      <div class = "adjacentPanels col-sm-4">
+      <div class = "adjacentPanels col-sm-5">
         <div class="form-group">
           <label for="Name" class="control-label">Last Name: </label>
           <span for="Name" class = "fields">{{project_details.client.client_last_name}}</span>
@@ -41,7 +46,8 @@
       </div>
   </div>
 </div>
-<div class="table-responsive col-sm-10">
+<div class="form-group">
+<div class="table-responsive col-sm-8 col-sm-push-1">
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th>#</th>
@@ -51,7 +57,7 @@
 		<tbody>
 			<tr ng-repeat="payment in paymentHistory">
 				<td>{{payment.id}}</td>
-				<td>{{payment.paidDate}}</td>
+				<td>{{payment.paidDate | date:'medium'}}</td>
 				<td>{{payment.amount}}</td>
 			</tr>
 		</tbody>
@@ -60,4 +66,5 @@
       <a class="btn btn-success" ng-href="#/add_crop_info">Add New Crop</a>
   </div> -->
 
+</div>
 </div>
