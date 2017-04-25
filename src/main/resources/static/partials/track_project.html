@@ -1,5 +1,9 @@
 <div class="header">
-	<h3 align="center">Client Information</h3>
+	<div class="container">
+	  <div class="col-sm-push-2 col-sm-5">
+		  	<h3 class="text-center">Client Information</h3>
+	  </div>
+  </div>
 	<div id="container" class="col-sm-12">
 		<div class="adjacentPanels col-sm-2"></div>
 		<div class="adjacentPanels col-sm-4">
@@ -158,7 +162,7 @@
 
 	<div class="form-group">
 		<label for="currentBill" class="col-sm-2 control-label">Current
-			Bill: </label> <span for="Name" class="fields">{{usage_form.currentBill}}</span>
+			Bill: </label> <span for="Name" class="fields">{{usage_form.currentBill | currency:"USD $"}}</span>
 	</div>
 
 
@@ -174,7 +178,7 @@
 
 	<div class="form-group">
 		<label for="billPaidTotal" class="col-sm-2 control-label">Total
-			Paid:</label> <span for="Name" class="fields">{{usage_form.billPaidTotal}}</span>
+			Paid:</label> <span for="Name" class="fields">{{usage_form.billPaidTotal | currency:"USD $"}}</span>
 	</div>
 
 	<div class="form-group">
