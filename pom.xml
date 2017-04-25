@@ -4,7 +4,7 @@
 	<groupId>edu.ncsu.phytotron</groupId>
 	<artifactId>finances</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>finances</name>
 	<url>http://maven.apache.org</url>
 	<parent>
@@ -28,8 +28,8 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- <exclusions> <exclusion> <groupId>org.springframework.boot</groupId> 
-				<artifactId>spring-boot-starter-logging</artifactId> </exclusion> </exclusions> -->
+			<exclusions> <exclusion> <groupId>org.springframework.boot</groupId> 
+				<artifactId>spring-boot-starter-logging</artifactId> </exclusion> </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

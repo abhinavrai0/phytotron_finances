@@ -1,13 +1,14 @@
 'use strict';
+/**
+ * This controller shows all the available clients.
+ */
 billingApp.controller("client_list_Controller", function($rootScope,$scope,$http,$log){
-		$scope.message="Client List";
+		/**
+		 * This get request fetches all the clients.
+		 */
 		$scope.savedClientInfo=$http.get('/client')
 			.then(function success(response) {
 				$scope.ClientList = response.data;
-				$scope.config = response.config;
-				$scope.headers = response.headers;
-				$scope.status = response.status;
-				$scope.statusText = response.statusText;
 			},function failure(response){
 				$scope.ClientList = response.statusText;
 				$scope.status = response.data;
@@ -19,47 +20,44 @@ billingApp.controller("client_list_Controller", function($rootScope,$scope,$http
 	        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
 	    }
 });
+/**
+ * This controller allows for editing the existing client information.
+ */
 billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
-	$scope.message="Edit Client";
 	$scope.id = $routeParams.id;
+	$scope.options = ["Active", "Inactive"];
+	/**
+ 	 * Gets the client information for the selected client.
+ 	 */
 	$scope.editClientInfo=$http.get('/client/'+$scope.id)
 		.then(function success(response) {
 			$scope.client_form = response.data;
-			$scope.config = response.config;
-			$scope.headers = response.headers;
-			$scope.status = response.status;
-			$scope.statusText = response.statusText;
 		},function failure(response){
-			$scope.selectedInfo = response.statusText;
-			$scope.status = response.data;
 			$log.info(response);
 	});
+	/**
+	 * ['Puts' the edited client form.]
+	 * @return {[JSON]} [the submitted form plus status fields]
+	 */
+
 	$scope.submit=function(){
-		console.log($scope.client_form);
 		$http.put("/client/"+$scope.id,$scope.client_form)
 		.success(function(client_form, status, headers, config) {
-			$scope.message = client_form;
+			$scope.client_form='';
 		})
 		.error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
-		$scope.client_form='';
 	}
 
 	$scope.savedDepartments=$http.get('/department/')
 		.then(function success(response) {
 			$scope.departments = response.data;
-			$scope.config = response.config;
-			$scope.headers = response.headers;
-			$scope.status = response.status;
-			$scope.statusText = response.statusText;
 		},function failure(response){
 			$scope.departments = response.statusText;
 			$scope.status = response.data;
 			$log.info(response);
 	});
-
-	$scope.options = ["Active", "Inactive"];
 });
 billingApp.controller("add_client_info_Controller", function($scope,$http){
 	$scope.message="Add Client Info";
@@ -139,11 +137,16 @@ billingApp.controller("add_chamber_info_Controller", function($scope,$http){
 		if($scope.chamber_form){
 				$http.post("/chamber/",$scope.chamber_form)
 				.success(function(response) {
+					$scope.message = "Chamber "+ response.chamberName + " Added Successfully";
+					$scope.savedSuccessfully = true; // show success message
+					$scope.showAlertMessage = true;
 					// remove this later
 					// console.log("pass"+JSON.stringify(response));
 				})
 				.error(function(response) {
-					console.log( "failure message: " + JSON.stringify(response));
+					$scope.message = "Couldn't save this chamber.";
+					$scope.savedSuccessfully = false; // show failure message
+					$scope.showAlertMessage = true;
 				});
 				$scope.chamber_form='';
 		}
@@ -155,10 +158,6 @@ billingApp.controller("edit_chamber_info_Controller", function($rootScope,$scope
 	$scope.editChamberInfo=$http.get('/chamber/'+$scope.id)
 		.then(function success(response) {
 			$scope.chamber_form = response.data;
-			$scope.config = response.config;
-			$scope.headers = response.headers;
-			$scope.status = response.status;
-			$scope.statusText = response.statusText;
 		},function failure(response){
 			$scope.selectedInfo = response.statusText;
 			$scope.status = response.data;
@@ -168,12 +167,16 @@ billingApp.controller("edit_chamber_info_Controller", function($rootScope,$scope
 
 		$http.post("/chamber/",$scope.chamber_form)
 		.success(function(chamber_form, status, headers, config) {
-			$scope.message = chamber_form;
+			$scope.message = "Chamber "+ response.chamberName + " Edited Successfully";
+			$scope.savedSuccessfully = true; // show success message
+			$scope.showAlertMessage = true;
+			$scope.chamber_form='';
 		})
 		.error(function(data, status, headers, config) {
-			alert( "failure message: " + JSON.stringify({data: data}));
+			$scope.message = "Couldn't edit this chamber";
+			$scope.savedSuccessfully = false; // show failure message
+			$scope.showAlertMessage = true;
 		});
-		$scope.chamber_form='';
 	}
 });
 billingApp.controller("department_list_Controller", function($rootScope,$scope,$http,$log){
@@ -362,7 +365,7 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 					$scope.project_form.client = currentClient; // Show the uneditableEntry fields.
 				})
 				.error(function(response) {
-					$scope.message = "Couldn't start new project Error";
+					$scope.message = "Couldn't start new project";
 					$scope.savedSuccessfully = false; // show failure message
 					$scope.showAlertMessage = true;
 				});
