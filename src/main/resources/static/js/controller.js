@@ -385,6 +385,9 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	$scope.savedRates=$http.get('/rate')
 		.then(function success(response) {
 			$scope.rates = response.data;
+			if($scope.rates!=null){
+				$scope.project_form.rateValue = $scope.rates[0];
+			}
 		},function failure(response){
 			$scope.chambers = response.statusText;
 			$scope.status = response.data;
@@ -448,13 +451,21 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.usage_form = response.data;
 			// setting the input ratetype into currentRateValue. Will use this as ng-model to show the current selected.
 			$scope.currentRateValue = $scope.usage_form.rateValue.rateType;
-			var start = $scope.usage_form.startDate.split('-');
-			var end = $scope.usage_form.endDate.split('-');
-			var lastBill = $scope.usage_form.lastBillDate.split('-');
+
+			if($scope.usage_form.startDate != null){
+				var start = $scope.usage_form.startDate.split('-');
+				$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
+			}
+			if($scope.usage_form.endDate != null){
+					var end = $scope.usage_form.endDate.split('-');
+					$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
+			}
+
+			if($scope.usage_form.lastBillDate != null){
+					var lastBill = $scope.usage_form.lastBillDate.split('-');
+					$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
+			}
 			//var lastBillPaid = $scope.usage_form.lastBillPaidDate.split('-');
-			$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
-			$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
-			$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
 			//$scope.usage_form.lastBillPaidDate = new Date(lastBillPaid[1]+"/"+lastBillPaid[2]+"/"+lastBillPaid[0]);
 			$scope.config = response.config;
 			$scope.headers = response.headers;
