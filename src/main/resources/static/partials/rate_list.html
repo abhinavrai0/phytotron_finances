@@ -39,7 +39,7 @@
 				<tr dir-paginate="rate in rateList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
 					<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.id}}</a></td>
 					<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rateType}}</a></td>
-					<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rate}}</a></td>
+					<td><a href="#/edit_rate_info/{{rate.id}}">{{rate.rate | currency}}</a></td>
 				</tr>
 			</tbody>
 		</table>

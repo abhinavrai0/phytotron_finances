@@ -356,6 +356,10 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	 */
 	$scope.submit=function(){
 		if($scope.project_form){
+			var start=new Date($scope.project_form.startDate);
+			var end=new Date($scope.project_form.endDate);
+			$scope.project_form.startDate=start;
+			$scope.project_form.endDate=end;
 				$http.post("/project/",$scope.project_form)
 				.success(function(response) {
 					$scope.message = "Project "+ response.project_Title + " Saved Successfully";
@@ -373,7 +377,17 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 			// TODO
 		}
 	}
-
+	 $(document).ready(function(){
+	      var date_input=$('input[name="date"]'); //our date input has the name "date"
+	      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+	      var options={
+	        format: 'MM-dd-yyyy',
+	        container: container,
+	        todayHighlight: true,
+	        autoclose: true,
+	      };
+	      date_input.datepicker(options);
+	    })
 	/**
 	 * Get All chambers from the chambers page and display in the drop down
 	 */
@@ -656,6 +670,12 @@ billingApp.controller("add_rate_info_Controller", function($scope,$http){
 				$scope.rate_form='';
 		}
 	}
+	
+	
+
+	
+	
+	
 });
 billingApp.controller("edit_rate_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.id = $routeParams.id;

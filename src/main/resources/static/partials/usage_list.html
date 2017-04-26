@@ -104,10 +104,10 @@
 				<td><a href="#/track_project/{{project.id}}">{{project.project_Title}}</a></td>
 				<td><a href="#/track_project/{{project.id}}">{{project.client.client_first_name}}</a></td>
 				<td><a href="#/track_project/{{project.id}}">{{project.client.client_last_name}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.startDate}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.endDate}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.lastBillDate}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.currentBill}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.startDate | date:'MMM d, y'}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.endDate | date:'MMM d, y'}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.lastBillDate | date:'MMM d, y'}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.currentBill | currency}}</a></td>
 			</tr>
 		</tbody>
 	</table>

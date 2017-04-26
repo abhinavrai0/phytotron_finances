@@ -61,7 +61,7 @@
         </div>
 
         <div class="col-sm-4">
-            <label for="rate" class="col-sm-4 control-label">Rate: {{usage_form.rateValue.rate}}
+            <label for="rate" class="col-sm-4 control-label">Rate: {{usage_form.rateValue.rate | currency}}
             </label>
         </div>
     </div>
@@ -85,7 +85,7 @@
       <span for="numberCarts" class = "fields">{{project_form.chambers.chamberCarts}}</span>
       <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-plus">Remove Chamber</i></button> -->
             <button type="button" ng-click="addChamberRow()" class="btn btn-default addButton">
-                <i class="fa fa-minus">Add Chamber</i>
+                Add Chamber
             </button>
         </div>
     </div>

@@ -1,143 +1,185 @@
-<div class = "header">
-    <h3 align="center">Client Information</h3>
-    <div id = "container" class="col-sm-12">
-        <div class = "adjacentPanels col-sm-2"></div>
-        <div class = "adjacentPanels col-sm-4">
-          <div class="form-group">
-            <label for="Name" class="control-label">First Name: </label>
-            <span for="Name" class = "fields">{{project_form.client.client_first_name}}</span>
-          </div>
-          <div class="form-group">
-            <label for="email" class="control-label">Email:</label>
-            <span for="email" class = "fields">{{project_form.client.client_email}}</span>
-          </div>
-          <div class="form-group">
-            <label for="department" class="control-label">Department:</label>
-            <span for="department" class = "fields">{{project_form.client.dept_name}}</span>
-          </div>
-        </div>
-        <div class = "adjacentPanels col-sm-4">
-          <div class="form-group">
-            <label for="Name" class="control-label">Last Name: </label>
-            <span for="Name" class = "fields">{{project_form.client.client_last_name}}</span>
-          </div>
-          <div class="form-group">
-            <label for="Phone" class="control-label">Phone: </label>
-            <span for="Phone" class = "fields">{{project_form.client.client_phone}}</span>
-          </div>
-          <div class="form-group">
-            <label for="address" class="control-label">Address:</label>
-            <span for="address" class = "fields">{{project_form.client.client_address}}</span>
-          </div>
-        </div>
-    </div>
-  </div>
-<form class="form-horizontal" name="ProjectInfoForm" role = "form" ng-submit = "ProjectInfoForm.$valid && submit()">
-  <div class="form-group">
-    <label for="project_id" class="col-sm-2 control-label">Project Id</label>
-    <div class="col-sm-8">
-      <input type="name" class="form-control" id="project_id" ng-model="project_form.project_id" placeholder="Enter the Project Id" required>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="project_Title" class="col-sm-2 control-label">Project Title</label>
-    <div class="col-sm-8">
-      <input type="name" class="form-control" id="project_Title" ng-model="project_form.project_Title" placeholder="Enter the Project Title">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="rateType" class="col-sm-2 control-label">Rate Type: </label>
-    <div class="col-sm-2">
-      <select class="form-control" ng-model="project_form.rateValue" ng-options="x.rateType for x in rates" required>
-      </select>
-    </div>
+<div class="header">
+	<h3 align="center">Client Information</h3>
+	<div id="container" class="col-sm-12">
+		<div class="adjacentPanels col-sm-2"></div>
+		<div class="adjacentPanels col-sm-4">
+			<div class="form-group">
+				<label for="Name" class="control-label">First Name: </label> <span
+					for="Name" class="fields">{{project_form.client.client_first_name}}</span>
+			</div>
+			<div class="form-group">
+				<label for="email" class="control-label">Email:</label> <span
+					for="email" class="fields">{{project_form.client.client_email}}</span>
+			</div>
+			<div class="form-group">
+				<label for="department" class="control-label">Department:</label> <span
+					for="department" class="fields">{{project_form.client.dept_name}}</span>
+			</div>
+		</div>
+		<div class="adjacentPanels col-sm-4">
+			<div class="form-group">
+				<label for="Name" class="control-label">Last Name: </label> <span
+					for="Name" class="fields">{{project_form.client.client_last_name}}</span>
+			</div>
+			<div class="form-group">
+				<label for="Phone" class="control-label">Phone: </label> <span
+					for="Phone" class="fields">{{project_form.client.client_phone}}</span>
+			</div>
+			<div class="form-group">
+				<label for="address" class="control-label">Address:</label> <span
+					for="address" class="fields">{{project_form.client.client_address}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bootstrap-iso">
+	<div class="container-fluid">
+		<div class="col-md-12">
+			<form class="form-horizontal" name="ProjectInfoForm" role="form"
+				ng-submit="ProjectInfoForm.$valid && submit()">
+				<div class="form-group">
+					<label for="project_id" class="col-sm-2 control-label">Project
+						Id</label>
+					<div class="col-sm-8">
+						<input type="name" class="form-control" id="project_id"
+							ng-model="project_form.project_id"
+							placeholder="Enter the Project Id" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="project_Title" class="col-sm-2 control-label">Project
+						Title</label>
+					<div class="col-sm-8">
+						<input type="name" class="form-control" id="project_Title"
+							ng-model="project_form.project_Title"
+							placeholder="Enter the Project Title">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="rateType" class="col-sm-2 control-label">Rate
+						Type: </label>
+					<div class="col-sm-2">
+						<select class="form-control" ng-model="project_form.rateValue"
+							ng-options="x.rateType for x in rates" required>
+						</select>
+					</div>
 
-    <div class="col-sm-4">
-      <label for="rate" class="col-sm-4 control-label">Rate: {{project_form.rateValue.rate}}</label>
-      <!-- <span for="rate">{{project_form.rateValue.rate}}</span> -->
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="acc_number" class="col-sm-2 control-label">Account Number</label>
-    <div class="col-sm-8">
-      <input type="name" class="form-control" id="acc_number" ng-model= "project_form.acc_number" placeholder="Enter the account number">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="chambers" class="col-sm-2 control-label">Chambers</label>
-    <div class="col-sm-2">
-      <select class="form-control" ng-model="selectedChamber" ng-options="x.chamberName for x in chambers">
-        <option value="" disabled selected>Chamber Type</option>
-      </select>
-      </div>
-      <div class="col-sm-2">
+					<div class="col-sm-4">
+						<label for="rate" class="col-sm-4 control-label">Rate:
+							{{project_form.rateValue.rate | currency}}</label>
+						<!-- <span for="rate">{{project_form.rateValue.rate}}</span> -->
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="acc_number" class="col-sm-2 control-label">Account
+						Number</label>
+					<div class="col-sm-8">
+						<input type="name" class="form-control" id="acc_number"
+							ng-model="project_form.acc_number"
+							placeholder="Enter the account number">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="chambers" class="col-sm-2 control-label">Chambers</label>
+					<div class="col-sm-2">
+						<select class="form-control" ng-model="selectedChamber"
+							ng-options="x.chamberName for x in chambers">
+							<option value="" disabled selected>Chamber Type</option>
+						</select>
+					</div>
+					<div class="col-sm-2">
 
-      <!-- <label for="numberCarts" class="control-label">Number of carts: </label>
+						<!-- <label for="numberCarts" class="control-label">Number of carts: </label>
       <span for="numberCarts" class = "fields">{{project_form.chambers.chamberCarts}}</span>
       <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-plus">Remove Chamber</i></button> -->
-      <button type="button" ng-click="addChamberRow()" class="btn btn-default addButton"><i class="fa fa-minus">Add Chamber</i></button>
-    </div>
-    </div>
-    <div class="form-group">
-    <div class="table-responsive col-sm-8 col-sm-push-2">
-    	<table class="table table-hover table-bordered">
-        <thead>
-          <th>Chamber Name</th>
-      		<th>Carts</th>
-          <th>Action</th>
-    		</thead>
+						<button type="button" ng-click="addChamberRow()"
+							class="btn btn-default addButton">Add Chamber</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="table-responsive col-sm-8 col-sm-push-2">
+						<table class="table table-hover table-bordered">
+							<thead>
+								<th>Chamber Name</th>
+								<th>Carts</th>
+								<th>Action</th>
+							</thead>
 
-        <tbody>
-        	<tr ng-repeat="chamber in project_form.chambers">
-        		<td>{{chamber.chamberName}}</td>
-        		<td>{{chamber.chamberCarts}}</td>
-        		<td>
-        		    <input type="button" value="Remove" class="btn btn-primary" ng-click="removeRow($index)"/>
-        		</td>
-        	</tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="carts" class="col-sm-2 control-label">Carts</label>
-    <div class="col-sm-2">
-      <input type="number" class="form-control" id="carts" ng-model= "project_form.carts" placeholder="Enter the number of carts">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="startDate" class="col-sm-2 control-label">Start Date</label>
-    <div class="col-sm-2">
-      <input type="date" class="form-control" id="startDate" ng-model= "project_form.startDate">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="endDate" class="col-sm-2 control-label">End Date</label>
-    <div class="col-sm-2">
-      <input type="date" class="form-control" id="endDate" ng-model= "project_form.endDate">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="accountStatus" class="col-sm-2 control-label">Account Status</label>
-    <div class="col-sm-8">
-      <label id="accountStatus" ng-model= "project_form.accountStatus">
-    </div>
-  </div>
+							<tbody>
+								<tr ng-repeat="chamber in project_form.chambers">
+									<td>{{chamber.chamberName}}</td>
+									<td>{{chamber.chamberCarts}}</td>
+									<td><input type="button" value="Remove"
+										class="btn btn-primary" ng-click="removeRow($index)" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="carts" class="col-sm-2 control-label">Carts</label>
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="carts"
+							ng-model="project_form.carts"
+							placeholder="Enter the number of carts">
+					</div>
+				</div>
+				<!-- <div class="form-group">
+					<label for="startDate" class="col-sm-2 control-label">Start
+						Date</label>
+					<div class="col-sm-2">
+						<input type="date" class="form-control" id="startDate"
+							ng-model="project_form.startDate">
+					</div>
+				</div> -->
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-8">
-      <button type="submit" class="btn btn-default">Save</button>
-      <a class="btn btn-default" ng-href="#/client_list">Go Back</a>
-    </div>
-  </div>
-<!-- generate bill label: date picker; Generate Button(date, project id); 5/generate_bill
-paybill: text box; Pay button(id, amount)
--->
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="date">Start Date</label>
 
-</form>
-<div ng-show = "showAlertMessage" id = "alert_placeholder" class="col-sm-offset-2 col-sm-8">
-  <div ng-class = "savedSuccessfully ? 'alert-success' : 'alert-danger'" class="alert alert-dismissable fade in">
-    <a class="close" data-dismiss="alert">&times;</a>
-    <span>{{message}}</span>
-  </div>
+					<div class="col-sm-3">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"> </i>
+							</div>
+							<input class="form-control" id="date" name="date"
+								ng-model="project_form.startDate" placeholder="MM-dd-yyyy"
+								type="text" />
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="date">End Date</label>
+					<div class="col-sm-3">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"> </i>
+							</div>
+							<input class="form-control" id="date" name="date"
+								ng-model="project_form.endDate" placeholder="MM-dd-yyyy"
+								type="text" />
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-8">
+						<button type="submit" class="btn btn-default">Save</button>
+						<a class="btn btn-default" ng-href="#/client_list">Go Back</a>
+					</div>
+				</div>
+				<!-- generate bill label: date picker; Generate Button(date, project id); 5/generate_bill paybill: text box; Pay button(id, amount) -->
+
+			</form>
+		</div>
+	</div>
+</div>
+<div ng-show="showAlertMessage" id="alert_placeholder"
+	class="col-sm-offset-2 col-sm-8">
+	<div ng-class="savedSuccessfully ? 'alert-success' : 'alert-danger'"
+		class="alert alert-dismissable fade in">
+		<a class="close" data-dismiss="alert">&times;</a> <span>{{message}}</span>
+	</div>
 </div>

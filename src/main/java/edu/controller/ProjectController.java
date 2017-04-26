@@ -63,7 +63,10 @@ public class ProjectController {
 
 	@RequestMapping(method=RequestMethod.POST)
 	public Project createProject(@RequestBody Project project) {
-		System.out.println("--====Post Request=====-- start date"+project.getStartDate() + " end date :"+ project.getEndDate());
+		System.out.println("post request ::::::::::::");
+		System.out.println("start :"+project.getStartDate());
+		System.out.println("end   :"+project.getEndDate());
+//		System.out.println("--====Post Request=====-- start date"+project.getStartDate() + " end date :"+ project.getEndDate());
 		System.out.println("project id :"+project.getClient().getId());
 		logger.info("Creating project : {}", project);
 		try {
