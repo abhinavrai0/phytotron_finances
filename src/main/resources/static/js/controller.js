@@ -356,10 +356,14 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	 */
 	$scope.submit=function(){
 		if($scope.project_form){
-			var start=new Date($scope.project_form.startDate);
-			var end=new Date($scope.project_form.endDate);
-			$scope.project_form.startDate=start;
-			$scope.project_form.endDate=end;
+			console.log("before s: ",$scope.project_form.startDate);
+			console.log("before e: ",$scope.project_form.startDate);
+//			var start=new Date($scope.project_form.startDate);
+//			var end=new Date($scope.project_form.endDate);
+			$scope.project_form.startDate=new Date($scope.project_form.startDate);;
+			$scope.project_form.endDate=new Date($scope.project_form.endDate);;
+			console.log($scope.project_form.startDate);
+			console.log($scope.project_form.startDate);
 				$http.post("/project/",$scope.project_form)
 				.success(function(response) {
 					$scope.message = "Project "+ response.project_Title + " Saved Successfully";
@@ -381,7 +385,28 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	      var date_input=$('input[name="date"]'); //our date input has the name "date"
 	      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 	      var options={
-	        format: 'MM-dd-yyyy',
+	        format: 'MM dd,yyyy',
+	    		/*  format: {
+	    		        
+	    		         * Say our UI should display a week ahead,
+	    		         * but textbox should store the actual date.
+	    		         * This is useful if we need UI to select local dates,
+	    		         * but store in UTC
+	    		         
+	    		        toDisplay: function (date, format, language) {
+	    		            var d = new Date(date);
+//	    		            d.setDate(d.getDate() - 7);
+//	    		            return d.toISOString();
+	    		            return d.toISOString();
+//	    		            return d.toDateString();
+	    		        },
+	    		        toValue: function (date, format, language) {
+	    		            var d = new Date(date);
+//	    		            d.setDate(d.getDate() - 7);
+	    		            return d.toDateString();
+//	    		            return new Date(d);
+	    		        }
+	    		    }	, */ 
 	        container: container,
 	        todayHighlight: true,
 	        autoclose: true,
@@ -571,6 +596,14 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 
 	$scope.generateBillDate = generateBillDate;
 	$scope.generate = function(){
+		var generateDate = $scope.generateBillDate.date; // 2013-07-30 17:11:00
+		console.log("generateDate :",generateDate)
+		var genrateEndOfDayDate = 	new Date(generateDate.getFullYear()
+                ,generateDate.getMonth()
+                ,generateDate.getDate()
+                ,23,59,59); 
+		console.log(genrateEndOfDayDate)
+		$scope.generateBillDate.date=genrateEndOfDayDate;
 		$http.post("/project/"+$scope.id+"/generatebill/",$scope.generateBillDate)
 		.success(function(lastBill, status, headers, config) {
 			$scope.usage_form.lastBillDate = $scope.generateBillDate.date;
