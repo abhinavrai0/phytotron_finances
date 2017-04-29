@@ -34,11 +34,12 @@ public class Project {
 	private Date startDate;
 	@Type(type="date")
 	private Date endDate;
-	@Type(type="date")
+//	@Type(type="date")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastBillDate;//Last Invoice Date
-	@Type(type="date")
+/*	@Type(type="date")
 	private Date lastBillPaidDate;//Last Date Paid
-	private Double currentBill=0.0;
+*/	private Double currentBill=0.0;
 	private Double billPaidTotal=0.0;//Total Paid
 	private String accountStatus;
 	public Long getId() {
@@ -101,12 +102,12 @@ public class Project {
 	public void setLastBillDate(Date lastBillDate) {
 		this.lastBillDate = lastBillDate;
 	}
-	public Date getLastBillPaidDate() {
+/*	public Date getLastBillPaidDate() {
 		return lastBillPaidDate;
 	}
 	public void setLastBillPaidDate(Date lastBillPaidDate) {
 		this.lastBillPaidDate = lastBillPaidDate;
-	}
+	}*/
 	public Double getCurrentBill() {
 		return currentBill;
 	}
