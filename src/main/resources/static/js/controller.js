@@ -360,8 +360,8 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 			console.log("before e: ",$scope.project_form.startDate);
 //			var start=new Date($scope.project_form.startDate);
 //			var end=new Date($scope.project_form.endDate);
-			$scope.project_form.startDate=new Date($scope.project_form.startDate);;
-			$scope.project_form.endDate=new Date($scope.project_form.endDate);;
+			$scope.project_form.startDate=new Date($scope.startDate);;
+			$scope.project_form.endDate=new Date($scope.endDate);;
 			console.log($scope.project_form.startDate);
 			console.log($scope.project_form.startDate);
 				$http.post("/project/",$scope.project_form)
