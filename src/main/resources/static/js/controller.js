@@ -3,6 +3,8 @@
  * This controller shows all the available clients.
  */
 billingApp.controller("client_list_Controller", function($rootScope,$scope,$http,$log){
+		// This is the selectedClient from the Client list page. The selectedClient is then bound to a radio button which is kept disabled in the html till a client is selected.
+		$scope.selectedClient="";
 		/**
 		 * This get request fetches all the clients.
 		 */
@@ -14,7 +16,6 @@ billingApp.controller("client_list_Controller", function($rootScope,$scope,$http
 				$scope.status = response.data;
 				$log.info(response);
 		});
-		$scope.selectedClient="";
 		$scope.sort = function(keyname){
 	        $scope.sortKey = keyname;   //set the sortKey to the param passed
 	        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
@@ -37,19 +38,26 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 	});
 	/**
 	 * ['Puts' the edited client form.]
-	 * @return {[JSON]} [the submitted form plus status fields]
+	 * @return {[type]} [the submitted form plus status fields]
 	 */
 
 	$scope.submit=function(){
 		$http.put("/client/"+$scope.id,$scope.client_form)
 		.success(function(client_form, status, headers, config) {
-			$scope.client_form='';
+			$scope.message = "Client "+ client_form.client_first_name + " Updated Successfully";
+			$scope.savedSuccessfully = true; // show success message
+			$scope.showAlertMessage = true;
 		})
 		.error(function(data, status, headers, config) {
-			alert( "failure message: " + JSON.stringify({data: data}));
+			$scope.message = "Couldn't edit the client. Please verify edited information.";
+			$scope.savedSuccessfully = false; // show failure message
+			$scope.showAlertMessage = true;
 		});
 	}
-
+	/**
+	 * Fetches all the departments to display in the drop down.
+	 * @type {[type]}
+	 */
 	$scope.savedDepartments=$http.get('/department/')
 		.then(function success(response) {
 			$scope.departments = response.data;
@@ -59,9 +67,15 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 			$log.info(response);
 	});
 });
+/**
+ * Adds a new client
+ * @param  {[type]} $scope
+ * @param  {[type]} $http
+ * @return {[type]}
+ */
+
 billingApp.controller("add_client_info_Controller", function($scope,$http){
-	$scope.message="Add Client Info";
-	var client_form={
+	$scope.client_form={
 			client_first_name:"",
 			client_last_name:"",
 			client_email:"",
@@ -71,13 +85,9 @@ billingApp.controller("add_client_info_Controller", function($scope,$http){
 			client_address:""
 	};
 	$scope.options = ["Active", "Inactive"];
-	$scope.client_form = client_form;
 	$scope.client_form.client_status = $scope.options[0];
 
-	//$scope.list=[];		// EMpty list to show data on page. TEsting purposes
 	$scope.submit=function(){
-		//$scope.list.push(this.client_form);
-		//$scope.HoldList.pust(this.billing_form);
 		if($scope.client_form){
 				$http.post("/client/",$scope.client_form)
 				.success(function(response) {
@@ -100,10 +110,6 @@ billingApp.controller("add_client_info_Controller", function($scope,$http){
 	$scope.savedDepartments=$http.get('/department/')
 		.then(function success(response) {
 			$scope.departments = response.data;
-			$scope.config = response.config;
-			$scope.headers = response.headers;
-			$scope.status = response.status;
-			$scope.statusText = response.statusText;
 		},function failure(response){
 			$scope.departments = response.statusText;
 			$scope.status = response.data;
@@ -454,7 +460,6 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.usage_form = response.data;
 			// setting the input ratetype into currentRateValue. Will use this as ng-model to show the current selected.
 			$scope.currentRateValue = $scope.usage_form.rateValue.rateType;
-
 			if($scope.usage_form.startDate != null){
 				var start = $scope.usage_form.startDate.split('-');
 				$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
@@ -503,15 +508,31 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	};
 	$scope.savedChambers=$http.get('/chamber/')
 		.then(function success(response) {
-			$scope.chambers = response.data;
+			var chamberObjArray = response.data;
 
+			//
+			// // Return chambers that are in $scope.chambers but not in usage_form
+			// if($scope.chambers!=null && $scope.usage_form.chambers!= null){
+			// 	$scope.existingChambers = $scope.chambers.filter(function(obj) {
+			// 	    return !$scope.usage_form.chambers.some(function(obj2) {
+			// 	        return obj.chamberName == obj2.chamberName;
+			// 	    });
+			// 	});
+			// }
+
+			var existingChams = [];
+			$scope.existingChambers = {};
 			// Return chambers that are in $scope.chambers but not in usage_form
-			if($scope.chambers!=null && $scope.usage_form.chambers!= null){
-				$scope.existingChambers = $scope.chambers.filter(function(obj) {
+			if(chamberObjArray!=null && $scope.usage_form != null && $scope.usage_form.chambers!= null){
+				existingChams = chamberObjArray.filter(function(obj) {
 				    return !$scope.usage_form.chambers.some(function(obj2) {
 				        return obj.chamberName == obj2.chamberName;
 				    });
 				});
+				console.log(existingChams);
+			}
+			for( var i in existingChams){
+				$scope.existingChambers[existingChams[i]['chamberName']] = existingChams[i];
 			}
 		},function failure(response){
 			$scope.chambers = response.statusText;
@@ -519,9 +540,15 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$log.info(response);
 	});
 	$scope.addChamberRow = function(){
-		for(var i = 0; i < $scope.existingChambers.length; i++){
-			if($scope.selectedChamber === $scope.existingChambers[i]){
-				$scope.existingChambers.splice(i,1);
+		// for(var i = 0; i < $scope.existingChambers.length; i++){
+		// 	if($scope.selectedChamber === $scope.existingChambers[i]){
+		// 		$scope.existingChambers.splice(i,1);
+		// 	}
+		// }
+
+		for(var key in $scope.existingChambers){
+			if($scope.selectedChamber === $scope.existingChambers[key]){
+				delete $scope.existingChambers[key];
 			}
 		}
 		// Display the total sum of the carts in each chamber in the finalised chambers.
@@ -536,7 +563,8 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	$scope.removeRow = function ($index) {
 		$scope.usage_form.carts = parseInt($scope.usage_form.carts) - parseInt($scope.usage_form.chambers[$index].chamberCarts);
 		// adding the removed chamber back to the list.
-		$scope.existingChambers.push($scope.usage_form.chambers[$index]);
+		//$scope.existingChambers.push($scope.usage_form.chambers[$index]);
+		$scope.existingChambers[$scope.usage_form.chambers[$index].chamberName] = $scope.usage_form.chambers[$index];
 		// Removing the chamber from the final chamber ids to be sent.
 		$scope.usage_form.chambers.splice($index, 1);
 	}

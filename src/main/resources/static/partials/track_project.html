@@ -76,7 +76,7 @@
     <div class="form-group">
         <label for="chambers" class="col-sm-2 control-label">Chambers</label>
         <div class="col-sm-2">
-            <select class="form-control" ng-model="selectedChamber" ng-options="x.chamberName for x in existingChambers">
+            <select class="form-control" ng-model="selectedChamber" ng-options="key as key for (key, value) in existingChambers">
                 <option value="" disabled selected>Chamber Type</option>
             </select>
         </div>
