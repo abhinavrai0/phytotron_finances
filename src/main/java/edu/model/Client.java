@@ -19,11 +19,11 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-//	@Column(nullable = false)
+	@Column(nullable = false)
 	private String client_first_name;
 //	@Column(nullable = false)
 	private String client_last_name;
-//	@Column(nullable = false)
+	@Column(nullable = false, unique=true)
 	private String client_email;
 	private String dept_name;
 	private String client_address;

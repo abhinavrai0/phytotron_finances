@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.exception.ZeroValueNotAllowedException;
 import edu.model.Payment;
 import edu.model.Project;
 import edu.service.PaymentCRUD;
@@ -68,8 +69,12 @@ public class PaymentController {
 
 	//project id
 	@RequestMapping(value="/{id}/paybill",method=RequestMethod.POST)
-	public String  payBill(@PathVariable("id") Long id,@RequestBody Double paybill){
-		//		ProjectController pc=new ProjectController();
+	public String  payBill(@PathVariable("id") Long id,@RequestBody Double paybill){// throws ZeroValueNotAllowedException{
+		/*if(paybill==0){
+				throw new ZeroValueNotAllowedException();
+		}*/
+//		if (paybill==0) throw new ZeroValueNotAllowedException();
+		
 		Project currentProject=pc.getProject(id);
 		//		Project currentProject= projectCrudRepo.findOne(id);;
 		System.out.println(currentProject.getProject_Title()+"000000000000"+currentProject.getCarts());

@@ -28,9 +28,9 @@
 
   <div class="form-group">
     <label for="department" class="col-sm-2 control-label">Depart</label>
-    <div class="col-sm-8">
+    <div class="col-sm-3">
 
-      <select ng-model="client_form.dept_name" ng-options="x.departmentName as x.departmentName for x in departments">
+      <select class="form-control" ng-model="client_form.dept_name" ng-options="x.departmentName as x.departmentName for x in departments">
       </select>
 
     </div>
@@ -38,9 +38,9 @@
 
   <div class="form-group">
     <label for="client_status" class="col-sm-2 control-label">Status</label>
-    <div class="col-sm-8">
+    <div class="col-sm-2">
 
-      <select ng-model="client_form.client_status" ng-options="status for status in options">
+      <select class="form-control"  ng-model="client_form.client_status" ng-options="status for status in options">
       </select>
 
     </div>

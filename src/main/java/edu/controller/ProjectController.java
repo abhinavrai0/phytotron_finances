@@ -123,6 +123,9 @@ public class ProjectController {
 		Date generateBillDate=getEndOfDay(generateBill.getDate());
 		System.out.println("lastBillDate ::::"+lastBillDate);
 		System.out.println("generateBillDate ::::"+generateBillDate);
+		if(lastBillDate.after(generateBillDate)){
+			return currentProject.getCurrentBill();
+		}
 		if(lastBillDate==null){
 			lastBillDate=currentProject.getStartDate();
 		}
