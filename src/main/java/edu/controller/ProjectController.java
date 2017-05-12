@@ -126,10 +126,10 @@ public class ProjectController {
 		if(lastBillDate==null){
 			lastBillDate=currentProject.getStartDate();
 		}
-		System.out.println("Joda ::::"+Days.daysBetween(new DateTime(lastBillDate), new DateTime(generateBillDate)).getDays());
+		/*System.out.println("Joda ::::"+Days.daysBetween(new DateTime(lastBillDate), new DateTime(generateBillDate)).getDays());
 		System.out.println("Joda hours ::"+Hours.hoursBetween(new DateTime(lastBillDate), new DateTime(generateBillDate)).getHours());
 		System.out.println("Joda minutes ::"+Minutes.minutesBetween(new DateTime(lastBillDate), new DateTime(generateBillDate)).getMinutes());
-		System.out.println("Math.ceil2 :"+ Math.ceil((generateBillDate.getTime() - lastBillDate.getTime())/(60*60*24*1000.0)));
+		System.out.println("Math.ceil2 :"+ Math.ceil((generateBillDate.getTime() - lastBillDate.getTime())/(60*60*24*1000.0)));*/
 		long diff = (long)Math.ceil((generateBillDate.getTime() - lastBillDate.getTime())/(60*60*24*1000.0));
 		System.out.println("generateBillDate.getTime() :"+generateBillDate.getTime());
 		System.out.println("lastBillDate.getTime() :"+lastBillDate.getTime());
