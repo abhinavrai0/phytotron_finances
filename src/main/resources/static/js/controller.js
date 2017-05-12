@@ -494,35 +494,65 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	// the strings. Whenever we select a new string from the select rate option, we call ng-change, which will look for the key value pair and
 	// update $scope.usage_form.rateValue with the value of the selected(changed) rate string.
 	$scope.currentRateValue = "";
-	$scope.editUsageForm=$http.get('/project/'+$scope.id)
-		.then(function success(response) {
-			$scope.usage_form = response.data;
-			// setting the input ratetype into currentRateValue. Will use this as ng-model to show the current selected.
-			$scope.currentRateValue = $scope.usage_form.rateValue.rateType;
-			if($scope.usage_form.startDate != null){
-				var start = $scope.usage_form.startDate.split('-');
-				$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
-			}
-			if($scope.usage_form.endDate != null){
-					var end = $scope.usage_form.endDate.split('-');
-					$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
-			}
+	// http.get().then(function success(response){}, function failure(response){});
 
-			if($scope.usage_form.lastBillDate != null){
-					var lastBill = $scope.usage_form.lastBillDate.split('-');
-					$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
-			}
-			//var lastBillPaid = $scope.usage_form.lastBillPaidDate.split('-');
-			//$scope.usage_form.lastBillPaidDate = new Date(lastBillPaid[1]+"/"+lastBillPaid[2]+"/"+lastBillPaid[0]);
-			$scope.config = response.config;
-			$scope.headers = response.headers;
-			$scope.status = response.status;
-			$scope.statusText = response.statusText;
-		},function failure(response){
-			$scope.selectedInfo = response.statusText;
-			$scope.status = response.data;
-			$log.info(response);
-	});
+	function check(callback){
+		$http.get('/project/'+$scope.id)
+			.then(function success(response) {
+				callback();
+				$scope.usage_form = response.data;
+				// setting the input ratetype into currentRateValue. Will use this as ng-model to show the current selected.
+				$scope.currentRateValue = $scope.usage_form.rateValue.rateType;
+				if($scope.usage_form.startDate != null){
+					var start = $scope.usage_form.startDate.split('-');
+					$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
+				}
+				if($scope.usage_form.endDate != null){
+						var end = $scope.usage_form.endDate.split('-');
+						$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
+				}
+
+				if($scope.usage_form.lastBillDate != null){
+						var lastBill = $scope.usage_form.lastBillDate.split('-');
+						$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
+				}
+
+				//var lastBillPaid = $scope.usage_form.lastBillPaidDate.split('-');
+				//$scope.usage_form.lastBillPaidDate = new Date(lastBillPaid[1]+"/"+lastBillPaid[2]+"/"+lastBillPaid[0]);
+			},function failure(response){
+				$scope.selectedInfo = response.statusText;
+				$scope.status = response.data;
+				$log.info(response);
+		});
+	}
+
+
+
+	// $scope.editUsageForm=$http.get('/project/'+$scope.id)
+	// 	.then(function success(response) {
+	// 		$scope.usage_form = response.data;
+	// 		// setting the input ratetype into currentRateValue. Will use this as ng-model to show the current selected.
+	// 		$scope.currentRateValue = $scope.usage_form.rateValue.rateType;
+	// 		if($scope.usage_form.startDate != null){
+	// 			var start = $scope.usage_form.startDate.split('-');
+	// 			$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
+	// 		}
+	// 		if($scope.usage_form.endDate != null){
+	// 				var end = $scope.usage_form.endDate.split('-');
+	// 				$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
+	// 		}
+	//
+	// 		if($scope.usage_form.lastBillDate != null){
+	// 				var lastBill = $scope.usage_form.lastBillDate.split('-');
+	// 				$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
+	// 		}
+	// 		//var lastBillPaid = $scope.usage_form.lastBillPaidDate.split('-');
+	// 		//$scope.usage_form.lastBillPaidDate = new Date(lastBillPaid[1]+"/"+lastBillPaid[2]+"/"+lastBillPaid[0]);
+	// 	},function failure(response){
+	// 		$scope.selectedInfo = response.statusText;
+	// 		$scope.status = response.data;
+	// 		$log.info(response);
+	// });
 	/**
 	 * This get request will fetch all rates, and create a dictionary of it. (rateType as String, the object associated with it)
 	 */
@@ -545,39 +575,74 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	$scope.changeRateValue = function() {
 		$scope.usage_form.rateValue = $scope.rates[$scope.currentRateValue];
 	};
-	$scope.savedChambers=$http.get('/chamber/')
-		.then(function success(response) {
-			var chamberObjArray = response.data;
+	check(function(){
+		$http.get('/chamber/')
+			.then(function success(response) {
+				var chamberObjArray = response.data;
 
-			//
-			// // Return chambers that are in $scope.chambers but not in usage_form
-			// if($scope.chambers!=null && $scope.usage_form.chambers!= null){
-			// 	$scope.existingChambers = $scope.chambers.filter(function(obj) {
-			// 	    return !$scope.usage_form.chambers.some(function(obj2) {
-			// 	        return obj.chamberName == obj2.chamberName;
-			// 	    });
-			// 	});
-			// }
+				//
+				// // Return chambers that are in $scope.chambers but not in usage_form
+				// if($scope.chambers!=null && $scope.usage_form.chambers!= null){
+				// 	$scope.existingChambers = $scope.chambers.filter(function(obj) {
+				// 	    return !$scope.usage_form.chambers.some(function(obj2) {
+				// 	        return obj.chamberName == obj2.chamberName;
+				// 	    });
+				// 	});
+				// }
 
-			var existingChams = [];
-			$scope.existingChambers = {};
-			// Return chambers that are in $scope.chambers but not in usage_form
-			if(chamberObjArray!=null && $scope.usage_form != null && $scope.usage_form.chambers!= null){
-				existingChams = chamberObjArray.filter(function(obj) {
-				    return !$scope.usage_form.chambers.some(function(obj2) {
-				        return obj.chamberName == obj2.chamberName;
-				    });
-				});
-				console.log(existingChams);
-			}
-			for( var i in existingChams){
-				$scope.existingChambers[existingChams[i]['chamberName']] = existingChams[i];
-			}
-		},function failure(response){
-			$scope.chambers = response.statusText;
-			$scope.status = response.data;
-			$log.info(response);
+				var existingChams = [];
+				$scope.existingChambers = {};
+				// Return chambers that are in $scope.chambers but not in usage_form
+				if(chamberObjArray!=null && $scope.usage_form != null && $scope.usage_form.chambers!= null){
+					existingChams = chamberObjArray.filter(function(obj) {
+					    return !$scope.usage_form.chambers.some(function(obj2) {
+					        return obj.chamberName == obj2.chamberName;
+					    });
+					});
+					console.log(existingChams);
+				}
+				for( var i in existingChams){
+					$scope.existingChambers[existingChams[i]['chamberName']] = existingChams[i];
+				}
+			},function failure(response){
+				$scope.chambers = response.statusText;
+				$scope.status = response.data;
+				$log.info(response);
+		});
 	});
+	// $scope.savedChambers=$http.get('/chamber/')
+	// 	.then(function success(response) {
+	// 		var chamberObjArray = response.data;
+	//
+	// 		//
+	// 		// // Return chambers that are in $scope.chambers but not in usage_form
+	// 		// if($scope.chambers!=null && $scope.usage_form.chambers!= null){
+	// 		// 	$scope.existingChambers = $scope.chambers.filter(function(obj) {
+	// 		// 	    return !$scope.usage_form.chambers.some(function(obj2) {
+	// 		// 	        return obj.chamberName == obj2.chamberName;
+	// 		// 	    });
+	// 		// 	});
+	// 		// }
+	//
+	// 		var existingChams = [];
+	// 		$scope.existingChambers = {};
+	// 		// Return chambers that are in $scope.chambers but not in usage_form
+	// 		if(chamberObjArray!=null && $scope.usage_form != null && $scope.usage_form.chambers!= null){
+	// 			existingChams = chamberObjArray.filter(function(obj) {
+	// 			    return !$scope.usage_form.chambers.some(function(obj2) {
+	// 			        return obj.chamberName == obj2.chamberName;
+	// 			    });
+	// 			});
+	// 			console.log(existingChams);
+	// 		}
+	// 		for( var i in existingChams){
+	// 			$scope.existingChambers[existingChams[i]['chamberName']] = existingChams[i];
+	// 		}
+	// 	},function failure(response){
+	// 		$scope.chambers = response.statusText;
+	// 		$scope.status = response.data;
+	// 		$log.info(response);
+	// });
 	$scope.addChamberRow = function(){
 		// for(var i = 0; i < $scope.existingChambers.length; i++){
 		// 	if($scope.selectedChamber === $scope.existingChambers[i]){
