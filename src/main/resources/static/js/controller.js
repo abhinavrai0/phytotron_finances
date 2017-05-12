@@ -364,8 +364,8 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 		if($scope.project_form){
 			console.log("before s: ",$scope.project_form.startDate);
 			console.log("before e: ",$scope.project_form.startDate);
-//			var start=new Date($scope.project_form.startDate);
-//			var end=new Date($scope.project_form.endDate);
+    //			var start=new Date($scope.project_form.startDate);
+    //			var end=new Date($scope.project_form.endDate);
 			$scope.project_form.startDate=new Date($scope.project_form.startDate);;
 			$scope.project_form.endDate=new Date($scope.project_form.endDate);;
 			console.log($scope.project_form.startDate);
@@ -393,26 +393,26 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	      var options={
 	        format: 'MM dd,yyyy',
 	    		/*  format: {
-	    		        
+
 	    		         * Say our UI should display a week ahead,
 	    		         * but textbox should store the actual date.
 	    		         * This is useful if we need UI to select local dates,
 	    		         * but store in UTC
-	    		         
+
 	    		        toDisplay: function (date, format, language) {
 	    		            var d = new Date(date);
-//	    		            d.setDate(d.getDate() - 7);
-//	    		            return d.toISOString();
+      //	    		            d.setDate(d.getDate() - 7);
+      //	    		            return d.toISOString();
 	    		            return d.toISOString();
-//	    		            return d.toDateString();
+      //	    		            return d.toDateString();
 	    		        },
 	    		        toValue: function (date, format, language) {
 	    		            var d = new Date(date);
-//	    		            d.setDate(d.getDate() - 7);
+      //	    		            d.setDate(d.getDate() - 7);
 	    		            return d.toDateString();
-//	    		            return new Date(d);
+      //	    		            return new Date(d);
 	    		        }
-	    		    }	, */ 
+	    		    }	, */
 	        container: container,
 	        todayHighlight: true,
 	        autoclose: true,
@@ -629,7 +629,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		var genrateEndOfDayDate = 	new Date(generateDate.getFullYear()
                 ,generateDate.getMonth()
                 ,generateDate.getDate()
-                ,23,59,59); 
+                ,23,59,59);
 		console.log(genrateEndOfDayDate)
 		$scope.generateBillDate.date=genrateEndOfDayDate;
 		$http.post("/project/"+$scope.id+"/generatebill/",$scope.generateBillDate)
@@ -731,12 +731,12 @@ billingApp.controller("add_rate_info_Controller", function($scope,$http){
 				$scope.rate_form='';
 		}
 	}
-	
-	
 
-	
-	
-	
+
+
+
+
+
 });
 billingApp.controller("edit_rate_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.id = $routeParams.id;
