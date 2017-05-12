@@ -5,7 +5,9 @@ public class Department {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable = false, unique=true)
 	private String departmentId;
+	@Column(nullable = false, unique=true)
 	private String departmentName;
 	public Long getId() {
 		return id;

@@ -7,6 +7,7 @@ public class Chamber {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable = false, unique=true)
 	private String chamberName;
 //	private String chamberId;
 	private String chamberCarts;
