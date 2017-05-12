@@ -364,10 +364,10 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 		if($scope.project_form){
 			console.log("before s: ",$scope.project_form.startDate);
 			console.log("before e: ",$scope.project_form.startDate);
-//			var start=new Date($scope.project_form.startDate);
-//			var end=new Date($scope.project_form.endDate);
-			$scope.project_form.startDate=new Date($scope.startDate);;
-			$scope.project_form.endDate=new Date($scope.endDate);;
+    //			var start=new Date($scope.project_form.startDate);
+    //			var end=new Date($scope.project_form.endDate);
+			$scope.project_form.startDate=new Date($scope.project_form.startDate);;
+			$scope.project_form.endDate=new Date($scope.project_form.endDate);;
 			console.log($scope.project_form.startDate);
 			console.log($scope.project_form.startDate);
 			$http.post("/project/",$scope.project_form)
@@ -398,27 +398,26 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 				 * but textbox should store the actual date.
 				 * This is useful if we need UI to select local dates,
 				 * but store in UTC
-
 	    		        toDisplay: function (date, format, language) {
 	    		            var d = new Date(date);
-//	    		            d.setDate(d.getDate() - 7);
-//	    		            return d.toISOString();
+      //	    		            d.setDate(d.getDate() - 7);
+      //	    		            return d.toISOString();
 	    		            return d.toISOString();
-//	    		            return d.toDateString();
+      //	    		            return d.toDateString();
 	    		        },
 	    		        toValue: function (date, format, language) {
 	    		            var d = new Date(date);
-//	    		            d.setDate(d.getDate() - 7);
+      //	    		            d.setDate(d.getDate() - 7);
 	    		            return d.toDateString();
-//	    		            return new Date(d);
+      //	    		            return new Date(d);
 	    		        }
-	    		    }	, */ 
-				container: container,
-				todayHighlight: true,
-				autoclose: true,
-		};
-		date_input.datepicker(options);
-	})
+	    		    }	, */
+	        container: container,
+	        todayHighlight: true,
+	        autoclose: true,
+	      };
+	      date_input.datepicker(options);
+	    })
 	/**
 	 * Get All chambers from the chambers page and display in the drop down
 	 */
@@ -666,9 +665,9 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		console.log("generateDate :",generateDate)
 //		generateDate=new Date($scope.generateDate);;
 		var genrateEndOfDayDate = 	new Date(generateDate.getFullYear()
-				,generateDate.getMonth()
-				,generateDate.getDate()
-				,23,59,59); 
+                ,generateDate.getMonth()
+                ,generateDate.getDate()
+                ,23,59,59);
 		console.log(genrateEndOfDayDate)
 		generateBillDate.date=genrateEndOfDayDate;
 		$http.post("/project/"+$scope.id+"/generatebill/",generateBillDate)
