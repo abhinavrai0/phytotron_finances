@@ -500,12 +500,12 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			.then(function success(response) {
 				callback();
 				$scope.usage_form = response.data;
-				console.log("start date",$scope.usage_form.startDate);
-				console.log("end date",$scope.usage_form.endDate);
-				console.log("lastBillDate",$scope.usage_form.lastBillDate);
+				// console.log("start date",$scope.usage_form.startDate);
+				// console.log("end date",$scope.usage_form.endDate);
+				// console.log("lastBillDate",$scope.usage_form.lastBillDate);
 				// setting the input ratetype into currentRateValue. Will use this as ng-model to show the current selected.
 				$scope.currentRateValue = $scope.usage_form.rateValue.rateType;
-				console.log("start date",$scope.usage_form.startDate);
+				// console.log("start date",$scope.usage_form.startDate);
 				var tempStartDate=$scope.usage_form.startDate+"T00:00:00";
 				var tempStart=new Date(tempStartDate);
 				$scope.startDate = tempStart.toDateString();
@@ -537,33 +537,6 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		});
 	}
 
-
-
-	// $scope.editUsageForm=$http.get('/project/'+$scope.id)
-	// 	.then(function success(response) {
-	// 		$scope.usage_form = response.data;
-	// 		// setting the input ratetype into currentRateValue. Will use this as ng-model to show the current selected.
-	// 		$scope.currentRateValue = $scope.usage_form.rateValue.rateType;
-	// 		if($scope.usage_form.startDate != null){
-	// 			var start = $scope.usage_form.startDate.split('-');
-	// 			$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
-	// 		}
-	// 		if($scope.usage_form.endDate != null){
-	// 				var end = $scope.usage_form.endDate.split('-');
-	// 				$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
-	// 		}
-	//
-	// 		if($scope.usage_form.lastBillDate != null){
-	// 				var lastBill = $scope.usage_form.lastBillDate.split('-');
-	// 				$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
-	// 		}
-	// 		//var lastBillPaid = $scope.usage_form.lastBillPaidDate.split('-');
-	// 		//$scope.usage_form.lastBillPaidDate = new Date(lastBillPaid[1]+"/"+lastBillPaid[2]+"/"+lastBillPaid[0]);
-	// 	},function failure(response){
-	// 		$scope.selectedInfo = response.statusText;
-	// 		$scope.status = response.data;
-	// 		$log.info(response);
-	// });
 	/**
 	 * This is to provide a custom date picker
 	 */
@@ -626,7 +599,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 					});
 					console.log(existingChams);
 				}
-				for( var i in existingChams){
+				for(var i in existingChams){
 					$scope.existingChambers[existingChams[i]['chamberName']] = existingChams[i];
 				}
 			},function failure(response){
@@ -674,16 +647,16 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		// 		$scope.existingChambers.splice(i,1);
 		// 	}
 		// }
-
 		for(var key in $scope.existingChambers){
-			if($scope.selectedChamber === $scope.existingChambers[key]){
+			if($scope.selectedChamber === $scope.existingChambers[key]['chamberName']){
+				// Display the total sum of the carts in each chamber in the finalised chambers.
+				$scope.usage_form.carts = parseInt($scope.usage_form.carts) + parseInt($scope.existingChambers[key].chamberCarts);
+				// Save the selected chamber id in the chamberId variable to send to back-end
+				$scope.usage_form.chambers.push($scope.existingChambers[key]);
+
 				delete $scope.existingChambers[key];
 			}
 		}
-		// Display the total sum of the carts in each chamber in the finalised chambers.
-		$scope.usage_form.carts = parseInt($scope.usage_form.carts) + parseInt($scope.selectedChamber.chamberCarts);
-		// Save the selected chamber id in the chamberId variable to send to back-end
-		$scope.usage_form.chambers.push($scope.selectedChamber);
 	};
 
 	/**
