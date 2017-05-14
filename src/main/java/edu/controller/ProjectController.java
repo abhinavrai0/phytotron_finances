@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.model.Project;
 import edu.model.Client;
 import edu.model.Payment;
-import edu.model.BillGenerate;
+//import edu.model.BillGenerate;
 import edu.service.ProjectCRUD;
 
 @RestController
@@ -120,11 +120,11 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value="/{id}/generatebill",method=RequestMethod.POST)
-	public double  generateBill(@PathVariable("id") Long id,@RequestBody BillGenerate generateBill){ //Calculate Invoice
+	public double  generateBill(@PathVariable("id") Long id,@RequestBody Date generateBill){ //Calculate Invoice
 		Project currentProject=getProject(id);
 		Date lastBillDate=currentProject.getLastBillDate();
 		// generate bill as per end of day
-		Date generateBillDate=getEndOfDay(generateBill.getDate());
+		Date generateBillDate=getEndOfDay(generateBill);
 		System.out.println("lastBillDate ::::"+lastBillDate);
 		System.out.println("generateBillDate ::::"+generateBillDate);
 		if(lastBillDate.after(generateBillDate)){

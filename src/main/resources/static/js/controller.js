@@ -691,16 +691,16 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		});
 	}
 
-	var generateBillDate = {
+	/*var generateBillDate = {
 			date: ""
 	};
 
-	$scope.generateBillDate = generateBillDate;
+	$scope.generateBillDate = generateBillDate;*/
 	$scope.generate = function(){
-		console.log("$scope.generateBillDate.date",$scope.generateBillDate.date);
-		console.log(typeof $scope.generateBillDate.date);
+		console.log("$scope.generateBillDate.date",$scope.generateBillDate);
+		console.log(typeof $scope.generateBillDate);
 //		var generateDate = $scope.generateBillDate.date; // 2013-07-30 17:11:00
-		var generateDate = new Date($scope.generateBillDate.date);
+		var generateDate = new Date($scope.generateBillDate);
 		console.log("generateDate :",generateDate)
 //		generateDate=new Date($scope.generateDate);;
 		var genrateEndOfDayDate = 	new Date(generateDate.getFullYear()
@@ -708,10 +708,10 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
                 ,generateDate.getDate()
                 ,23,59,59);
 		console.log(genrateEndOfDayDate)
-		generateBillDate.date=genrateEndOfDayDate;
-		$http.post("/project/"+$scope.id+"/generatebill/",generateBillDate)
+//		generateBillDate.date=genrateEndOfDayDate;
+		$http.post("/project/"+$scope.id+"/generatebill/",genrateEndOfDayDate)
 		.success(function(lastBill, status, headers, config) {
-			$scope.usage_form.lastBillDate = generateBillDate.date.toDateString();
+			$scope.usage_form.lastBillDate = genrateEndOfDayDate.toDateString();
 			$scope.usage_form.currentBill = lastBill;
 		})
 		.error(function(data, status, headers, config) {

@@ -1,4 +1,4 @@
-package edu.model;
+/*package edu.model;
 
 import java.util.Date;
 
@@ -9,12 +9,12 @@ public class BillGenerate {
 //	private Date date;
 	@Type(type="date")
 	private Date date;
-/*	public Long getId() {
+	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}*/
+	}
 	public Date getDate() {
 		return date;
 	}
@@ -24,3 +24,4 @@ public class BillGenerate {
 	
 
 }
+*/
