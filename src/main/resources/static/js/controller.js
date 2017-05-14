@@ -363,13 +363,15 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	$scope.submit=function(){
 		if($scope.project_form){
 			console.log("before s: ",$scope.project_form.startDate);
-			console.log("before e: ",$scope.project_form.startDate);
+			console.log("before e: ",$scope.project_form.endDate);
+			console.log("before e: ",$scope.startDate);
+			console.log("before e: ",$scope.endDate);
     //			var start=new Date($scope.project_form.startDate);
     //			var end=new Date($scope.project_form.endDate);
-			$scope.project_form.startDate=new Date($scope.project_form.startDate);;
-			$scope.project_form.endDate=new Date($scope.project_form.endDate);;
+			$scope.project_form.startDate=new Date($scope.startDate);;
+			$scope.project_form.endDate=new Date($scope.endDate);;
 			console.log($scope.project_form.startDate);
-			console.log($scope.project_form.startDate);
+			console.log($scope.project_form.endDate);
 			$http.post("/project/",$scope.project_form)
 			.success(function(response) {
 				$scope.message = "Project "+ response.project_Title + " Saved Successfully";

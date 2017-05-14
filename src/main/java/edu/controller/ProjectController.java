@@ -110,6 +110,10 @@ public class ProjectController {
 		System.out.println("iiiiiiiiiiiddddddd :"+id);
 		System.out.println("updateProject : : "+updateProject);
 		System.out.println(id+"===title===="+updateProject.getProject_Title()+"prj id : "+updateProject.getProject_id()+"Carts : "+updateProject.getCarts());
+		Project currentProject=getProject(id);
+		if(currentProject.getStartDate().equals(currentProject.getLastBillDate())){
+			updateProject.setLastBillDate(updateProject.getStartDate());
+		}
 		updateProject.setId(id);
 		projectCrudRepo.save(updateProject);
 		return updateProject;
@@ -126,9 +130,9 @@ public class ProjectController {
 		if(lastBillDate.after(generateBillDate)){
 			return currentProject.getCurrentBill();
 		}
-		if(lastBillDate==null){
+		/*if(lastBillDate==null){
 			lastBillDate=currentProject.getStartDate();
-		}
+		}*/
 		/*System.out.println("Joda ::::"+Days.daysBetween(new DateTime(lastBillDate), new DateTime(generateBillDate)).getDays());
 		System.out.println("Joda hours ::"+Hours.hoursBetween(new DateTime(lastBillDate), new DateTime(generateBillDate)).getHours());
 		System.out.println("Joda minutes ::"+Minutes.minutesBetween(new DateTime(lastBillDate), new DateTime(generateBillDate)).getMinutes());
