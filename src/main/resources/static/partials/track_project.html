@@ -138,7 +138,7 @@
 						<input type="date" class="form-control" id="startDate"
 							ng-model="usage_form.startDate" required>
 					</div>
-				</div> 
+				</div>
 				<div class="form-group">
 					<label for="endDate" class="col-sm-2 control-label">End
 						Date</label>
@@ -242,11 +242,11 @@
 					<!-- <label for="billPaidTotal" class="col-sm-2 control-label">Total
 						Paid: </label> <span for="Name" class="fields">{{usage_form.billPaidTotal
 						| currency:"USD $"}}</span> -->
-						
+
 					<label for="billPaidTotal" class="control-label col-sm-2">Total Paid</label>
 					<div class="controls col-sm-2">
 						<p class="form-control-static">{{usage_form.billPaidTotal | currency:"USD $"}}</p>
-					</div>	
+					</div>
 				</div>
 
 				<div class="form-group">
@@ -274,4 +274,10 @@
 	</div>
 </div>
 
-<div id="alert_placeholder" class="col-sm-offset-2 col-sm-8"></div>
+<div ng-show="showAlertMessage" id="alert_placeholder"
+	class="col-sm-offset-2 col-sm-8">
+	<div ng-class="savedSuccessfully ? 'alert-success' : 'alert-danger'"
+		class="alert alert-dismissable fade in">
+		<a class="close" data-dismiss="alert">&times;</a> <span>{{message}}</span>
+	</div>
+</div>

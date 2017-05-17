@@ -75,35 +75,30 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
  */
 
 billingApp.controller("add_client_info_Controller", function($scope,$http){
-	$scope.client_form={
-			client_first_name:"",
-			client_last_name:"",
-			client_email:"",
-			client_phone:"",
-			dept_name:"",
-			client_status:"",
-			client_address:""
-	};
-	$scope.options = ["Active", "Inactive"];
-	$scope.client_form.client_status = $scope.options[0];
+	var initializeClient = function(){
+		$scope.options = ["Active", "Inactive"];
+		return {
+				client_first_name:"", client_last_name:"", client_email:"", client_phone:"", dept_name:"", client_status: $scope.options[0], client_address:""
+		};
+	}
+	$scope.client_form= initializeClient();
 
 	$scope.submit=function(){
 		if($scope.client_form){
 			$http.post("/client/",$scope.client_form)
 			.success(function(response) {
-				var message = "Client Saved Successfully";
-				(function alertSuccess(){
-					$('#alert_placeholder').html('<div class="alert alert-success alert-dismissable fade in"><a class="close" data-dismiss="alert">&times;</a><span>'+message+'</span></div>')
-				})()
+				console.log(response);
+				$scope.message = "Client " +response.client_first_name +" Added Successfully";
+				$scope.savedSuccessfully = true; // show success message
+				$scope.showAlertMessage = true;
+				$scope.client_form=initializeClient();
 			})
 			.error(function(response) {
-				var message = "Couldn't save Error";
-				(function alertSuccess(){
-					$('#alert_placeholder').html('<div class="alert alert-danger alert-dismissable fade in"><a class="close" data-dismiss="alert">&times;</a><span>'+message+'</span></div>')
-				})()
-				console.log( "failure message: " + JSON.stringify(response));
+				$scope.message = "Client adding unsuccessful. Please verify information.";
+				$scope.savedSuccessfully = false; // show success message
+				$scope.showAlertMessage = true;
+				//console.log( "failure message: " + JSON.stringify(response));
 			});
-			$scope.client_form='';
 		}
 	}
 
@@ -131,12 +126,12 @@ billingApp.controller("chamber_list_Controller", function($rootScope,$scope,$htt
 	}
 });
 billingApp.controller("add_chamber_info_Controller", function($scope,$http){
-	$scope.message="Add Chamber Info";
-	var chamber_form={
-			chamberName:"",
-			chamberCarts:""
+	var initializeChamber = function(){
+			return{
+				chamberName:"", chamberCarts:""
+			}
 	};
-	$scope.chamber_form = chamber_form;
+	$scope.chamber_form = initializeChamber();
 	//$scope.list=[];		// EMpty list to show data on page. TEsting purposes
 	$scope.submit=function(){
 		//$scope.list.push(this.chamber_form);
@@ -146,20 +141,19 @@ billingApp.controller("add_chamber_info_Controller", function($scope,$http){
 				$scope.message = "Chamber "+ response.chamberName + " Added Successfully";
 				$scope.savedSuccessfully = true; // show success message
 				$scope.showAlertMessage = true;
+				$scope.chamber_form = initializeChamber();
 				// remove this later
 				// console.log("pass"+JSON.stringify(response));
 			})
 			.error(function(response) {
-				$scope.message = "Couldn't save this chamber.";
+				$scope.message = "Couldn't add this chamber.";
 				$scope.savedSuccessfully = false; // show failure message
 				$scope.showAlertMessage = true;
 			});
-			$scope.chamber_form='';
 		}
 	}
 });
 billingApp.controller("edit_chamber_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
-	$scope.message="Edit Chamber Info";
 	$scope.id = $routeParams.id;
 	$scope.editChamberInfo=$http.get('/chamber/'+$scope.id)
 	.then(function success(response) {
@@ -173,10 +167,9 @@ billingApp.controller("edit_chamber_info_Controller", function($rootScope,$scope
 
 		$http.post("/chamber/",$scope.chamber_form)
 		.success(function(chamber_form, status, headers, config) {
-			$scope.message = "Chamber "+ response.chamberName + " Edited Successfully";
+			$scope.message = "Chamber Edited Successfully";
 			$scope.savedSuccessfully = true; // show success message
 			$scope.showAlertMessage = true;
-			$scope.chamber_form='';
 		})
 		.error(function(data, status, headers, config) {
 			$scope.message = "Couldn't edit this chamber";
@@ -207,29 +200,32 @@ billingApp.controller("department_list_Controller", function($rootScope,$scope,$
 });
 billingApp.controller("add_department_info_Controller", function($scope,$http){
 	$scope.message="Add Department Info";
-	var department_form={
-			departmentId:"",
-			departmentName:""
-	};
-	$scope.department_form = department_form;
-	$scope.list=[];		// EMpty list to show data on page. TEsting purposes
+	var initializeDepartment = function(){
+		return {
+			departmentId:"", departmentName:""
+		}
+	}
+	$scope.department_form = initializeDepartment();
 	$scope.submit=function(){
-		$scope.list.push(this.department_form);
 		if($scope.department_form){
 			$http.post("/department",$scope.department_form)
 			.success(function(response) {
+				$scope.message = "Department "+ response.departmentName + " Added Successfully";
+				$scope.savedSuccessfully = true; // show success message
+				$scope.showAlertMessage = true;
+				$scope.department_form = initializeDepartment();
 				// remove this later
 				// console.log("pass"+JSON.stringify(response));
 			})
 			.error(function(response) {
-				console.log( "failure message: " + JSON.stringify(response));
+				$scope.message = "Department Failed to add";
+				$scope.savedSuccessfully = false; // show failure message
+				$scope.showAlertMessage = true;
 			});
-			$scope.department_form='';
 		}
 	}
 });
 billingApp.controller("edit_department_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
-	$scope.message="Edit Department Info";
 	$scope.id = $routeParams.id;
 	$scope.editDepartmentInfo=$http.get('/department/'+$scope.id)
 	.then(function success(response) {
@@ -247,12 +243,16 @@ billingApp.controller("edit_department_info_Controller", function($rootScope,$sc
 
 		$http.put("/department/"+$scope.id,$scope.department_form)
 		.success(function(department_form, status, headers, config) {
-			$scope.message = department_form;
+			$scope.message = "Department "+ department_form.departmentName + " edited Successfully";
+			$scope.savedSuccessfully = true; // show success message
+			$scope.showAlertMessage = true;
 		})
 		.error(function(data, status, headers, config) {
-			alert( "failure message: " + JSON.stringify({data: data}));
+			$scope.message = "Department "+ department_form.departmentName + " failed to edit";
+			$scope.savedSuccessfully = false; // show success message
+			$scope.showAlertMessage = true;
+			//alert( "failure message: " + JSON.stringify({data: data}));
 		});
-		$scope.department_form='';
 	}
 });
 billingApp.controller("crop_list_Controller", function($rootScope,$scope,$http,$log){
@@ -275,30 +275,30 @@ billingApp.controller("crop_list_Controller", function($rootScope,$scope,$http,$
 	}
 });
 billingApp.controller("add_crop_info_Controller", function($scope,$http){
-	$scope.message="Add Crop Info";
-	var crop_form={
-			cropCommonName:"",
-			cropScientificName:""
-	};
-	$scope.crop_form = crop_form;
-	$scope.list=[];		// EMpty list to show data on page. TEsting purposes
+	var initializeCrop = function(){
+		return {
+			cropCommonName:"", cropScientificName:""
+		}
+	}
+	$scope.crop_form = initializeCrop();
 	$scope.submit=function(){
-		$scope.list.push(this.crop_form);
 		if($scope.crop_form){
 			$http.post("/crop/",$scope.crop_form)
 			.success(function(response) {
-				// remove this later
-				// console.log("pass"+JSON.stringify(response));
+				$scope.message = "Crop "+ response.cropCommonName + " Added Successfully";
+				$scope.savedSuccessfully = true; // show success message
+				$scope.showAlertMessage = true;
+				$scope.crop_form = initializeCrop();
 			})
 			.error(function(response) {
-				console.log( "failure message: " + JSON.stringify(response));
+				$scope.message = "Crop Failed to add";
+				$scope.savedSuccessfully = false; // show failure message
+				$scope.showAlertMessage = true;
 			});
-			$scope.crop_form='';
 		}
 	}
 });
 billingApp.controller("edit_crop_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
-	$scope.message="Edit Crop Info";
 	$scope.id = $routeParams.id;
 	$scope.editCropInfo=$http.get('/crop/'+$scope.id)
 	.then(function success(response) {
@@ -314,14 +314,18 @@ billingApp.controller("edit_crop_info_Controller", function($rootScope,$scope,$h
 	});
 	$scope.submit=function(){
 
-		$http.post("/crop/",$scope.crop_form)
+		$http.put("/crop/"+$scope.id,$scope.crop_form)
 		.success(function(crop_form, status, headers, config) {
-			$scope.message = crop_form;
+			$scope.message = "Crop "+ crop_form.cropCommonName + " Edited Successfully";
+			$scope.savedSuccessfully = true; // show success message
+			$scope.showAlertMessage = true;
 		})
-		.error(function(data, status, headers, config) {
-			alert( "failure message: " + JSON.stringify({data: data}));
+		.error(function(crop_form, status, headers, config) {
+			$scope.message = "Crop "+ crop_form.cropCommonName + " failed to edit";
+			$scope.savedSuccessfully = failure; // show failure message
+			$scope.showAlertMessage = true;
+			//alert( "failure message: " + JSON.stringify({data: data}));
 		});
-		$scope.crop_form='';
 	}
 });
 
@@ -676,18 +680,24 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	$scope.save=function(){
 		console.log("before s: ",$scope.usage_form.startDate);
 		console.log("before e: ",$scope.usage_form.endDate);
-//		var start=new Date($scope.project_form.startDate);
-//		var end=new Date($scope.project_form.endDate);
+		//		var start=new Date($scope.project_form.startDate);
+		//		var end=new Date($scope.project_form.endDate);
 		$scope.usage_form.startDate=new Date($scope.startDate);;
 		$scope.usage_form.endDate=new Date($scope.endDate);;
 		console.log($scope.usage_form.startDate);
 		console.log($scope.usage_form.endDate);
 		$http.put("/project/"+$scope.id, $scope.usage_form)
 		.success(function(usage_form, status, headers, config) {
+			$scope.message = "Project Updated Successfully";
+			$scope.savedSuccessfully = true; // show success message
+			$scope.showAlertMessage = true;
 			$scope.message = usage_form;
 		})
 		.error(function(data, status, headers, config) {
-			alert( "failure message: " + JSON.stringify({data: data}));
+			$scope.message = "Error Updating Project";
+			$scope.savedSuccessfully = false; // show failure message
+			$scope.showAlertMessage = true;
+			//alert( "failure message: " + JSON.stringify({data: data}));
 		});
 	}
 
@@ -699,16 +709,16 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	$scope.generate = function(){
 		console.log("$scope.generateBillDate.date",$scope.generateBillDate);
 		console.log(typeof $scope.generateBillDate);
-//		var generateDate = $scope.generateBillDate.date; // 2013-07-30 17:11:00
+		//		var generateDate = $scope.generateBillDate.date; // 2013-07-30 17:11:00
 		var generateDate = new Date($scope.generateBillDate);
 		console.log("generateDate :",generateDate)
-//		generateDate=new Date($scope.generateDate);;
+		//		generateDate=new Date($scope.generateDate);;
 		var genrateEndOfDayDate = 	new Date(generateDate.getFullYear()
                 ,generateDate.getMonth()
                 ,generateDate.getDate()
                 ,23,59,59);
 		console.log(genrateEndOfDayDate)
-//		generateBillDate.date=genrateEndOfDayDate;
+		//		generateBillDate.date=genrateEndOfDayDate;
 		$http.post("/project/"+$scope.id+"/generatebill/",genrateEndOfDayDate)
 		.success(function(lastBill, status, headers, config) {
 			$scope.usage_form.lastBillDate = genrateEndOfDayDate.toDateString();
@@ -790,30 +800,30 @@ billingApp.controller("rate_list_Controller", function($rootScope,$scope,$http,$
 	}
 });
 billingApp.controller("add_rate_info_Controller", function($scope,$http){
-	var rate_form={
-			rateType:"",
-			rate:0
-	};
-	$scope.rate_form = rate_form;
+	var initializeRate = function(){
+		return{
+			rateType:"", rate:0
+		}
+	}
+	$scope.rate_form = initializeRate();
 	$scope.submit=function(){
 		if($scope.rate_form){
 			$http.post("/rate/",$scope.rate_form)
 			.success(function(response) {
+				$scope.message = "Rate "+ response.rateType + " Added Successfully";
+				$scope.savedSuccessfully = true; // show success message
+				$scope.showAlertMessage = true;
+				$scope.rate_form = initializeRate();
 				// remove this later
 				// console.log("pass"+JSON.stringify(response));
 			})
 			.error(function(response) {
-				console.log( "failure message: " + JSON.stringify(response));
+				$scope.message = "Rate Failed to Add";
+				$scope.savedSuccessfully = false; // show failure message
+				$scope.showAlertMessage = true;
 			});
-			$scope.rate_form='';
 		}
 	}
-
-
-
-
-
-
 });
 billingApp.controller("edit_rate_info_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.id = $routeParams.id;
@@ -827,13 +837,16 @@ billingApp.controller("edit_rate_info_Controller", function($rootScope,$scope,$h
 	});
 	$scope.submit=function(){
 
-		$http.post("/rate/",$scope.rate_form)
+		$http.put("/rate/"+$scope.id,$scope.rate_form)
 		.success(function(rate_form, status, headers, config) {
-			$scope.message = rate_form;
+			$scope.message = "Rate "+ rate_form.rateType + " Edited Successfully";
+			$scope.savedSuccessfully = true; // show success message
+			$scope.showAlertMessage = true;
 		})
 		.error(function(data, status, headers, config) {
-			alert( "failure message: " + JSON.stringify({data: data}));
+			$scope.message = "Rate Failed to edit";
+			$scope.savedSuccessfully = false; // show failure message
+			$scope.showAlertMessage = true;
 		});
-		$scope.rate_form='';
 	}
 });
