@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,7 @@ public class PaymentController {
 		double billPaidTotal=currentProject.getBillPaidTotal()+paybill;
 		double remainingCurrentBill=currentProject.getCurrentBill()-paybill;
 		currentProject.setBillPaidTotal(billPaidTotal);
+		currentProject.setLastBillPaidDate(new Date());
 		currentProject.setCurrentBill(remainingCurrentBill);
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		currentProject.setLastBillDate(Calendar.getInstance().getTime());
