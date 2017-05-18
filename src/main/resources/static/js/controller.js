@@ -716,7 +716,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		var genrateEndOfDayDate = 	new Date(generateDate.getFullYear()
                 ,generateDate.getMonth()
                 ,generateDate.getDate()
-                ,23,59,59);
+                ,10,0,0);
 		console.log(genrateEndOfDayDate)
 		//		generateBillDate.date=genrateEndOfDayDate;
 		$http.post("/project/"+$scope.id+"/generatebill/",genrateEndOfDayDate)
