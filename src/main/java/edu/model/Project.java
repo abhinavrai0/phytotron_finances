@@ -41,7 +41,7 @@ public class Project {
 	private Date lastBillPaidDate;//Last Date Paid
 	private Double currentBill=0.0;
 	private Double billPaidTotal=0.0;//Total Paid
-	private String accountStatus;
+	private String projectStatus;
 	public Long getId() {
 		return id;
 	}
@@ -114,12 +114,7 @@ public class Project {
 	public void setCurrentBill(Double currentBill) {
 		this.currentBill = currentBill;
 	}
-	public String getAccountStatus() {
-		return accountStatus;
-	}
-	public void setAccountStatus(String accountStatus) {
-		this.accountStatus = accountStatus;
-	}
+	
 /*	public String getChambers() {
 		return chambers;
 	}
@@ -161,6 +156,12 @@ public class Project {
 	}
 	public void setRateValue(Rate rateValue) {
 		this.rateValue = rateValue;
+	}
+	public String getProjectStatus() {
+		return projectStatus;
+	}
+	public void setProjectStatus(String projectStatus) {
+		this.projectStatus = projectStatus;
 	}
 	
 	
