@@ -82,6 +82,7 @@ public class ProjectController {
 			Date dd=calendar.getTime();
 			System.out.println("dd date : "+dd);*/
 			System.out.println("getEndOfDay : "+getEndOfDay(project.getStartDate()));
+			project.setProjectStatus("Active");
 			project.setLastBillDate(project.getStartDate());
 			project.setCurrentBill(0d);
 			project.setBillPaidTotal(0d);
@@ -106,7 +107,7 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	public Project updateProject(@PathVariable("id") Long id,@RequestBody Project updateProject) {
+	public Project updateProject(@PathVariable("id") Long id,@RequestBody Project updateProject) throws Exception {
 		System.out.println("iiiiiiiiiiiddddddd :"+id);
 		System.out.println("updateProject : : "+updateProject);
 		System.out.println(id+"===title===="+updateProject.getProject_Title()+"prj id : "+updateProject.getProject_id()+"Carts : "+updateProject.getCarts());
@@ -115,8 +116,39 @@ public class ProjectController {
 			updateProject.setLastBillDate(updateProject.getStartDate());
 		}
 		updateProject.setId(id);
-		projectCrudRepo.save(updateProject);
+		if(!updateProject.getProjectStatus().equals("Completed")){
+			projectCrudRepo.save(updateProject);
+		}
+		else{
+			System.out.println("Inside Exception -----------------------");
+			throw new Exception();
+		}
+		System.out.println("reached here -----------------------");
 		return updateProject;
+	}
+	
+	// Project in transaction pending state, only waiting for payment
+	@RequestMapping(value="/{id}/endProject",method=RequestMethod.GET)
+	public Project endProject(@PathVariable("id") Long id){
+		Project currentProject=getProject(id);
+		generateBill(id, currentProject.getEndDate());
+		currentProject.setProjectStatus("Payment Pending");
+		try {
+			updateProject(id, currentProject);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return currentProject;
+	}
+	
+	//Project is completed and nothing can be updated now
+	@RequestMapping(value="/{id}/finishProject",method=RequestMethod.GET)
+	public Project finishProject(@PathVariable("id") Long id){
+		Project currentProject=getProject(id);
+		currentProject.setProjectStatus("Completed");
+		projectCrudRepo.save(currentProject);
+		return currentProject;
 	}
 
 	@RequestMapping(value="/{id}/generatebill",method=RequestMethod.POST)
@@ -151,7 +183,12 @@ public class ProjectController {
 		currentProject.setLastBillDate(generateBillDate);
 		currentProject.setCurrentBill(bill);
 		System.out.println("bill :"+bill+", generateBillDate:"+generateBillDate);
-		updateProject(id,currentProject);
+		try {
+			updateProject(id,currentProject);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return currentProject.getCurrentBill();
 	}
 

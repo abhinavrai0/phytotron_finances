@@ -94,7 +94,12 @@ public class PaymentController {
 		currentProject.setLastBillDate(Calendar.getInstance().getTime());
 		System.out.println(id+"-----------id, currentProject------------"+currentProject);
 		System.out.println(id+"-----------id, stuff----title--------"+currentProject.getProject_Title()+"prj id : "+currentProject.getProject_id()+"Carts : "+currentProject.getCarts());
-		currentProject=pc.updateProject(id,currentProject);
+		try {
+			currentProject=pc.updateProject(id,currentProject);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(billPaidTotal+","+remainingCurrentBill);
 		String s= "{\"billPaidTotal\":"+billPaidTotal +",\"remainingCurrentBill\":"+remainingCurrentBill+",\"lastBillPaidDate\":\""+dateFormat.format(currentProject.getLastBillDate())+"\"}";
 		System.out.println(s);
