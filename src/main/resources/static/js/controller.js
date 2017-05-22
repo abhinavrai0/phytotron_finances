@@ -781,7 +781,27 @@ billingApp.controller("payment_list_Controller", function($rootScope,$scope,$htt
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
 		$scope.reverse = !$scope.reverse; //if true make it false and vice versa
 	}
-	//$scope.project = project_service.project_info;
+	$scope.printPage = function () {
+	//  var printContents = document.getElementById("print").innerHTML;
+	//  var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+	//  mywindow.document.open();
+	//  mywindow.document.write('<html><head><link rel="stylesheet" href="css/main.css" media="all" type="text/css" /><link rel="stylesheet" href="css/bootstrap_cdn.css" media="all" type="text/css" /><title>' + document.title  + '</title>');
+	//  mywindow.document.write('</head><body >');
+	//  mywindow.document.write(printContents);
+	//  mywindow.document.write('</body></html>');
+	 //
+	//  mywindow.document.close(); // necessary for IE >= 10
+	//  mywindow.focus(); // necessary for IE >= 10*/
+	 //
+	//  mywindow.print();
+	//  mywindow.close();
+
+		var printContents = document.getElementById("print").innerHTML;
+	  var popupWin = window.open('', '_blank');
+	  popupWin.document.open();
+	  popupWin.document.write('<html><head><link rel="stylesheet" href="css/main.css" media="all" type="text/css" /><link rel="stylesheet" href="css/bootstrap_cdn.css" media="all" type="text/css" /></head><body onload="window.print()">' + printContents + '</body></html>');
+	  popupWin.document.close();
+	}
 });
 
 

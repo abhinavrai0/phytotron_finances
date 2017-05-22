@@ -1,70 +1,80 @@
-<div class = "header">
-  <!-- <h3 align="center">Client Information</h3> -->
-  <div class="container">
-	  <div class="col-sm-push-2 col-sm-6">
-		  	<h3 class="text-center">Client Information</h3>
-	  </div>
-  </div>
-  <div id = "container" class="col-sm-10">
-	  <div class="adjacentPanels col-sm-3"></div>
-		<div class="adjacentPanels col-sm-5">
-        <div class="form-group">
-          <label for="Name" class="control-label">First Name: </label>
-          <span for="Name" class = "fields">{{project_details.client.client_first_name}}</span>
+<div id = "print">
+  <div class = "header">
+    <!-- <h3 align="center">Client Information</h3> -->
+    <div class="container">
+  	  <div class="col-sm-push-2 col-sm-6">
+  		  	<h3 class="text-center">Client Information</h3>
+  	  </div>
+    </div>
+    <div id = "container" class="col-sm-10">
+  	  <div class="adjacentPanels col-sm-3"></div>
+  		<div class="adjacentPanels col-sm-5">
+          <div class="form-group">
+            <label for="Name" class="control-label">First Name: </label>
+            <span for="Name" class = "fields">{{project_details.client.client_first_name}}</span>
+          </div>
+          <div class="form-group">
+            <label for="email" class="control-label">Email:</label>
+            <span for="email" class = "fields">{{project_details.client.client_email}}</span>
+          </div>
+          <div class="form-group">
+            <label for="department" class="control-label">Department:</label>
+            <span for="department" class = "fields">{{project_details.client.dept_name}}</span>
+          </div>
+          <div class="form-group">
+            <label for="project_id" class="control-label">Project Id:</label>
+            <span for="project_id" class = "fields">{{project_details.project_id}}</span>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="email" class="control-label">Email:</label>
-          <span for="email" class = "fields">{{project_details.client.client_email}}</span>
-        </div>
-        <div class="form-group">
-          <label for="department" class="control-label">Department:</label>
-          <span for="department" class = "fields">{{project_details.client.dept_name}}</span>
-        </div>
-        <div class="form-group">
-          <label for="project_id" class="control-label">Project Id:</label>
-          <span for="project_id" class = "fields">{{project_details.project_id}}</span>
-        </div>
-      </div>
-      <div class = "adjacentPanels col-sm-4">
-        <div class="form-group">
-          <label for="Name" class="control-label">Last Name: </label>
-          <span for="Name" class = "fields">{{project_details.client.client_last_name}}</span>
-        </div>
-        <div class="form-group">
-          <label for="Phone" class="control-label">Phone: </label>
-          <span for="Phone" class = "fields">{{project_details.client.client_phone}}</span>
-        </div>
-        <div class="form-group">
-          <label for="address" class="control-label">Address:</label>
-          <span for="address" class = "fields">{{project_details.client.client_address}}</span>
-        </div>
-        <div class="form-group">
-          <label for="project_Title" class="control-label">Project Title:</label>
-          <span for="project_Title" class = "fields">{{project_details.project_Title}}</span>
-        </div>
+        <div class = "adjacentPanels col-sm-4">
+          <div class="form-group">
+            <label for="Name" class="control-label">Last Name: </label>
+            <span for="Name" class = "fields">{{project_details.client.client_last_name}}</span>
+          </div>
+          <div class="form-group">
+            <label for="Phone" class="control-label">Phone: </label>
+            <span for="Phone" class = "fields">{{project_details.client.client_phone}}</span>
+          </div>
+          <div class="form-group">
+            <label for="address" class="control-label">Address:</label>
+            <span for="address" class = "fields">{{project_details.client.client_address}}</span>
+          </div>
+          <div class="form-group">
+            <label for="project_Title" class="control-label">Project Title:</label>
+            <span for="project_Title" class = "fields">{{project_details.project_Title}}</span>
+          </div>
 
-      </div>
+        </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="table-responsive col-sm-7 col-sm-push-2">
+    	<table class="table table-hover table-bordered">
+    		<thead>
+    			<th class="text-center">#</th>
+    			<th class="text-center">Payment Date</th>
+    			<th class="text-center">Amount</th>
+    		</thead>
+    		<tbody>
+    			<tr ng-repeat="payment in paymentHistory">
+    				<td align="center">{{payment.id}}</td>
+    				<td align="center">{{payment.paidDate | date:'medium'}}</td>
+    				<td align="center">{{payment.amount | currency:"$"}}</td>
+    			</tr>
+    		</tbody>
+    	</table>
+    	<!-- <div>
+          <a class="btn btn-success" ng-href="#/add_crop_info">Add New Crop</a>
+      </div> -->
+
+    </div>
   </div>
 </div>
-<div class="form-group">
-<div class="table-responsive col-sm-7 col-sm-push-2">
-	<table class="table table-hover table-bordered">
-		<thead>
-			<th class="text-center">#</th>
-			<th class="text-center">Payment Date</th>
-			<th class="text-center">Amount</th>
-		</thead>
-		<tbody>
-			<tr ng-repeat="payment in paymentHistory">
-				<td align="center">{{payment.id}}</td>
-				<td align="center">{{payment.paidDate | date:'medium'}}</td>
-				<td align="center">{{payment.amount | currency:"$"}}</td>
-			</tr>
-		</tbody>
-	</table>
-	<!-- <div>
-      <a class="btn btn-success" ng-href="#/add_crop_info">Add New Crop</a>
-  </div> -->
-
-</div>
+<div>
+  <div class="col-sm-offset-2 col-sm-8">
+    <button ng-click="printPage()" class="btn btn-default">Print</button>
+    <!-- <a ng-click="currentProject()" class="btn btn-default"
+      ng-href="#/payment_list/{{currentProjectID}}">Payment History</a>
+    <a class="btn btn-default" ng-href="#/usage_list">Go Back</a> -->
+  </div>
 </div>
