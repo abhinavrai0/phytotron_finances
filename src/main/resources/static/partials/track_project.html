@@ -42,6 +42,7 @@
 		<div class="col-md-12">
 			<form class="form-horizontal" name="ProjectInfoForm" role="form"
 				ng-submit="ProjectInfoForm.$valid">
+				<fieldset ng-disabled = "projectEnded">
 				<div class="form-group">
 					<label for="project_id" class="col-sm-2 control-label">Project
 						Id </label>
@@ -226,13 +227,15 @@
 						<p class="form-control-static">{{usage_form.currentBill | currency:"USD $"}}</p>
 					</div>
 				</div>
+			</fieldset>
 
+			<fieldset ng-disabled = "!paymentPending">
 
 				<div class="form-group">
 					<label for="payBill" class="col-sm-2 control-label">Amount
 						Pay </label>
 					<div class="col-sm-2">
-						<input type="Number" class="form-control" ng-model="pay_amount">
+						<input type="Number" class="form-control" ng-model="pay_amount" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
 					</div>
 					<button ng-click="pay()" class="btn btn-default">Pay</button>
 				</div>
@@ -259,14 +262,16 @@
 					<label for="accountStatus" class="col-sm-2 control-label">Project
 						Status</label> <span for="Name" class="fields">{{usage_form.projectStatus}}</span>
 				</div>
-
+			</fieldset>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-8">
-						<button ng-click="save()" class="btn btn-default">Save</button>
+						<button ng-click="save()" ng-hide = "projectEnded" class="btn btn-default">Save</button>
 						<a ng-click="currentProject()" class="btn btn-default"
 							ng-href="#/payment_list/{{currentProjectID}}">Payment History</a>
+						<button class="btn btn-default btn-danger" ng-hide = "projectEnded" ng-confirm-click="Are you sure you want to end this project with date {{usage_form.project_Title}} ?" confirmed-click="endProject()">End Project</button>
+						<button class="btn btn-default" ng-show = "projectEnded" ng-disabled = "paymentPending" ng-click = "finishProject()">Finish Project</button>
 						<a class="btn btn-default" ng-href="#/usage_list">Go Back</a>
-						<button class="btn btn-sm btn-danger" ng-confirm-click="Are you sure you want to end this project with date {{usage_form.project_Title}} ?" confirmed-click="endProject()">End Project</button>
+
 					</div>
 				</div>
 
