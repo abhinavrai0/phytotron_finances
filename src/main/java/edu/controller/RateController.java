@@ -15,18 +15,29 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.model.Rate;
 import edu.service.RateCRUD;
 
+
+/**
+ * 
+ * @author ankit
+ *
+ * This controller will control CRUD operations for different type of project rates
+ * Delete functionality is not provided and can be added here in future if required
+ */
 @RestController
 @RequestMapping("/rate")
 public class RateController {
 	@Autowired
 	private RateCRUD rateCrudRepo;
-
+	
+	// Get list for rates
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Rate> getAllRates() {
 		List<Rate> rateList =new ArrayList<Rate>();
 		rateList = (List<Rate>) rateCrudRepo.findAll();
 		return rateList;
 	} 
+	
+	// fetch a specific rate
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public Rate getRate(@PathVariable("id") Long id) {
 		Rate rate=new Rate();

@@ -24,7 +24,7 @@ public class Application extends SpringBootServletInitializer {
 
 
 
-	@Bean
+	/*@Bean
 	 public FilterRegistrationBean remoteAddressFilter() {
 	  FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
 	  RemoteAddrFilter filter = new RemoteAddrFilter();
@@ -42,5 +42,5 @@ public class Application extends SpringBootServletInitializer {
 	  filterRegistrationBean.setFilter(filter);
 	  filterRegistrationBean.addUrlPatterns("/*");
 	  return filterRegistrationBean;
-	 }
+	 }*/
 }

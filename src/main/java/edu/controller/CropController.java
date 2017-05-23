@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.model.Crop;
 import edu.service.CropCRUD;
 
+/**
+ * 
+ * @author ankit
+ * This controller will control CRUD operation for crops
+ * Delete functionality is not provided and can be added here in future if required
+ */
+
 @RestController
 @RequestMapping("/crop")
 public class CropController {
@@ -22,13 +29,15 @@ public class CropController {
 	private CropCRUD cropCrudRepo;
 	static final Logger logger = LogManager.getLogger(CropController.class.getName());
 
-
+	// Show list of all Crops
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Crop> getAllCrops() {
 		List<Crop> CropList =new ArrayList<Crop>();
 		CropList = (List<Crop>) cropCrudRepo.findAll();
 		return CropList;
 	} 
+	
+	// Fetch specific crop by its id
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public Crop getCrop(@PathVariable("id") Long id) {
 		Crop crop=new Crop();
@@ -39,19 +48,21 @@ public class CropController {
         }
 		return crop;
 	}
-
+	
+	
+	// Create a new Crop
 	@RequestMapping(method=RequestMethod.POST)
 	public Crop createCrop(@RequestBody Crop crop) {
-		logger.info("Creating Bill : {}", crop);
+		logger.info("Creating Crop : {}", crop);
 		try {
 			cropCrudRepo.save(crop);
 		} catch (Exception e) {
-			System.out.println("errrro -----------");
 			logger.error(e.getMessage());
 		}
 		return crop;
 	}
 	
+	// Update a crops id or name
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	public Crop updateRate(@PathVariable("id") Long id,@RequestBody Crop updateCrop) {
 		updateCrop.setId(id);

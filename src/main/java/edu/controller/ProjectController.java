@@ -45,15 +45,35 @@ public class ProjectController {
 		List<Project> projectList =new ArrayList<Project>();
 		System.out.println("Project Controller :"+projectList);
 		try {
-			projectList = (List<Project>) projectCrudRepo.findAll();
+			projectList = (List<Project>) projectCrudRepo.findByProjectStatus("Active");
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			System.out.println("Error :: " +e.getMessage());
 		}
-
 		System.out.println("a :"+projectList);
 		return projectList;
 	}
+	
+	@RequestMapping(value="/status/{status}",method=RequestMethod.GET)
+	public List<Project> getSelectedProjects(@PathVariable("status") String status) {
+		System.out.println("-------------------------");
+		List<Project> projectList =new ArrayList<Project>();
+		System.out.println("Project Controller :"+projectList);
+		try {
+			if(status.equals("all")){
+				projectList = (List<Project>) projectCrudRepo.findAll();
+			}
+			else{
+				projectList = (List<Project>) projectCrudRepo.findByProjectStatus(status);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			System.out.println("Error :: " +e.getMessage());
+		}
+		System.out.println("a :"+projectList);
+		return projectList;
+	}
+	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public Project getProject(@PathVariable("id") Long id) {
 		Project project=new Project();
@@ -72,15 +92,6 @@ public class ProjectController {
 		System.out.println(project.getClient().getId()+"--====Post Request=====-- acc"+project.getAcc_number() + " name :"+ project.getProject_Title());
 		logger.info("Creating project : {}", project);
 		try {
-			/*System.out.println("project.getStartDate() : "+project.getStartDate());
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(project.getStartDate());
-			System.out.println("calendar : "+calendar);
-//			Calendar calendar = new Calendar();
-			calendar.set(calendar.MILLISECOND, 999);
-			System.out.println("calendar later : "+calendar);
-			Date dd=calendar.getTime();
-			System.out.println("dd date : "+dd);*/
 			System.out.println("getEndOfDay : "+getEndOfDay(project.getStartDate()));
 			project.setProjectStatus("Active");
 			project.setLastBillDate(project.getStartDate());
