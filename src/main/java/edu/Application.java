@@ -32,6 +32,13 @@ public class Application extends SpringBootServletInitializer {
 //	  filter.setAllow("127\\.0\\.0\\.1");
 	  System.out.println(filter);
 //	  filter.setAllow("152\\.1\\.177\\.101");
+//	  filter.setAllow("127\\.\\d+\\.\\d+\\.\\d+|::1|0:0:0:0:0:0:0:1");
+
+//	  filter.setAllow("10\\.\\d+\\.\\d+\\.\\d+|71\\.69\\.\\d+\\.\\d+|192\\.168\\.\\d+\\.\\d+|2606:a000:4dc9:e500:258a:8709:8650:ff80");
+//	  filter.setAllow("192\\.168\\.0\\.17");
+	  filter.setAllow("192\\.168\\.0\\.22|107.\\77.\\240.\\26");
+//	  filter.setAllow("10\\.255\\.244\\.1");
+//	  <param-value>127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1</param-value>
 	  filterRegistrationBean.setFilter(filter);
 	  filterRegistrationBean.addUrlPatterns("/*");
 	  return filterRegistrationBean;
