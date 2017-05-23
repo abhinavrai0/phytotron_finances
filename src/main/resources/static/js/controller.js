@@ -751,6 +751,21 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			console.log( "failure message: " + response);
 		});
 	}
+	
+	$scope.endProject = function(){
+		console.log('/project/'+$scope.id+'/endProject')
+		$http.get('/project/'+$scope.id+'/endProject')
+		.then(function success(response) {
+			console.log(response.data)
+			$scope.usage_form = response.data;
+			// var payDate = $scope.paymentHistory.paidDate.split('-');
+			// $scope.paymentHistory.paidDate = new Date(payDate[1]+"/"+payDate[2]+"/"+payDate[0]);
+		},function failure(response){
+			$scope.selectedInfo = response.statusText;
+			$scope.status = response.data;
+			$log.info(response);
+		});
+	}
 });
 billingApp.controller("payment_list_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.id = $routeParams.id;

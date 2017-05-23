@@ -256,8 +256,8 @@
 				</div>
 
 				<div class="form-group">
-					<label for="accountStatus" class="col-sm-2 control-label">Account
-						Status</label> <span for="Name" class="fields">{{usage_form.accountStatus}}</span>
+					<label for="accountStatus" class="col-sm-2 control-label">Project
+						Status</label> <span for="Name" class="fields">{{usage_form.projectStatus}}</span>
 				</div>
 
 				<div class="form-group">
@@ -266,6 +266,7 @@
 						<a ng-click="currentProject()" class="btn btn-default"
 							ng-href="#/payment_list/{{currentProjectID}}">Payment History</a>
 						<a class="btn btn-default" ng-href="#/usage_list">Go Back</a>
+						<button class="btn btn-sm btn-danger" ng-confirm-click="Are you sure you want to end this project with date {{usage_form.project_Title}} ?" confirmed-click="endProject()">End Project</button>
 					</div>
 				</div>
 
