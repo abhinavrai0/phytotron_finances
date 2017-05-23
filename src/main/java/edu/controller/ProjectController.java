@@ -140,7 +140,7 @@ public class ProjectController {
 	
 	// Project in transaction pending state, only waiting for payment
 	@RequestMapping(value="/{id}/endProject",method=RequestMethod.GET)
-	public Project endProject(@PathVariable("id") Long id){
+	public Project endProject(@PathVariable("id") Long id) throws Exception{
 		Project currentProject=getProject(id);
 		generateBill(id, currentProject.getEndDate());
 		currentProject.setProjectStatus("Payment Pending");
@@ -163,7 +163,7 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value="/{id}/generatebill",method=RequestMethod.POST)
-	public double  generateBill(@PathVariable("id") Long id,@RequestBody Date generateBill){ //Calculate Invoice
+	public double  generateBill(@PathVariable("id") Long id,@RequestBody Date generateBill) throws Exception{ //Calculate Invoice
 		Project currentProject=getProject(id);
 		Date lastBillDate=currentProject.getLastBillDate();
 		// generate bill as per end of day
@@ -171,7 +171,7 @@ public class ProjectController {
 		System.out.println("lastBillDate ::::"+lastBillDate);
 		System.out.println("generateBillDate ::::"+generateBillDate);
 		if(lastBillDate.after(generateBillDate)){
-			return currentProject.getCurrentBill();
+			throw new Exception();
 		}
 		/*if(lastBillDate==null){
 			lastBillDate=currentProject.getStartDate();
@@ -192,6 +192,7 @@ public class ProjectController {
 		double bill= currentProject.getCurrentBill();
 		bill= bill + ((double)currentProject.getRateValue().getRate() * (double)diff * currentProject.getCarts());
 		currentProject.setLastBillDate(generateBillDate);
+		bill = Math.round(bill * 100D) / 100D;
 		currentProject.setCurrentBill(bill);
 		System.out.println("bill :"+bill+", generateBillDate:"+generateBillDate);
 		try {

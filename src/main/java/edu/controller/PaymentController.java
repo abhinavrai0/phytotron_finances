@@ -71,28 +71,21 @@ public class PaymentController {
 	//project id
 	@RequestMapping(value="/{id}/paybill",method=RequestMethod.POST)
 	public String  payBill(@PathVariable("id") Long id,@RequestBody Double paybill){// throws ZeroValueNotAllowedException{
-		/*if(paybill==0){
-				throw new ZeroValueNotAllowedException();
-		}*/
-//		if (paybill==0) throw new ZeroValueNotAllowedException();
-		
+		System.out.println("pay bill ----------------------"+paybill);
 		Project currentProject=pc.getProject(id);
-		//		Project currentProject= projectCrudRepo.findOne(id);;
-		System.out.println(currentProject.getProject_Title()+"000000000000"+currentProject.getCarts());
 		Payment pay=new Payment();
-//		pay.setClient(currentProject.getClient());
-//		pay.setProject(currentProject);
 		pay.setProjectId(currentProject.getId());
 		pay.setAmount(paybill);
 		makePayment(pay);
 		double billPaidTotal=currentProject.getBillPaidTotal()+paybill;
-		double remainingCurrentBill=currentProject.getCurrentBill()-paybill;
+		double remainingCurrentBill=Math.round((currentProject.getCurrentBill()-paybill)*100D)/100D;
 		currentProject.setBillPaidTotal(billPaidTotal);
 		currentProject.setLastBillPaidDate(new Date());
 		currentProject.setCurrentBill(remainingCurrentBill);
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		currentProject.setLastBillDate(Calendar.getInstance().getTime());
-		System.out.println(id+"-----------id, currentProject------------"+currentProject);
+		System.out.println("remainingCurrentBill :"+remainingCurrentBill);
+		System.out.println("billPaidTotal :"+billPaidTotal);
 		System.out.println(id+"-----------id, stuff----title--------"+currentProject.getProject_Title()+"prj id : "+currentProject.getProject_id()+"Carts : "+currentProject.getCarts());
 		try {
 			currentProject=pc.updateProject(id,currentProject);
