@@ -60,7 +60,7 @@ public class ProjectController {
 		List<Project> projectList =new ArrayList<Project>();
 		System.out.println("Project Controller :"+projectList);
 		try {
-			if(status.equals("all")){
+			if(status.equals("All")){
 				projectList = (List<Project>) projectCrudRepo.findAll();
 			}
 			else{

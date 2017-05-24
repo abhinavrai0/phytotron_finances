@@ -88,6 +88,9 @@
 			<th ng-click="sort('currentBill')">Current Bill
 			<span  ng-show="sortKey=='currentBill'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
+			<th ng-click="sort('projectStatus')">Project Status
+			<span  ng-show="sortKey=='projectStatus'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			</th>
 		</thead>
 		<tbody>
 			<tr dir-paginate="project in projectList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
@@ -100,6 +103,7 @@
 				<td><a href="#/track_project/{{project.id}}">{{project.endDate | date:'MMM d, y'}}</a></td>
 				<td><a href="#/track_project/{{project.id}}">{{project.lastBillDate | date:'MMM d, y'}}</a></td>
 				<td><a href="#/track_project/{{project.id}}">{{project.currentBill | currency}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.projectStatus}}</a></td>
 			</tr>
 		</tbody>
 	</table>

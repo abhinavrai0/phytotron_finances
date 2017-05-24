@@ -474,7 +474,7 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	}
 });
 billingApp.controller("usage_list_Controller", function($scope,$http){
-	$scope.statuses = ["Active","Payment Pending","Completed", "all"];
+	$scope.statuses = ["Active","Payment Pending","Completed", "All"];
 	$scope.project_status = $scope.statuses[0];
 	$scope.savedTrackingUsage=$http.get('/project')
 	.then(function success(response) {
