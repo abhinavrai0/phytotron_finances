@@ -510,6 +510,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 
 	// To make a part of the track project page uneditable when the user submits a end project request.
 	$scope.projectEnded = false;
+	$scope.projectFinished = false;
 
 	$scope.paymentPending = true;
 	function check(callback){
@@ -523,10 +524,8 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 				if($scope.usage_form.projectStatus === "Completed"){
 					$scope.projectEnded = true;
 					$scope.paymentPending = false;
+					$scope.projectFinished = true;
 				}
-				// console.log("start date",$scope.usage_form.startDate);
-				// console.log("end date",$scope.usage_form.endDate);
-				// console.log("lastBillDate",$scope.usage_form.lastBillDate);
 				// setting the input ratetype into currentRateValue. Will use this as ng-model to show the current selected.
 				$scope.currentRateValue = $scope.usage_form.rateValue.rateType;
 				// console.log("start date",$scope.usage_form.startDate);
@@ -534,26 +533,6 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 				var tempStart=new Date(tempStartDate);
 				$scope.startDate = tempStart.toDateString();
 				$scope.endDate = (new Date($scope.usage_form.endDate+"T00:00:00")).toDateString();
-		/*		console.log(typeof $scope.usage_form.startDate);
-				console.log(tempStart);
-				console.log(tempStart.toDateString())*/;
-
-				/*if($scope.usage_form.startDate != null){
-						var start = $scope.usage_form.startDate.split('-');
-						$scope.usage_form.startDate = new Date(start[1]+"/"+start[2]+"/"+start[0]);
-					}
-				if($scope.usage_form.endDate != null){
-					var end = $scope.usage_form.endDate.split('-');
-					$scope.usage_form.endDate = new Date(end[1]+"/"+end[2]+"/"+end[0]);
-				}
-		*/
-
-				/*if($scope.usage_form.lastBillDate != null){
-					var lastBill = $scope.usage_form.lastBillDate.split('-');
-					$scope.usage_form.lastBillDate = new Date(lastBill[1]+"/"+lastBill[2]+"/"+lastBill[0]);
-				}*/
-				//var lastBillPaid = $scope.usage_form.lastBillPaidDate.split('-');
-				//$scope.usage_form.lastBillPaidDate = new Date(lastBillPaid[1]+"/"+lastBillPaid[2]+"/"+lastBillPaid[0]);
 			},function failure(response){
 				$scope.selectedInfo = response.statusText;
 				$scope.status = response.data;
@@ -601,17 +580,6 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		$http.get('/chamber/')
 			.then(function success(response) {
 				var chamberObjArray = response.data;
-
-				//
-				// // Return chambers that are in $scope.chambers but not in usage_form
-				// if($scope.chambers!=null && $scope.usage_form.chambers!= null){
-				// 	$scope.existingChambers = $scope.chambers.filter(function(obj) {
-				// 	    return !$scope.usage_form.chambers.some(function(obj2) {
-				// 	        return obj.chamberName == obj2.chamberName;
-				// 	    });
-				// 	});
-				// }
-
 				var existingChams = [];
 				$scope.existingChambers = {};
 				// Return chambers that are in $scope.chambers but not in usage_form
@@ -631,45 +599,8 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 				$log.info(response);
 		});
 	});
-	// $scope.savedChambers=$http.get('/chamber/')
-	// 	.then(function success(response) {
-	// 		var chamberObjArray = response.data;
-	//
-	// 		//
-	// 		// // Return chambers that are in $scope.chambers but not in usage_form
-	// 		// if($scope.chambers!=null && $scope.usage_form.chambers!= null){
-	// 		// 	$scope.existingChambers = $scope.chambers.filter(function(obj) {
-	// 		// 	    return !$scope.usage_form.chambers.some(function(obj2) {
-	// 		// 	        return obj.chamberName == obj2.chamberName;
-	// 		// 	    });
-	// 		// 	});
-	// 		// }
-	//
-	// 		var existingChams = [];
-	// 		$scope.existingChambers = {};
-	// 		// Return chambers that are in $scope.chambers but not in usage_form
-	// 		if(chamberObjArray!=null && $scope.usage_form != null && $scope.usage_form.chambers!= null){
-	// 			existingChams = chamberObjArray.filter(function(obj) {
-	// 			    return !$scope.usage_form.chambers.some(function(obj2) {
-	// 			        return obj.chamberName == obj2.chamberName;
-	// 			    });
-	// 			});
-	// 			console.log(existingChams);
-	// 		}
-	// 		for( var i in existingChams){
-	// 			$scope.existingChambers[existingChams[i]['chamberName']] = existingChams[i];
-	// 		}
-	// 	},function failure(response){
-	// 		$scope.chambers = response.statusText;
-	// 		$scope.status = response.data;
-	// 		$log.info(response);
-	// });
+
 	$scope.addChamberRow = function(){
-		// for(var i = 0; i < $scope.existingChambers.length; i++){
-		// 	if($scope.selectedChamber === $scope.existingChambers[i]){
-		// 		$scope.existingChambers.splice(i,1);
-		// 	}
-		// }
 		for(var key in $scope.existingChambers){
 			if($scope.selectedChamber === $scope.existingChambers[key]['chamberName']){
 				// Display the total sum of the carts in each chamber in the finalised chambers.
@@ -714,11 +645,6 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		});
 	}
 
-	/*var generateBillDate = {
-			date: ""
-	};
-
-	$scope.generateBillDate = generateBillDate;*/
 	$scope.generate = function(){
 		console.log("$scope.generateBillDate.date",$scope.generateBillDate);
 		console.log(typeof $scope.generateBillDate);
@@ -753,15 +679,14 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	var pay_amount = 0;
 	$scope.pay_amount = pay_amount;
 	$scope.pay = function(){
-
-		$http.post("/payment/"+$scope.id+"/paybill", $scope.pay_amount)
+		var pay = Math.round($scope.pay_amount * 100)/100;
+		$http.post("/payment/"+$scope.id+"/paybill", pay)
 		.success(function(pay_bill, status, headers, config) {
 			$scope.usage_form.currentBill = pay_bill.remainingCurrentBill;
 			console.log("outside: "+$scope.usage_form.currentBill);
 			console.log($scope.usage_form.currentBill === 0);
-			if($scope.usage_form.currentBill === 0){
+			if($scope.projectEnded === true && $scope.usage_form.currentBill === 0){
 				console.log($scope.usage_form.currentBill);
-
 				$scope.paymentPending = false;
 			}
 			$scope.usage_form.billPaidTotal = pay_bill.billPaidTotal;
@@ -773,10 +698,8 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	}
 
 	$scope.endProject = function(){
-		console.log('/project/'+$scope.id+'/endProject')
 		$http.get('/project/'+$scope.id+'/endProject')
 		.then(function success(response) {
-			console.log(response.data)
 			$scope.usage_form = response.data;
 			$scope.projectEnded = true;
 		},function failure(response){
@@ -789,9 +712,9 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	$scope.finishProject = function(){
 		$http.get('/project/'+$scope.id+'/finishProject')
 		.then(function success(response) {
-			console.log(response.data)
 			$scope.usage_form = response.data;
 			$scope.projectEnded = true;
+			$scope.projectFinished = true;
 		},function failure(response){
 			$scope.selectedInfo = response.statusText;
 			$scope.status = response.data;
