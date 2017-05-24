@@ -1,7 +1,7 @@
 <div id="search_boxes" class="container">
 	<div class="col-sm-12">
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-10">
 				<form>
 					<div class="form-group">
 						<label for="searchAll">Global Search :</label>
@@ -9,23 +9,15 @@
 					</div>
 				</form>
 			</div>
-			<!-- ng-model="searchAll.client_status" -->
-			<!-- <div class="col-xs-4">
+			<div class="col-sm-2">
 				<form>
 					<div class="form-group">
-						  <label for="searchStatus">Start Date :</label>
-					      <input type="date" class="form-control" id="searchStatus" ng-model="searchAll.client_status">
+						  <label for="searchStatus">Select Status :</label>
+								<select class="form-control"  id="searchStatus" ng-change = "getProjects()" ng-model="project_status" ng-options="x for x in statuses">
+					      </select>
 					</div>
 				</form>
 			</div>
-			<div class="col-xs-4">
-				<form>
-					<div class="form-group">
-						  <label for="searchStatus">End Date :</label>
-					      <input type="date" class="form-control" id="searchStatus" ng-model="searchAll.client_status">
-					</div>
-				</form>
-			</div> -->
 		</div>
 		<div class="row">
 			<div class="col-sm-6">
@@ -112,7 +104,7 @@
 		</tbody>
 	</table>
 	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
-	
+
 
 	<div>
 		<a class="btn btn-success" ng-href="#/">DOES NOTHING :P</a>

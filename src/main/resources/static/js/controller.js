@@ -474,23 +474,30 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	}
 });
 billingApp.controller("usage_list_Controller", function($scope,$http){
-	$scope.message="Tracking usage list";
+	$scope.statuses = ["Active","Payment Pending","Completed", "all"];
+	$scope.project_status = $scope.statuses[0];
 	$scope.savedTrackingUsage=$http.get('/project')
 	.then(function success(response) {
 		$scope.projectList = response.data;
-		$scope.config = response.config;
-		$scope.headers = response.headers;
-		$scope.status = response.status;
-		$scope.statusText = response.statusText;
 	},function failure(response){
 		$scope.projectList = response.statusText;
-		$scope.status = response.data;
 		$log.info(response);
 	});
 	$scope.sort = function(keyname){
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
 		$scope.reverse = !$scope.reverse; //if true make it false and vice versa
 	}
+	$scope.getProjects = function(){
+			$http.get('/project/status/'+ $scope.project_status)
+			.then(function success(response) {
+				$scope.projectList = response.data;
+			},function failure(response){
+				$scope.projectList = response.statusText;
+				$scope.status = response.data;
+				$log.info(response);
+			});
+	}
+
 });
 billingApp.controller("track_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.selectedChamber = undefined;
