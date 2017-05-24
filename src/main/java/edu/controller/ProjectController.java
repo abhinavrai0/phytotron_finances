@@ -87,12 +87,12 @@ public class ProjectController {
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public Project createProject(@RequestBody Project project) {
-		System.out.println(project.getClient().getId()+"--====Post Request=====-- start date"+project.getStartDate() + " end date :"+ project.getEndDate());
-		System.out.println(project.getClient().getId()+"--====Post Request=====-- acc"+project.getAcc_number() + " name :"+ project.getProject_Title());
+	public Project createProject(@RequestBody Project project) throws Exception {
+//		System.out.println(project.getClient().getId()+"--====Post Request=====-- start date"+project.getStartDate() + " end date :"+ project.getEndDate());
+//		System.out.println(project.getClient().getId()+"--====Post Request=====-- acc"+project.getAcc_number() + " name :"+ project.getProject_Title());
 		logger.info("Creating project : {}", project);
 		try {
-			System.out.println("getEndOfDay : "+getEndOfDay(project.getStartDate()));
+//			System.out.println("getEndOfDay : "+getEndOfDay(project.getStartDate()));
 			project.setProjectStatus("Active");
 			project.setLastBillDate(project.getStartDate());
 			project.setCurrentBill(0d);
@@ -102,6 +102,7 @@ public class ProjectController {
 			System.out.println("error :"+e);
 			logger.error(e.getMessage());
 			e.printStackTrace();
+			throw new Exception();
 		}
 		return project;
 	} 
@@ -123,9 +124,10 @@ public class ProjectController {
 		System.out.println("updateProject : : "+updateProject);
 		System.out.println(id+"===title===="+updateProject.getProject_Title()+"prj id : "+updateProject.getProject_id()+"Carts : "+updateProject.getCarts());
 		Project currentProject=getProject(id);
-		if(currentProject.getStartDate().equals(currentProject.getLastBillDate())){
+		if((currentProject.getStartDate() == null && currentProject.getLastBillDate() ==null) || currentProject.getStartDate().equals(currentProject.getLastBillDate())){
 			updateProject.setLastBillDate(updateProject.getStartDate());
 		}
+		
 		updateProject.setId(id);
 		if(!updateProject.getProjectStatus().equals("Completed")){
 			projectCrudRepo.save(updateProject);
