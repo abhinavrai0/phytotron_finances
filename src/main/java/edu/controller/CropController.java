@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.exception.CustomException;
 import edu.model.Crop;
 import edu.service.CropCRUD;
 
@@ -54,19 +55,33 @@ public class CropController {
 	@RequestMapping(method=RequestMethod.POST)
 	public Crop createCrop(@RequestBody Crop crop) {
 		logger.info("Creating Crop : {}", crop);
+		if(crop.getCropCommonName()== null || crop.getCropCommonName().isEmpty() 
+				|| crop.getCropScientificName()==null || crop.getCropScientificName().isEmpty()){
+			throw new IllegalArgumentException("Missing a mandatory field");
+		}
 		try {
 			cropCrudRepo.save(crop);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
+			throw new CustomException();
 		}
 		return crop;
 	}
 	
 	// Update a crops id or name
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	public Crop updateRate(@PathVariable("id") Long id,@RequestBody Crop updateCrop) {
-		updateCrop.setId(id);
-		cropCrudRepo.save(updateCrop);
-		return updateCrop;
+	public Crop updateCrop(@PathVariable("id") Long id,@RequestBody Crop crop) {
+		crop.setId(id);
+		if(crop.getCropCommonName()== null || crop.getCropCommonName().isEmpty() 
+				|| crop.getCropScientificName()==null || crop.getCropScientificName().isEmpty()){
+			throw new IllegalArgumentException("Missing a mandatory field");
+		}
+		try {
+			cropCrudRepo.save(crop);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new CustomException();
+		}
+		return crop;
 	}
 }

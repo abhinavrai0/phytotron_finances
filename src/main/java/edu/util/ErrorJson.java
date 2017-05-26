@@ -1,4 +1,4 @@
-package edu.util;
+/*package edu.util;
 
 import java.util.Map;
 
@@ -18,4 +18,4 @@ public class ErrorJson {
         this.trace = (String) errorAttributes.get("trace");
     }
 
-}
+}*/
