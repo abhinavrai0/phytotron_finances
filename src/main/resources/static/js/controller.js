@@ -511,8 +511,10 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	// To make a part of the track project page uneditable when the user submits a end project request.
 	$scope.projectEnded = false;
 	$scope.projectFinished = false;
-
 	$scope.paymentPending = true;
+	$scope.addChamberCheck = false;
+
+
 	function check(callback){
 		$http.get('/project/'+$scope.id)
 			.then(function success(response) {
@@ -544,7 +546,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	 * This is to provide a custom date picker
 	 */
 	$(document).ready(function(){
-		var date_input=$('input[name="date"]'); //our date input has the name "date"
+		var date_input=$('input[id="date"]'); //our date input has the name "date"
 		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 		var options={
 				format: 'D M dd yyyy',
@@ -609,6 +611,8 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 				$scope.usage_form.chambers.push($scope.existingChambers[key]);
 
 				delete $scope.existingChambers[key];
+
+				$scope.addChamberCheck = true;
 			}
 		}
 	};
@@ -623,8 +627,12 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		$scope.existingChambers[$scope.usage_form.chambers[$index].chamberName] = $scope.usage_form.chambers[$index];
 		// Removing the chamber from the final chamber ids to be sent.
 		$scope.usage_form.chambers.splice($index, 1);
+		$scope.addChamberCheck = true;
 	}
-
+	$scope.$watch('cartsCheck', function (newValue, oldValue, scope) {
+		console.log("here");
+    $scope.dirtyCheck = true;
+	}, true);
 	$scope.save=function(){
 		//		var start=new Date($scope.project_form.startDate);
 		//		var end=new Date($scope.project_form.endDate);
@@ -635,7 +643,8 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.message = "Project Updated Successfully";
 			$scope.savedSuccessfully = true; // show success message
 			$scope.showAlertMessage = true;
-			$scope.message = usage_form;
+			$scope.dirtyCheck = false;
+			//$scope.usage_form = usage_form;
 		})
 		.error(function(data, status, headers, config) {
 			$scope.message = "Error Updating Project";
@@ -646,17 +655,13 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 	}
 
 	$scope.generate = function(){
-		console.log("$scope.generateBillDate.date",$scope.generateBillDate);
-		console.log(typeof $scope.generateBillDate);
 		//		var generateDate = $scope.generateBillDate.date; // 2013-07-30 17:11:00
 		var generateDate = new Date($scope.generateBillDate);
-		console.log("generateDate :",generateDate)
 		//		generateDate=new Date($scope.generateDate);;
 		var genrateEndOfDayDate = 	new Date(generateDate.getFullYear()
                 ,generateDate.getMonth()
                 ,generateDate.getDate()
                 ,10,0,0);
-		console.log(genrateEndOfDayDate)
 		//		generateBillDate.date=genrateEndOfDayDate;
 		$http.post("/project/"+$scope.id+"/generatebill/",genrateEndOfDayDate)
 		.success(function(lastBill, status, headers, config) {

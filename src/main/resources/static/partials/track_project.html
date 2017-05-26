@@ -47,7 +47,7 @@
 					<label for="project_id" class="col-sm-2 control-label">Project
 						Id </label>
 					<div class="col-sm-8">
-						<input type="name" class="form-control" id="project_id"
+						<input type="name" name = "projectIdCheck" class="form-control" id="project_id"
 							ng-model="usage_form.project_id"
 							placeholder="Enter the Project Id" required>
 					</div>
@@ -56,7 +56,7 @@
 					<label for="project_Title" class="col-sm-2 control-label">Project
 						Title </label>
 					<div class="col-sm-8">
-						<input type="name" class="form-control" id="project_Title"
+						<input type="name" name = "projectTitleCheck" class="form-control" id="project_Title"
 							ng-model="usage_form.project_Title"
 							placeholder="Enter the Project Title">
 					</div>
@@ -66,7 +66,7 @@
 					<label for="rateType" class="col-sm-2 control-label">Rate
 						Type: </label>
 					<div class="col-sm-2">
-						<select class="form-control" ng-model="currentRateValue"
+						<select name = "rateTypeCheck" class="form-control" ng-model="currentRateValue"
 							ng-options="key as key for (key, value) in rates"
 							ng-change="changeRateValue()" required>
 						</select>
@@ -82,7 +82,7 @@
 					<label for="acc_number" class="col-sm-2 control-label">Account
 						Number </label>
 					<div class="col-sm-8">
-						<input type="name" class="form-control" id="acc_number"
+						<input type="name" name = "accNumCheck" class="form-control" id="acc_number"
 							ng-model="usage_form.acc_number"
 							placeholder="Enter the account number">
 					</div>
@@ -99,7 +99,7 @@
 						<!-- <label for="numberCarts" class="control-label">Number of carts: </label>
       <span for="numberCarts" class = "fields">{{project_form.chambers.chamberCarts}}</span>
       <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-plus">Remove Chamber</i></button> -->
-						<button type="button" ng-click="addChamberRow()"
+						<button type="button"  ng-click="addChamberRow()"
 							class="btn btn-default addButton">Add Chamber</button>
 					</div>
 				</div>
@@ -126,7 +126,7 @@
 				<div class="form-group">
 					<label for="carts" class="col-sm-2 control-label">Carts</label>
 					<div class="col-sm-2">
-						<input type="number" class="form-control" id="carts"
+						<input type="number" name = "cartsCheck" class="form-control" id="carts"
 							ng-model="usage_form.carts"
 							placeholder="Enter the number of carts" required>
 					</div>
@@ -157,7 +157,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"> </i>
 							</div>
-							<input class="form-control" id="date" name="date"
+							<input class="form-control" id="date" name="startDateCheck"
 								ng-model="startDate" placeholder="MM-dd-yyyy" type="text" />
 						</div>
 					</div>
@@ -170,7 +170,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"> </i>
 							</div>
-							<input class="form-control" id="date" name="date"
+							<input class="form-control" id="date" name="endDateCheck"
 								ng-model="endDate" placeholder="MM-dd-yyyy" type="text" />
 						</div>
 					</div>
@@ -182,19 +182,6 @@
 						| date:'EEE MMM dd yyyy'}}</span>
 				</div>
 
-				<!-- <div class="form-group">
-					<label for="generateBill" class="col-sm-2 control-label">Calculate
-						Invoice </label>
-					<div class="col-sm-2">
-						<input type="date" class="form-control"
-							ng-model="generateBillDate.date">
-					</div>
-					<button ng-click="generate()" class="btn btn-default">Calculate</button>
-				</div> -->
-
-
-
-
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="date">Calculate
 						Invoice</label>
@@ -203,14 +190,22 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"> </i>
 							</div>
-							<input class="form-control" id="date" name="date"
+							<input class="form-control" id="date" name="generateDateCheck"
 								ng-model="generateBillDate" placeholder="MM-dd-yyyy"
 								type="text" />
 						</div>
-					</div>
-					<button ng-click="generate()" class="btn btn-default" ng-disabled = "usage_form.carts==0">Calculate</button>
-				</div>
 
+					</div>
+					<button ng-click="generate()" class="btn btn-default" ng-disabled = "dirtyCheck || usage_form.carts==0">Calculate</button>
+				</div>
+				<!-- ProjectInfoForm.projectIdCheck.$dirty ||
+				ProjectInfoForm.projectTitleCheck.$dirty ||
+				ProjectInfoForm.rateTypeCheck.$dirty ||
+				ProjectInfoForm.accNumCheck.$dirty ||
+				addChamberCheck ||
+				ProjectInfoForm.startDateCheck.$dirty ||
+				ProjectInfoForm.endDateCheck.$dirty ||
+				ProjectInfoForm.cartsCheck.$dirty || -->
 
 				<!-- 				<div class="form-group">
 					<label for="currentBill" class="col-sm-2 control-label">Current
@@ -265,11 +260,14 @@
 						<button ng-click="save()" ng-hide = "projectEnded" class="btn btn-default">Save</button>
 						<a ng-click="currentProject()" class="btn btn-default"
 							ng-href="#/payment_list/{{currentProjectID}}">Payment History</a>
-						<button class="btn btn-default btn-danger" ng-hide = "projectEnded" ng-confirm-click="Are you sure you want to end this project with date {{usage_form.project_Title}} ?" confirmed-click="endProject()">End Project</button>
+						<button class="btn btn-default btn-danger" ng-hide = "projectEnded"
+						ng-confirm-click="Are you sure you want to end this project with date {{usage_form.project_Title}} ?" confirmed-click="endProject()">End Project</button>
 						<button class="btn btn-default" ng-show = "projectEnded && !projectFinished"  ng-disabled = "paymentPending" ng-click = "finishProject()">Finish Project</button>
 						<a class="btn btn-default" ng-href="#/usage_list">Go Back</a>
-
 					</div>
+				</div>
+				<div class="col-sm-offset-2 col-sm-8 alert alert-info">
+					<span>Please save your changes or refresh the page to discard them.</span>
 				</div>
 
 			</form>
