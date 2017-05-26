@@ -703,6 +703,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.usage_form = response.data;
 			$scope.projectEnded = true;
 		},function failure(response){
+			console.log("error",response);
 			$scope.selectedInfo = response.statusText;
 			$scope.status = response.data;
 			$log.info(response);

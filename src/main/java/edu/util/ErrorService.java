@@ -1,4 +1,4 @@
-package edu.util;
+/*package edu.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -30,4 +30,4 @@ public class ErrorService {
 		}
 		return message;
 	}
-}
+}*/

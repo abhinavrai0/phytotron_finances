@@ -1,4 +1,4 @@
-package edu.util;
+/*package edu.util;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +33,4 @@ public class ErrorController {
 	   System.out.println("reached to error page getHttpStatusCode method");
 	   return (int) request.getAttribute("javax.servlet.error.status_code");
    }
-}
+}*/

@@ -1,4 +1,6 @@
 package edu.controller;
+import edu.exception.CustomException;
+import edu.exception.DataNotFoundException;
 import edu.model.*;
 import edu.service.*;
 
@@ -9,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +24,6 @@ public class ClientController {
 
 	static final Logger logger = LogManager.getLogger(ClientController.class.getName());
 
-//	@RequestMapping(value="/client/",method=RequestMethod.GET)
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Client> getAllClients() {
 		List<Client> clientList =new ArrayList<Client>();
@@ -35,55 +37,54 @@ public class ClientController {
 			client = clientCrudRepo.findOne(id);
         } catch (Exception e) {
             logger.error(e.getMessage());
-//            return e.getMessage();
         }
+		if (client == null) throw new DataNotFoundException();
 		return client;
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
 	public Client createClient(@RequestBody Client client) {
 		logger.info("Creating Client : {}", client);
-		/* if (clientCrudRepo.exists(client.getId()) {
-            logger.error("Unable to create. A User with name {} already exist", user.getName());
-            return new ResponseEntity(new CustomErrorType("Unable to create. A User with name " + 
-            user.getName() + " already exist."),HttpStatus.CONFLICT);
-        }*/
+		if(client.getClient_email() == null || client.getClient_email().isEmpty() 
+				|| client.getClient_first_name()==null || client.getClient_first_name().isEmpty() 
+				|| client.getClient_last_name()==null || client.getClient_last_name().isEmpty()){
+			throw new IllegalArgumentException("Missing a mandatory field");
+		}
 		try {
 			clientCrudRepo.save(client);
-		} catch (Exception e) {
+		}
+		catch(DataIntegrityViolationException e){
+			throw new IllegalArgumentException("Email id already exist");
+		}
+		catch (Exception e) {
 			logger.error(e.getMessage());
+			throw new CustomException();
 		}
 		return client;
-//		return "creation successful: " + String.valueOf(client.getId());
 	} 
-//	@RequestMapping(value="/client/{id}",method=RequestMethod.PUT)
+	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	public Client updateClient(@PathVariable("id") Long id,@RequestBody Client updateClient) {
-//		Client client= new Client();
-//		client=clientCrudRepo.findOne(id);
 		updateClient.setId(id);
-//		updateRate.setId(id);
-//		rateCrudRepo.save(updateRate);
-		/*if(client.getClientAddress()!=updateClient.getClientAddress()){
-			client.setClientAddress(updateClient.getClientAddress());
+		if(updateClient.getClient_email() == null || updateClient.getClient_email().isEmpty() 
+				|| updateClient.getClient_first_name()==null || updateClient.getClient_first_name().isEmpty() 
+				|| updateClient.getClient_last_name()==null || updateClient.getClient_last_name().isEmpty()){
+			throw new IllegalArgumentException("Missing a mandatory field");
 		}
-		if(client.getDept_name()!=updateClient.getDept_name()){
-			client.setDept_name(updateClient.getDept_name());
-		}
-		if(client.getClient_email()!=updateClient.getClient_email()){
-			client.setClient_email(updateClient.getClient_email());
-		}
-		if(client.getClient_first_name()!=updateClient.getClient_first_name()){
-			client.setClient_first_name(updateClient.getClient_first_name());
-		}
-		if(client.getClient_last_name()!=updateClient.getClient_last_name()){
-			client.setClient_last_name(updateClient.getClient_last_name());
-		}*/
+		try{
         clientCrudRepo.save(updateClient);
+        }
+		catch(DataIntegrityViolationException e){
+			throw new IllegalArgumentException("Email id already exist");
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new IllegalArgumentException("Some error occured");
+		}
 		return updateClient;
 	}
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public String deleteClient(@PathVariable("id") Long id) {
-		return "Greetings from Spring Boot!";
+		return "Delete functionality not implemented!";
 	}
 }

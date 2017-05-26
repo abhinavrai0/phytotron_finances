@@ -14,6 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.model.Chamber;
 import edu.service.ChamberCRUD;
+
+/**
+ * 
+ * @author ankit
+ * This controller will control CRUD operation for Chambers
+ * Delete functionality is not provided and can be added here in future if required
+ */
+
 @RestController
 public class ChamberController {
 	@Autowired

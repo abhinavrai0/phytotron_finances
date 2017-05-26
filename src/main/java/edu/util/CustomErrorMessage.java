@@ -1,4 +1,4 @@
-package edu.util;
+/*package edu.util;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @RestController
 public class CustomErrorMessage {
 	
-	/*private static final String PATH = "/error";
+	private static final String PATH = "/error";
 
     @Value("${debug}")
     private boolean debug;
@@ -37,11 +37,11 @@ public class CustomErrorMessage {
         RequestAttributes requestAttributes = new ServletRequestAttributes(request);
         System.out.println("reached in error controller getErrorAttributes method");
         return errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
-    }*/
+    }
    
     
 
-/*	private String errorMessage;
+	private String errorMessage;
 
 	public CustomError(String errorMessage){
 		this.errorMessage = errorMessage;
@@ -49,6 +49,7 @@ public class CustomErrorMessage {
 
 	public String getErrorMessage() {
 		return errorMessage;
-	}*/
+	}
 
 }
+*/
