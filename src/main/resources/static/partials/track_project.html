@@ -196,7 +196,7 @@
 						</div>
 
 					</div>
-					<button ng-click="generate()" class="btn btn-default" ng-disabled = "dirtyCheck || usage_form.carts==0">Calculate</button>
+					<button ng-click="generate()" class="btn btn-default" ng-disabled = "usage_form.carts==0">Calculate</button>
 				</div>
 				<!-- ProjectInfoForm.projectIdCheck.$dirty ||
 				ProjectInfoForm.projectTitleCheck.$dirty ||
@@ -266,9 +266,6 @@
 						<a class="btn btn-default" ng-href="#/usage_list">Go Back</a>
 					</div>
 				</div>
-				<div class="col-sm-offset-2 col-sm-8 alert alert-info">
-					<span>Please save your changes or refresh the page to discard them.</span>
-				</div>
 
 			</form>
 		</div>
@@ -280,5 +277,7 @@
 	<div ng-class="savedSuccessfully ? 'alert-success' : 'alert-danger'"
 		class="alert alert-dismissable fade in">
 		<a class="close" data-dismiss="alert">&times;</a> <span>{{message}}</span>
+	</br>
+	<span>{{exceptionMessage}}</span>
 	</div>
 </div>

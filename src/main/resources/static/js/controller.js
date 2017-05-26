@@ -35,6 +35,7 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 		$scope.client_form = response.data;
 	},function failure(response){
 		$log.info(response);
+		alert(response.message);
 	});
 	/**
 	 * ['Puts' the edited client form.]
@@ -48,8 +49,9 @@ billingApp.controller("edit_client_info_Controller", function($rootScope,$scope,
 			$scope.savedSuccessfully = true; // show success message
 			$scope.showAlertMessage = true;
 		})
-		.error(function(data, status, headers, config) {
+		.error(function(response) {
 			$scope.message = "Couldn't edit the client. Please verify edited information.";
+			$scope.exceptionMessage = response.message;
 			$scope.savedSuccessfully = false; // show failure message
 			$scope.showAlertMessage = true;
 		});
@@ -94,7 +96,8 @@ billingApp.controller("add_client_info_Controller", function($scope,$http){
 				$scope.client_form=initializeClient();
 			})
 			.error(function(response) {
-				$scope.message = "Client adding unsuccessful. Please verify information.";
+				$scope.message = "New Client failed to add. Please verify information.";
+				$scope.exceptionMessage = response.message;
 				$scope.savedSuccessfully = false; // show success message
 				$scope.showAlertMessage = true;
 				//console.log( "failure message: " + JSON.stringify(response));
@@ -366,10 +369,6 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	 */
 	$scope.submit=function(){
 		if($scope.project_form){
-			console.log("before s: ",$scope.project_form.startDate);
-			console.log("before e: ",$scope.project_form.endDate);
-			console.log("before e: ",$scope.startDate);
-			console.log("before e: ",$scope.endDate);
     //			var start=new Date($scope.project_form.startDate);
     //			var end=new Date($scope.project_form.endDate);
 			$scope.project_form.startDate=new Date($scope.startDate);;
@@ -386,6 +385,7 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 			})
 			.error(function(response) {
 				$scope.message = "Couldn't start new project";
+				$scope.exceptionMessage = response.message;
 				$scope.savedSuccessfully = false; // show failure message
 				$scope.showAlertMessage = true;
 			});
@@ -482,6 +482,7 @@ billingApp.controller("usage_list_Controller", function($scope,$http){
 	},function failure(response){
 		$scope.projectList = response.statusText;
 		$log.info(response);
+		alert(response.message);
 	});
 	$scope.sort = function(keyname){
 		$scope.sortKey = keyname;   //set the sortKey to the param passed
@@ -495,6 +496,7 @@ billingApp.controller("usage_list_Controller", function($scope,$http){
 				$scope.projectList = response.statusText;
 				$scope.status = response.data;
 				$log.info(response);
+				alert(response.message);
 			});
 	}
 
@@ -539,6 +541,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 				$scope.selectedInfo = response.statusText;
 				$scope.status = response.data;
 				$log.info(response);
+				alert(response.message);
 		});
 	}
 
@@ -611,8 +614,6 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 				$scope.usage_form.chambers.push($scope.existingChambers[key]);
 
 				delete $scope.existingChambers[key];
-
-				$scope.addChamberCheck = true;
 			}
 		}
 	};
@@ -627,12 +628,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		$scope.existingChambers[$scope.usage_form.chambers[$index].chamberName] = $scope.usage_form.chambers[$index];
 		// Removing the chamber from the final chamber ids to be sent.
 		$scope.usage_form.chambers.splice($index, 1);
-		$scope.addChamberCheck = true;
 	}
-	$scope.$watch('cartsCheck', function (newValue, oldValue, scope) {
-		console.log("here");
-    $scope.dirtyCheck = true;
-	}, true);
 	$scope.save=function(){
 		//		var start=new Date($scope.project_form.startDate);
 		//		var end=new Date($scope.project_form.endDate);
@@ -643,11 +639,11 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.message = "Project Updated Successfully";
 			$scope.savedSuccessfully = true; // show success message
 			$scope.showAlertMessage = true;
-			$scope.dirtyCheck = false;
 			//$scope.usage_form = usage_form;
 		})
-		.error(function(data, status, headers, config) {
+		.error(function(response) {
 			$scope.message = "Error Updating Project";
+			$scope.exceptionMessage = response.message;
 			$scope.savedSuccessfully = false; // show failure message
 			$scope.showAlertMessage = true;
 			//alert( "failure message: " + JSON.stringify({data: data}));
@@ -664,12 +660,13 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
                 ,10,0,0);
 		//		generateBillDate.date=genrateEndOfDayDate;
 		$http.post("/project/"+$scope.id+"/generatebill/",genrateEndOfDayDate)
-		.success(function(lastBill, status, headers, config) {
+		.success(function(response) {
 			$scope.usage_form.lastBillDate = genrateEndOfDayDate.toDateString();
 			$scope.usage_form.currentBill = lastBill;
 		})
-		.error(function(data, status, headers, config) {
+		.error(function(response) {
 			console.log( "failure message: " + JSON.stringify({data: data}));
+			alert(response.message)
 		});
 	}
 	/**
@@ -688,10 +685,7 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		$http.post("/payment/"+$scope.id+"/paybill", pay)
 		.success(function(pay_bill, status, headers, config) {
 			$scope.usage_form.currentBill = pay_bill.remainingCurrentBill;
-			console.log("outside: "+$scope.usage_form.currentBill);
-			console.log($scope.usage_form.currentBill === 0);
 			if($scope.projectEnded === true && $scope.usage_form.currentBill === 0){
-				console.log($scope.usage_form.currentBill);
 				$scope.paymentPending = false;
 			}
 			$scope.usage_form.billPaidTotal = pay_bill.billPaidTotal;
@@ -707,9 +701,12 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 		.then(function success(response) {
 			$scope.usage_form = response.data;
 			$scope.projectEnded = true;
+			$scope.message = "Project Ended Successfully";
+			$scope.savedSuccessfully = true; // show success message
+			$scope.showAlertMessage = true;
 		},function failure(response){
-			console.log("error",response);
 			$scope.selectedInfo = response.statusText;
+			$scope.exceptionMessage = response.message;
 			$scope.status = response.data;
 			$log.info(response);
 		});
@@ -721,8 +718,12 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$scope.usage_form = response.data;
 			$scope.projectEnded = true;
 			$scope.projectFinished = true;
+			$scope.message = "Project Finished Successfully";
+			$scope.savedSuccessfully = true; // show success message
+			$scope.showAlertMessage = true;
 		},function failure(response){
 			$scope.selectedInfo = response.statusText;
+			$scope.exceptionMessage = response.message;
 			$scope.status = response.data;
 			$log.info(response);
 		});
