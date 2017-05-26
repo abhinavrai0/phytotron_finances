@@ -660,12 +660,13 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
                 ,10,0,0);
 		//		generateBillDate.date=genrateEndOfDayDate;
 		$http.post("/project/"+$scope.id+"/generatebill/",genrateEndOfDayDate)
-		.success(function(response) {
+		.success(function(lastBill, status, headers, config) {
 			$scope.usage_form.lastBillDate = genrateEndOfDayDate.toDateString();
 			$scope.usage_form.currentBill = lastBill;
+			$scope.generateSuccess = true;
 		})
 		.error(function(response) {
-			console.log( "failure message: " + JSON.stringify({data: data}));
+			//console.log( "failure message: " + JSON.stringify({data: data}));
 			alert(response.message)
 		});
 	}
