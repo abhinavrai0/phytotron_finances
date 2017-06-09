@@ -30,6 +30,7 @@ public class Application{
 	  filter.setAllow("152\\.1\\.177\\.72|152\\.1\\.177\\.43|152\\.1\\.177\\.106");
 	  filterRegistrationBean.setFilter(filter);
 	  filterRegistrationBean.addUrlPatterns("/*");
+	  filterRegistrationBean.setEnabled(false);
 	  return filterRegistrationBean;
 	 }
 }

@@ -34,7 +34,7 @@
 				</th>
 			</thead>
 			<tbody>
-				<tr	dir-paginate="department in departmentList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
+				<tr	dir-paginate="department in departmentList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10" ng-init="sortKey='departmentName'">
 					<td><a href="#/edit_department_info/{{department.id}}">{{department.id}}</a></td>
 					<td><a href="#/edit_department_info/{{department.id}}">{{department.departmentId}}</a></td>
 					<td><a href="#/edit_department_info/{{department.id}}">{{department.departmentName}}</a></td>

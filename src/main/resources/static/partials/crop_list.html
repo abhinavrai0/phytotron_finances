@@ -33,7 +33,7 @@
 			</th>
 		</thead>
 		<tbody>
-			<tr dir-paginate="crop in cropList |filter:searchAll| orderBy:sortKey:reverse | itemsPerPage: 10">
+			<tr dir-paginate="crop in cropList |filter:searchAll| orderBy:sortKey:reverse | itemsPerPage: 10" ng-init="sortKey='cropCommonName'">
 				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.id}}</a></td>
 				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropCommonName}}</a></td>
 				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropScientificName}}</a></td>
