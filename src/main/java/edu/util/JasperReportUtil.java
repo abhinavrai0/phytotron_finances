@@ -14,6 +14,7 @@ import java.util.List;
  * Created by Pinakin Abhyankar on 6/7/2017.
  */
 public class JasperReportUtil {
+    //This method is used to generate PDF report out of Jasper template.
     public int generateReport(List<Client> clientList, String templateFilePath, String reportPath){
         JRBeanCollectionDataSource beanCollectionDataSource = null;
         try{
