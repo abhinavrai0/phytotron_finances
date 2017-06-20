@@ -848,3 +848,25 @@ billingApp.controller("edit_rate_info_Controller", function($rootScope,$scope,$h
 		});
 	}
 });
+// Added by Abhinav for invoice functionality
+// This controller lands the invoice page to select the date for particular invoices
+billingApp.controller("invoice_quarterly_controller", function($scope,$http){
+	$scope.invoiceMessage="Message from Generate Invoice Controller";
+	$scope.financialQuarter=[{'name':'First Quarter','startDate':'01-01-'+new Date().getFullYear(),'endDate':'03-31-'+new Date().getFullYear()},
+		 {'name':'Second Quarter','startDate':'04-01-'+ new Date().getFullYear(),'endDate':'06-30-'+new Date().getFullYear()},
+		 {'name':'Third Quarter','startDate':'07-01-'+new Date().getFullYear(),'endDate':'09-30-'+new Date().getFullYear()},
+		 {'name':'Fourth Quarter','startDate':'10-01-'+new Date().getFullYear(),'endDate':'12-31-'+new Date().getFullYear()}];
+	$scope.generateInvoiceQuarterly = function(){
+        $scope.savedClientInfo=$http.get('/get_projects_quaterly/'+selectedQuarter.startDate+'/'+selectedQuarter.endDate)
+            .then(function success(response){
+                $scope.ProjectList = response.data;
+                console.log(response);
+            },function failure(response){
+                $scope.ProjectList = response.statusText;
+                $scope.status = response.data;
+                $log.info(response);
+            	console.log(response);
+            });
+
+	}
+});
