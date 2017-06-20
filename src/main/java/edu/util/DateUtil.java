@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-
+// This utility class is added to support date coversion in various formats.
 public class DateUtil {
 	
 	private static Calendar today = new GregorianCalendar();
