@@ -17,6 +17,7 @@ public class JasperReportUtil {
     public int generateReport(List<Client> clientList, String templateFilePath, String reportPath){
         JRBeanCollectionDataSource beanCollectionDataSource = null;
         try{
+            
             beanCollectionDataSource = new JRBeanCollectionDataSource(clientList,false);
             JasperPrint jPrint = JasperFillManager.fillReport(templateFilePath, new HashMap<String, Object>(), beanCollectionDataSource);
             JasperExportManager.exportReportToPdfFile(jPrint,reportPath);
