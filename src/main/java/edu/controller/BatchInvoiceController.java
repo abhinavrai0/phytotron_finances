@@ -27,7 +27,7 @@ public class BatchInvoiceController {
     private ProjectCRUD projectCrudRepo;
     static final Logger logger = LogManager.getLogger(BatchInvoiceController.class.getName());
 
-    @RequestMapping(value = "/getActiveClients/{quarterStartDate}/{quarterEndDate}/", method = RequestMethod.GET)
+    @RequestMapping(value = "/getActiveClients/{quarterStartDate}/{quarterEndDate}", method = RequestMethod.GET)
     public List<Project> getActiveClients(@PathVariable("quarterStartDate") String quarterStartDate, @PathVariable("quarterEndDate") String quarterEndDate){
         List<Project> projectList = new ArrayList<>();
         System.out.println("Inside getActiveClients Sections....");
