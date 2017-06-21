@@ -851,7 +851,7 @@ billingApp.controller("edit_rate_info_Controller", function($rootScope,$scope,$h
 // Added by Abhinav for invoice functionality
 // This controller lands the invoice page to select the date for particular invoices
 billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log){
-	$scope.financialQuarters=[{'name':'First Quarter','startDate':'01-01-'+new Date().getFullYear(),'endDate':'03-31-'+new Date().getFullYear()},
+	$scope.financialQuarters=[{'name':'First Quarter','startDate':+new Date().getFullYear()+'-01-01','endDate':+new Date().getFullYear()+'-03-31'},
 		 {'name':'Second Quarter','startDate':new Date().getFullYear()+'-04-01' ,'endDate':new Date().getFullYear()+'-06-30'},
 		 {'name':'Third Quarter','startDate':new Date().getFullYear()+'-07-01','endDate':new Date().getFullYear()+'-09-30'},
 		 {'name':'Fourth Quarter','startDate':new Date().getFullYear()+'-10-01','endDate':new Date().getFullYear()+'-12-31'}];
@@ -868,13 +868,13 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
 		//$scope.savedProjecInfo=$http.get('/batchInvoice/getActiveClients/2015-08-08/2018-08-08/')
             .then(function success(response){
             	// temp code to test
-				$scope.projectList = tempProjectData;
-                //$scope.projectList = response.data;
+				//$scope.projectList = tempProjectData;
+                $scope.projectList = response.data;
                 console.log(response);
             },function failure(response){
                 // temp code to test
-                $scope.projectList = tempProjectData;
-                //$scope.projectList = response.statusText;
+                //$scope.projectList = tempProjectData;
+                $scope.projectList = response.statusText;
                 $scope.status = response.data;
                 $log.info(response);
             	console.log(response);
@@ -885,7 +885,7 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
 		if(action==='SELECT'){
             if($scope.selectedProjectsForInvoicing.indexOf(projectID)===-1) {
                 $scope.selectedProjectsForInvoicing.push(projectID);
-                console.log(projectID+" Pushed");
+                //console.log(projectID+" Pushed");
             }
 
 		}
@@ -893,7 +893,7 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
             if($scope.selectedProjectsForInvoicing.indexOf(projectID)!==-1){
                 var index = $scope.selectedProjectsForInvoicing.indexOf(projectID);
                 $scope.selectedProjectsForInvoicing.splice(index,1);
-                console.log(projectID+" Spliced");
+                //console.log(projectID+" Spliced");
             }
 		}
 	}
