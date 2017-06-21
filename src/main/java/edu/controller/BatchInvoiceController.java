@@ -31,7 +31,7 @@ public class BatchInvoiceController {
     public List<Project> getActiveClients(@PathVariable("quarterStartDate") String quarterStartDate, @PathVariable("quarterEndDate") String quarterEndDate){
         List<Project> projectList = new ArrayList<>();
         System.out.println("Inside getActiveClients Sections....");
-        String datePattern = "yyyy-mm-dd";
+        String datePattern = "yyyy-MM-dd";
         Date qStart = DateUtil.convertStringDateToUtilDate(quarterStartDate,datePattern);
         Date qEnd = DateUtil.convertStringDateToUtilDate(quarterEndDate,datePattern);
         projectList = projectCrudRepo.findActiveClientsForQuarter("Active", qStart, qEnd);
