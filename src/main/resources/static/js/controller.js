@@ -850,23 +850,57 @@ billingApp.controller("edit_rate_info_Controller", function($rootScope,$scope,$h
 });
 // Added by Abhinav for invoice functionality
 // This controller lands the invoice page to select the date for particular invoices
-billingApp.controller("invoice_quarterly_controller", function($scope,$http){
-	$scope.invoiceMessage="Message from Generate Invoice Controller";
-	$scope.financialQuarter=[{'name':'First Quarter','startDate':'01-01-'+new Date().getFullYear(),'endDate':'03-31-'+new Date().getFullYear()},
-		 {'name':'Second Quarter','startDate':'04-01-'+ new Date().getFullYear(),'endDate':'06-30-'+new Date().getFullYear()},
-		 {'name':'Third Quarter','startDate':'07-01-'+new Date().getFullYear(),'endDate':'09-30-'+new Date().getFullYear()},
-		 {'name':'Fourth Quarter','startDate':'10-01-'+new Date().getFullYear(),'endDate':'12-31-'+new Date().getFullYear()}];
-	$scope.generateInvoiceQuarterly = function(){
-        $scope.savedClientInfo=$http.get('/get_projects_quaterly/'+selectedQuarter.startDate+'/'+selectedQuarter.endDate)
+billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log){
+	$scope.financialQuarters=[{'name':'First Quarter','startDate':'01-01-'+new Date().getFullYear(),'endDate':'03-31-'+new Date().getFullYear()},
+		 {'name':'Second Quarter','startDate':new Date().getFullYear()+'-04-01' ,'endDate':new Date().getFullYear()+'-06-30'},
+		 {'name':'Third Quarter','startDate':new Date().getFullYear()+'-07-01','endDate':new Date().getFullYear()+'-09-30'},
+		 {'name':'Fourth Quarter','startDate':new Date().getFullYear()+'-10-01','endDate':new Date().getFullYear()+'-12-31'}];
+
+    $scope.selectedProject="";
+    $scope.selectedProjectsForInvoicing=[];
+
+    // TEMP DATA TO TEST
+    var tempProjectData = [{"id":1,"client":{"id":3,"client_first_name":"Danesha","client_last_name":"Carley","client_email":"danesha_carley@ncsu.edu","dept_name":"Horticultural Science","client_address":"","client_phone":"919-513-8189","client_status":"Active"},"rateValue":{"id":2,"rateType":"Academic","rate":0.5},"project_id":"A040073","project_Title":"Consequences of Climate Change for Pollinator Nutrition","acc_number":"111111-11111","carts":12,"startDate":"2017-04-01","endDate":"2017-08-05","lastBillDate":1496678861000,"lastBillPaidDate":"2017-06-05","currentBill":0.0,"billPaidTotal":4062.0,"projectStatus":"Active","chambers":[]},{"id":2,"client":{"id":4,"client_first_name":"Ricardo","client_last_name":"Hernandez","client_email":"ricardo_hernandez@ncsu.edu","dept_name":"Horticultural Science","client_address":"","client_phone":"","client_status":"Active"},"rateValue":{"id":2,"rateType":"Academic","rate":0.5},"project_id":"A070366","project_Title":"Conditioning of Strawberries","acc_number":"111111-11111","carts":24,"startDate":"2017-04-01","endDate":"2018-12-31","lastBillDate":1501559999000,"lastBillPaidDate":"2017-06-05","currentBill":1148.0,"billPaidTotal":1000.0,"projectStatus":"Active","chambers":[]}];
+
+
+	$scope.getActiveClients = function(){
+        $scope.savedProjectInfo=$http.get('/batchInvoice/getActiveClients/'+$scope.selectedQuarter.startDate+'/'+$scope.selectedQuarter.endDate)
+		//$scope.savedProjecInfo=$http.get('/batchInvoice/getActiveClients/2015-08-08/2018-08-08/')
             .then(function success(response){
-                $scope.ProjectList = response.data;
+            	// temp code to test
+				$scope.projectList = tempProjectData;
+                //$scope.projectList = response.data;
                 console.log(response);
             },function failure(response){
-                $scope.ProjectList = response.statusText;
+                // temp code to test
+                $scope.projectList = tempProjectData;
+                //$scope.projectList = response.statusText;
                 $scope.status = response.data;
                 $log.info(response);
             	console.log(response);
             });
+	}
 
+    $scope.selectDeselectProjectForInvoice = function(projectID,action){
+		if(action==='SELECT'){
+            if($scope.selectedProjectsForInvoicing.indexOf(projectID)===-1) {
+                $scope.selectedProjectsForInvoicing.push(projectID);
+                console.log(projectID+" Pushed");
+            }
+
+		}
+		if(action==='DESELECT'){
+            if($scope.selectedProjectsForInvoicing.indexOf(projectID)!==-1){
+                var index = $scope.selectedProjectsForInvoicing.indexOf(projectID);
+                $scope.selectedProjectsForInvoicing.splice(index,1);
+                console.log(projectID+" Spliced");
+            }
+		}
+	}
+
+	$scope.invoiceSelectedProjects = function(){
+        $scope.selectedProjectsForInvoicing.forEach(function(pid){
+    		console.log(" INVOICING: "+pid);
+		});
 	}
 });

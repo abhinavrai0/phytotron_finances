@@ -83,8 +83,8 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource","angularUtil
       templateUrl: "./partials/payment_list.html",
 			controller: "payment_list_Controller"
     })
-    .when("/generate_invoice",{
-        templateUrl: "./partials/generate_invoice.html",
+    .when("/invoice_quarterly",{
+        templateUrl: "./partials/invoice_quarterly.html",
         controller:"invoice_quarterly_controller"
     });
 
