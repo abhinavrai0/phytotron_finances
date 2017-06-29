@@ -160,5 +160,15 @@ public class DateUtil {
 	{
 		return new java.util.Date();
 	}
+
+	public static java.util.Date getEndOfDay(java.util.Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DATE);
+		calendar.set(year, month, day, 23, 59, 59);
+		return calendar.getTime();
+	}
 	
 }

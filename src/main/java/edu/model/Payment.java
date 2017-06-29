@@ -44,6 +44,10 @@ public class Payment {
 	@JoinColumn(name="project_id")
 	private Project project;
 	*/
+
+
+	private Long invoiceId;
+
 	private Long projectId;
 
 	private Double amount;
@@ -94,7 +98,12 @@ public class Payment {
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
-	
 
+	public Long getInvoiceId() {
+		return invoiceId;
+	}
 
+	public void setInvoiceId(Long invoiceId) {
+		this.invoiceId = invoiceId;
+	}
 }

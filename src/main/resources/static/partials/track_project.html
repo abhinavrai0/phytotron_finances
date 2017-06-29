@@ -4,7 +4,7 @@
 			<h3 class="text-center">Client Information</h3>
 		</div>
 	</div>
-	<div id="container" class="col-sm-12">
+	<div client_id="container" class="col-sm-12">
 		<div class="adjacentPanels col-sm-2"></div>
 		<div class="adjacentPanels col-sm-4">
 			<div class="form-group">
@@ -47,17 +47,17 @@
 					<label for="project_id" class="col-sm-2 control-label">Project
 						Id </label>
 					<div class="col-sm-8">
-						<input type="name" name = "projectIdCheck" class="form-control" id="project_id"
+						<input type="name" name = "projectIdCheck" class="form-control" client_id="project_id"
 							ng-model="usage_form.project_id"
 							placeholder="Enter the Project Id" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="project_Title" class="col-sm-2 control-label">Project
+					<label for="project_title" class="col-sm-2 control-label">Project
 						Title </label>
 					<div class="col-sm-8">
-						<input type="name" name = "projectTitleCheck" class="form-control" id="project_Title"
-							ng-model="usage_form.project_Title"
+						<input type="name" name = "projectTitleCheck" class="form-control" client_id="project_title"
+							ng-model="usage_form.project_title"
 							placeholder="Enter the Project Title">
 					</div>
 				</div>
@@ -82,7 +82,7 @@
 					<label for="acc_number" class="col-sm-2 control-label">Account
 						Number </label>
 					<div class="col-sm-8">
-						<input type="name" name = "accNumCheck" class="form-control" id="acc_number"
+						<input type="name" name = "accNumCheck" class="form-control" client_id="acc_number"
 							ng-model="usage_form.acc_number"
 							placeholder="Enter the account number">
 					</div>
@@ -126,26 +126,26 @@
 				<div class="form-group">
 					<label for="carts" class="col-sm-2 control-label">Carts</label>
 					<div class="col-sm-2">
-						<input type="number" name = "cartsCheck" class="form-control" id="carts"
+						<input type="number" name = "cartsCheck" class="form-control" client_id="carts"
 							ng-model="usage_form.carts"
 							placeholder="Enter the number of carts" required>
 					</div>
 				</div>
 
 				<!-- <div class="form-group">
-					<label for="startDate" class="col-sm-2 control-label">Start
+					<label fstart_dateDate" class="col-sm-2 control-label">Start
 						Date </label>
 					<div class="col-sm-2">
-						<input type="date" class="form-control" id="startDate"
-							ng-model="usage_form.startDate" required>
+						<input type="date" class="form-contrclient_id" start_dateDate"
+							ng-model="usage_fstart_dateDate" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="endDate" class="col-sm-2 control-label">End
+					<label fend_DateDate" class="col-sm-2 control-label">End
 						Date</label>
 					<div class="col-sm-2">
-						<input type="date" class="form-control" id="endDate"
-							ng-model="usage_form.endDate" required>
+						<input type="date" class="form-contrclient_id" end_DateDate"
+							ng-model="usage_fend_DateDate" required>
 					</div>
 				</div>-->
 
@@ -157,8 +157,8 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"> </i>
 							</div>
-							<input class="form-control" id="date" name="startDateCheck"
-								ng-model="startDate" placeholder="MM-dd-yyyy" type="text" />
+							<input class="form-control" client_id="date" name="startDateCheck"
+								ng-model="start_date" placeholder="MM-dd-yyyy" type="text" />
 						</div>
 					</div>
 				</div>
@@ -170,8 +170,8 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"> </i>
 							</div>
-							<input class="form-control" id="date" name="endDateCheck"
-								ng-model="endDate" placeholder="MM-dd-yyyy" type="text" />
+							<input class="form-control" client_id="date" name="endDateCheck"
+								ng-model="end_date" placeholder="MM-dd-yyyy" type="text" />
 						</div>
 					</div>
 				</div>
@@ -190,7 +190,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"> </i>
 							</div>
-							<input class="form-control" id="date" name="generateDateCheck"
+							<input class="form-control" client_id="date" name="generateDateCheck"
 								ng-model="generateBillDate" placeholder="MM-dd-yyyy"
 								type="text" />
 
@@ -254,7 +254,7 @@
 
 				<div class="form-group">
 					<label for="accountStatus" class="col-sm-2 control-label">Project
-						Status</label> <span for="Name" class="fields">{{usage_form.projectStatus}}</span>
+						Status</label> <span for="Name" class="fields">{{usage_form.project_status}}</span>
 				</div>
 			</fieldset>
 				<div class="form-group">
@@ -274,7 +274,7 @@
 	</div>
 </div>
 
-<div ng-show="showAlertMessage" id="alert_placeholder"
+<div ng-show="showAlertMessage" client_id="alert_placeholder"
 	class="col-sm-offset-2 col-sm-8">
 	<div ng-class="savedSuccessfully ? 'alert-success' : 'alert-danger'"
 		class="alert alert-dismissable fade in">

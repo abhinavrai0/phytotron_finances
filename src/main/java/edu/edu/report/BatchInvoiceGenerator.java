@@ -16,6 +16,6 @@ public class BatchInvoiceGenerator {
 
     public void generateInvoice(List<Client> clientList, String templatePath, String filePath){
         JasperReportUtil jasperReportUtil = new JasperReportUtil();
-        jasperReportUtil.generateReport(clientList,templatePath,filePath);
+        //jasperReportUtil.generateReport(clientList,templatePath,filePath);
     }
 }

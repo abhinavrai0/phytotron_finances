@@ -1,11 +1,11 @@
-<div id="search_boxes" class="container">
+<div client_id="search_boxes" class="container">
 	<div class="col-sm-12">
 		<div class="row">
 			<div class="col-sm-10">
 				<form>
 					<div class="form-group">
 						<label for="searchAll">Global Search :</label>
-						<input type="text" ng-model="searchAll.$" id="searchAll" class="form-control"/>
+						<input type="text" ng-model="searchAll.$" client_id="searchAll" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -14,7 +14,7 @@
 				<form>
 					<div class="form-group">
 						  <label for="searchStatus">Select Status :</label>
-					      <select class="form-control" id="searchStatus" ng-model="searchAll.client_status">
+					      <select class="form-control" client_id="searchStatus" ng-model="searchAll.client_status">
 					        <option>Active</option>
 					        <option>Inactive</option>
 					      </select>
@@ -27,7 +27,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchFirstName">First Name :</label>
-						<input type="text" ng-model="searchAll.client_first_name" id="searchFirstName" class="form-control"/>
+						<input type="text" ng-model="searchAll.client_first_name" client_id="searchFirstName" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -35,7 +35,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchLastName">Last Name :</label>
-						<input type="text" ng-model="searchAll.client_last_name" id="searchLastName" class="form-control"/>
+						<input type="text" ng-model="searchAll.client_last_name" client_id="searchLastName" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -45,7 +45,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchEmail">Email :</label>
-						<input type="text" ng-model="searchAll.client_email" id="searchEmail" class="form-control"/>
+						<input type="text" ng-model="searchAll.client_email" client_id="searchEmail" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -53,7 +53,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchDepartment">Department :</label>
-						<input type="text" ng-model="searchAll.dept_name" id="searchDepartment" class="form-control"/>
+						<input type="text" ng-model="searchAll.dept_name" client_id="searchDepartment" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -88,12 +88,12 @@
 					ng-value puts the given value in the ng-model
 					groupName is to select only one radio button.
 				  -->
-					<td><input type="radio" name="groupName" ng-model="$parent.selectedClient" ng-checked="false" ng-value="{{savedClient.id}}"></td>
-					<td><a href="#/edit_client_info/{{savedClient.id}}">{{savedClient.client_first_name}}</a></td>
-					<td><a href="#/edit_client_info/{{savedClient.id}}">{{savedClient.client_last_name}}</a></td>
-					<td><a href="#/edit_client_info/{{savedClient.id}}">{{savedClient.client_email}}</a></td>
-					<td><a href="#/edit_client_info/{{savedClient.id}}">{{savedClient.dept_name}}</a></td>
-					<td><a href="#/edit_client_info/{{savedClient.id}}">{{savedClient.client_status}}</a></td>
+					<td><input type="radio" name="groupName" ng-model="$parent.selectedClient" ng-checked="false" ng-value="{{savedClient.client_id}}"></td>
+					<td><a href="#/edit_client_info/{{savedClient.client_id}}">{{savedClient.client_first_name}}</a></td>
+					<td><a href="#/edit_client_info/{{savedClient.client_id}}">{{savedClient.client_last_name}}</a></td>
+					<td><a href="#/edit_client_info/{{savedClient.client_id}}">{{savedClient.client_email}}</a></td>
+					<td><a href="#/edit_client_info/{{savedClient.client_id}}">{{savedClient.dept_name}}</a></td>
+					<td><a href="#/edit_client_info/{{savedClient.client_id}}">{{savedClient.client_status}}</a></td>
 			</tr>
 		</tbody>
 	</table>

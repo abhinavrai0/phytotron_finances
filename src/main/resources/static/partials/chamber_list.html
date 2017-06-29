@@ -1,11 +1,11 @@
-<div id="search_boxes" class="container">
+<div client_id="search_boxes" class="container">
 	<div class="col-sm-12">
 		<div class="row">
 			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchChamberName">Chamber Name :</label>
-						<input type="text" ng-model="searchAll.chamberName" id="searchChamberName" class="form-control"/>
+						<input type="text" ng-model="searchAll.chamberName" client_id="searchChamberName" class="form-control"/>
 					</div>
 				</form>
 			</div>			
@@ -13,7 +13,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchChamberCarts">Carts :</label>
-						<input type="text" ng-model="searchAll.chamberCarts" id="searchChamberCarts" class="form-control"/>
+						<input type="text" ng-model="searchAll.chamberCarts" client_id="searchChamberCarts" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -25,7 +25,7 @@
 <div class="table-responsive col-sm-12">
 	<table class="table table-hover table-bordered">
 		<thead>
-			<th ng-click="sort('id')">#</th>
+			<th ng-click="sort('client_id')">#</th>
 			<th ng-click="sort('chamberName')">Chamber Name
 			<span  ng-show="sortKey=='chamberName'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
@@ -35,9 +35,9 @@
 		</thead>
 		<tbody>
 			<tr dir-paginate="chamber in chamberList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
-				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.id}}</a></td>
-				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberName}}</a></td>
-				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberCarts}}</a></td>
+				<td><a href="#/edit_chamber_info/{{chamber.client_id}}">{{chamber.client_id}}</a></td>
+				<td><a href="#/edit_chamber_info/{{chamber.client_id}}">{{chamber.chamberName}}</a></td>
+				<td><a href="#/edit_chamber_info/{{chamber.client_id}}">{{chamber.chamberCarts}}</a></td>
 			</tr>
 		</tbody>
 	</table>
