@@ -1,0 +1,78 @@
+<div class="header">
+    <div class="container">
+        <div class="col-sm-push-2 col-sm-5">
+            <h3 class="text-center">Invoice Quarterly</h3>
+        </div>
+    </div>
+    <div id="container" class="col-sm-12">
+        <div class="adjacentPanels col-sm-2"></div>
+        <div class="form-group">
+            <label for="department" class="col-sm-2 control-label">Select a Quarter to List Projects and Invoice Selection</label>
+            <div class="col-sm-3">
+                <select class="form-control"  ng-init="selectedQuarter = financialQuarters[0]" ng-model="selectedQuarter" ng-options="x as x.name for x in financialQuarters">
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <button ng-click="getActiveClients()" class="btn btn-default">List Projects</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="table-responsive col-sm-12">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <th>Invoice</th>
+            <th ng-click="sort('cropCommonName')">#
+                <span  ng-show="sortKey=='id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('project_id')">Project Id
+                <span  ng-show="sortKey=='project_id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('project_Title')">Project Title
+                <span  ng-show="sortKey=='project_Title'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('client.client_first_name')">First Name
+                <span  ng-show="sortKey=='client.client_first_name'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('client.client_last_name')">Last Name
+                <span  ng-show="sortKey=='client.client_last_name'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('startDate')">Start Date
+                <span  ng-show="sortKey=='startDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('endDate')">End Date
+                <span  ng-show="sortKey=='endDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('lastBillDate')">Last Invoice Date
+                <span  ng-show="sortKey=='lastBillDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('currentBill')">Current Bill
+                <span  ng-show="sortKey=='currentBill'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('projectStatus')">Project Status
+                <span  ng-show="sortKey=='projectStatus'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+            </th>
+            </thead>
+            <tbody>
+            <tr dir-paginate="project in projectList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
+                <td><input type="checkbox" name="groupName" ng-model="selectedProject" ng-true-value="'SELECT'" ng-false-value="'DESELECT'" ng-checked="false" ng-change="selectDeselectProjectForInvoice(project.project_id,selectedProject)"></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.id}}</a></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.project_id}}</a></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.project_Title}}</a></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.client.client_first_name}}</a></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.client.client_last_name}}</a></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.startDate | date:'MMM d, y'}}</a></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.endDate | date:'MMM d, y'}}</a></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.lastBillDate | date:'MMM d, y'}}</a></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.currentBill | currency}}</a></td>
+                <td><a href="#/track_project/{{project.id}}">{{project.projectStatus}}</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+
+        <button ng-click="invoiceSelectedProjects()" class="btn btn-success">INVOICE</button>
+    </div>
+</div>
