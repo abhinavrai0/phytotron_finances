@@ -1,4 +1,4 @@
-<div client_id = "print">
+<div id = "print">
   <div class = "header">
     <!-- <h3 align="center">Client Information</h3> -->
     <div class="container">
@@ -6,7 +6,7 @@
   		  	<h3 class="text-center">Client Information</h3>
   	  </div>
     </div>
-    <div client_id = "container" class="col-sm-10">
+    <div id = "container" class="col-sm-10">
   	  <div class="adjacentPanels col-sm-3"></div>
   		<div class="adjacentPanels col-sm-5">
           <div class="form-group">
@@ -40,8 +40,8 @@
             <span for="address" class = "fields">{{project_details.client.client_address}}</span>
           </div>
           <div class="form-group">
-            <label for="project_title" class="control-label">Project Title:</label>
-            <span for="project_title" class = "fields">{{project_details.project_title}}</span>
+            <label for="project_Title" class="control-label">Project Title:</label>
+            <span for="project_Title" class = "fields">{{project_details.project_Title}}</span>
           </div>
 
         </div>
@@ -57,7 +57,7 @@
     		</thead>
     		<tbody>
     			<tr ng-repeat="payment in paymentHistory">
-    				<td align="center">{{payment.client_id}}</td>
+    				<td align="center">{{payment.id}}</td>
     				<td align="center">{{payment.paidDate | date:'medium'}}</td>
     				<td align="center">{{payment.amount | currency:"$"}}</td>
     			</tr>
@@ -73,7 +73,7 @@
 <div>
   <div class="col-sm-offset-2 col-sm-8">
     <button ng-click="printPage()" class="btn btn-default">Print</button>
-    <a class="btn btn-default" ng-href="#/track_project/{{project_details.client_id}}">Go Back</a>
+    <a class="btn btn-default" ng-href="#/track_project/{{project_details.id}}">Go Back</a>
     <!-- <a ng-click="currentProject()" class="btn btn-default"
       ng-href="#/payment_list/{{currentProjectID}}">Payment History</a>
     <a class="btn btn-default" ng-href="#/usage_list">Go Back</a> -->

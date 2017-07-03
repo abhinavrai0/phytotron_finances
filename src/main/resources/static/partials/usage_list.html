@@ -1,11 +1,11 @@
-<div client_id="search_boxes" class="container">
+<div id="search_boxes" class="container">
 	<div class="col-sm-12">
 		<div class="row">
 			<div class="col-sm-10">
 				<form>
 					<div class="form-group">
 						<label for="searchAll">Global Search :</label>
-						<input type="text" ng-model="searchAll.$" client_id="searchAll" class="form-control"/>
+						<input type="text" ng-model="searchAll.$" id="searchAll" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -13,7 +13,7 @@
 				<form>
 					<div class="form-group">
 						  <label for="searchStatus">Select Status :</label>
-								<select class="form-control"  client_id="searchStatus" ng-change = "getProjects()" ng-model="project_status" ng-options="x for x in statuses">
+								<select class="form-control"  id="searchStatus" ng-change = "getProjects()" ng-model="project_status" ng-options="x for x in statuses">
 					      </select>
 					</div>
 				</form>
@@ -24,7 +24,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchFirstName">Client First Name :</label>
-						<input type="text" ng-model="searchAll.client.client_first_name" client_id="searchFirstName" class="form-control"/>
+						<input type="text" ng-model="searchAll.client.client_first_name" id="searchFirstName" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -32,7 +32,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchLastName">Client Last Name :</label>
-						<input type="text" ng-model="searchAll.client.client_last_name" client_id="searchLastName" class="form-control"/>
+						<input type="text" ng-model="searchAll.client.client_last_name" id="searchLastName" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -41,8 +41,8 @@
 			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
-						<label for="searchProject_id">Project client_id :</label>
-						<input type="text" ng-model="searchAll.project_id" client_id="searchProject_id" class="form-control"/>
+						<label for="searchProject_id">Project id :</label>
+						<input type="text" ng-model="searchAll.project_id" id="searchProject_id" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -50,7 +50,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchProject_Title">Project Title :</label>
-						<input type="text" ng-model="searchAll.project_title" client_id="searchProject_Title" class="form-control"/>
+						<input type="text" ng-model="searchAll.project_Title" id="searchProject_Title" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -62,13 +62,13 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<th ng-click="sort('cropCommonName')">#
-			<span  ng-show="sortKey=='client_id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			<span  ng-show="sortKey=='id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
 			<th ng-click="sort('project_id')">Project Id
 			<span  ng-show="sortKey=='project_id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
-			<th ng-click="sort('project_title')">Project Title
-			<span  ng-show="sortKey=='project_title'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			<th ng-click="sort('project_Title')">Project Title
+			<span  ng-show="sortKey=='project_Title'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
 			<th ng-click="sort('client.client_first_name')">First Name
 			<span  ng-show="sortKey=='client.client_first_name'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
@@ -76,11 +76,11 @@
 			<th ng-click="sort('client.client_last_name')">Last Name
 			<span  ng-show="sortKey=='client.client_last_name'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
-			<th ng-click="sort('start_date')">Start Date
-			<span  ng-show="sortKey=='start_date'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			<th ng-click="sort('startDate')">Start Date
+			<span  ng-show="sortKey=='startDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
-			<th ng-click="sort('end_date')">End Date
-			<span  ng-show="sortKey=='end_date'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			<th ng-click="sort('endDate')">End Date
+			<span  ng-show="sortKey=='endDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
 			<th ng-click="sort('lastBillDate')">Last Invoice Date
 			<span  ng-show="sortKey=='lastBillDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
@@ -88,22 +88,22 @@
 			<th ng-click="sort('currentBill')">Current Bill
 			<span  ng-show="sortKey=='currentBill'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
-			<th ng-click="sort('project_status')">Project Status
-			<span  ng-show="sortKey=='project_status'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+			<th ng-click="sort('projectStatus')">Project Status
+			<span  ng-show="sortKey=='projectStatus'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 			</th>
 		</thead>
 		<tbody>
 			<tr dir-paginate="project in projectList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
-				<td><a href="#/track_project/{{project.client_id}}">{{project.client_id}}</a></td>
-				<td><a href="#/track_project/{{project.client_id}}">{{project.project_id}}</a></td>
-				<td><a href="#/track_project/{{project.client_id}}">{{project.project_title}}</a></td>
-				<td><a href="#/track_project/{{project.client_id}}">{{project.client.client_first_name}}</a></td>
-				<td><a href="#/track_project/{{project.client_id}}">{{project.client.client_last_name}}</a></td>
-				<td><a href="#/track_project/{{project.client_id}}">{{project.start_date | date:'MMM d, y'}}</a></td>
-				<td><a href="#/track_project/{{project.client_id}}">{{project.end_date | date:'MMM d, y'}}</a></td>
-				<td><a href="#/track_project/{{project.client_id}}">{{project.lastBillDate | date:'MMM d, y'}}</a></td>
-				<td><a href="#/track_project/{{project.client_id}}">{{project.currentBill | currency}}</a></td>
-				<td><a href="#/track_project/{{project.client_id}}">{{project.project_status}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.id}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.project_id}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.project_Title}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.client.client_first_name}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.client.client_last_name}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.startDate | date:'MMM d, y'}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.endDate | date:'MMM d, y'}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.lastBillDate | date:'MMM d, y'}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.currentBill | currency}}</a></td>
+				<td><a href="#/track_project/{{project.id}}">{{project.projectStatus}}</a></td>
 			</tr>
 		</tbody>
 	</table>

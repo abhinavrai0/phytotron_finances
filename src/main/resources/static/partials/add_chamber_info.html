@@ -3,13 +3,13 @@
   <div class="form-group">
     <label for="chamberName" class="col-sm-2 control-label">Chamber Name</label>
     <div class="col-sm-8">
-      <input type="name" class="form-control" client_id="chamberName" ng-model="chamber_form.chamberName" placeholder="Enter the Chamber Name" required>
+      <input type="name" class="form-control" id="chamberName" ng-model="chamber_form.chamberName" placeholder="Enter the Chamber Name" required>
     </div>
   </div>
   <div class="form-group">
     <label for="carts" class="col-sm-2 control-label">Carts</label>
     <div class="col-sm-8">
-      <input type="number" class="form-control" client_id="chamberCarts" ng-model= "chamber_form.chamberCarts" placeholder="Enter number of Carts available" required>
+      <input type="number" class="form-control" id="chamberCarts" ng-model= "chamber_form.chamberCarts" placeholder="Enter number of Carts available" required>
     </div>
   </div>
   <div class="form-group">
@@ -19,7 +19,7 @@
     </div>
   </div>
 </form>
-<div ng-show = "showAlertMessage" client_id = "alert_placeholder" class="col-sm-offset-2 col-sm-8">
+<div ng-show = "showAlertMessage" id = "alert_placeholder" class="col-sm-offset-2 col-sm-8">
   <div ng-class = "savedSuccessfully ? 'alert-success' : 'alert-danger'" class="alert alert-dismissable fade in">
     <a class="close" data-dismiss="alert">&times;</a>
     <span>{{message}}</span>

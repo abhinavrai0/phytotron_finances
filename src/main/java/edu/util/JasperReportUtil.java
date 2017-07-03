@@ -1,7 +1,6 @@
 package edu.util;
 
 import edu.model.Client;
-import edu.model.InvoiceReportView;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -16,13 +15,13 @@ import java.util.List;
  */
 public class JasperReportUtil {
     //This method is used to generate PDF report out of Jasper template.
-    public int generateReport(List<InvoiceReportView> invoiceReportViewRecords, String templateFilePath, String reportFilePath){
+    public int generateReport(List<Client> clientList, String templateFilePath, String reportPath){
         JRBeanCollectionDataSource beanCollectionDataSource = null;
         try{
 
-            beanCollectionDataSource = new JRBeanCollectionDataSource(invoiceReportViewRecords,true);
+            beanCollectionDataSource = new JRBeanCollectionDataSource(clientList,false);
             JasperPrint jPrint = JasperFillManager.fillReport(templateFilePath, new HashMap<String, Object>(), beanCollectionDataSource);
-            JasperExportManager.exportReportToPdfFile(jPrint,reportFilePath);
+            JasperExportManager.exportReportToPdfFile(jPrint,reportPath);
 
         }
         catch (Exception e){

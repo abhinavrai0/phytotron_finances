@@ -42,7 +42,6 @@ public class Project {
 	private Double currentBill=0.0;
 	private Double billPaidTotal=0.0;//Total Paid
 	private String projectStatus;
-
 	public Long getId() {
 		return id;
 	}

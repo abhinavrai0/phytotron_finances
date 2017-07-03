@@ -1,11 +1,11 @@
-<div client_id="search_boxes" class="container">
+<div id="search_boxes" class="container">
 	<div class="col-sm-12">
 		<div class="row">
 			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchCropCommonName">Common Name :</label>
-						<input type="text" ng-model="searchAll.cropCommonName" client_id="searchCropCommonName" class="form-control"/>
+						<input type="text" ng-model="searchAll.cropCommonName" id="searchCropCommonName" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -13,7 +13,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchCropScientificName">Scientific Name :</label>
-						<input type="text" ng-model="searchAll.cropScientificName" client_id="searchCropScientificName" class="form-control"/>
+						<input type="text" ng-model="searchAll.cropScientificName" id="searchCropScientificName" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -34,9 +34,9 @@
 		</thead>
 		<tbody>
 			<tr dir-paginate="crop in cropList |filter:searchAll| orderBy:sortKey:reverse | itemsPerPage: 10" ng-init="sortKey='cropCommonName'">
-				<td><a href="#/edit_crop_info/{{crop.client_id}}">{{crop.client_id}}</a></td>
-				<td><a href="#/edit_crop_info/{{crop.client_id}}">{{crop.cropCommonName}}</a></td>
-				<td><a href="#/edit_crop_info/{{crop.client_id}}">{{crop.cropScientificName}}</a></td>
+				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.id}}</a></td>
+				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropCommonName}}</a></td>
+				<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropScientificName}}</a></td>
 			</tr>
 		</tbody>
 	</table>

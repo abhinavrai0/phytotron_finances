@@ -1,11 +1,11 @@
-<div client_id="search_boxes" class="container">
+<div id="search_boxes" class="container">
 	<div class="col-sm-12">
 		<div class="row">
 			<div class="col-sm-6">
 				<form>
 					<div class="form-group">
 						<label for="searchDepartmentId">Department Id :</label>
-						<input type="text" ng-model="searchAll.departmentId" client_id="searchDepartmentId" class="form-control"/>
+						<input type="text" ng-model="searchAll.departmentId" id="searchDepartmentId" class="form-control"/>
 					</div>
 				</form>
 			</div>			
@@ -13,7 +13,7 @@
 				<form>
 					<div class="form-group">
 						<label for="searchDepartmentName">Department Name :</label>
-						<input type="text" ng-model="searchAll.departmentName" client_id="searchDepartmentName" class="form-control"/>
+						<input type="text" ng-model="searchAll.departmentName" id="searchDepartmentName" class="form-control"/>
 					</div>
 				</form>
 			</div>
@@ -35,9 +35,9 @@
 			</thead>
 			<tbody>
 				<tr	dir-paginate="department in departmentList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10" ng-init="sortKey='departmentName'">
-					<td><a href="#/edit_department_info/{{department.client_id}}">{{department.client_id}}</a></td>
-					<td><a href="#/edit_department_info/{{department.client_id}}">{{department.departmentId}}</a></td>
-					<td><a href="#/edit_department_info/{{department.client_id}}">{{department.departmentName}}</a></td>
+					<td><a href="#/edit_department_info/{{department.id}}">{{department.id}}</a></td>
+					<td><a href="#/edit_department_info/{{department.id}}">{{department.departmentId}}</a></td>
+					<td><a href="#/edit_department_info/{{department.id}}">{{department.departmentName}}</a></td>
 				</tr>
 			</tbody>
 		</table>
