@@ -21,9 +21,16 @@
 
 <div class="container">
     <div class="table-responsive col-sm-12">
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover table-bordered" >
             <thead>
-            <th>Invoice</th>
+            <th>Invoice
+                <input type="checkbox"
+                       ng-model="selectAllProjectsForInvoice"
+                       ng-click="checkAllProjectsForInvoice()"
+                       ng-disabled="!showProjectForInvoiceTable"
+                />
+
+            </th>
             <th ng-click="sort('cropCommonName')">#
                 <span  ng-show="sortKey=='id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
             </th>
@@ -57,7 +64,12 @@
             </thead>
             <tbody>
             <tr dir-paginate="project in projectList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
-                <td><input type="checkbox" name="groupName" ng-model="selectedProject" ng-true-value="'SELECT'" ng-false-value="'DESELECT'" ng-checked="false" ng-change="selectDeselectProjectForInvoice(project.project_id,selectedProject)"></td>
+                <td><input type="checkbox"
+                           name="groupName"
+                           ng-model="project.selected"
+                           ng-checked="false"
+                           ng-click="selectProjectForInvoice()"
+                /></td>
                 <td><a href="#/track_project/{{project.id}}">{{project.id}}</a></td>
                 <td><a href="#/track_project/{{project.id}}">{{project.project_id}}</a></td>
                 <td><a href="#/track_project/{{project.id}}">{{project.project_Title}}</a></td>
@@ -73,6 +85,9 @@
         </table>
         <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
 
-        <button ng-click="invoiceSelectedProjects()" class="btn btn-success">INVOICE</button>
+        <button ng-disabled = "!aleastOneProjectSelected"
+                ng-click="invoiceSelectedProjects()"
+                class="btn btn-success"
+        >INVOICE</button>
     </div>
 </div>

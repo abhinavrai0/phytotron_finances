@@ -856,8 +856,13 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
 		 {'name':'Third Quarter','startDate':new Date().getFullYear()+'-07-01','endDate':new Date().getFullYear()+'-09-30'},
 		 {'name':'Fourth Quarter','startDate':new Date().getFullYear()+'-10-01','endDate':new Date().getFullYear()+'-12-31'}];
 
-    $scope.selectedProject="";
-    $scope.selectedProjectsForInvoicing=[];
+
+    $scope.aleastOneProjectSelected = false; // to disbale/enable "INVOICE" button
+	$scope.showProjectForInvoiceTable = false; // to show/hide projects for invoice table
+    $scope.selectAllProjectsForInvoice = false; // data-model for select/deselect all projects in list
+
+    $scope.projectList=[];
+
 
     // TEMP DATA TO TEST
     var tempProjectData = [{"id":1,"client":{"id":3,"client_first_name":"Danesha","client_last_name":"Carley","client_email":"danesha_carley@ncsu.edu","dept_name":"Horticultural Science","client_address":"","client_phone":"919-513-8189","client_status":"Active"},"rateValue":{"id":2,"rateType":"Academic","rate":0.5},"project_id":"A040073","project_Title":"Consequences of Climate Change for Pollinator Nutrition","acc_number":"111111-11111","carts":12,"startDate":"2017-04-01","endDate":"2017-08-05","lastBillDate":1496678861000,"lastBillPaidDate":"2017-06-05","currentBill":0.0,"billPaidTotal":4062.0,"projectStatus":"Active","chambers":[]},{"id":2,"client":{"id":4,"client_first_name":"Ricardo","client_last_name":"Hernandez","client_email":"ricardo_hernandez@ncsu.edu","dept_name":"Horticultural Science","client_address":"","client_phone":"","client_status":"Active"},"rateValue":{"id":2,"rateType":"Academic","rate":0.5},"project_id":"A070366","project_Title":"Conditioning of Strawberries","acc_number":"111111-11111","carts":24,"startDate":"2017-04-01","endDate":"2018-12-31","lastBillDate":1501559999000,"lastBillPaidDate":"2017-06-05","currentBill":1148.0,"billPaidTotal":1000.0,"projectStatus":"Active","chambers":[]}];
@@ -868,9 +873,10 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
 		//$scope.savedProjecInfo=$http.get('/batchInvoice/getActiveClients/2015-08-08/2018-08-08/')
             .then(function success(response){
             	// temp code to test
-				//$scope.projectList = tempProjectData;
-                $scope.projectList = response.data;
+				$scope.projectList = tempProjectData;
+                //$scope.projectList = response.data;
                 console.log(response);
+                updatePageUI();
             },function failure(response){
                 // temp code to test
                 //$scope.projectList = tempProjectData;
@@ -878,29 +884,57 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
                 $scope.status = response.data;
                 $log.info(response);
             	console.log(response);
+                updatePageUI();
             });
 	}
 
-    $scope.selectDeselectProjectForInvoice = function(projectID,action){
-		if(action==='SELECT'){
-            if($scope.selectedProjectsForInvoicing.indexOf(projectID)===-1) {
-                $scope.selectedProjectsForInvoicing.push(projectID);
-                //console.log(projectID+" Pushed");
-            }
+	// function call on "INVOICE" button
+	$scope.invoiceSelectedProjects = function(){
+        $scope.projectListForInvoice= [];	// list containing project ids to be sent for invoicing.
+        angular.forEach($scope.projectList, function(project) {
+        	if(project.selected==true){
+                $scope.projectListForInvoice.push(project.project_id);
+			}
+        });
+        var confirmInvoice = confirm("Invoice "+$scope.projectListForInvoice.length+" of "+$scope.projectList.length+"projects");
+        if(confirmInvoice){
+            console.log("invoicing.......making a function call");
+        }else{
+            $scope.projectListForInvoice= [];
+            console.log("invoicing cancelled");
+        }
+	}
 
-		}
-		if(action==='DESELECT'){
-            if($scope.selectedProjectsForInvoicing.indexOf(projectID)!==-1){
-                var index = $scope.selectedProjectsForInvoicing.indexOf(projectID);
-                $scope.selectedProjectsForInvoicing.splice(index,1);
-                //console.log(projectID+" Spliced");
+	// function call on select/deselectAll projects in invoice table
+	$scope.checkAllProjectsForInvoice = function(){
+        angular.forEach($scope.projectList, function(project) {
+            project.selected = $scope.selectAllProjectsForInvoice;
+        });
+        $scope.aleastOneProjectSelected = $scope.selectAllProjectsForInvoice;
+
+	}
+
+	// functionc all on each checkbox in invoice table
+	$scope.selectProjectForInvoice = function(){
+		var selectedProject = 0;
+        angular.forEach($scope.projectList, function(project) {
+            if(project.selected==true){
+                selectedProject++;
             }
+        });
+		if(selectedProject==0){
+            $scope.aleastOneProjectSelected=false;
+		}else{
+            $scope.aleastOneProjectSelected=true;
 		}
 	}
 
-	$scope.invoiceSelectedProjects = function(){
-        $scope.selectedProjectsForInvoicing.forEach(function(pid){
-    		console.log(" INVOICING: "+pid);
-		});
+	function updatePageUI(){
+        //showHide project table
+        if($scope.projectList.length!==0){
+            $scope.showProjectForInvoiceTable = true;
+        }else{
+            $scope.showProjectForInvoiceTable = false;
+        }
 	}
 });
