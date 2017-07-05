@@ -39,8 +39,7 @@ public class InvoiceReportView {
     @Type(type="date")
     private Date end_date;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastBillDate;//Last Invoice Date
+    //private Date lastBillDate;//Last Invoice Date
 
     private String project_status;
 
@@ -280,11 +279,11 @@ public class InvoiceReportView {
         this.chamber_carts = chamber_carts;
     }
 
-    public Date getLastBillDate() {
+    /*public Date getLastBillDate() {
         return lastBillDate;
     }
 
     public void setLastBillDate(Date lastBillDate) {
         this.lastBillDate = lastBillDate;
-    }
+    }*/
 }
