@@ -11,6 +11,7 @@ import edu.util.JasperReportUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +35,15 @@ public class BatchInvoiceController {
     @Autowired
     private InvoiceReportViewCRUD invoiceReportViewCRUDRepo;
 
+    @Value("${name}")
+    String name;
+
+    @Value("${invoiceJasperTemplate}")
+    String invoiceTemplatePath = "D:\\Pinakin\\Phytotron\\Jasper_Reports\\billing_invoice.jasper";
+
+    @Value("${invoiceDirectory}")
+    String invoiceDirectory = "D:\\Pinakin\\Phytotron\\Jasper_Reports";
+
     static final Logger logger = LogManager.getLogger(BatchInvoiceController.class.getName());
 
     private JasperReportUtil reportUtil;
@@ -52,6 +62,7 @@ public class BatchInvoiceController {
     @RequestMapping(value = "/generateInvoice/{project_ids}", method = RequestMethod.GET)
     public List<Invoice> generateBatchInvoices(@PathVariable("project_ids") List<Long> projectIds){
         List<Invoice> invoiceList = new ArrayList<>();
+
         reportUtil = new JasperReportUtil();
         try {
             if (projectIds!=null) {
@@ -121,8 +132,7 @@ public class BatchInvoiceController {
             currentInvoice.setTotoal_due(bill+prevBalance);
 
             invoiceCRUDRepo.save(currentInvoice);
-            String invoiceTemplatePath = "D:\\Pinakin\\Phytotron\\Jasper_Reports\\billing_invoice.jasper";
-            String invoiceDirectory = "D:\\Pinakin\\Phytotron\\Jasper_Reports";
+
             String invoiceFilePath = invoiceDirectory+"\\"+currentInvoice.getInvoice_id()+".pdf";
                     /*try {
                         File emptyFile = new File(invoiceFilePath);
@@ -164,5 +174,12 @@ public class BatchInvoiceController {
             return "Failed : "+e.getMessage();
         }
         return "Success";
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String test(){
+        String retMessage = "";
+        retMessage = "My name is : "+name;
+        return retMessage;
     }
 }
