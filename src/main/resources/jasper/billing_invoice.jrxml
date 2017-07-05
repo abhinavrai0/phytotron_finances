@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="billing_invoice" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7bdf310a-2dd8-4757-961f-b5414a7b161d">
+	<property name="ireport.zoom" value="1.1000000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="405"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="0bc83df2-9ff0-4203-adf9-7cbc924f9a3b"/>
+	<subDataset name="ItemDataset" uuid="6b0d307c-0d69-42ee-b3f0-4409518194e1">
+		<field name="id" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="client_id" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="client_address" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="client_email" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="client_first_name" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="client_last_name" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="client_phone" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="client_status" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="dept_name" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="acc_number" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="carts" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="end_date" class="java.sql.Date">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="project_status" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="project_title" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="project_id" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="start_date" class="java.sql.Date">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="rate_type" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="rate" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="invoiceId" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="generation_date" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="prev_balance" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="current_bill" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="total_due" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="ItemDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="client_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="client_address" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="client_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="client_first_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="client_last_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="client_phone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="client_status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dept_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="acc_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="carts" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="end_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="project_status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="project_title" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="project_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="start_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rate_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rate" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="invoiceId" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="generation_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prev_balance" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="current_bill" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_due" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="chamber_name" class="java.lang.String"/>
+	<field name="chamber_carts" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="42" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FF9900" uuid="d13040d3-22d8-4062-a2cf-85cd927961fe"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[North Carolina State University]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="26" width="301" height="37" uuid="c6d87bdc-3d1e-48d8-a565-22700be06929"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Southeastern Plant Environment Laboratories
+Invoice for Services Rendered]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="339" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="26" y="32" width="48" height="20" uuid="b0d4ee2b-3715-41fa-a5ec-189a8ab9cfd9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Invoice#:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="26" y="52" width="82" height="20" uuid="d13b9608-7a31-4930-a18e-46e84c41f979"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Billing Interval: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="26" y="72" width="93" height="20" uuid="9d041d71-7b81-47bc-b9fa-165890800d5c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[In account with:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="74" y="32" width="100" height="20" uuid="97c84e62-34c1-4392-a95f-d1d6c8a45cb9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invoiceId}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="108" y="52" width="66" height="20" uuid="83072e32-9649-4e3c-80be-e81094c86245"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{start_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="37" y="92" width="82" height="20" uuid="45eb04ae-f9d7-4775-b86c-c17da55afe39"/>
+				<text><![CDATA[Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="26" y="12" width="103" height="20" uuid="d6a742f4-c361-4197-be64-2d114bb58733"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Preparation Date:]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="129" y="12" width="116" height="20" uuid="21044b28-a965-444f-89cb-603447ed9405"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{generation_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="37" y="112" width="82" height="20" uuid="fdb724f4-4154-4e4e-b70c-6ce0855f4812"/>
+				<text><![CDATA[Address:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="37" y="156" width="82" height="20" uuid="904b7a18-1c8f-498e-9240-3feff469a649"/>
+				<text><![CDATA[Agency:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="37" y="176" width="82" height="20" uuid="6ecb7079-7a3c-4152-b4dd-882f4f1459fe"/>
+				<text><![CDATA[OUC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="37" y="196" width="82" height="20" uuid="e6e7a1a7-f2aa-4f24-9d6d-59ae48e569f1"/>
+				<text><![CDATA[Phytotron ID:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="37" y="216" width="82" height="20" uuid="d80bf73d-6e6d-420e-9a1e-23c1e86b4289"/>
+				<text><![CDATA[Abbreviated Title:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="92" width="82" height="20" uuid="3e02da14-22da-41a6-9318-958d763271f1"/>
+				<text><![CDATA[Dept Code:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="112" width="82" height="20" uuid="f1981bd1-a36e-45a5-86eb-e7172ad05892"/>
+				<text><![CDATA[Project:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="136" width="82" height="20" uuid="0471d67a-89ae-4357-b511-7f4e31eaf9b8"/>
+				<text><![CDATA[Budget/Trust:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="196" width="82" height="20" uuid="d7809200-8363-41ea-b49e-c5efe6477aae"/>
+				<text><![CDATA[Project Duration:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="92" width="152" height="20" uuid="9a38ccfb-52d5-4bce-987a-500fa04f0a83"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{client_first_name}+" "+$F{client_last_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="116" width="162" height="40" uuid="56df0eef-da37-4f14-936d-531da32e6893"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{client_address}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="156" width="116" height="20" uuid="38c79a7f-a4e6-427c-85a7-c9aa5377227c"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="176" width="116" height="20" uuid="0e39fa4a-a707-4482-bf15-2175c293d764"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="196" width="116" height="20" uuid="31407d42-342b-4371-9053-c938cd2b6742"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{client_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="108" y="216" width="116" height="20" uuid="6c2b810d-c2a8-46be-9bbe-74b455b8f5ba"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="366" y="92" width="116" height="20" uuid="b79718ee-b48c-4d06-925b-3e4a3b0d1e82"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dept_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="366" y="112" width="116" height="20" uuid="cac128b3-f748-40e7-ba1d-52678842ed41"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{project_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="366" y="136" width="116" height="20" uuid="76be6d20-ec14-4c8d-9ee7-cb85679160af"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="184" y="52" width="81" height="20" uuid="c877b6aa-8c1a-4248-9240-92a48f0f5778"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{end_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="174" y="52" width="10" height="20" uuid="9ef4e90e-9b8b-4cc1-bd96-e1ec0e32a591"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="196" width="10" height="20" uuid="b553ef63-7086-43f9-aaf0-acda8f028ced"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="352" y="196" width="56" height="20" uuid="2915ffca-087a-4d65-a637-7ba3ddba4585"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{start_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="418" y="196" width="81" height="20" uuid="a8d26af1-4ac8-4e12-803c-9b9e6830336b"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{end_date}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="8" y="247" width="536" height="66" uuid="aafb4300-1e47-4301-874d-9809b0dcf8c4"/>
+			</rectangle>
+			<line>
+				<reportElement x="60" y="247" width="1" height="31" uuid="6c5e13b4-8173-4736-b4d1-7dae74be52cd"/>
+			</line>
+			<line>
+				<reportElement x="208" y="247" width="1" height="31" uuid="3441d18b-587d-4d08-a5a0-899dec104fd4"/>
+			</line>
+			<line>
+				<reportElement x="128" y="247" width="1" height="31" uuid="6fe6ef22-ecc3-43d3-96e2-5b1e83d8ba91"/>
+			</line>
+			<line>
+				<reportElement x="298" y="247" width="1" height="31" uuid="3c5372d2-18ac-4a82-a3bf-a73c593b88ab"/>
+			</line>
+			<line>
+				<reportElement x="380" y="247" width="1" height="31" uuid="7553f842-adcf-46ab-b023-549d0877fc70"/>
+			</line>
+			<line>
+				<reportElement x="455" y="247" width="1" height="31" uuid="54c158da-862d-456f-a080-36eda57b698d"/>
+			</line>
+			<line>
+				<reportElement x="8" y="278" width="536" height="1" uuid="9c509a5d-5dbf-4950-b035-6c5a0f259876"/>
+			</line>
+			<line>
+				<reportElement x="455" y="278" width="1" height="35" uuid="f6e4ade0-de91-4577-9d5b-7eefc0fbf498"/>
+			</line>
+			<line>
+				<reportElement x="380" y="278" width="1" height="35" uuid="7bbfc025-f551-4302-9d70-59224217a556"/>
+			</line>
+			<line>
+				<reportElement x="298" y="278" width="1" height="35" uuid="92057768-965c-409d-8231-bc822b545a2b"/>
+			</line>
+			<line>
+				<reportElement x="208" y="278" width="1" height="34" uuid="2e152ecd-033d-459f-8154-388066a4e217"/>
+			</line>
+			<line>
+				<reportElement x="128" y="278" width="1" height="35" uuid="25ae16dc-9fc0-49b5-bc10-19dbb86a4106"/>
+			</line>
+			<line>
+				<reportElement x="60" y="278" width="1" height="35" uuid="0333dfd9-a896-49fd-9b36-f53b1be1f920"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="26" y="258" width="22" height="20" uuid="51ec2b68-23e7-4396-aa59-203e8ed51709"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Item]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="72" y="252" width="42" height="20" uuid="3db76d8e-87fe-480c-a084-42858e7be04d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Units]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="142" y="252" width="45" height="20" uuid="feded6d2-fbfb-454b-8c8a-1e002e19a179"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Beginning]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="225" y="252" width="45" height="20" uuid="8125a8f5-b2b4-46d1-ac56-9cf640dbffaa"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Ending]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="321" y="252" width="45" height="20" uuid="bf0cb1bd-a1cc-4a0c-a5be-7abdd20e6a2b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Unit Days]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="398" y="252" width="45" height="20" isPrintWhenDetailOverflows="true" uuid="58a4f06d-5f68-4a71-9f8a-bc56acfc4882"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Crop]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="472" y="252" width="45" height="20" isPrintWhenDetailOverflows="true" uuid="eb7b17b4-8509-4ab2-a2cd-691086136a45"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Charge (in $)]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="72" y="285" width="42" height="20" uuid="23aa6b41-d4b3-49e4-b260-ef00d52d0968"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{carts}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement mode="Opaque" x="133" y="285" width="73" height="20" uuid="9ffe3dcf-2f50-4a25-b54e-2663244ffac9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{start_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement mode="Opaque" x="215" y="285" width="80" height="20" uuid="d1d35e3b-f418-4664-9995-6aa0d43c298e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="300" y="285" width="75" height="20" uuid="9f82de78-2138-4058-b7b2-2a7ffcaa9e7c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[(($F{end_date}.getTime()-$F{start_date}.getTime())/(60*60*24*1000.00))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="393" y="285" width="50" height="20" uuid="e9f4ea7a-803d-4062-8849-2227802d2ba3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Tomato"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="15" y="285" width="40" height="20" uuid="19d34d22-1ba8-4a89-8caa-c10b451905af"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{chamber_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="464" y="285" width="70" height="20" uuid="d171e55e-0a3f-44c2-ab7f-611fc826cbdb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{total_due}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="8" y="11" width="536" height="1" uuid="05801967-9dcf-4b1a-a218-e1c7d1172188"/>
+			</line>
+		</band>
+		<band height="245">
+			<staticText>
+				<reportElement mode="Opaque" x="8" y="52" width="179" height="18" uuid="e45cae2d-64b3-4b49-a576-9ff7dfebfc8e"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Please make check payable to: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="187" y="52" width="179" height="18" uuid="72095b32-1593-41b9-b152-fc01e10cdca3"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[North Carolina State University]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="8" y="70" width="290" height="18" uuid="b683fdb3-cc18-4dba-afbb-54f79a286147"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Remit with one (1) copy of this invoice to:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="48" y="98" width="290" height="18" uuid="51caba8a-a71b-43b8-ad73-50315a487417"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[North Carolina State University]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="48" y="116" width="290" height="18" uuid="0314dd4e-adc5-4705-84f3-2dfa0303154b"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[North Carolina State University]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="48" y="116" width="290" height="18" uuid="13a7addd-fdf2-4237-a201-4a194a9e6823"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Office of Finance and Business, Box 7201]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="48" y="134" width="290" height="18" uuid="c0719831-06b7-49c0-95ec-265f9438c03a"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Raleigh, North Carolina  27695-7201]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="8" y="166" width="290" height="18" uuid="57f2d0d5-9653-4ecf-9d20-939ffdb0ceba"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Business Office:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="48" y="195" width="350" height="18" uuid="d5cfcd06-38b1-4213-a967-b36469d5a295"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Deposit check to: North Carolina Agricultural Research Service]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="48" y="213" width="350" height="18" uuid="2b480374-26aa-48a4-885b-d09774532b2e"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Misc. Rec. -- Phytotron Revenue Code No. 4- 16952=0791]]></text>
+			</staticText>
+			<line>
+				<reportElement x="8" y="12" width="536" height="1" uuid="440e709b-ec9c-4ae8-998e-51addca94c7b"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="15" y="24" width="156" height="17" uuid="1bed1aa9-bc0a-4e21-a1ac-32947d14c6c7"/>
+				<text><![CDATA[Total usage in billing interval]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
