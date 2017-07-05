@@ -896,12 +896,12 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
                 $scope.projectListForInvoice.push(project.project_id);
 			}
         });
-        var confirmInvoice = confirm("Invoice "+$scope.projectListForInvoice.length+" of "+$scope.projectList.length+"projects");
+        var confirmInvoice = confirm("Invoice "+$scope.projectListForInvoice.length+" of "+$scope.projectList.length+" projects");
         if(confirmInvoice){
-            console.log("invoicing.......making a function call");
+            console.log("invoicing.......making a service request");
         }else{
             $scope.projectListForInvoice= [];
-            console.log("invoicing cancelled");
+            console.log("NIH");
         }
 	}
 
