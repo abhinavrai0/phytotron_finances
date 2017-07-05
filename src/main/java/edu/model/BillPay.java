@@ -9,10 +9,10 @@ public class BillPay {
 //	private Date date;
 	@Type(type="date")
 	private Date date;
-/*	public Long getId() {
+/*	public Long getClient_id() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setClient_id(Long id) {
 		this.id = id;
 	}*/
 	public Date getDate() {
