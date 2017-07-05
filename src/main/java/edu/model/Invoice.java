@@ -79,12 +79,12 @@ public class Invoice {
         this.current_bill = current_bill;
     }
 
-    public Double getTotoal_due() {
+    public Double getTotal_due() {
         return total_due;
     }
 
-    public void setTotoal_due(Double totoal_due) {
-        this.total_due = totoal_due;
+    public void setTotal_due(Double total_due) {
+        this.total_due = total_due;
     }
 
     public Long getProjectId() {

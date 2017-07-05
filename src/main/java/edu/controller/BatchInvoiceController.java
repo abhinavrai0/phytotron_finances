@@ -129,7 +129,7 @@ public class BatchInvoiceController {
             currentInvoice.setPrev_balance(prevBalance);
             currentInvoice.setInvoice_id(currentProject.getProject_id()+Long.toString(lastInvoiceId+1));
             currentInvoice.setProjectId(projectId);
-            currentInvoice.setTotoal_due(bill+prevBalance);
+            currentInvoice.setTotal_due(bill+prevBalance);
 
             invoiceCRUDRepo.save(currentInvoice);
 
