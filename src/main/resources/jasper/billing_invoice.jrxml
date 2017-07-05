@@ -192,7 +192,6 @@
 	<field name="chamber_carts" class="java.lang.String"/>
 	<field name="billing_start_date" class="java.util.Date"/>
 	<field name="billing_end_date" class="java.util.Date"/>
-	<field name="lastBillDate" class="java.util.Date"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -490,7 +489,7 @@ Invoice for Services Rendered]]></text>
 			<textField pattern="MM/dd/yyyy">
 				<reportElement mode="Opaque" x="215" y="285" width="80" height="20" uuid="d1d35e3b-f418-4664-9995-6aa0d43c298e"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{end_date}$F{billing_end_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{billing_end_date}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="300" y="285" width="75" height="20" uuid="9f82de78-2138-4058-b7b2-2a7ffcaa9e7c"/>

@@ -1,5 +1,7 @@
 package edu.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,12 +21,15 @@ public class Invoice {
     private String invoice_id;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private Date billing_start_date;//Invoice Billing Cycle Start Date
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="MM-dd-yyyy")
     private Date billing_end_date;//Invoice Billing Cycle End Date
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="MM-dd-yyyy HH:mm:ss.SSS")
     @Column(name = "generation_date")
     private Date generationDate;
 

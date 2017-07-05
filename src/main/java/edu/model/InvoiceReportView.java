@@ -279,6 +279,22 @@ public class InvoiceReportView {
         this.chamber_carts = chamber_carts;
     }
 
+    public Date getBilling_start_date() {
+        return billing_start_date;
+    }
+
+    public void setBilling_start_date(Date billing_start_date) {
+        this.billing_start_date = billing_start_date;
+    }
+
+    public Date getBilling_end_date() {
+        return billing_end_date;
+    }
+
+    public void setBilling_end_date(Date billing_end_date) {
+        this.billing_end_date = billing_end_date;
+    }
+
     /*public Date getLastBillDate() {
         return lastBillDate;
     }
