@@ -19,6 +19,12 @@ public class Invoice {
     private String invoice_id;
 
     @Temporal(TemporalType.TIMESTAMP)
+    private Date billing_start_date;//Invoice Billing Cycle Start Date
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date billing_end_date;//Invoice Billing Cycle End Date
+
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "generation_date")
     private Date generationDate;
 
@@ -93,6 +99,22 @@ public class Invoice {
 
     public void setProjectId(Long projectId) {
         this.projectId = projectId;
+    }
+
+    public Date getBilling_start_date() {
+        return billing_start_date;
+    }
+
+    public void setBilling_start_date(Date billing_start_date) {
+        this.billing_start_date = billing_start_date;
+    }
+
+    public Date getBilling_end_date() {
+        return billing_end_date;
+    }
+
+    public void setBilling_end_date(Date billing_end_date) {
+        this.billing_end_date = billing_end_date;
     }
 
     @Override

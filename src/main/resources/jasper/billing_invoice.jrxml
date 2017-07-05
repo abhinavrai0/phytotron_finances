@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="billing_invoice" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7bdf310a-2dd8-4757-961f-b5414a7b161d">
 	<property name="ireport.zoom" value="1.1000000000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="405"/>
+	<property name="ireport.y" value="165"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -190,6 +190,9 @@
 	</field>
 	<field name="chamber_name" class="java.lang.String"/>
 	<field name="chamber_carts" class="java.lang.String"/>
+	<field name="billing_start_date" class="java.util.Date"/>
+	<field name="billing_end_date" class="java.util.Date"/>
+	<field name="lastBillDate" class="java.util.Date"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -247,7 +250,7 @@ Invoice for Services Rendered]]></text>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{start_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{billing_start_date}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="37" y="92" width="82" height="20" uuid="45eb04ae-f9d7-4775-b86c-c17da55afe39"/>
@@ -371,7 +374,7 @@ Invoice for Services Rendered]]></text>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{end_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{billing_end_date}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="174" y="52" width="10" height="20" uuid="9ef4e90e-9b8b-4cc1-bd96-e1ec0e32a591"/>
@@ -482,17 +485,17 @@ Invoice for Services Rendered]]></text>
 			<textField pattern="MM/dd/yyyy">
 				<reportElement mode="Opaque" x="133" y="285" width="73" height="20" uuid="9ffe3dcf-2f50-4a25-b54e-2663244ffac9"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{start_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{billing_start_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="MM/dd/yyyy">
 				<reportElement mode="Opaque" x="215" y="285" width="80" height="20" uuid="d1d35e3b-f418-4664-9995-6aa0d43c298e"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{end_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{end_date}$F{billing_end_date}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="300" y="285" width="75" height="20" uuid="9f82de78-2138-4058-b7b2-2a7ffcaa9e7c"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[(($F{end_date}.getTime()-$F{start_date}.getTime())/(60*60*24*1000.00))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(($F{billing_end_date}.getTime()-$F{billing_start_date}.getTime())/(60*60*24*1000.00))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="393" y="285" width="50" height="20" uuid="e9f4ea7a-803d-4062-8849-2227802d2ba3"/>

@@ -94,7 +94,7 @@ public class BatchInvoiceController {
             // Invoice lastGeneratedInvoice = invoiceCRUDRepo.findTopByProjectIdEqualsOrderByGeneration_dateDesc(projectId);
             Invoice lastGeneratedInvoice = invoiceCRUDRepo.findFirstByProjectIdOrderByGenerationDateDesc(projectId);
             Date lastBillDate = null;
-            if(lastGeneratedInvoice == null || lastGeneratedInvoice.getGenerationDate()==null) {
+            if(lastGeneratedInvoice == null || lastGeneratedInvoice.getGenerationDate()==null || currentProject.getLastBillDate() == null) {
                 lastBillDate = currentProject.getStartDate();
             }
             else{
@@ -104,7 +104,13 @@ public class BatchInvoiceController {
             }
             // generate bill as per end of day
             Date today = new Date();
+
             Date generateBillDate= DateUtil.getEndOfDay(today);
+
+            //set billing end date to project end date if project ends date is before the quarter end date.
+            if(currentProject.getEndDate().before(today))
+                generateBillDate = currentProject.getEndDate();
+
             if(lastBillDate==null || currentProject.getStartDate()==null){
                 isInvoiceGenerated = false;
                 //throw new IllegalArgumentException("There is no start or last invoice date");
@@ -119,19 +125,24 @@ public class BatchInvoiceController {
             Double bill= ((double)currentProject.getRateValue().getRate() * (double)diff * currentProject.getCarts());
             //Double prevBalance = 0.00;
             Double prevBalance = currentProject.getCurrentBill();
-            currentProject.setLastBillDate(generateBillDate);
+
 
             bill = Math.round(bill * 100D) / 100D;
             //currentProject.setCurrentBill(bill);
 
             currentInvoice.setGenerationDate(today);
+            currentInvoice.setBilling_start_date(lastBillDate);
+            currentInvoice.setBilling_end_date(generateBillDate);
             currentInvoice.setCurrent_bill(bill);
             currentInvoice.setPrev_balance(prevBalance);
             currentInvoice.setInvoice_id(currentProject.getProject_id()+Long.toString(lastInvoiceId+1));
             currentInvoice.setProjectId(projectId);
             currentInvoice.setTotal_due(bill+prevBalance);
-
             invoiceCRUDRepo.save(currentInvoice);
+
+            currentProject.setLastBillDate(today);
+            currentProject.setCurrentBill(currentInvoice.getTotal_due());
+
 
             String invoiceFilePath = invoiceDirectory+"\\"+currentInvoice.getInvoice_id()+".pdf";
                     /*try {

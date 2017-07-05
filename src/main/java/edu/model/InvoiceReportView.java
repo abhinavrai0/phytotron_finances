@@ -39,6 +39,9 @@ public class InvoiceReportView {
     @Type(type="date")
     private Date end_date;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastBillDate;//Last Invoice Date
+
     private String project_status;
 
     private String project_title;
@@ -58,6 +61,12 @@ public class InvoiceReportView {
 
     @Column(name = "invoice_id")
     private String invoiceId;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date billing_start_date;//Invoice Billing Cycle Start Date
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date billing_end_date;//Invoice Billing Cycle End Date
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date generation_date;
@@ -269,5 +278,13 @@ public class InvoiceReportView {
 
     public void setChamber_carts(String chamber_carts) {
         this.chamber_carts = chamber_carts;
+    }
+
+    public Date getLastBillDate() {
+        return lastBillDate;
+    }
+
+    public void setLastBillDate(Date lastBillDate) {
+        this.lastBillDate = lastBillDate;
     }
 }
