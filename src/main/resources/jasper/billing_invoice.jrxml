@@ -246,7 +246,7 @@ Invoice for Services Rendered]]></text>
 				<textFieldExpression><![CDATA[$F{invoiceId}]]></textFieldExpression>
 			</textField>
 			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
-				<reportElement x="108" y="52" width="66" height="20" uuid="83072e32-9649-4e3c-80be-e81094c86245"/>
+				<reportElement x="108" y="52" width="79" height="20" uuid="83072e32-9649-4e3c-80be-e81094c86245"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -370,31 +370,31 @@ Invoice for Services Rendered]]></text>
 				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
-				<reportElement x="184" y="52" width="81" height="20" uuid="c877b6aa-8c1a-4248-9240-92a48f0f5778"/>
+				<reportElement x="197" y="52" width="81" height="20" uuid="c877b6aa-8c1a-4248-9240-92a48f0f5778"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{billing_end_date}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="174" y="52" width="10" height="20" uuid="9ef4e90e-9b8b-4cc1-bd96-e1ec0e32a591"/>
+				<reportElement x="187" y="52" width="10" height="20" uuid="9ef4e90e-9b8b-4cc1-bd96-e1ec0e32a591"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="408" y="196" width="10" height="20" uuid="b553ef63-7086-43f9-aaf0-acda8f028ced"/>
+				<reportElement x="420" y="196" width="10" height="20" uuid="b553ef63-7086-43f9-aaf0-acda8f028ced"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
-				<reportElement x="352" y="196" width="56" height="20" uuid="2915ffca-087a-4d65-a637-7ba3ddba4585"/>
+				<reportElement x="352" y="196" width="68" height="20" uuid="2915ffca-087a-4d65-a637-7ba3ddba4585"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{start_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
-				<reportElement x="418" y="196" width="81" height="20" uuid="a8d26af1-4ac8-4e12-803c-9b9e6830336b"/>
+				<reportElement x="430" y="196" width="81" height="20" uuid="a8d26af1-4ac8-4e12-803c-9b9e6830336b"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
