@@ -39,6 +39,9 @@ public class Invoice {
 
     private Double total_due;
 
+    @Transient
+    private String invoiceFileLocation;
+
     public Invoice(){
 
     }
@@ -120,6 +123,14 @@ public class Invoice {
 
     public void setBilling_end_date(Date billing_end_date) {
         this.billing_end_date = billing_end_date;
+    }
+
+    public String getInvoiceFileLocation() {
+        return invoiceFileLocation;
+    }
+
+    public void setInvoiceFileLocation(String invoiceFileLocation) {
+        this.invoiceFileLocation = invoiceFileLocation;
     }
 
     @Override

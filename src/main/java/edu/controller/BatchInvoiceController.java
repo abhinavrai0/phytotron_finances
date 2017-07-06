@@ -130,21 +130,25 @@ public class BatchInvoiceController {
             bill = Math.round(bill * 100D) / 100D;
             //currentProject.setCurrentBill(bill);
 
+
             currentInvoice.setGenerationDate(today);
             currentInvoice.setBilling_start_date(lastBillDate);
             currentInvoice.setBilling_end_date(generateBillDate);
             currentInvoice.setCurrent_bill(bill);
             currentInvoice.setPrev_balance(prevBalance);
-            currentInvoice.setInvoice_id(currentProject.getProject_id()+Long.toString(lastInvoiceId+1));
+            currentInvoice.setInvoice_id(currentProject.getProject_id()+"_"+Long.toString(lastInvoiceId+1));
             currentInvoice.setProjectId(projectId);
             currentInvoice.setTotal_due(bill+prevBalance);
+
+            String invoiceFilePath = invoiceDirectory+"\\"+currentInvoice.getInvoice_id()+".pdf";
+
+            currentInvoice.setInvoiceFileLocation(invoiceFilePath);
+
             invoiceCRUDRepo.save(currentInvoice);
 
             currentProject.setLastBillDate(today);
             currentProject.setCurrentBill(currentInvoice.getTotal_due());
 
-
-            String invoiceFilePath = invoiceDirectory+"\\"+currentInvoice.getInvoice_id()+".pdf";
                     /*try {
                         File emptyFile = new File(invoiceFilePath);
                         emptyFile.createNewFile();
