@@ -54,13 +54,13 @@
 		<field name="client_address" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="client_email" class="java.lang.String">
+		<field name="clientEmail" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="client_first_name" class="java.lang.String">
+		<field name="clientFirstName" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
-		<field name="client_last_name" class="java.lang.String">
+		<field name="clientLastName" class="java.lang.String">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 		<field name="client_phone" class="java.lang.String">
@@ -128,13 +128,13 @@
 	<field name="client_address" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="client_email" class="java.lang.String">
+	<field name="clientEmail" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="client_first_name" class="java.lang.String">
+	<field name="clientFirstName" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="client_last_name" class="java.lang.String">
+	<field name="clientLastName" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="client_phone" class="java.lang.String">
@@ -310,7 +310,7 @@ Invoice for Services Rendered]]></text>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{client_first_name}+" "+$F{client_last_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{clientFirstName}+" "+$F{clientLastName}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="108" y="116" width="162" height="40" uuid="56df0eef-da37-4f14-936d-531da32e6893"/>
