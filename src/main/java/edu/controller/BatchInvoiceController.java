@@ -100,7 +100,8 @@ public class BatchInvoiceController {
             else{
                 //lastBillDate = lastGeneratedInvoice.getGenerationDate();
                 lastBillDate = currentProject.getLastBillDate();
-                lastInvoiceId = lastGeneratedInvoice.getId();
+                //lastInvoiceId = lastGeneratedInvoice.getId();
+                lastInvoiceId = Long.parseLong(lastGeneratedInvoice.getInvoice_id().replaceAll("[^0-9]",""));
             }
             // generate bill as per end of day
             Date today = new Date();
