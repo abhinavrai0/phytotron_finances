@@ -851,15 +851,19 @@ billingApp.controller("edit_rate_info_Controller", function($rootScope,$scope,$h
 // Added by Abhinav for invoice functionality
 // This controller lands the invoice page to select the date for particular invoices
 billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log){
-	$scope.financialQuarters=[{'name':'First Quarter','startDate':+new Date().getFullYear()+'-01-01','endDate':+new Date().getFullYear()+'-03-31'},
-		 {'name':'Second Quarter','startDate':new Date().getFullYear()+'-04-01' ,'endDate':new Date().getFullYear()+'-06-30'},
-		 {'name':'Third Quarter','startDate':new Date().getFullYear()+'-07-01','endDate':new Date().getFullYear()+'-09-30'},
-		 {'name':'Fourth Quarter','startDate':new Date().getFullYear()+'-10-01','endDate':new Date().getFullYear()+'-12-31'}];
+
+	$scope.financialQuarters=[
+		{'name':'First Quarter','startDate':+new Date().getFullYear()+'-01-01','endDate':+new Date().getFullYear()+'-03-31'},
+		{'name':'Second Quarter','startDate':new Date().getFullYear()+'-04-01' ,'endDate':new Date().getFullYear()+'-06-30'},
+		{'name':'Third Quarter','startDate':new Date().getFullYear()+'-07-01','endDate':new Date().getFullYear()+'-09-30'},
+		{'name':'Fourth Quarter','startDate':new Date().getFullYear()+'-10-01','endDate':new Date().getFullYear()+'-12-31'}
+		];
 
 
     $scope.aleastOneProjectSelected = false; // to disbale/enable "INVOICE" button
 	$scope.showProjectForInvoiceTable = false; // to show/hide projects for invoice table
     $scope.selectAllProjectsForInvoice = false; // data-model for select/deselect all projects in list
+	$scope.showInvoicedProjects = false;
 
     $scope.projectList=[];
 
@@ -870,13 +874,15 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
 
 	$scope.getActiveClients = function(){
         $scope.savedProjectInfo=$http.get('/batchInvoice/getActiveClients/'+$scope.selectedQuarter.startDate+'/'+$scope.selectedQuarter.endDate)
-		//$scope.savedProjecInfo=$http.get('/batchInvoice/getActiveClients/2015-08-08/2018-08-08/')
             .then(function success(response){
             	// temp code to test
-				$scope.projectList = tempProjectData;
-                //$scope.projectList = response.data;
+				//$scope.projectList = tempProjectData;
+                $scope.projectList = response.data;
                 console.log(response);
+                // show projectsForInvoiceTable if a project exists
                 updatePageUI();
+                // hide InvoicedProjectsTable (if displayed)
+				$scope.showInvoicedProjects = false;
             },function failure(response){
                 // temp code to test
                 //$scope.projectList = tempProjectData;
@@ -893,12 +899,38 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
         $scope.projectListForInvoice= [];	// list containing project ids to be sent for invoicing.
         angular.forEach($scope.projectList, function(project) {
         	if(project.selected==true){
-                $scope.projectListForInvoice.push(project.project_id);
+                $scope.projectListForInvoice.push(project.id);
 			}
         });
         var confirmInvoice = confirm("Invoice "+$scope.projectListForInvoice.length+" of "+$scope.projectList.length+" projects");
         if(confirmInvoice){
-            console.log("invoicing.......making a service request");
+            //console.log("invoicing.......making a service request");
+			var invoiceServiceRequestString='/batchInvoice/generateInvoice/';
+			var projectIdsRemaining = $scope.projectListForInvoice.length;
+			angular.forEach($scope.projectListForInvoice, function(projectId){
+                invoiceServiceRequestString = invoiceServiceRequestString + projectId;
+                projectIdsRemaining--;
+                if(projectIdsRemaining>0){
+                    invoiceServiceRequestString = invoiceServiceRequestString +',';
+                }
+			});
+            console.log(invoiceServiceRequestString);
+            //requesting batch invoice service.
+			$scope.invoicedProjectsInfo=$http.get(invoiceServiceRequestString)
+                .then(function success(response){
+                    $scope.invoicedProjectList = response.data;
+                    console.log(response);
+                    //display invoicedProjectsTable
+                    $scope.showInvoicedProjects = true;
+                    //hide projectsForInvoiceTabel
+					$scope.showProjectForInvoiceTable = false;
+                },function failure(response){
+                    $scope.invoicedProjectList = response.statusText;
+                    $scope.status = response.data;
+                    $log.info(response);
+                    console.log(response);
+                });
+
         }else{
             $scope.projectListForInvoice= [];
             console.log("NIH");
@@ -922,10 +954,15 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
                 selectedProject++;
             }
         });
+        // if no project is selected, disable Invoice Button
 		if(selectedProject==0){
             $scope.aleastOneProjectSelected=false;
 		}else{
             $scope.aleastOneProjectSelected=true;
+		}
+		// if select All is selected and you deselect a single project, selectAll should be auto deselected
+		if(selectedProject<$scope.projectList.length){
+            $scope.selectAllProjectsForInvoice = false;
 		}
 	}
 

@@ -1,83 +1,83 @@
 <!DOCTYPE html>
 <html ng-app="billing">
 <head>
-<title>Phytotron Billing Application</title>
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
-<link href="https://cdn.ncsu.edu/brand-assets/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen" type="text/css" />
-<link href="https://cdn.ncsu.edu/brand-assets/fonts/include.css" rel="stylesheet" type="text/css" />
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"/>
-<script src="https://cdn.ncsu.edu/brand-assets/bootstrap/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/main.css" media="all" type="text/css" />
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"/>
+	<title>Phytotron Billing Application</title>
+	<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+	<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="https://cdn.ncsu.edu/brand-assets/bootstrap/css/bootstrap.css"  media="screen" type="text/css" />
+	<link rel="stylesheet" href="https://cdn.ncsu.edu/brand-assets/fonts/include.css" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"/>
+	<link rel="stylesheet" href="css/main.css" media="all" type="text/css" />
+
+	<!-- AngularJS Material CSS now available via Google CDN; version 1.1.4 used here -->
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
 </head>
-<body
-	class="home page-template-default page page-id-4 custom-background siteorigin-panels siteorigin-panels-home no-sidebar content-width excerpt-image-left sfsi_1.64">
 
-	<div>
-		<nav class="navbar navbar-default">
-			<div class="container">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="myclass">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-						aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a href="#/usage_list">Phytotron</a>
-				</div>
+<body class="home page-template-default page page-id-4 custom-background siteorigin-panels siteorigin-panels-home no-sidebar content-width excerpt-image-left sfsi_1.64">
+	<!-- jquery -->
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"/>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse"
-					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li ng-class="{ active: isActive('/usage_list')}"><a
-							href="#/usage_list">Tracking Usage<span class="sr-only">(current)</span></a></li>
-						<li ng-class="{ active: isActive('/client_list')}"><a
-							href="#/client_list">Client Information</a></li>
-						<li ng-class="{ active: isActive('/chamber_list')}"><a
-							href="#/chamber_list">Chambers</a></li>
-						<li ng-class="{ active: isActive('/rate_list')}"><a
-							href="#/rate_list">Rate</a></li>
-						<li ng-class="{ active: isActive('/department_list')}"><a
-							href="#/department_list">Department</a></li>
-						<li ng-class="{ active: isActive('/crop_list')}"><a
-							href="#/crop_list">Crop</a></li>
-						<li ng-class="{ active: isActive('/invoice_quarterly')}"><a
-							href="#/invoice_quarterly">Invoice Quarterly</a></li>
-					</ul>
-				</div>
+
+	<!-- angular old libraries-->
+	<script type="text/javascript" src="https://cdn.ncsu.edu/brand-assets/utility-bar/ub.php?googleCustomSearchCode=Search ncsu.edu&placeholder=Search ncsu.edu&maxWidth=1100&color=gray&showBrick=1"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular-animate.min.js"></script>
+	<script type="text/javascript" src="js/angular-aria.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.js"></script>
+	<!--<script src="js/angular-resource.js"></script>-->
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+
+	<!--custom javascript files-->
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
+	<script type="text/javascript" src="js/services.js"></script>
+	<script type="text/javascript" src="js/dirPagination.js"></script>
+
+	<!-- AngularJS Material Javascript now available via Google CDN; version 1.1.4 used here -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+	<!--<script src="js/angular-material.min.js"></script>-->
+
+	<!--date picker code-->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+	<!--<script src="js/bootstrap-datepicker.min.js"></script>-->
+
+	<!--bootstrap-->
+	<script src="https://cdn.ncsu.edu/brand-assets/bootstrap/js/bootstrap.min.js"></script>
+	<!--<script src="js/bootstrap.min.js"></script>-->
+
+	<div layout="column" flex ng-cloak>
+		<md-toolbar layout="row">
+			<div>
+				<h4>Phytotron NC State</h4>
 			</div>
-		</nav>
+			<md-button href="#/usage_list" ng-class="{ active: isActive('/usage_list')}">Tracking Usage</md-button>
+			<md-button href="#/client_list" ng-class="{ active: isActive('/client_list')}">Client Information</md-button>
+			<md-button href="#/chamber_list" ng-class="{ active: isActive('/chamber_list')}">Chambers</md-button>
+			<md-button href="#/rate_list" ng-class="{ active: isActive('/rate_list')}">Rate</md-button>
+			<md-button href="#/department_list" ng-class="{ active: isActive('/department_list')}">Department</md-button>
+			<md-button href="#/crop_list" ng-class="{ active: isActive('/crop_list')}">Crop</md-button>
+			<md-button href="#/invoice_quarterly" ng-class="{ active: isActive('/invoice_quarterly')}">Invoice Quarterly</md-button>
+		</md-toolbar>
+		<section layout="row" flex>
+			<md-content layout-align="center start">
+				<ng-view ></ng-view>
+			</md-content>
+		</section>
 	</div>
 
-	<ng-view></ng-view>
-	<script
-		src="https://cdn.ncsu.edu/brand-assets/utility-bar/ub.php?googleCustomSearchCode=Search ncsu.edu&placeholder=Search ncsu.edu&maxWidth=1100&color=gray&showBrick=1"></script>
-<script src="js/angular.min.js"></script>
-<script type="text/javascript" src="js/angular-route.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/controller.js"></script>
-<script type="text/javascript" src="js/services.js"></script>
-<script type="text/javascript" src="js/dirPagination.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.js"></script>
-<!--check version accordingly of angular resources -->
-<script>
-    $(document).ready(function(){
-      var date_input=$('input[name="date"]'); //our date input has the name "date"
-      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })
-</script>
+	<!--check version accordingly of angular resources -->
+	<script>
+        $(document).ready(function(){
+            var date_input=$('input[name="date"]'); //our date input has the name "date"
+            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+            var options={
+                format: 'mm/dd/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            };
+            date_input.datepicker(options);
+        })
+	</script>
 </body>
 </html>

@@ -1,51 +1,52 @@
-<div id="search_boxes" class="container">
-	<div class="col-sm-12">
-		<div class="row">
-			<div class="col-sm-6">
-				<form>
-					<div class="form-group">
-						<label for="searchChamberName">Chamber Name :</label>
-						<input type="text" ng-model="searchAll.chamberName" id="searchChamberName" class="form-control"/>
-					</div>
-				</form>
-			</div>			
-			<div class="col-sm-6">
-				<form>
-					<div class="form-group">
-						<label for="searchChamberCarts">Carts :</label>
-						<input type="text" ng-model="searchAll.chamberCarts" id="searchChamberCarts" class="form-control"/>
-					</div>
-				</form>
-			</div>
-			
-		</div>
-	</div>
-</div>
-<div class="container">
-<div class="table-responsive col-sm-12">
-	<table class="table table-hover table-bordered">
-		<thead>
-			<th ng-click="sort('id')">#</th>
-			<th ng-click="sort('chamberName')">Chamber Name
-			<span  ng-show="sortKey=='chamberName'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('chamberCarts')">Carts
-			<span  ng-show="sortKey=='chamberCarts'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-		</thead>
-		<tbody>
-			<tr dir-paginate="chamber in chamberList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
-				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.id}}</a></td>
-				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberName}}</a></td>
-				<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberCarts}}</a></td>
-			</tr>
-		</tbody>
-	</table>
-	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
-	
-	<div>
-      <a class="btn btn-success" ng-href="#/add_chamber_info">Add New Chamber</a>
-  </div>
+<div layout="row">
+	<md-sidenav
+			class="md-sidenav-left"
+			md-is-locked-open="true"
+			md-whiteframe="16">
+		<md-content>
+			<md-list flex >
+				<md-list-item class="md-secondary" >
+					<form>
+						<div class="form-group">
+							<label for="searchChamberName">Chamber Name :</label>
+							<input type="text" ng-model="searchAll.chamberName" id="searchChamberName" class="form-control"/>
+						</div>
+					</form>
+				</md-list-item>
+				<md-list-item class="md-secondary">
+					<form>
+						<div class="form-group">
+							<label for="searchChamberCarts">Carts :</label>
+							<input type="text" ng-model="searchAll.chamberCarts" id="searchChamberCarts" class="form-control"/>
+						</div>
+					</form>
+				</md-list-item>
+			</md-list>
+		</md-content>
+	</md-sidenav>
+	<div class="table-responsive col-sm-12">
+		<table class="table table-hover table-bordered">
+			<thead>
+				<th ng-click="sort('id')">#</th>
+				<th ng-click="sort('chamberName')">Chamber Name
+				<span  ng-show="sortKey=='chamberName'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('chamberCarts')">Carts
+				<span  ng-show="sortKey=='chamberCarts'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+			</thead>
+			<tbody>
+				<tr dir-paginate="chamber in chamberList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
+					<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.id}}</a></td>
+					<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberName}}</a></td>
+					<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberCarts}}</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
 
-</div>
+		<div>
+		  <a class="btn btn-success" ng-href="#/add_chamber_info">Add New Chamber</a>
+	  </div>
+	</div>
 </div>
