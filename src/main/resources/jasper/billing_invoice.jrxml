@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="billing_invoice" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7bdf310a-2dd8-4757-961f-b5414a7b161d">
-	<property name="ireport.zoom" value="1.1000000000000008"/>
+	<property name="ireport.zoom" value="1.4641000000000015"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="165"/>
+	<property name="ireport.y" value="87"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -128,13 +128,13 @@
 	<field name="client_address" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="clientEmail" class="java.lang.String">
+	<field name="client_email" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="clientFirstName" class="java.lang.String">
+	<field name="client_first_name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="clientLastName" class="java.lang.String">
+	<field name="client_last_name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="client_phone" class="java.lang.String">
@@ -215,7 +215,7 @@ Invoice for Services Rendered]]></text>
 		</band>
 	</title>
 	<detail>
-		<band height="339" splitType="Stretch">
+		<band height="411" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="26" y="32" width="48" height="20" uuid="b0d4ee2b-3715-41fa-a5ec-189a8ab9cfd9"/>
 				<textElement>
@@ -274,32 +274,16 @@ Invoice for Services Rendered]]></text>
 				<text><![CDATA[Address:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="37" y="156" width="82" height="20" uuid="904b7a18-1c8f-498e-9240-3feff469a649"/>
-				<text><![CDATA[Agency:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="37" y="176" width="82" height="20" uuid="6ecb7079-7a3c-4152-b4dd-882f4f1459fe"/>
-				<text><![CDATA[OUC:]]></text>
-			</staticText>
-			<staticText>
 				<reportElement mode="Opaque" x="37" y="196" width="82" height="20" uuid="e6e7a1a7-f2aa-4f24-9d6d-59ae48e569f1"/>
 				<text><![CDATA[Phytotron ID:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="37" y="216" width="82" height="20" uuid="d80bf73d-6e6d-420e-9a1e-23c1e86b4289"/>
-				<text><![CDATA[Abbreviated Title:]]></text>
+				<text><![CDATA[Project Title:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="270" y="92" width="82" height="20" uuid="3e02da14-22da-41a6-9318-958d763271f1"/>
-				<text><![CDATA[Dept Code:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="270" y="112" width="82" height="20" uuid="f1981bd1-a36e-45a5-86eb-e7172ad05892"/>
-				<text><![CDATA[Project:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="270" y="136" width="82" height="20" uuid="0471d67a-89ae-4357-b511-7f4e31eaf9b8"/>
-				<text><![CDATA[Budget/Trust:]]></text>
+				<reportElement mode="Opaque" x="270" y="92" width="96" height="20" uuid="3e02da14-22da-41a6-9318-958d763271f1"/>
+				<text><![CDATA[Department Name:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="270" y="196" width="82" height="20" uuid="d7809200-8363-41ea-b49e-c5efe6477aae"/>
@@ -310,28 +294,14 @@ Invoice for Services Rendered]]></text>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{clientFirstName}+" "+$F{clientLastName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{client_first_name}+" "+$F{client_last_name}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="108" y="116" width="162" height="40" uuid="56df0eef-da37-4f14-936d-531da32e6893"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="108" y="116" width="162" height="67" isPrintWhenDetailOverflows="true" uuid="56df0eef-da37-4f14-936d-531da32e6893"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{client_address}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="108" y="156" width="116" height="20" uuid="38c79a7f-a4e6-427c-85a7-c9aa5377227c"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="108" y="176" width="116" height="20" uuid="0e39fa4a-a707-4482-bf15-2175c293d764"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="108" y="196" width="116" height="20" uuid="31407d42-342b-4371-9053-c938cd2b6742"/>
@@ -353,20 +323,6 @@ Invoice for Services Rendered]]></text>
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dept_name}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="366" y="112" width="116" height="20" uuid="cac128b3-f748-40e7-ba1d-52678842ed41"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{project_id}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="366" y="136" width="116" height="20" uuid="76be6d20-ec14-4c8d-9ee7-cb85679160af"/>
-				<textElement>
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[]]></textFieldExpression>
 			</textField>
 			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
 				<reportElement x="197" y="52" width="81" height="20" uuid="c877b6aa-8c1a-4248-9240-92a48f0f5778"/>
@@ -442,27 +398,23 @@ Invoice for Services Rendered]]></text>
 				<reportElement x="60" y="278" width="1" height="35" uuid="0333dfd9-a896-49fd-9b36-f53b1be1f920"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="26" y="258" width="22" height="20" uuid="51ec2b68-23e7-4396-aa59-203e8ed51709"/>
+				<reportElement mode="Opaque" x="12" y="252" width="44" height="20" uuid="51ec2b68-23e7-4396-aa59-203e8ed51709"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Item]]></text>
+				<text><![CDATA[Chamber]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="72" y="252" width="42" height="20" uuid="3db76d8e-87fe-480c-a084-42858e7be04d"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Units]]></text>
+				<text><![CDATA[Carts]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="142" y="252" width="45" height="20" uuid="feded6d2-fbfb-454b-8c8a-1e002e19a179"/>
+				<reportElement mode="Opaque" x="142" y="248" width="55" height="27" uuid="feded6d2-fbfb-454b-8c8a-1e002e19a179"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Beginning]]></text>
+				<text><![CDATA[Billing Start
+Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="225" y="252" width="45" height="20" uuid="8125a8f5-b2b4-46d1-ac56-9cf640dbffaa"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Ending]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="321" y="252" width="45" height="20" uuid="bf0cb1bd-a1cc-4a0c-a5be-7abdd20e6a2b"/>
+				<reportElement mode="Opaque" x="307" y="252" width="59" height="20" uuid="bf0cb1bd-a1cc-4a0c-a5be-7abdd20e6a2b"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Unit Days]]></text>
 			</staticText>
@@ -509,11 +461,59 @@ Invoice for Services Rendered]]></text>
 			<textField>
 				<reportElement mode="Opaque" x="464" y="285" width="70" height="20" uuid="d171e55e-0a3f-44c2-ab7f-611fc826cbdb"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{total_due}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{current_bill}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="8" y="11" width="536" height="1" uuid="05801967-9dcf-4b1a-a218-e1c7d1172188"/>
 			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="224" y="248" width="55" height="27" uuid="c5e9ab0f-6361-4973-8bc7-18b6f60d635d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Billing End
+Date]]></text>
+			</staticText>
+			<line>
+				<reportElement x="299" y="391" width="244" height="1" uuid="2edf146c-4ae7-4950-ae61-41f93357964b"/>
+			</line>
+			<line>
+				<reportElement x="542" y="312" width="1" height="78" uuid="7df45d49-353b-4909-87d8-0281f07b07ee"/>
+			</line>
+			<line>
+				<reportElement x="299" y="314" width="1" height="78" uuid="fe97ce43-11da-4e84-9222-ef9232b95a38"/>
+			</line>
+			<line>
+				<reportElement x="455" y="313" width="1" height="78" uuid="8d9d4742-736c-46bc-984b-71379d3bcbfe"/>
+			</line>
+			<line>
+				<reportElement x="300" y="339" width="244" height="1" uuid="0e010f8b-75a1-449f-bf64-3053c376c10f"/>
+			</line>
+			<line>
+				<reportElement x="300" y="366" width="244" height="1" uuid="ede8de42-c0dc-4bbb-ae12-6584b8fcab1c"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="317" y="317" width="113" height="20" uuid="4eebec84-27f9-4d72-96d7-7e1c33a21d50"/>
+				<text><![CDATA[Current Bill]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="317" y="343" width="113" height="20" uuid="bb538f83-d87d-4839-978c-eccba4d989ef"/>
+				<text><![CDATA[Previous Balance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="317" y="370" width="113" height="20" uuid="5dd5f016-0d44-468b-ae45-e80db1c31d01"/>
+				<text><![CDATA[Total Due]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="464" y="369" width="66" height="20" uuid="6dbb772e-b045-4381-b524-a2f1ac30bc75"/>
+				<textFieldExpression><![CDATA[$F{total_due}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="464" y="317" width="66" height="20" uuid="bd4743d3-cef8-4a9f-b401-3ddb0c6ecf39"/>
+				<textFieldExpression><![CDATA[$F{current_bill}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="464" y="343" width="66" height="20" uuid="85ed8d63-3215-45e4-bb8a-2b563a811334"/>
+				<textFieldExpression><![CDATA[$F{prev_balance}]]></textFieldExpression>
+			</textField>
 		</band>
 		<band height="245">
 			<staticText>
