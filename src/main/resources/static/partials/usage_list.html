@@ -1,117 +1,121 @@
-<div id="search_boxes" class="container">
-	<div class="col-sm-12">
-		<div class="row">
-			<div class="col-sm-10">
-				<form>
-					<div class="form-group">
-						<label for="searchAll">Global Search :</label>
-						<input type="text" ng-model="searchAll.$" id="searchAll" class="form-control"/>
-					</div>
-				</form>
-			</div>
-			<div class="col-sm-2">
-				<form>
-					<div class="form-group">
-						  <label for="searchStatus">Select Status :</label>
-								<select class="form-control"  id="searchStatus" ng-change = "getProjects()" ng-model="project_status" ng-options="x for x in statuses">
-					      </select>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				<form>
-					<div class="form-group">
-						<label for="searchFirstName">Client First Name :</label>
-						<input type="text" ng-model="searchAll.client.client_first_name" id="searchFirstName" class="form-control"/>
-					</div>
-				</form>
-			</div>
-			<div class="col-sm-6">
-				<form>
-					<div class="form-group">
-						<label for="searchLastName">Client Last Name :</label>
-						<input type="text" ng-model="searchAll.client.client_last_name" id="searchLastName" class="form-control"/>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				<form>
-					<div class="form-group">
-						<label for="searchProject_id">Project id :</label>
-						<input type="text" ng-model="searchAll.project_id" id="searchProject_id" class="form-control"/>
-					</div>
-				</form>
-			</div>
-			<div class="col-sm-6">
-				<form>
-					<div class="form-group">
-						<label for="searchProject_Title">Project Title :</label>
-						<input type="text" ng-model="searchAll.project_Title" id="searchProject_Title" class="form-control"/>
-					</div>
-				</form>
+<div layout="row">
+	<md-sidenav
+			class="md-sidenav-left"
+			md-is-locked-open="true"
+			md-whiteframe="16">
+		<md-content>
+			<md-list flex>
+				<md-list-item class="md-secondary" >
+					<form>
+						<div class="form-group">
+							<label for="searchAll">Global Search :</label>
+							<input type="text" ng-model="searchAll.$" id="searchAll" class="form-control"/>
+						</div>
+					</form>
+				</md-list-item>
+				<md-list-item class="md-secondary">
+					<form>
+						<div class="form-group">
+							<label for="searchStatus">Select Status :</label>
+							<select class="form-control"  id="searchStatus" ng-change = "getProjects()" ng-model="project_status" ng-options="x for x in statuses">
+							</select>
+						</div>
+					</form>
+				</md-list-item>
+				<md-list-item class="md-secondary">
+					<form>
+						<div class="form-group">
+							<label for="searchFirstName">Client First Name :</label>
+							<input type="text" ng-model="searchAll.client.client_first_name" id="searchFirstName" class="form-control"/>
+						</div>
+					</form>
+				</md-list-item>
+				<md-list-item class="md-secondary">
+					<form>
+						<div class="form-group">
+							<label for="searchLastName">Client Last Name :</label>
+							<input type="text" ng-model="searchAll.client.client_last_name" id="searchLastName" class="form-control"/>
+						</div>
+					</form>
+				</md-list-item>
+				<md-list-item class="md-secondary">
+					<form>
+						<div class="form-group">
+							<label for="searchProject_id">Project id :</label>
+							<input type="text" ng-model="searchAll.project_id" id="searchProject_id" class="form-control"/>
+						</div>
+					</form>
+				</md-list-item>
+				<md-list-item class="md-secondary">
+					<form>
+						<div class="form-group">
+							<label for="searchProject_Title">Project Title :</label>
+							<input type="text" ng-model="searchAll.project_Title" id="searchProject_Title" class="form-control"/>
+						</div>
+					</form>
+				</md-list-item>
+			</md-list>
+		</md-content>
+	</md-sidenav>
+	<div class="container" layout="column">
+		<div class="table-responsive col-sm-12">
+			<table class="table table-hover table-bordered">
+				<thead>
+				<th ng-click="sort('cropCommonName')">#
+					<span  ng-show="sortKey=='id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('project_id')">Project Id
+					<span  ng-show="sortKey=='project_id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('project_Title')">Project Title
+					<span  ng-show="sortKey=='project_Title'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('client.client_first_name')">First Name
+					<span  ng-show="sortKey=='client.client_first_name'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('client.client_last_name')">Last Name
+					<span  ng-show="sortKey=='client.client_last_name'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('startDate')">Start Date
+					<span  ng-show="sortKey=='startDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('endDate')">End Date
+					<span  ng-show="sortKey=='endDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('lastBillDate')">Last Invoice Date
+					<span  ng-show="sortKey=='lastBillDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('currentBill')">Current Bill
+					<span  ng-show="sortKey=='currentBill'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('projectStatus')">Project Status
+					<span  ng-show="sortKey=='projectStatus'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+				</th>
+				</thead>
+				<tbody>
+				<tr dir-paginate="project in projectList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
+					<td><a href="#/track_project/{{project.id}}">{{project.id}}</a></td>
+					<td><a href="#/track_project/{{project.id}}">{{project.project_id}}</a></td>
+					<td><a href="#/track_project/{{project.id}}">{{project.project_Title}}</a></td>
+					<td><a href="#/track_project/{{project.id}}">{{project.client.client_first_name}}</a></td>
+					<td><a href="#/track_project/{{project.id}}">{{project.client.client_last_name}}</a></td>
+					<td><a href="#/track_project/{{project.id}}">{{project.startDate | date:'MMM d, y'}}</a></td>
+					<td><a href="#/track_project/{{project.id}}">{{project.endDate | date:'MMM d, y'}}</a></td>
+					<td><a href="#/track_project/{{project.id}}">{{project.lastBillDate | date:'MMM d, y'}}</a></td>
+					<td><a href="#/track_project/{{project.id}}">{{project.currentBill | currency}}</a></td>
+					<td><a href="#/track_project/{{project.id}}">{{project.projectStatus}}</a></td>
+				</tr>
+				</tbody>
+			</table>
+			<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+			<div>
+				<a class="btn btn-success" ng-href="#/">DOES NOTHING :P</a>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container">
-<div class="table-responsive col-sm-12">
-	<table class="table table-hover table-bordered">
-		<thead>
-			<th ng-click="sort('cropCommonName')">#
-			<span  ng-show="sortKey=='id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('project_id')">Project Id
-			<span  ng-show="sortKey=='project_id'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('project_Title')">Project Title
-			<span  ng-show="sortKey=='project_Title'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('client.client_first_name')">First Name
-			<span  ng-show="sortKey=='client.client_first_name'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('client.client_last_name')">Last Name
-			<span  ng-show="sortKey=='client.client_last_name'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('startDate')">Start Date
-			<span  ng-show="sortKey=='startDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('endDate')">End Date
-			<span  ng-show="sortKey=='endDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('lastBillDate')">Last Invoice Date
-			<span  ng-show="sortKey=='lastBillDate'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('currentBill')">Current Bill
-			<span  ng-show="sortKey=='currentBill'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-			<th ng-click="sort('projectStatus')">Project Status
-			<span  ng-show="sortKey=='projectStatus'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
-			</th>
-		</thead>
-		<tbody>
-			<tr dir-paginate="project in projectList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
-				<td><a href="#/track_project/{{project.id}}">{{project.id}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.project_id}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.project_Title}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.client.client_first_name}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.client.client_last_name}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.startDate | date:'MMM d, y'}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.endDate | date:'MMM d, y'}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.lastBillDate | date:'MMM d, y'}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.currentBill | currency}}</a></td>
-				<td><a href="#/track_project/{{project.id}}">{{project.projectStatus}}</a></td>
-			</tr>
-		</tbody>
-	</table>
-	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
 
 
-	<div>
-		<a class="btn btn-success" ng-href="#/">DOES NOTHING :P</a>
-	</div>
-</div>
-</div>
+
+
+

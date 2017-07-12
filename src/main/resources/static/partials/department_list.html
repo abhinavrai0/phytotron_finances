@@ -1,27 +1,29 @@
-<div id="search_boxes" class="container">
-	<div class="col-sm-12">
-		<div class="row">
-			<div class="col-sm-6">
-				<form>
-					<div class="form-group">
-						<label for="searchDepartmentId">Department Id :</label>
-						<input type="text" ng-model="searchAll.departmentId" id="searchDepartmentId" class="form-control"/>
-					</div>
-				</form>
-			</div>			
-			<div class="col-sm-6">
-				<form>
-					<div class="form-group">
-						<label for="searchDepartmentName">Department Name :</label>
-						<input type="text" ng-model="searchAll.departmentName" id="searchDepartmentName" class="form-control"/>
-					</div>
-				</form>
-			</div>
-			
-		</div>
-	</div>
-</div>
-<div class="container">
+<div layout="row">
+	<md-sidenav
+			class="md-sidenav-left"
+			md-is-locked-open="true"
+			md-whiteframe="16">
+		<md-content>
+			<md-list flex >
+				<md-list-item class="md-secondary" >
+					<form>
+						<div class="form-group">
+							<label for="searchDepartmentId">Department Id :</label>
+							<input type="text" ng-model="searchAll.departmentId" id="searchDepartmentId" class="form-control"/>
+						</div>
+					</form>
+				</md-list-item>
+				<md-list-item class="md-secondary">
+					<form>
+						<div class="form-group">
+							<label for="searchDepartmentName">Department Name :</label>
+							<input type="text" ng-model="searchAll.departmentName" id="searchDepartmentName" class="form-control"/>
+						</div>
+					</form>
+				</md-list-item>
+			</md-list>
+		</md-content>
+	</md-sidenav>
 	<div class="table-responsive col-sm-10">
 		<table class="table table-hover table-bordered">
 			<thead>
