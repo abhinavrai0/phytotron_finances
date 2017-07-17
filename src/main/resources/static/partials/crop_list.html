@@ -24,29 +24,30 @@
 			</md-list>
 		</md-content>
 	</md-sidenav>
-	<div class="table-responsive col-sm-12">
-		<table class="table table-hover table-bordered">
-			<thead>
+	<div class="container" layout="column">
+		<div>
+			<a class="btn btn-success" ng-href="#/add_crop_info">Add New Crop</a>
+		</div>
+		<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+		<div class="table-responsive col-sm-12">
+			<table class="table table-hover table-bordered">
+				<thead>
 				<th>#</th>
 				<th ng-click="sort('cropCommonName')">Common Name <!-- <i class="fa fa-fw fa-sort"></i> -->
-				<span class="glyphicon" ng-show="sortKey=='cropCommonName'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+					<span class="glyphicon" ng-show="sortKey=='cropCommonName'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 				</th>
 				<th ng-click="sort('cropScientificName')">Scientific Name <!-- ng-class="glyphicon glyphicon-hand-up"  -->
-				<span class="glyphicon" ng-show="sortKey=='cropScientificName'"  ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+					<span class="glyphicon" ng-show="sortKey=='cropScientificName'"  ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 				</th>
-			</thead>
-			<tbody>
+				</thead>
+				<tbody>
 				<tr dir-paginate="crop in cropList |filter:searchAll| orderBy:sortKey:reverse | itemsPerPage: 10" ng-init="sortKey='cropCommonName'">
 					<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.id}}</a></td>
 					<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropCommonName}}</a></td>
 					<td><a href="#/edit_crop_info/{{crop.id}}">{{crop.cropScientificName}}</a></td>
 				</tr>
-			</tbody>
-		</table>
-		<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
-
-		<div>
-		  <a class="btn btn-success" ng-href="#/add_crop_info">Add New Crop</a>
-	  </div>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

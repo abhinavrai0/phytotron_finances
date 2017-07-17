@@ -1,19 +1,13 @@
-<div class="header">
-    <div class="container">
-        <h3 class="text-center">Invoice Quarterly</h3>
+<div class="container" layout="row">
+    <div layout-alight="left center">
+        <h3>Select a Quarter to List Projects and Invoice Selection</h3>
     </div>
-    <div id="container" class="col-sm-12">
-        <div class="adjacentPanels col-sm-2"></div>
-        <div class="form-group">
-            <label for="department" class="col-sm-2 control-label">Select a Quarter to List Projects and Invoice Selection</label>
-            <div class="col-sm-3">
-                <select class="form-control"  ng-init="selectedQuarter = financialQuarters[0]" ng-model="selectedQuarter" ng-options="x as x.name for x in financialQuarters">
-                </select>
-            </div>
-            <div class="col-sm-3">
-                <button ng-click="getActiveClients()" class="btn btn-default">List Projects</button>
-            </div>
-        </div>
+    <div layout-align="center center">
+        <select class="form-control"  ng-init="selectedQuarter = financialQuarters[0]" ng-model="selectedQuarter" ng-options="x as x.name for x in financialQuarters">
+        </select>
+    </div>
+    <div layout-aligh="right center">
+        <button ng-click="getActiveClients()" class="btn btn-default">List Projects</button>
     </div>
 </div>
 

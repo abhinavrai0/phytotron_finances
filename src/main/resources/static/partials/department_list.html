@@ -24,30 +24,32 @@
 			</md-list>
 		</md-content>
 	</md-sidenav>
-	<div class="table-responsive col-sm-10">
-		<table class="table table-hover table-bordered">
-			<thead>
+	<div class="container" layout="column">
+		<div>
+			<a class="btn btn-success" ng-href="#/add_department_info">Add
+				New Department</a>
+		</div>
+		<dir-pagination-controls boundary-links="true"
+								 on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+		<div class="table-responsive col-sm-10">
+			<table class="table table-hover table-bordered">
+				<thead>
 				<th>#</th>
 				<th ng-click="sort('departmentId')">Department Id
-				<span class="glyphicon" ng-show="sortKey=='departmentId'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+					<span class="glyphicon" ng-show="sortKey=='departmentId'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 				</th>
 				<th ng-click="sort('departmentName')">Department Name
-				<span class="glyphicon" ng-show="sortKey=='departmentName'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+					<span class="glyphicon" ng-show="sortKey=='departmentName'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 				</th>
-			</thead>
-			<tbody>
+				</thead>
+				<tbody>
 				<tr	dir-paginate="department in departmentList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10" ng-init="sortKey='departmentName'">
 					<td><a href="#/edit_department_info/{{department.id}}">{{department.id}}</a></td>
 					<td><a href="#/edit_department_info/{{department.id}}">{{department.departmentId}}</a></td>
 					<td><a href="#/edit_department_info/{{department.id}}">{{department.departmentName}}</a></td>
 				</tr>
-			</tbody>
-		</table>
-		<dir-pagination-controls boundary-links="true"
-			on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
-		<div>
-			<a class="btn btn-success" ng-href="#/add_department_info">Add
-				New Department</a>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

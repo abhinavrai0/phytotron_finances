@@ -24,29 +24,30 @@
 			</md-list>
 		</md-content>
 	</md-sidenav>
-	<div class="table-responsive col-sm-12">
-		<table class="table table-hover table-bordered">
-			<thead>
+	<div class="container" layout="column">
+		<div>
+			<a class="btn btn-success" ng-href="#/add_chamber_info">Add New Chamber</a>
+		</div>
+		<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+		<div class="table-responsive col-sm-12">
+			<table class="table table-hover table-bordered">
+				<thead>
 				<th ng-click="sort('id')">#</th>
 				<th ng-click="sort('chamberName')">Chamber Name
-				<span  ng-show="sortKey=='chamberName'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+					<span  ng-show="sortKey=='chamberName'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 				</th>
 				<th ng-click="sort('chamberCarts')">Carts
-				<span  ng-show="sortKey=='chamberCarts'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+					<span  ng-show="sortKey=='chamberCarts'" ng-class="{'glyphicon':true ,'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
 				</th>
-			</thead>
-			<tbody>
+				</thead>
+				<tbody>
 				<tr dir-paginate="chamber in chamberList | filter:searchAll | orderBy:sortKey:reverse | itemsPerPage: 10">
 					<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.id}}</a></td>
 					<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberName}}</a></td>
 					<td><a href="#/edit_chamber_info/{{chamber.id}}">{{chamber.chamberCarts}}</a></td>
 				</tr>
-			</tbody>
-		</table>
-		<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
-
-		<div>
-		  <a class="btn btn-success" ng-href="#/add_chamber_info">Add New Chamber</a>
-	  </div>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

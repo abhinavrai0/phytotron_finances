@@ -47,18 +47,51 @@
 
 	<div layout="column" flex ng-cloak>
 		<md-toolbar layout="row">
-			<div>
-				<h4>Phytotron NC State</h4>
+			<div layout-alight="left center">
+				<h5>Phytotron NC State</h5>
 			</div>
-			<md-button href="#/usage_list" ng-class="{ active: isActive('/usage_list')}">Tracking Usage</md-button>
-			<md-button href="#/client_list" ng-class="{ active: isActive('/client_list')}">Client Information</md-button>
-			<md-button href="#/chamber_list" ng-class="{ active: isActive('/chamber_list')}">Chambers</md-button>
-			<md-button href="#/rate_list" ng-class="{ active: isActive('/rate_list')}">Rate</md-button>
-			<md-button href="#/department_list" ng-class="{ active: isActive('/department_list')}">Department</md-button>
-			<md-button href="#/crop_list" ng-class="{ active: isActive('/crop_list')}">Crop</md-button>
-			<md-button href="#/invoice_quarterly" ng-class="{ active: isActive('/invoice_quarterly')}">Invoice Quarterly</md-button>
+			<div layout-alight="left center">
+				<md-button href="#/usage_list" ng-class="{ active: isActive('/usage_list')}">Tracking Usage</md-button>
+			</div>
+			<div layout-alight="left center">
+				<md-menu>
+					<md-button ng-mouseenter="$mdMenu.open()">Invoice
+					</md-button>
+					<md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+						<md-menu-item>
+							<md-button href="#/invoice_quarterly" ng-class="{ active: isActive('/invoice_quarterly')}">Invoice Quarterly</md-button>
+						</md-menu-item>
+						<md-menu-item>
+							<md-button href="#/invoice_quarterly" ng-class="{ active: isActive('/invoice_quarterly')}">View Invoice History</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu>
+			</div>
+			<div layout-alight="left center">
+				<md-button href="#/client_list" ng-class="{ active: isActive('/client_list')}">Client Information</md-button>
+			</div>
+			<div layout-align="left center">
+				<md-menu>
+					<md-button ng-mouseenter="$mdMenu.open()">Space Usage Parameters
+					</md-button>
+					<md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+						<md-menu-item>
+							<md-button href="#/chamber_list" ng-class="{ active: isActive('/chamber_list')}">Chambers</md-button>
+						</md-menu-item>
+						<md-menu-item>
+							<md-button href="#/rate_list" ng-class="{ active: isActive('/rate_list')}">Rate</md-button>
+						</md-menu-item>
+						<md-menu-item>
+							<md-button href="#/department_list" ng-class="{ active: isActive('/department_list')}">Department</md-button>
+						</md-menu-item>
+						<md-menu-item>
+							<md-button href="#/crop_list" ng-class="{ active: isActive('/crop_list')}">Crop</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu>
+			</div>
 		</md-toolbar>
-		<section layout="row" flex>
+		<section layout="row">
 			<md-content layout-align="center start">
 				<ng-view ></ng-view>
 			</md-content>
