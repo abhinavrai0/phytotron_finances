@@ -881,6 +881,7 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
                 console.log(response);
                 // show projectsForInvoiceTable if a project exists
                 updatePageUI();
+                $scope.selectAllProjectsForInvoice = false;
                 // hide InvoicedProjectsTable (if displayed)
 				$scope.showInvoicedProjects = false;
             },function failure(response){

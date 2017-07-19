@@ -1,4 +1,4 @@
-<div class="container" layout="row">
+<div layout="row" layout-align="center center" layout-fill layout-margin>
     <div layout-alight="left center">
         <h3>Select a Quarter to List Projects and Invoice Selection</h3>
     </div>
@@ -14,6 +14,7 @@
 <div class="container" ng-show="showProjectForInvoiceTable">
     <div class="table-responsive col-sm-12">
         <h3>Projects available for invoicing: {{projectList.length}}</h3>
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
         <table class="table table-hover table-bordered" >
             <thead>
             <th>Invoice
@@ -76,17 +77,16 @@
             </tr>
             </tbody>
         </table>
-        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
-
-        <button ng-disabled = "!aleastOneProjectSelected"
-                ng-click="invoiceSelectedProjects()"
-                class="btn btn-success"
-        >INVOICE</button>
     </div>
+    <button ng-disabled = "!aleastOneProjectSelected"
+            ng-click="invoiceSelectedProjects()"
+            class="btn btn-success"
+    >INVOICE</button>
 </div>
 
 <div class="container" ng-show="showInvoicedProjects">
     <div class="table-responsive col-sm-12">
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
         <table class="table table-hover table-bordered" >
             <h3>Projects invoiced: {{invoicedProjectList.length}}</h3>
             <thead>
@@ -133,6 +133,5 @@
             </tr>
             </tbody>
         </table>
-        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
     </div>
 </div>

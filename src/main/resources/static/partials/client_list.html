@@ -1,4 +1,4 @@
-<div layout="row">
+<div layout="row" layout-fill>
 	<md-sidenav
 			class="md-sidenav-left"
 			md-is-locked-open="true"
@@ -62,13 +62,13 @@
 			</md-list>
 		</md-content>
 	</md-sidenav>
-	<div class="container" layout="column"><!-- Div containing table and other buttons-->
-		<div class="form-group">
+	<div class="container" layout="column" layout-fill><!-- Div containing table and other buttons-->
+		<div layout="row" layout-margin>
 			<a class="btn btn-success" ng-href="#/add_client_info">Add New Client</a>
 			<a class="btn btn-success" ng-disabled = "!selectedClient" ng-href="#/start_project/{{selectedClient}}">Start New Project</a>
 		</div>
-		<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
 		<div class="table-responsive col-sm-12">
+			<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
 			<table class="table table-hover table-bordered">
 				<thead>
 				<th>Select</th>

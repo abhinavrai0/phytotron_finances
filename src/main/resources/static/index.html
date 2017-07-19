@@ -45,13 +45,16 @@
 	<script src="https://cdn.ncsu.edu/brand-assets/bootstrap/js/bootstrap.min.js"></script>
 	<!--<script src="js/bootstrap.min.js"></script>-->
 
-	<div layout="column" flex ng-cloak>
+	<div layout="column" layout-fill ng-cloak>
 		<md-toolbar layout="row">
 			<div layout-alight="left center">
 				<h5>Phytotron NC State</h5>
 			</div>
 			<div layout-alight="left center">
 				<md-button href="#/usage_list" ng-class="{ active: isActive('/usage_list')}">Tracking Usage</md-button>
+			</div>
+			<div layout-alight="left center">
+				<md-button href="#/client_list" ng-class="{ active: isActive('/client_list')}">Client Information</md-button>
 			</div>
 			<div layout-alight="left center">
 				<md-menu>
@@ -67,9 +70,7 @@
 					</md-menu-content>
 				</md-menu>
 			</div>
-			<div layout-alight="left center">
-				<md-button href="#/client_list" ng-class="{ active: isActive('/client_list')}">Client Information</md-button>
-			</div>
+
 			<div layout-align="left center">
 				<md-menu>
 					<md-button ng-mouseenter="$mdMenu.open()">Space Usage Parameters
@@ -90,11 +91,12 @@
 					</md-menu-content>
 				</md-menu>
 			</div>
+
 		</md-toolbar>
 		<section layout="row">
-			<md-content layout-align="center start">
+			<div layout-fill>
 				<ng-view ></ng-view>
-			</md-content>
+			</div>
 		</section>
 	</div>
 
