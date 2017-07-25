@@ -1,0 +1,23 @@
+
+**********************************Invoicing URL's****************************************************************
+http://localhost:9080/batchInvoice/getActiveClients/{quarterStartDate}/{quarterEndDate}
+http://localhost:9080/batchInvoice/generateInvoice/{project_ids}
+
+
+**********************************Resource URL*******************************************************************
+http://localhost:9080/resourceController/addResource/{resource}
+http://localhost:9080/resourceController/updateResouce/{resource}
+http://localhost:9080/resourceController/getAllResources
+http://localhost:9080/resourceController/getResourceByName
+http://localhost:9080/resourceController/getResourceById
+http://localhost:9080/resourceController/removeResource/{id}
+
+**********************************Project Resource Mapping URL***************************************************
+http://localhost:9080/resourceController/addProjectResourceMapping/{resource}
+http://localhost:9080/resourceController/updateProjectResouceMapping/{resource}
+http://localhost:9080/resourceController/getAllProjectResourceMappings
+http://localhost:9080/resourceController/getResourcesForProject
+http://localhost:9080/resourceController/getProjectResourceMappingById
+http://localhost:9080/resourceController/removeProjectResourceMapping/{id}
+
+
