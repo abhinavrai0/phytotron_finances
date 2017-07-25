@@ -6,10 +6,7 @@ import edu.service.ProjectResourceMappingCRUD;
 import edu.service.ResourceCRUD;
 import edu.service.ProjectCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -30,8 +27,8 @@ public class ResourceController {
     @Autowired
     private ProjectResourceMappingCRUD projectResourceMappingCRUDRepo;
 
-    @RequestMapping(value = "/addResource/{resource}", method = RequestMethod.GET)
-    public Resource createResource(@PathVariable("resource") Resource resource){
+    @RequestMapping(value = "/addResource", method = RequestMethod.POST)
+    public Resource createResource(@RequestBody Resource resource){
 
         try {
             if(resource !=null)
@@ -43,8 +40,8 @@ public class ResourceController {
         return resource;
     }
 
-    @RequestMapping(value = "/updateResouce/{resource}", method = RequestMethod.GET)
-    public Resource updateResource(@PathVariable("resource") Resource resource){
+    @RequestMapping(value = "/updateResouce", method = RequestMethod.PUT)
+    public Resource updateResource(@RequestBody Resource resource){
 
         try {
             if(resource !=null)
@@ -56,7 +53,7 @@ public class ResourceController {
         return resource;
     }
 
-    @RequestMapping("/getAllResources")
+    @RequestMapping(value = "/getAllResources", method = RequestMethod.GET)
     public List<Resource> getAllResources(){
         List<Resource> resourceList = new ArrayList<>();
         try {
@@ -67,7 +64,7 @@ public class ResourceController {
         return resourceList;
     }
 
-    @RequestMapping("/getResourceByName")
+    @RequestMapping(value = "/getResourceByName", method = RequestMethod.GET)
     public Resource getResourceByName(String resourceName){
         Resource resource = new Resource();
         try {
@@ -78,7 +75,7 @@ public class ResourceController {
         return resource;
     }
 
-    @RequestMapping("/getResourceById")
+    @RequestMapping(value = "/getResourceById", method = RequestMethod.GET)
     Resource getResourceById(Long id){
         Resource resource = new Resource();
         try {
@@ -90,7 +87,7 @@ public class ResourceController {
         return resource;
     }
 
-    @RequestMapping(value = "/removeResource/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/removeResource/{id}", method = RequestMethod.DELETE)
     public Boolean removeResource(@PathVariable("id") Long id){
         try {
             if(resourceCRUDRepo.exists(id))
@@ -105,8 +102,8 @@ public class ResourceController {
         return true;
     }
 
-    @RequestMapping(value = "/addProjectResourceMapping/{resource}", method = RequestMethod.GET)
-    public ProjectResourceMapping createResource(@PathVariable("resource") ProjectResourceMapping resource){
+    @RequestMapping(value = "/addProjectResourceMapping/", method = RequestMethod.POST)
+    public ProjectResourceMapping createResource(@RequestBody ProjectResourceMapping resource){
 
         try {
             if(resource !=null)
@@ -118,8 +115,8 @@ public class ResourceController {
         return resource;
     }
 
-    @RequestMapping(value = "/updateProjectResouceMapping/{resource}", method = RequestMethod.GET)
-    public ProjectResourceMapping updateResource(@PathVariable("resource") ProjectResourceMapping resource){
+    @RequestMapping(value = "/updateProjectResouceMapping", method = RequestMethod.PUT)
+    public ProjectResourceMapping updateResource(@RequestBody ProjectResourceMapping resource){
         try {
             if(resource !=null)
                 projectResourceMappingCRUDRepo.save(resource);
@@ -129,7 +126,7 @@ public class ResourceController {
         return resource;
     }
 
-    @RequestMapping("/getAllProjectResourceMappings")
+    @RequestMapping(value = "/getAllProjectResourceMappings", method = RequestMethod.GET)
     public List<ProjectResourceMapping> getAllProjectReourcesMappings(){
         List<ProjectResourceMapping> resourceList = new ArrayList<>();
         try {
@@ -140,7 +137,7 @@ public class ResourceController {
         return resourceList;
     }
 
-    @RequestMapping("/getResourcesForProject")
+    @RequestMapping(value = "/getResourcesForProject", method = RequestMethod.GET)
     public List<ProjectResourceMapping> getResourceForProject(String projectId){
         List<ProjectResourceMapping> projectResourceList = new ArrayList<>();
         try {
@@ -151,7 +148,7 @@ public class ResourceController {
         return projectResourceList;
     }
 
-    @RequestMapping("/getProjectResourceMappingById")
+    @RequestMapping(value = "/getProjectResourceMappingById", method = RequestMethod.GET)
     ProjectResourceMapping getProjectResourceMappingById(Long id){
         ProjectResourceMapping projectResourceMapping = new ProjectResourceMapping();
         try {
