@@ -40,12 +40,14 @@ public class ResourceController {
         return resource;
     }
 
-    @RequestMapping(value = "/updateResouce", method = RequestMethod.PUT)
-    public Resource updateResource(@RequestBody Resource resource){
+    @RequestMapping(value = "/updateResouce/{id}", method = RequestMethod.PUT)
+    public Resource updateResource(@PathVariable("id") Long id, @RequestBody Resource resource){
 
         try {
-            if(resource !=null)
+            if(resource !=null && resourceCRUDRepo.exists(id)){
+                resource.setId(id);
                 resourceCRUDRepo.save(resource);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,11 +117,13 @@ public class ResourceController {
         return resource;
     }
 
-    @RequestMapping(value = "/updateProjectResouceMapping", method = RequestMethod.PUT)
-    public ProjectResourceMapping updateResource(@RequestBody ProjectResourceMapping resource){
+    @RequestMapping(value = "/updateProjectResouceMapping/{id}", method = RequestMethod.PUT)
+    public ProjectResourceMapping updateResource(@PathVariable("id") Long id,@RequestBody ProjectResourceMapping resource){
         try {
-            if(resource !=null)
+            if(resource !=null && projectResourceMappingCRUDRepo.exists(id)){
+                resource.setId(id);
                 projectResourceMappingCRUDRepo.save(resource);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
