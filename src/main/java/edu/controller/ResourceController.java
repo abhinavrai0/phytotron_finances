@@ -66,8 +66,8 @@ public class ResourceController {
         return resourceList;
     }
 
-    @RequestMapping(value = "/getResourceByName", method = RequestMethod.GET)
-    public Resource getResourceByName(String resourceName){
+    @RequestMapping(value = "/getResourceByName/{resourceName}", method = RequestMethod.GET)
+    public Resource getResourceByName(@PathVariable("resourceName") String resourceName){
         Resource resource = new Resource();
         try {
             resource = resourceCRUDRepo.findFirstByResourceName(resourceName);
@@ -77,8 +77,8 @@ public class ResourceController {
         return resource;
     }
 
-    @RequestMapping(value = "/getResourceById", method = RequestMethod.GET)
-    Resource getResourceById(Long id){
+    @RequestMapping(value = "/getResourceById/{id}", method = RequestMethod.GET)
+    Resource getResourceById(@PathVariable ("id") Long id){
         Resource resource = new Resource();
         try {
             if(resourceCRUDRepo.exists(id))
@@ -141,8 +141,8 @@ public class ResourceController {
         return resourceList;
     }
 
-    @RequestMapping(value = "/getResourcesForProject", method = RequestMethod.GET)
-    public List<ProjectResourceMapping> getResourceForProject(String projectId){
+    @RequestMapping(value = "/getResourcesForProject/{projectId}", method = RequestMethod.GET)
+    public List<ProjectResourceMapping> getResourceForProject(@PathVariable("projectId") String projectId){
         List<ProjectResourceMapping> projectResourceList = new ArrayList<>();
         try {
             projectResourceList = projectResourceMappingCRUDRepo.findAllByProjectId(projectId);
@@ -152,8 +152,8 @@ public class ResourceController {
         return projectResourceList;
     }
 
-    @RequestMapping(value = "/getProjectResourceMappingById", method = RequestMethod.GET)
-    ProjectResourceMapping getProjectResourceMappingById(Long id){
+    @RequestMapping(value = "/getProjectResourceMappingById/{id}", method = RequestMethod.GET)
+    ProjectResourceMapping getProjectResourceMappingById(@PathVariable("id") Long id){
         ProjectResourceMapping projectResourceMapping = new ProjectResourceMapping();
         try {
             if(projectResourceMappingCRUDRepo.exists(id))
