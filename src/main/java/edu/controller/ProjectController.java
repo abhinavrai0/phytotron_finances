@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 //import org.joda.time.*;
 //import org.joda.time.Interval;
+import edu.model.ProjectResourceMapping;
+import edu.service.ProjectResourceMappingCRUD;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectCRUD projectCrudRepo;
+
+	@Autowired
+	private ProjectResourceMappingCRUD projectResourceMappingCRUDRepo;
 
 	static final Logger logger = LogManager.getLogger(ProjectController.class.getName());
 
@@ -93,8 +98,8 @@ public class ProjectController {
 	//Set initially bill and bill paid to 0
 	//Set Project status as active upon creation of project
 	//Set last bill generated(last invoice) date same as start date
-	@RequestMapping(method=RequestMethod.POST)
-	public Project createProject(@RequestBody Project project) throws Exception {
+	@RequestMapping(value = "/createProject/{id}",method=RequestMethod.POST)
+	public Project createProject(@RequestBody Project project, @RequestBody ProjectResourceMapping projectResourceMapping, @PathVariable("id") Long id) throws Exception {
 		logger.info("Creating project : {}", project);
 		if(project.getProject_Title() == null || project.getProject_Title().isEmpty() 
 				|| project.getProject_id()==null || project.getProject_id().isEmpty()){
@@ -106,6 +111,10 @@ public class ProjectController {
 			project.setCurrentBill(0d);
 			project.setBillPaidTotal(0d);
 			projectCrudRepo.save(project);
+
+			projectResourceMapping.setId(id);
+			projectResourceMappingCRUDRepo.save(projectResourceMapping);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			e.printStackTrace();
