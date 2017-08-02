@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 //import org.joda.time.*;
 //import org.joda.time.Interval;
+import edu.model.ProjectResourceMapping;
+import edu.service.ProjectResourceMappingCRUD;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectCRUD projectCrudRepo;
+
+	@Autowired
+	private ProjectResourceMappingCRUD projectResourceMappingCRUDRepo;
 
 	static final Logger logger = LogManager.getLogger(ProjectController.class.getName());
 
@@ -106,6 +111,10 @@ public class ProjectController {
 			project.setCurrentBill(0d);
 			project.setBillPaidTotal(0d);
 			projectCrudRepo.save(project);
+            ProjectResourceMapping projectResourceMapping = project.getProjectResourceMapping();
+			if(projectResourceMapping!=null)
+				projectResourceMappingCRUDRepo.save(projectResourceMapping);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			e.printStackTrace();
