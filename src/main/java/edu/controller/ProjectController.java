@@ -99,7 +99,7 @@ public class ProjectController {
 	//Set Project status as active upon creation of project
 	//Set last bill generated(last invoice) date same as start date
 	@RequestMapping(method=RequestMethod.POST)
-	public Project createProject(@RequestBody Project project, @RequestBody ProjectResourceMapping projectResourceMapping) throws Exception {
+	public Project createProject(@RequestBody Project project) throws Exception {
 		logger.info("Creating project : {}", project);
 		if(project.getProject_Title() == null || project.getProject_Title().isEmpty() 
 				|| project.getProject_id()==null || project.getProject_id().isEmpty()){
@@ -111,7 +111,7 @@ public class ProjectController {
 			project.setCurrentBill(0d);
 			project.setBillPaidTotal(0d);
 			projectCrudRepo.save(project);
-
+            ProjectResourceMapping projectResourceMapping = project.getProjectResourceMapping();
 			if(projectResourceMapping!=null)
 				projectResourceMappingCRUDRepo.save(projectResourceMapping);
 

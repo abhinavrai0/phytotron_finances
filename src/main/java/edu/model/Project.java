@@ -43,6 +43,9 @@ public class Project {
 	private Double billPaidTotal=0.0;//Total Paid
 	private String projectStatus;
 
+	@Transient
+	private ProjectResourceMapping projectResourceMapping;
+
 	public Long getId() {
 		return id;
 	}
@@ -184,6 +187,12 @@ public class Project {
 	public void setCrops(Crop[] crops) {
 		this.crops = crops;
 	}*/
-	
 
+	public ProjectResourceMapping getProjectResourceMapping() {
+		return projectResourceMapping;
+	}
+
+	public void setProjectResourceMapping(ProjectResourceMapping projectResourceMapping) {
+		this.projectResourceMapping = projectResourceMapping;
+	}
 }
