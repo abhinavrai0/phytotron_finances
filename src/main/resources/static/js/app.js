@@ -86,8 +86,19 @@ var billingApp = angular.module( "billing", ["ngRoute","ngResource","angularUtil
     .when("/invoice_quarterly",{
         templateUrl: "./partials/invoice_quarterly.html",
         controller:"invoice_quarterly_controller"
+    })
+    .when("/resource_list",{
+        templateUrl: "./partials/resource_list.html",
+        controller:"resource_list_Controller"
+    })
+    .when("/add_resource_info",{
+        templateUrl: "./partials/add_resource_info.html",
+        controller:"add_resource_info_Controller"
+    })
+    .when("/edit_resource_info/:id",{
+        templateUrl: "./partials/edit_resource_info.html",
+        controller:"edit_resource_info_Controller"
     });
-
   });
 
 billingApp.directive('ngConfirmClick', [

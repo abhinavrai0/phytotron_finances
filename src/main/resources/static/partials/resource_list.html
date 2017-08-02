@@ -1,0 +1,45 @@
+<div layout="row" layout-fill>
+    <md-sidenav
+            class="md-sidenav-left"
+            md-is-locked-open="true"
+            md-whiteframe="16">
+        <md-content>
+            <md-list flex >
+                <md-list-item class="md-secondary" >
+                    <form>
+                        <div class="form-group">
+                            <label for="searchResourceName">Resource Name :</label>
+                            <input type="text" ng-model="searchAll.resourceName" id="searchResourceName" class="form-control"/>
+                        </div>
+                    </form>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+    <div class="container" layout="column" layout-fill>
+        <div layout="row" layout-margin>
+            <a class="btn btn-success" ng-href="#/add_resource_info">Add New Resource</a>
+        </div>
+        <div class="table-responsive col-sm-12">
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+            <table class="table table-hover table-bordered">
+                <thead>
+                <th>#</th>
+                <th ng-click="sort('resourceName')">Resource Name <!-- <i class="fa fa-fw fa-sort"></i> -->
+                    <span class="glyphicon" ng-show="sortKey=='resourceName'" ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('resourceUnitType')">Unit of Measure <!-- ng-class="glyphicon glyphicon-hand-up"  -->
+                    <span class="glyphicon" ng-show="sortKey=='resourceUnitType'"  ng-class="{'glyphicon-hand-up':reverse,'glyphicon-hand-down':!reverse}"></span>
+                </th>
+                </thead>
+                <tbody>
+                <tr dir-paginate="resource in resourceList |filter:searchAll| orderBy:sortKey:reverse | itemsPerPage: 10" ng-init="sortKey='resourceName'">
+                    <td><a href="#/edit_resource_info/{{resource.id}}">{{resource.id}}</a></td>
+                    <td><a href="#/edit_resource_info/{{resource.id}}">{{resource.resourceName}}</a></td>
+                    <td><a href="#/edit_resource_info/{{resource.id}}">{{resource.unitOfMeasure}}</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

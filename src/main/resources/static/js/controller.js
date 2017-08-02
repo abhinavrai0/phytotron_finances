@@ -258,6 +258,7 @@ billingApp.controller("edit_department_info_Controller", function($rootScope,$sc
 		});
 	}
 });
+
 billingApp.controller("crop_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.message="Crop List";
 	$scope.savedCropInfo=$http.get('/crop/')
@@ -339,7 +340,19 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 	var currentClient = null;
 	var initializeProject = function() {
 		return {
-			client : null, project_id : "", project_Title :"", rateValue:"", acc_number:"", chambers: [], carts:0, startDate:"", endDate:"", lastBillDate:"", currentBill:"", billPaidTotal:"", accountStatus:""
+			client : null,
+			project_id : "",
+			project_Title :"",
+			rateValue:"",
+			acc_number:"",
+			chambers: [],
+			carts:0,
+			startDate:"",
+			endDate:"",
+			lastBillDate:"",
+			currentBill:"",
+			billPaidTotal:"",
+			accountStatus:""
 		};
 	}
 	// Saves all information regarding a new project for a selected client.
@@ -782,7 +795,6 @@ billingApp.controller("payment_list_Controller", function($rootScope,$scope,$htt
 	}
 });
 
-
 billingApp.controller("rate_list_Controller", function($rootScope,$scope,$http,$log){
 	$scope.savedRateInfo=$http.get('/rate/')
 	.then(function success(response) {
@@ -975,4 +987,82 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
             $scope.showProjectForInvoiceTable = false;
         }
 	}
+});
+
+// Controllers for Managing Resources
+billingApp.controller("resource_list_Controller", function($rootScope,$scope,$http,$log){
+	$scope.message ="Resource List";
+	$scope.savedResourceInfo =$http.get('/resourceController/getAllResources/')
+		.then(function success(response){
+            $scope.resourceList = response.data;
+            $scope.config = response.config;
+            $scope.headers = response.headers;
+            $scope.status = response.status;
+            $scope.statusText = response.statusText;
+
+		}, function failure(response){
+            $scope.resourceList = response.statusText;
+            $scope.status = response.data;
+            $log.info(response);
+		});
+
+    $scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
+});
+billingApp.controller("add_resource_info_Controller", function($scope,$http){
+	var initializeResource = function(){
+		return {
+			resourceName:"",unitOfMeasure:""
+		}
+	}
+
+	$scope.resource_form = initializeResource();
+	$scope.submit = function(){
+		if($scope.resource_form){
+			$http.post("/resourceController/addResource/",$scope.resource_form)
+				.success(function(response){
+                    $scope.message = "Resource "+ response.resourceName + " Added Successfully";
+                    $scope.savedSuccessfully = true; // show success message
+                    $scope.showAlertMessage = true;
+                    $scope.resource_form = initializeResource();
+				})
+				.error(function(response){
+                    $scope.message = "Resource Failed to add";
+                    $scope.savedSuccessfully = false; // show failure message
+                    $scope.showAlertMessage = true;
+			});
+		}
+	}
+});
+billingApp.controller("edit_resource_info_Controller", function($rootScope,$scope,$http,$log,$routeParams){
+    $scope.id = $routeParams.id;
+    $scope.editResourceInfo=$http.get('/resourceController/getResourceById/'+$scope.id)
+        .then(function success(response) {
+            $scope.resource_form = response.data;
+            $scope.config = response.config;
+            $scope.headers = response.headers;
+            $scope.status = response.status;
+            $scope.statusText = response.statusText;
+        },function failure(response){
+            $scope.selectedInfo = response.statusText;
+            $scope.status = response.data;
+            $log.info(response);
+        });
+    $scope.submit=function(){
+
+        $http.put("/resourceController/updateResouce/"+$scope.id,$scope.resource_form)
+            .success(function(resource_form, status, headers, config) {
+                $scope.message = "Resource "+ resource_form.resourceName + " Edited Successfully";
+                $scope.savedSuccessfully = true; // show success message
+                $scope.showAlertMessage = true;
+            })
+            .error(function(resource_form, status, headers, config) {
+                $scope.message = "Resource "+ resource_form.resourceName + " failed to edit";
+                $scope.savedSuccessfully = failure; // show failure message
+                $scope.showAlertMessage = true;
+                //alert( "failure message: " + JSON.stringify({data: data}));
+            });
+    }
 });
