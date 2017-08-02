@@ -112,8 +112,13 @@ public class ProjectController {
 			project.setBillPaidTotal(0d);
 			projectCrudRepo.save(project);
             ProjectResourceMapping projectResourceMapping = project.getProjectResourceMapping();
-			if(projectResourceMapping!=null)
+			if(projectResourceMapping!=null){
+				projectResourceMapping.setProjectId(project.getProject_id());
+				projectResourceMapping.setInvoiced(Boolean.FALSE);
+
 				projectResourceMappingCRUDRepo.save(projectResourceMapping);
+			}
+
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
