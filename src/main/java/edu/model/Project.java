@@ -44,7 +44,7 @@ public class Project {
 	private String projectStatus;
 
 	@Transient
-	private ProjectResourceMapping projectResourceMapping;
+	private List<ProjectResourceMapping> projectResourceMappingList;
 
 	public Long getId() {
 		return id;
@@ -188,11 +188,11 @@ public class Project {
 		this.crops = crops;
 	}*/
 
-	public ProjectResourceMapping getProjectResourceMapping() {
-		return projectResourceMapping;
+	public List<ProjectResourceMapping> getProjectResourceMappingList() {
+		return projectResourceMappingList;
 	}
 
-	public void setProjectResourceMapping(ProjectResourceMapping projectResourceMapping) {
-		this.projectResourceMapping = projectResourceMapping;
+	public void setProjectResourceMappingList(List<ProjectResourceMapping> projectResourceMappingList) {
+		this.projectResourceMappingList = projectResourceMappingList;
 	}
 }

@@ -111,12 +111,14 @@ public class ProjectController {
 			project.setCurrentBill(0d);
 			project.setBillPaidTotal(0d);
 			projectCrudRepo.save(project);
-            ProjectResourceMapping projectResourceMapping = project.getProjectResourceMapping();
-			if(projectResourceMapping!=null){
-				projectResourceMapping.setProjectId(project.getProject_id());
-				projectResourceMapping.setInvoiced(Boolean.FALSE);
+            List<ProjectResourceMapping> projectResourceMappingList = project.getProjectResourceMappingList();
+			if(projectResourceMappingList!=null && !projectResourceMappingList.isEmpty()){
+				for (ProjectResourceMapping projectResourceMapping : projectResourceMappingList){
+					projectResourceMapping.setProjectId(project.getProject_id());
+					projectResourceMapping.setInvoiced(Boolean.FALSE);
 
-				projectResourceMappingCRUDRepo.save(projectResourceMapping);
+					projectResourceMappingCRUDRepo.save(projectResourceMapping);
+				}
 			}
 
 
