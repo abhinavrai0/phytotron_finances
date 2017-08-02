@@ -31,10 +31,10 @@ public class ProjectResourceMapping {
     private Float unitsConsumed;
 
     @Column(name = "allocation_date")
-    private Date allocatiionDate;
+    private Date allocationDate;
 
     @Column(name = "deallocation_date")
-    private Date deAllocationDate;
+    private Date deallocationDate;
 
     @Column(name = "comments")
     private String comments;
@@ -93,20 +93,20 @@ public class ProjectResourceMapping {
         this.unitsConsumed = unitsConsumed;
     }
 
-    public Date getAllocatiionDate() {
-        return allocatiionDate;
+    public Date getAllocationDate() {
+        return allocationDate;
     }
 
-    public void setAllocatiionDate(Date allocatiionDate) {
-        this.allocatiionDate = allocatiionDate;
+    public void setAllocationDate(Date allocationDate) {
+        this.allocationDate = allocationDate;
     }
 
-    public Date getDeAllocationDate() {
-        return deAllocationDate;
+    public Date getDeallocationDate() {
+        return deallocationDate;
     }
 
-    public void setDeAllocationDate(Date deAllocationDate) {
-        this.deAllocationDate = deAllocationDate;
+    public void setDeallocationDate(Date deallocationDate) {
+        this.deallocationDate = deallocationDate;
     }
 
     public String getComments() {
@@ -134,8 +134,8 @@ public class ProjectResourceMapping {
                 ", resourceDescription='" + resourceDescription + '\'' +
                 ", rate=" + rate +
                 ", unitsConsumed=" + unitsConsumed +
-                ", allocatiionDate=" + allocatiionDate +
-                ", deAllocationDate=" + deAllocationDate +
+                ", allocationDate=" + allocationDate +
+                ", deallocationDate=" + deallocationDate +
                 ", comments='" + comments + '\'' +
                 ", isInvoiced=" + isInvoiced +
                 '}';
