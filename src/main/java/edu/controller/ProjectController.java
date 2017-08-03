@@ -111,7 +111,12 @@ public class ProjectController {
 			project.setCurrentBill(0d);
 			project.setBillPaidTotal(0d);
 			projectCrudRepo.save(project);
-            List<ProjectResourceMapping> projectResourceMappingList = project.getProjectResourceMappingList();
+			/****
+			 * *** Logic for adding resources to project on create project page.
+			 * This part is commented since we decided to use check box button
+			 * instead of actually adding resources while creating project.
+			 * ******************/
+            /*List<ProjectResourceMapping> projectResourceMappingList = project.getProjectResourceMappingList();
 			if(projectResourceMappingList!=null && !projectResourceMappingList.isEmpty()){
 				for (ProjectResourceMapping projectResourceMapping : projectResourceMappingList){
 					projectResourceMapping.setProjectId(project.getProject_id());
@@ -119,7 +124,7 @@ public class ProjectController {
 
 					projectResourceMappingCRUDRepo.save(projectResourceMapping);
 				}
-			}
+			}*/
 
 
 		} catch (Exception e) {
