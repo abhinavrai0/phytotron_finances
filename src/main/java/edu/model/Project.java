@@ -43,6 +43,12 @@ public class Project {
 	private Double billPaidTotal=0.0;//Total Paid
 	private String projectStatus;
 
+	@Column(name = "requires_additional_resources")
+	private Boolean requiresAdditionalResources;
+
+	@Column(name = "additional_resources_added")
+	private Boolean additionalResourcesAdded;
+
 	@Transient
 	private List<ProjectResourceMapping> projectResourceMappingList;
 
@@ -194,5 +200,21 @@ public class Project {
 
 	public void setProjectResourceMappingList(List<ProjectResourceMapping> projectResourceMappingList) {
 		this.projectResourceMappingList = projectResourceMappingList;
+	}
+
+	public Boolean getRequiresAdditionalResources() {
+		return requiresAdditionalResources;
+	}
+
+	public void setRequiresAdditionalResources(Boolean requiresAdditionalResources) {
+		this.requiresAdditionalResources = requiresAdditionalResources;
+	}
+
+	public Boolean getAdditionalResourcesAdded() {
+		return additionalResourcesAdded;
+	}
+
+	public void setAdditionalResourcesAdded(Boolean additionalResourcesAdded) {
+		this.additionalResourcesAdded = additionalResourcesAdded;
 	}
 }
