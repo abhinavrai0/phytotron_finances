@@ -82,16 +82,12 @@
 				<div class="form-group">
 					<label for="chambers" class="col-sm-2 control-label">Chambers</label>
 					<div class="col-sm-2">
-						<select class="form-control" ng-model="selectedChamber"
+						<select class="form-control" ng-model="selectedChamber" id="chambers"
 							ng-options="x.chamberName for x in chambers">
 							<option value="" disabled selected>Chamber Type</option>
 						</select>
 					</div>
 					<div class="col-sm-2">
-
-						<!-- <label for="numberCarts" class="control-label">Number of carts: </label>
-      <span for="numberCarts" class = "fields">{{project_form.chambers.chamberCarts}}</span>
-      <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-plus">Remove Chamber</i></button> -->
 						<button type="button" ng-click="addChamberRow()"
 							class="btn btn-default addButton">Add Chamber</button>
 					</div>
@@ -124,24 +120,138 @@
 							placeholder="Enter the number of carts">
 					</div>
 				</div>
-				<!-- <div class="form-group">
-					<label for="startDate" class="col-sm-2 control-label">Start
-						Date</label>
+				<div class="form-group" >
+					<label for="carts" class="col-sm-2 control-label">Requires Additional Resources</label>
 					<div class="col-sm-2">
-						<input type="date" class="form-control" id="startDate"
-							ng-model="project_form.startDate">
+						<md-switch ng-model="project_form.requiresAdditionalResources"
+								   aria-label="Requires Additional Resources"
+								   ng-change="resourcesToggled()"
+								   ng-disabled="project_form.projectResourceMappingList.length>0"
+						</md-switch>
 					</div>
-				</div> -->
+				</div>
+				<!--START OLD OF RESOURCES VIEW-->
+				<div ng-show="project_form.requiresAdditionalResources">
+					<div class="form-group">
+						<label for="resources" class="col-sm-2 control-label">Resources</label>
+						<div class="col-sm-2">
+							<select class="form-control" ng-model="selectedResource" ng-change="updateCurrentResourceNameId()" id="resources"
+									ng-options="x as x.resourceName for x in resourceList">
+								<option value="" disabled selected>Resource Name</option>
+							</select>
+						</div>
 
+						<label for="resource_Description" class="col-sm-2 control-label">Description</label>
+						<div class="col-sm-2">
+							<input type="name" class="form-control" id="resource_Description"
+								   ng-model="currentResourceDescription"
+								   placeholder="Enter Resource Use Description">
+						</div>
+					</div>
+					<div class="form-group">
+
+						<label for="resource_Rate" class="col-sm-2 control-label">Unit Rate</label>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" id="resource_Rate"
+								   ng-model="currentResourceRate"
+								   placeholder="Enter Resource Unit Rate">
+						</div>
+
+						<label for="resource_Units_Consumed" class="col-sm-2 control-label">Units Consumed</label>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" id="resource_Units_Consumed"
+								   ng-model="currentResourceUnitsConsumed"
+								   placeholder="Enter Units Consumed">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="allocationDate">Allocation Date</label>
+
+						<div class="col-sm-3">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"> </i>
+								</div>
+								<input class="form-control" id="allocationDate" name="date"
+									   ng-model="currentResourceStartDate" placeholder="MM-dd-yyyy"
+									   type="text" />
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="deallocationDate">Deallocation Date</label>
+						<div class="col-sm-3">
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"> </i>
+								</div>
+								<input class="form-control" id="deallocationDate" name="date"
+									   ng-model="currentResourceEndDate" placeholder="MM-dd-yyyy"
+									   type="text" />
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+
+						<label for="resource_Comments" class="col-sm-2 control-label">Resource Comments</label>
+						<div class="col-sm-2">
+							<input type="name" class="form-control" id="resource_Comments"
+								   ng-model="currentResourceComments"
+								   placeholder="Enter Comments">
+						</div>
+
+						<div class="col-sm-2">
+							<button type="button" ng-click="addResourceRow()"
+									class="btn btn-default addButton">Add Resource</button>
+						</div>
+					</div>
+
+
+
+					<div class="form-group">
+						<div class="table-responsive col-sm-8 col-sm-push-2">
+							<table class="table table-hover table-bordered">
+								<thead>
+								<th>Resource Id</th>
+								<th>Resource Name</th>
+								<th>Description</th>
+								<th>Unit Rate</th>
+								<th>Units Consumed</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Comments</th>
+								<th>Action</th>
+								</thead>
+
+								<tbody>
+								<tr ng-repeat="resource in project_form.projectResourceMappingList">
+									<td>{{resource.resourceId}}</td>
+									<td>{{resource.resourceName}}</td>
+									<td>{{resource.resourceDescription}}</td>
+									<td>{{resource.rate}}</td>
+									<td>{{resource.unitsConsumed}}</td>
+									<td>{{resource.displayAllocationDate}}</td>
+									<td>{{resource.displayDeallocationDate}}</td>
+									<td>{{resource.comments}}</td>
+									<td><input type="button" value="Remove"
+											   class="btn btn-primary" ng-click="removeResourceRow($index)" /></td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!--END OF RESOURCES VIEW-->
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="date">Start Date</label>
+					<label class="col-sm-2 control-label" for="projectStartDate">Project Start Date</label>
 
 					<div class="col-sm-3">
 						<div class="input-group">
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"> </i>
 							</div>
-							<input class="form-control" id="date" name="date"
+							<input class="form-control" id="projectStartDate" name="date"
 								ng-model="startDate" placeholder="MM-dd-yyyy"
 								type="text" />
 						</div>
@@ -149,13 +259,13 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="date">End Date</label>
+					<label class="col-sm-2 control-label" for="projectEndDate">Project End Date</label>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"> </i>
 							</div>
-							<input class="form-control" id="date" name="date"
+							<input class="form-control" id="projectEndDate" name="date"
 								ng-model="endDate" placeholder="MM-dd-yyyy"
 								type="text" />
 						</div>

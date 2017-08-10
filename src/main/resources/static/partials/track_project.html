@@ -131,24 +131,128 @@
 							placeholder="Enter the number of carts" required>
 					</div>
 				</div>
-
-				<!-- <div class="form-group">
-					<label for="startDate" class="col-sm-2 control-label">Start
-						Date </label>
-					<div class="col-sm-2">
-						<input type="date" class="form-control" id="startDate"
-							ng-model="usage_form.startDate" required>
+					<!--adding button to add resources to project-->
+					<div class="form-group" >
+						<label for="carts" class="col-sm-2 control-label">Requires Additional Resources</label>
+						<div class="col-sm-2">
+							<md-switch ng-model="usage_form.requiresAdditionalResources"
+									   aria-label="Requires Additional Resources"
+									   ng-change="resourcesToggled()"
+									   ng-disabled="usage_form.projectResourceMappingList.length>0"
+							</md-switch>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="endDate" class="col-sm-2 control-label">End
-						Date</label>
-					<div class="col-sm-2">
-						<input type="date" class="form-control" id="endDate"
-							ng-model="usage_form.endDate" required>
-					</div>
-				</div>-->
+					<div ng-show="usage_form.requiresAdditionalResources">
 
+						<div class="form-group">
+							<label for="resources" class="col-sm-2 control-label">Resources</label>
+							<div class="col-sm-2">
+								<select class="form-control" ng-model="selectedResource" ng-change="updateCurrentResourceNameId()" id="resources"
+										ng-options="x as x.resourceName for x in resourceList">
+									<option value="" disabled selected>Resource Name</option>
+								</select>
+							</div>
+
+							<label for="resource_Description" class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-2">
+								<input type="name" class="form-control" id="resource_Description"
+									   ng-model="currentResourceDescription"
+									   placeholder="Enter Resource Use Description">
+							</div>
+						</div>
+						<div class="form-group">
+
+							<label for="resource_Rate" class="col-sm-2 control-label">Unit Rate</label>
+							<div class="col-sm-2">
+								<input type="number" class="form-control" id="resource_Rate"
+									   ng-model="currentResourceRate"
+									   placeholder="Enter Resource Unit Rate">
+							</div>
+
+							<label for="resource_Units_Consumed" class="col-sm-2 control-label">Units Consumed</label>
+							<div class="col-sm-2">
+								<input type="number" class="form-control" id="resource_Units_Consumed"
+									   ng-model="currentResourceUnitsConsumed"
+									   placeholder="Enter Units Consumed">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="date">Allocation Date</label>
+
+							<div class="col-sm-3">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"> </i>
+									</div>
+									<input class="form-control" id="date" name="currentResourceStartDateCheck"
+										   ng-model="currentResourceStartDate" placeholder="MM-dd-yyyy"
+										   type="text" />
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="date">Deallocation Date</label>
+							<div class="col-sm-3">
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"> </i>
+									</div>
+									<input class="form-control" id="date" name="currentResourceEndDateCheck"
+										   ng-model="currentResourceEndDate" placeholder="MM-dd-yyyy" type="text" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+
+							<label for="resource_Comments" class="col-sm-2 control-label">Resource Comments</label>
+							<div class="col-sm-2">
+								<input type="name" class="form-control" id="resource_Comments"
+									   ng-model="currentResourceComments"
+									   placeholder="Enter Comments">
+							</div>
+
+							<div class="col-sm-2">
+								<button type="button" ng-click="addResourceRow()"
+										class="btn btn-default addButton">Add Resource</button>
+							</div>
+						</div>
+
+
+
+						<div class="form-group">
+							<div class="table-responsive col-sm-8 col-sm-push-2">
+								<table class="table table-hover table-bordered">
+									<thead>
+									<th>Resource Id</th>
+									<th>Resource Name</th>
+									<th>Description</th>
+									<th>Unit Rate</th>
+									<th>Units Consumed</th>
+									<th>Start Date</th>
+									<th>End Date</th>
+									<th>Comments</th>
+									<th>Action</th>
+									</thead>
+
+									<tbody>
+									<tr ng-repeat="resource in usage_form.projectResourceMappingList">
+										<td>{{resource.resourceId}}</td>
+										<td>{{resource.resourceName}}</td>
+										<td>{{resource.resourceDescription}}</td>
+										<td>{{resource.rate}}</td>
+										<td>{{resource.unitsConsumed}}</td>
+										<td>{{resource.allocationDate}}</td>
+										<td>{{resource.deallocationDate}}</td>
+										<td>{{resource.comments}}</td>
+										<td><input type="button" value="Remove"
+												   class="btn btn-primary" ng-click="removeResourceRow($index)" /></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="date">Start Date</label>
 
@@ -200,20 +304,7 @@
 					<button ng-click="generate()" class="btn btn-default" ng-disabled = "usage_form.carts==0">Calculate</button>
 					<span ng-show= "generateSuccess">Generated Successfully</span>
 				</div>
-				<!-- ProjectInfoForm.projectIdCheck.$dirty ||
-				ProjectInfoForm.projectTitleCheck.$dirty ||
-				ProjectInfoForm.rateTypeCheck.$dirty ||
-				ProjectInfoForm.accNumCheck.$dirty ||
-				addChamberCheck ||
-				ProjectInfoForm.startDateCheck.$dirty ||
-				ProjectInfoForm.endDateCheck.$dirty ||
-				ProjectInfoForm.cartsCheck.$dirty || -->
 
-				<!-- 				<div class="form-group">
-					<label for="currentBill" class="col-sm-2 control-label">Current
-						Bill: </label> <span for="Name" class="fields">{{usage_form.currentBill
-						| currency:"USD $"}}</span>
-				</div> -->
 
 				<div class="form-group">
 					<label for="currentBill" class="control-label col-sm-2">Current	Bill</label>

@@ -338,6 +338,7 @@ billingApp.controller("edit_crop_info_Controller", function($rootScope,$scope,$h
  */
 billingApp.controller("start_project_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	var currentClient = null;
+	//$scope.resourcesRequiredButtonDisabled = false;
 	var initializeProject = function() {
 		return {
 			client : null,
@@ -347,6 +348,8 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 			acc_number:"",
 			chambers: [],
 			carts:0,
+            projectResourceMappingList: [],
+			requiresAdditionalResources: "",
 			startDate:"",
 			endDate:"",
 			lastBillDate:"",
@@ -355,6 +358,7 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 			accountStatus:""
 		};
 	}
+
 	// Saves all information regarding a new project for a selected client.
 	$scope.project_form = initializeProject();
 	// Get the selected client from the routeParams.
@@ -384,10 +388,10 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 		if($scope.project_form){
     //			var start=new Date($scope.project_form.startDate);
     //			var end=new Date($scope.project_form.endDate);
-			$scope.project_form.startDate=new Date($scope.startDate);;
-			$scope.project_form.endDate=new Date($scope.endDate);;
-			console.log($scope.project_form.startDate);
-			console.log($scope.project_form.endDate);
+			$scope.project_form.startDate=new Date($scope.startDate);
+			$scope.project_form.endDate=new Date($scope.endDate);
+			//console.log($scope.project_form.startDate);
+			//console.log($scope.project_form.endDate);
 			$http.post("/project/",$scope.project_form)
 			.success(function(response) {
 				$scope.message = "Project "+ response.project_Title + " Saved Successfully";
@@ -485,6 +489,99 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 		// Removing the chamber from the final chamber ids to be sent.
 		$scope.project_form.chambers.splice($index, 1);
 	}
+
+	$scope.resourcesToggled = function(){
+		console.log($scope.project_form.requiresAdditionalResources);
+	};
+
+
+	//Get all resources from the resource table and show it in a drop down
+
+	$scope.savedResources = $http.get('/resourceController/getAllResources/')
+		.then(function success(response){
+        $scope.resourceList = response.data;
+        $scope.config = response.config;
+        $scope.headers = response.headers;
+        $scope.status = response.status;
+        $scope.statusText = response.statusText;
+
+    }, function failure(response){
+        $scope.resourceList = response.statusText;
+        $scope.status = response.data;
+        $log.info(response);
+    });
+
+    // To clearCurrent Resource <Added by Abhinav: 2Aug2017>
+
+    $scope.selectedResource;
+
+    $scope.currentResourceId;
+    $scope.currentResourceName;
+    $scope.currentResourceDescription;
+    $scope.currentResourceRate;
+    $scope.currentResourceUnitsConsumed;
+    $scope.currentResourceStartDate;
+    $scope.currentResourceEndDate;
+    $scope.currentResourceComments;
+
+
+	//Set resourceName and resourceId when resource select box is changed
+
+    $scope.updateCurrentResourceNameId = function(){
+    	$scope.currentResourceName = $scope.selectedResource.resourceName;
+    	$scope.currentResourceId = $scope.selectedResource.id;
+	}
+
+
+	//Add rows to the selected resource table.
+
+    $scope.addResourceRow = function(){
+    	if(!$scope.currentResourceId){
+    		alert("select a resource to add");
+    		return;
+		}
+        if(!$scope.currentResourceRate){
+            alert("Enter unit rate");
+            return;
+        }
+        if(!$scope.currentResourceUnitsConsumed){
+            alert("Enter units consumed");
+            return;
+        }
+    	var currentResource = {
+            resourceId: $scope.currentResourceId,
+            resourceName: $scope.currentResourceName,
+            resourceDescription: $scope.currentResourceDescription,
+            rate: $scope.currentResourceRate,
+            unitsConsumed: $scope.currentResourceUnitsConsumed,
+            allocationDate: new Date($scope.currentResourceStartDate),
+			displayAllocationDate: $scope.currentResourceStartDate,
+            deallocationDate: new Date($scope.currentResourceEndDate),
+			displayDeallocationDate: $scope.currentResourceEndDate,
+            comments: $scope.currentResourceComments
+		};
+    	$scope.project_form.projectResourceMappingList.push(currentResource);
+        //showHideResourcesToggleButton();
+	};
+
+
+	//Removes rows from the added resource table.
+
+    $scope.removeResourceRow = function($index){
+        $scope.project_form.projectResourceMappingList.splice($index, 1);
+        //showHideResourcesToggleButton();
+	}
+/*
+	//Check if resources table is empty
+	function showHideResourcesToggleButton(){
+
+    	if($scope.project_form.projectResourceMappingList.length > 0){
+    		$scope.resourcesRequiredButtonDisabled = true;
+		}else{
+            $scope.resourcesRequiredButtonDisabled = false;
+		}
+	}
+*/
 });
 billingApp.controller("usage_list_Controller", function($scope,$http){
 	$scope.statuses = ["Active","Payment Pending","Completed", "All"];
@@ -535,6 +632,16 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			.then(function success(response) {
 				callback();
 				$scope.usage_form = response.data;
+                // GET RESOURCES FOR A PROJECT ---- START ---
+                // Get resources attached to a project
+                $scope.projectResources = $http.get('/resourceController/getResourcesForProject/'+$scope.usage_form.project_id)
+                    .then(function success(response){
+                        $scope.usage_form.projectResourceMappingList = response.data;
+                    }, function failure(response){
+                        $scope.status = response.data;
+                        $log.info(response);
+                    });
+                // GET RESOURCES FOR A PROJECT ---- END ---
 				if($scope.usage_form.projectStatus === "Payment Pending"){
 					$scope.projectEnded = true;
 				}
@@ -742,6 +849,83 @@ billingApp.controller("track_project_Controller", function($rootScope,$scope,$ht
 			$log.info(response);
 		});
 	}
+	// RESOURCES RELATED CODE FOR TRACK PROJECT
+	// Get all resources from the resource table and show it in a drop down
+
+    $scope.savedResources = $http.get('/resourceController/getAllResources/')
+        .then(function success(response){
+            $scope.resourceList = response.data;
+            $scope.config = response.config;
+            $scope.headers = response.headers;
+            $scope.status = response.status;
+            $scope.statusText = response.statusText;
+
+        }, function failure(response){
+            $scope.resourceList = response.statusText;
+            $scope.status = response.data;
+            $log.info(response);
+        });
+
+    // To clearCurrent Resource <Added by Abhinav: 2Aug2017>
+
+    $scope.selectedResource;
+
+    $scope.currentResourceId;
+    $scope.currentResourceName;
+    $scope.currentResourceDescription;
+    $scope.currentResourceRate;
+    $scope.currentResourceUnitsConsumed;
+    $scope.currentResourceStartDate;
+    $scope.currentResourceEndDate;
+    $scope.currentResourceComments;
+
+    /**
+     * Set resourceName and resourceId when resource select box is changed
+     */
+    $scope.updateCurrentResourceNameId = function(){
+        $scope.currentResourceName = $scope.selectedResource.resourceName;
+        $scope.currentResourceId = $scope.selectedResource.id;
+    }
+
+    /**
+     * Add rows to the selected resource table.
+     */
+    $scope.addResourceRow = function(){
+    	console.log("inside track project resource id function");
+        if(!$scope.currentResourceId){
+            alert("select a resource to add");
+            return;
+        }
+        if(!$scope.currentResourceRate){
+            alert("Enter unit rate");
+            return;
+        }
+        if(!$scope.currentResourceUnitsConsumed){
+            alert("Enter units consumed");
+            return;
+        }
+        var currentResource = {
+            resourceId: $scope.currentResourceId,
+            resourceName: $scope.currentResourceName,
+            resourceDescription: $scope.currentResourceDescription,
+            rate: $scope.currentResourceRate,
+            unitsConsumed: $scope.currentResourceUnitsConsumed,
+            allocationDate: new Date($scope.currentResourceStartDate),
+            displayAllocationDate: $scope.currentResourceStartDate,
+            deallocationDate: new Date($scope.currentResourceEndDate),
+            displayDeallocationDate: $scope.currentResourceEndDate,
+            comments: $scope.currentResourceComments
+        };
+        $scope.usage_form.projectResourceMappingList.push(currentResource);
+    };
+
+    /**
+     * Removes rows from the added resource table.
+     */
+    $scope.removeResourceRow = function($index){
+        $scope.usage_form.projectResourceMappingList.splice($index, 1);
+    }
+
 });
 billingApp.controller("payment_list_Controller", function($rootScope,$scope,$http, $log, $routeParams){
 	$scope.id = $routeParams.id;
@@ -987,6 +1171,12 @@ billingApp.controller("invoice_quarterly_controller", function($scope,$http,$log
             $scope.showProjectForInvoiceTable = false;
         }
 	}
+
+    $scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
+
 });
 
 // Controllers for Managing Resources
