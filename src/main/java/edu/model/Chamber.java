@@ -10,7 +10,7 @@ public class Chamber {
 	@Column(nullable = false, unique=true)
 	private String chamberName;
 //	private String chamberId;
-	private String chamberCarts;
+	private Integer chamberCarts;
 	/*@OneToMany(mappedBy="chambers")
 	private Set<Project> projects;
 	*/
@@ -32,10 +32,10 @@ public class Chamber {
 	public void setChamberId(String chamberId) {
 		this.chamberId = chamberId;
 	}*/
-	public String getChamberCarts() {
+	public Integer getChamberCarts() {
 		return chamberCarts;
 	}
-	public void setChamberCarts(String chamberCarts) {
+	public void setChamberCarts(Integer chamberCarts) {
 		this.chamberCarts = chamberCarts;
 	} 
 
