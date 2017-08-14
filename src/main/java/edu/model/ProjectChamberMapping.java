@@ -26,15 +26,15 @@ public class ProjectChamberMapping {
     @Temporal(value = TemporalType.DATE)
     @NotNull
     @Column(name = "start_date")
-    private Date startDate;
+    private Date allocationDate;
 
     @Temporal(value = TemporalType.DATE)
     @NotNull
     @Column(name = "end_date")
-    private Date endDate;
+    private Date deAllocationDate;
 
     @Column(name = "carts_used")
-    private Integer cartsUsed;
+    private Integer allocatedCarts;
 
     @Column(name = "status")
     private String status;
@@ -70,28 +70,28 @@ public class ProjectChamberMapping {
         this.chamberId = chamberId;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getAllocationDate() {
+        return allocationDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setAllocationDate(Date allocationDate) {
+        this.allocationDate = allocationDate;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getDeAllocationDate() {
+        return deAllocationDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setDeAllocationDate(Date deAllocationDate) {
+        this.deAllocationDate = deAllocationDate;
     }
 
-    public Integer getCartsUsed() {
-        return cartsUsed;
+    public Integer getAllocatedCarts() {
+        return allocatedCarts;
     }
 
-    public void setCartsUsed(Integer cartsUsed) {
-        this.cartsUsed = cartsUsed;
+    public void setAllocatedCarts(Integer allocatedCarts) {
+        this.allocatedCarts = allocatedCarts;
     }
 
     public String getStatus() {
@@ -108,19 +108,5 @@ public class ProjectChamberMapping {
 
     public void setSaved(Boolean saved) {
         isSaved = saved;
-    }
-
-    @Override
-    public String toString() {
-        return "ProjectChamberMapping{" +
-                "id=" + id +
-                ", projectId='" + projectId + '\'' +
-                ", chamberId=" + chamberId +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", cartsUsed=" + cartsUsed +
-                ", status='" + status + '\'' +
-                ", isSaved=" + isSaved +
-                '}';
     }
 }
