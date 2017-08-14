@@ -42,6 +42,9 @@ public class ProjectResourceMapping {
     @Column(name = "isInvoiced")
     private Boolean isInvoiced;
 
+    @Transient
+    private Boolean isSaved;
+
     public ProjectResourceMapping() {
     }
 
@@ -125,6 +128,14 @@ public class ProjectResourceMapping {
         isInvoiced = invoiced;
     }
 
+    public Boolean getSaved() {
+        return isSaved;
+    }
+
+    public void setSaved(Boolean saved) {
+        isSaved = saved;
+    }
+
     @Override
     public String toString() {
         return "ProjectResourceMapping{" +
@@ -138,6 +149,7 @@ public class ProjectResourceMapping {
                 ", deallocationDate=" + deallocationDate +
                 ", comments='" + comments + '\'' +
                 ", isInvoiced=" + isInvoiced +
+                ", isSaved=" + isSaved +
                 '}';
     }
 }

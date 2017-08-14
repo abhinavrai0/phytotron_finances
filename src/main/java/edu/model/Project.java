@@ -52,6 +52,9 @@ public class Project {
 	@Transient
 	private List<ProjectResourceMapping> projectResourceMappingList;
 
+	@Transient
+	private List<ProjectChamberMapping> projectChamberMappingList;
+
 	public Long getId() {
 		return id;
 	}
@@ -216,5 +219,13 @@ public class Project {
 
 	public void setAdditionalResourcesAdded(Boolean additionalResourcesAdded) {
 		this.additionalResourcesAdded = additionalResourcesAdded;
+	}
+
+	public List<ProjectChamberMapping> getProjectChamberMappingList() {
+		return projectChamberMappingList;
+	}
+
+	public void setProjectChamberMappingList(List<ProjectChamberMapping> projectChamberMappingList) {
+		this.projectChamberMappingList = projectChamberMappingList;
 	}
 }

@@ -7,7 +7,10 @@ import java.util.Date;
 import java.util.List;
 //import org.joda.time.*;
 //import org.joda.time.Interval;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import edu.model.ProjectChamberMapping;
 import edu.model.ProjectResourceMapping;
+import edu.service.ProjectChamberMappingCRUD;
 import edu.service.ProjectResourceMappingCRUD;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,6 +49,8 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectResourceMappingCRUD projectResourceMappingCRUDRepo;
+
+	private ProjectChamberMappingCRUD projectChamberMappingCRUDRepo;
 
 	static final Logger logger = LogManager.getLogger(ProjectController.class.getName());
 
@@ -116,7 +121,7 @@ public class ProjectController {
 			 * This part is commented since we decided to use check box button
 			 * instead of actually adding resources while creating project.
 			 * ******************/
-            /*List<ProjectResourceMapping> projectResourceMappingList = project.getProjectResourceMappingList();
+            List<ProjectResourceMapping> projectResourceMappingList = project.getProjectResourceMappingList();
 			if(projectResourceMappingList!=null && !projectResourceMappingList.isEmpty()){
 				for (ProjectResourceMapping projectResourceMapping : projectResourceMappingList){
 					projectResourceMapping.setProjectId(project.getProject_id());
@@ -124,7 +129,17 @@ public class ProjectController {
 
 					projectResourceMappingCRUDRepo.save(projectResourceMapping);
 				}
-			}*/
+				project.setAdditionalResourcesAdded(Boolean.TRUE);
+			}
+
+			//Saving Chambers.
+			List<ProjectChamberMapping> projectChamberMappingList = project.getProjectChamberMappingList();
+			if(projectChamberMappingList!=null && !projectChamberMappingList.isEmpty()){
+				for (ProjectChamberMapping projectChamberMapping : projectChamberMappingList){
+					projectChamberMapping.setStatus("ACTIVE");
+					projectChamberMappingCRUDRepo.save(projectChamberMapping);
+				}
+			}
 
 
 		} catch (Exception e) {
@@ -152,6 +167,16 @@ public class ProjectController {
 	public Project updateProject(@PathVariable("id") Long id,@RequestBody Project updateProject) throws Exception {
 		Project currentProject=getProject(id);
 		updateProject.setId(id);
+		List<ProjectResourceMapping> projectResourceMappingList = updateProject.getProjectResourceMappingList();
+		if(updateProject!=null && projectResourceMappingList!=null && !projectResourceMappingList.isEmpty()){
+			for(ProjectResourceMapping projectResourceMapping: projectResourceMappingList){
+				if(projectResourceMapping!=null)
+					projectResourceMappingCRUDRepo.save(projectResourceMapping);
+			}
+		}
+		else
+			updateProject.setAdditionalResourcesAdded(Boolean.FALSE);
+
 		if((currentProject.getStartDate() == null && currentProject.getLastBillDate() ==null) || currentProject.getStartDate().equals(currentProject.getLastBillDate())){
 			updateProject.setLastBillDate(updateProject.getStartDate());
 		}
