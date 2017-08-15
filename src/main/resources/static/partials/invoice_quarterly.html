@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div class="container" ><!--ng-show="showProjectForInvoiceTable"-->
+<div class="container" ng-show="showProjectForInvoiceTable"><!---->
     <div class="table-responsive col-sm-12">
         <h3>Projects available for invoicing: {{projectList.length}}</h3>
         <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>

@@ -1,369 +1,355 @@
-<div class="header">
-	<div class="container">
-		<div class="col-sm-push-2 col-sm-5">
-			<h3 class="text-center">Client Information</h3>
-		</div>
-	</div>
-	<div id="container" class="col-sm-12">
-		<div class="adjacentPanels col-sm-2"></div>
-		<div class="adjacentPanels col-sm-4">
+<div layout="column">
+	<h2 layout="row" layout-align="center start" class="md-title">Client Information</h2>
+	<md-grid-list
+			md-cols="2"
+			md-row-height="15px"
+			md-gutter="12px">
+		<md-grid-tile>
+			<div layout="row" layout-align="start start">
+				<label >First Name: </label>
+				<span>{{usage_form.client.client_first_name}}</span>
+			</div>
+		</md-grid-tile>
+		<md-grid-tile>
+			<div layout="row" layout-align="start start">
+				<label>Email:</label>
+				<span>{{usage_form.client.client_email}}</span>
+			</div>
+		</md-grid-tile>
+		<md-grid-tile>
+			<div layout="row" layout-align="start start">
+				<label>Department:</label>
+				<span>{{usage_form.client.dept_name}}</span>
+			</div>
+		</md-grid-tile>
+		<md-grid-tile>
+			<div layout="row" layout-align="start start">
+				<label>Last Name: </label>
+				<span>{{usage_form.client.client_last_name}}</span>
+			</div>
+		</md-grid-tile>
+		<md-grid-tile>
+			<div layout="row" layout-align="start start">
+				<label>Phone: </label>
+				<span>{{usage_form.client.client_phone}}</span>
+			</div>
+		</md-grid-tile>
+		<md-grid-tile>
+			<div layout="row" layout-align="start start">
+				<label>Address:</label>
+				<span>{{usage_form.client.client_address}}</span>
+			</div>
+		</md-grid-tile>
+	</md-grid-list>
+
+	<md-divider></md-divider>
+
+	<form class="form-horizontal" name="ProjectInfoForm" role="form"
+		  ng-submit="ProjectInfoForm.$valid">
+		<fieldset ng-disabled = "projectEnded">
 			<div class="form-group">
-				<label for="Name" class="control-label">First Name: </label> <span
-					for="Name" class="fields">{{usage_form.client.client_first_name}}</span>
+				<label for="project_id" class="col-sm-2 control-label">Project
+					Id </label>
+				<div class="col-sm-8">
+					<input type="name" name = "projectIdCheck" class="form-control" id="project_id"
+						   ng-model="usage_form.project_id"
+						   placeholder="Enter the Project Id" required>
+				</div>
 			</div>
 			<div class="form-group">
-				<label for="email" class="control-label">Email:</label> <span
-					for="email" class="fields">{{usage_form.client.client_email}}</span>
-			</div>
-			<div class="form-group">
-				<label for="department" class="control-label">Department:</label> <span
-					for="department" class="fields">{{usage_form.client.dept_name}}</span>
-			</div>
-		</div>
-		<div class="adjacentPanels col-sm-4">
-			<div class="form-group">
-				<label for="Name" class="control-label">Last Name: </label> <span
-					for="Name" class="fields">{{usage_form.client.client_last_name}}</span>
-			</div>
-			<div class="form-group">
-				<label for="Phone" class="control-label">Phone: </label> <span
-					for="Phone" class="fields">{{usage_form.client.client_phone}}</span>
-			</div>
-			<div class="form-group">
-				<label for="address" class="control-label">Address:</label> <span
-					for="address" class="fields">{{usage_form.client.client_address}}</span>
+				<label for="project_Title" class="col-sm-2 control-label">Project
+					Title </label>
+				<div class="col-sm-8">
+					<input type="name" name = "projectTitleCheck" class="form-control" id="project_Title"
+						   ng-model="usage_form.project_Title"
+						   placeholder="Enter the Project Title">
+				</div>
 			</div>
 
-		</div>
-	</div>
-</div>
-<div class="bootstrap-iso">
-	<div class="container-fluid">
-		<div class="col-md-12">
-			<form class="form-horizontal" name="ProjectInfoForm" role="form"
-				ng-submit="ProjectInfoForm.$valid">
-				<fieldset ng-disabled = "projectEnded">
-				<div class="form-group">
-					<label for="project_id" class="col-sm-2 control-label">Project
-						Id </label>
-					<div class="col-sm-8">
-						<input type="name" name = "projectIdCheck" class="form-control" id="project_id"
-							ng-model="usage_form.project_id"
-							placeholder="Enter the Project Id" required>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="project_Title" class="col-sm-2 control-label">Project
-						Title </label>
-					<div class="col-sm-8">
-						<input type="name" name = "projectTitleCheck" class="form-control" id="project_Title"
-							ng-model="usage_form.project_Title"
-							placeholder="Enter the Project Title">
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="rateType" class="col-sm-2 control-label">Rate
-						Type: </label>
-					<div class="col-sm-2">
-						<select name = "rateTypeCheck" class="form-control" ng-model="currentRateValue"
+			<div class="form-group">
+				<label for="rateType" class="col-sm-2 control-label">Rate
+					Type: </label>
+				<div class="col-sm-2">
+					<select name = "rateTypeCheck" class="form-control" ng-model="currentRateValue"
 							ng-options="key as key for (key, value) in rates"
 							ng-change="changeRateValue()" required>
-						</select>
-					</div>
-
-					<div class="col-sm-4">
-						<label for="rate" class="col-sm-4 control-label">Rate:
-							{{usage_form.rateValue.rate | currency}} </label>
-					</div>
+					</select>
 				</div>
 
-				<div class="form-group">
-					<label for="acc_number" class="col-sm-2 control-label">Account
-						Number </label>
-					<div class="col-sm-8">
-						<input type="name" name = "accNumCheck" class="form-control" id="acc_number"
-							ng-model="usage_form.acc_number"
-							placeholder="Enter the account number">
-					</div>
+				<div class="col-sm-4">
+					<label for="rate" class="col-sm-4 control-label">Rate:
+						{{usage_form.rateValue.rate | currency}} </label>
 				</div>
-				<div class="form-group">
-					<label for="chambers" class="col-sm-2 control-label">Chambers</label>
-					<div class="col-sm-2">
-						<select class="form-control" ng-model="selectedChamber"
+			</div>
+
+			<div class="form-group">
+				<label for="acc_number" class="col-sm-2 control-label">Account
+					Number </label>
+				<div class="col-sm-8">
+					<input type="name" name = "accNumCheck" class="form-control" id="acc_number"
+						   ng-model="usage_form.acc_number"
+						   placeholder="Enter the account number">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="date">Start Date</label>
+				<div class="col-sm-3">
+					<md-datepicker ng-model="startDate" md-placeholder="Project Start Date" id="date"></md-datepicker>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="date">End Date</label>
+				<div class="col-sm-3">
+					<md-datepicker ng-model="endDate" md-placeholder="Project End Date" id="date"></md-datepicker>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="chambers" class="col-sm-2 control-label">Chambers</label>
+				<div class="col-sm-2">
+					<select class="form-control" ng-model="selectedChamber"
 							ng-options="key as key for (key, value) in existingChambers">
-							<option value="" disabled selected>Chamber Type</option>
+						<option value="" disabled selected>Chamber Type</option>
+					</select>
+				</div>
+				<div class="col-sm-2">
+					<button type="button"  ng-click="addChamberRow()"
+							class="btn btn-default addButton">Add Chamber</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="table-responsive col-sm-8 col-sm-push-2">
+					<table class="table table-hover table-bordered">
+						<thead>
+						<th>Chamber Name</th>
+						<th>Carts</th>
+						<th>Action</th>
+						</thead>
+
+						<tbody>
+						<tr ng-repeat="chamber in usage_form.chambers">
+							<td>{{chamber.chamberName}}</td>
+							<td>{{chamber.chamberCarts}}</td>
+							<td><input type="button" value="Remove"
+									   class="btn btn-primary" ng-click="removeRow($index)" /></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="carts" class="col-sm-2 control-label">Carts</label>
+				<div class="col-sm-2">
+					<input type="number" name = "cartsCheck" class="form-control" id="carts"
+						   ng-model="usage_form.carts"
+						   placeholder="Enter the number of carts" required>
+				</div>
+			</div>
+			<!--adding button to add resources to project-->
+			<div class="form-group" >
+				<label for="carts" class="col-sm-2 control-label">Requires Additional Resources</label>
+				<div class="col-sm-2">
+					<md-switch ng-model="usage_form.requiresAdditionalResources"
+							   aria-label="Requires Additional Resources"
+							   ng-change="resourcesToggled()"
+							   ng-disabled="usage_form.projectResourceMappingList.length>0"
+					</md-switch>
+				</div>
+			</div>
+			<div ng-show="usage_form.requiresAdditionalResources">
+
+				<div class="form-group">
+					<label for="resources" class="col-sm-2 control-label">Resources</label>
+					<div class="col-sm-2">
+						<select class="form-control" ng-model="selectedResource" ng-change="updateCurrentResourceNameId()" id="resources"
+								ng-options="x as x.resourceName for x in resourceList">
+							<option value="" disabled selected>Resource Name</option>
 						</select>
 					</div>
+
+					<label for="resource_Description" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-2">
-						<!-- <label for="numberCarts" class="control-label">Number of carts: </label>
-      <span for="numberCarts" class = "fields">{{project_form.chambers.chamberCarts}}</span>
-      <button type="button" ng-click="deleteRow($index)" class="btn btn-default addButton"><i class="fa fa-plus">Remove Chamber</i></button> -->
-						<button type="button"  ng-click="addChamberRow()"
-							class="btn btn-default addButton">Add Chamber</button>
+						<input type="name" class="form-control" id="resource_Description"
+							   ng-model="currentResourceDescription"
+							   placeholder="Enter Resource Use Description">
 					</div>
 				</div>
+				<div class="form-group">
+
+					<label for="resource_Rate" class="col-sm-2 control-label">Unit Rate</label>
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="resource_Rate"
+							   ng-model="currentResourceRate"
+							   placeholder="Enter Resource Unit Rate">
+					</div>
+
+					<label for="resource_Units_Consumed" class="col-sm-2 control-label">Units Consumed</label>
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="resource_Units_Consumed"
+							   ng-model="currentResourceUnitsConsumed"
+							   placeholder="Enter Units Consumed">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="date">Allocation Date</label>
+
+					<div class="col-sm-3">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"> </i>
+							</div>
+							<input class="form-control" id="date" name="currentResourceStartDateCheck"
+								   ng-model="currentResourceStartDate" placeholder="MM-dd-yyyy"
+								   type="text" />
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="date">Deallocation Date</label>
+					<div class="col-sm-3">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"> </i>
+							</div>
+							<input class="form-control" id="date" name="currentResourceEndDateCheck"
+								   ng-model="currentResourceEndDate" placeholder="MM-dd-yyyy" type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+
+					<label for="resource_Comments" class="col-sm-2 control-label">Resource Comments</label>
+					<div class="col-sm-2">
+						<input type="name" class="form-control" id="resource_Comments"
+							   ng-model="currentResourceComments"
+							   placeholder="Enter Comments">
+					</div>
+
+					<div class="col-sm-2">
+						<button type="button" ng-click="addResourceRow()"
+								class="btn btn-default addButton">Add Resource</button>
+					</div>
+				</div>
+
+
+
 				<div class="form-group">
 					<div class="table-responsive col-sm-8 col-sm-push-2">
 						<table class="table table-hover table-bordered">
 							<thead>
-								<th>Chamber Name</th>
-								<th>Carts</th>
-								<th>Action</th>
+							<th>Resource Id</th>
+							<th>Resource Name</th>
+							<th>Description</th>
+							<th>Unit Rate</th>
+							<th>Units Consumed</th>
+							<th>Start Date</th>
+							<th>End Date</th>
+							<th>Comments</th>
+							<th>Action</th>
 							</thead>
 
 							<tbody>
-								<tr ng-repeat="chamber in usage_form.chambers">
-									<td>{{chamber.chamberName}}</td>
-									<td>{{chamber.chamberCarts}}</td>
-									<td><input type="button" value="Remove"
-										class="btn btn-primary" ng-click="removeRow($index)" /></td>
-								</tr>
+							<tr ng-repeat="resource in usage_form.projectResourceMappingList">
+								<td>{{resource.resourceId}}</td>
+								<td>{{resource.resourceName}}</td>
+								<td>{{resource.resourceDescription}}</td>
+								<td>{{resource.rate}}</td>
+								<td>{{resource.unitsConsumed}}</td>
+								<td>{{resource.allocationDate}}</td>
+								<td>{{resource.deallocationDate}}</td>
+								<td>{{resource.comments}}</td>
+								<td><input type="button" value="Remove"
+										   class="btn btn-primary" ng-click="removeResourceRow($index)" /></td>
+							</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="carts" class="col-sm-2 control-label">Carts</label>
-					<div class="col-sm-2">
-						<input type="number" name = "cartsCheck" class="form-control" id="carts"
-							ng-model="usage_form.carts"
-							placeholder="Enter the number of carts" required>
-					</div>
-				</div>
-					<!--adding button to add resources to project-->
-					<div class="form-group" >
-						<label for="carts" class="col-sm-2 control-label">Requires Additional Resources</label>
-						<div class="col-sm-2">
-							<md-switch ng-model="usage_form.requiresAdditionalResources"
-									   aria-label="Requires Additional Resources"
-									   ng-change="resourcesToggled()"
-									   ng-disabled="usage_form.projectResourceMappingList.length>0"
-							</md-switch>
-						</div>
-					</div>
-					<div ng-show="usage_form.requiresAdditionalResources">
-
-						<div class="form-group">
-							<label for="resources" class="col-sm-2 control-label">Resources</label>
-							<div class="col-sm-2">
-								<select class="form-control" ng-model="selectedResource" ng-change="updateCurrentResourceNameId()" id="resources"
-										ng-options="x as x.resourceName for x in resourceList">
-									<option value="" disabled selected>Resource Name</option>
-								</select>
-							</div>
-
-							<label for="resource_Description" class="col-sm-2 control-label">Description</label>
-							<div class="col-sm-2">
-								<input type="name" class="form-control" id="resource_Description"
-									   ng-model="currentResourceDescription"
-									   placeholder="Enter Resource Use Description">
-							</div>
-						</div>
-						<div class="form-group">
-
-							<label for="resource_Rate" class="col-sm-2 control-label">Unit Rate</label>
-							<div class="col-sm-2">
-								<input type="number" class="form-control" id="resource_Rate"
-									   ng-model="currentResourceRate"
-									   placeholder="Enter Resource Unit Rate">
-							</div>
-
-							<label for="resource_Units_Consumed" class="col-sm-2 control-label">Units Consumed</label>
-							<div class="col-sm-2">
-								<input type="number" class="form-control" id="resource_Units_Consumed"
-									   ng-model="currentResourceUnitsConsumed"
-									   placeholder="Enter Units Consumed">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label" for="date">Allocation Date</label>
-
-							<div class="col-sm-3">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-calendar"> </i>
-									</div>
-									<input class="form-control" id="date" name="currentResourceStartDateCheck"
-										   ng-model="currentResourceStartDate" placeholder="MM-dd-yyyy"
-										   type="text" />
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label" for="date">Deallocation Date</label>
-							<div class="col-sm-3">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-calendar"> </i>
-									</div>
-									<input class="form-control" id="date" name="currentResourceEndDateCheck"
-										   ng-model="currentResourceEndDate" placeholder="MM-dd-yyyy" type="text" />
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-
-							<label for="resource_Comments" class="col-sm-2 control-label">Resource Comments</label>
-							<div class="col-sm-2">
-								<input type="name" class="form-control" id="resource_Comments"
-									   ng-model="currentResourceComments"
-									   placeholder="Enter Comments">
-							</div>
-
-							<div class="col-sm-2">
-								<button type="button" ng-click="addResourceRow()"
-										class="btn btn-default addButton">Add Resource</button>
-							</div>
-						</div>
+			</div>
 
 
-
-						<div class="form-group">
-							<div class="table-responsive col-sm-8 col-sm-push-2">
-								<table class="table table-hover table-bordered">
-									<thead>
-									<th>Resource Id</th>
-									<th>Resource Name</th>
-									<th>Description</th>
-									<th>Unit Rate</th>
-									<th>Units Consumed</th>
-									<th>Start Date</th>
-									<th>End Date</th>
-									<th>Comments</th>
-									<th>Action</th>
-									</thead>
-
-									<tbody>
-									<tr ng-repeat="resource in usage_form.projectResourceMappingList">
-										<td>{{resource.resourceId}}</td>
-										<td>{{resource.resourceName}}</td>
-										<td>{{resource.resourceDescription}}</td>
-										<td>{{resource.rate}}</td>
-										<td>{{resource.unitsConsumed}}</td>
-										<td>{{resource.allocationDate}}</td>
-										<td>{{resource.deallocationDate}}</td>
-										<td>{{resource.comments}}</td>
-										<td><input type="button" value="Remove"
-												   class="btn btn-primary" ng-click="removeResourceRow($index)" /></td>
-									</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="date">Start Date</label>
-
-					<div class="col-sm-3">
-						<div class="input-group">
-							<div class="input-group-addon">
-								<i class="fa fa-calendar"> </i>
-							</div>
-							<input class="form-control" id="date" name="startDateCheck"
-								ng-model="startDate" placeholder="MM-dd-yyyy" type="text" />
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="date">End Date</label>
-					<div class="col-sm-3">
-						<div class="input-group">
-							<div class="input-group-addon">
-								<i class="fa fa-calendar"> </i>
-							</div>
-							<input class="form-control" id="date" name="endDateCheck"
-								ng-model="endDate" placeholder="MM-dd-yyyy" type="text" />
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="lastBillDate" class="col-sm-2 control-label">Last
-						Invoice Date: </label> <span for="Name" class="fields">{{usage_form.lastBillDate
+			<div class="form-group">
+				<label for="lastBillDate" class="col-sm-2 control-label">Last
+					Invoice Date: </label> <span for="Name" class="fields">{{usage_form.lastBillDate
 						| date:'EEE MMM dd yyyy'}}</span>
-				</div>
+			</div>
 
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="date">Calculate
-						Invoice</label>
-					<div class="col-sm-3">
-						<div class="input-group">
-							<div class="input-group-addon">
-								<i class="fa fa-calendar"> </i>
-							</div>
-							<input class="form-control" id="date" name="generateDateCheck"
-								ng-model="generateBillDate" placeholder="MM-dd-yyyy"
-								type="text" />
-
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="date">Calculate
+					Invoice</label>
+				<div class="col-sm-3">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"> </i>
 						</div>
+						<input class="form-control" id="date" name="generateDateCheck"
+							   ng-model="generateBillDate" placeholder="MM-dd-yyyy"
+							   type="text" />
 
 					</div>
-					<button ng-click="generate()" class="btn btn-default" ng-disabled = "usage_form.carts==0">Calculate</button>
-					<span ng-show= "generateSuccess">Generated Successfully</span>
+
 				</div>
+				<button ng-click="generate()" class="btn btn-default" ng-disabled = "usage_form.carts==0">Calculate</button>
+				<span ng-show= "generateSuccess">Generated Successfully</span>
+			</div>
 
 
-				<div class="form-group">
-					<label for="currentBill" class="control-label col-sm-2">Current	Bill</label>
-					<div class="controls col-sm-2">
-						<p class="form-control-static">{{usage_form.currentBill | currency:"USD $"}}</p>
-					</div>
+			<div class="form-group">
+				<label for="currentBill" class="control-label col-sm-2">Current	Bill</label>
+				<div class="controls col-sm-2">
+					<p class="form-control-static">{{usage_form.currentBill | currency:"USD $"}}</p>
 				</div>
-			</fieldset>
+			</div>
+		</fieldset>
 
-			<fieldset ng-disabled = "projectFinished">
+		<fieldset ng-disabled = "projectFinished">
 
-				<div class="form-group">
-					<label for="payBill" class="col-sm-2 control-label">Amount
-						Pay </label>
-					<div class="col-sm-2">
-						<input type="number" class="form-control" ng-model="pay_amount" ng-pattern="/^-?[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
-					</div>
-					<button ng-click="pay()" class="btn btn-default">Pay</button>
+			<div class="form-group">
+				<label for="payBill" class="col-sm-2 control-label">Amount
+					Pay </label>
+				<div class="col-sm-2">
+					<input type="number" class="form-control" ng-model="pay_amount" ng-pattern="/^-?[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
 				</div>
+				<button ng-click="pay()" class="btn btn-default">Pay</button>
+			</div>
 
 
-				<div class="form-group">
-					<!-- <label for="billPaidTotal" class="col-sm-2 control-label">Total
-						Paid: </label> <span for="Name" class="fields">{{usage_form.billPaidTotal
-						| currency:"USD $"}}</span> -->
-
-					<label for="billPaidTotal" class="control-label col-sm-2">Total Paid</label>
-					<div class="controls col-sm-2">
-						<p class="form-control-static">{{usage_form.billPaidTotal | currency:"USD $"}}</p>
-					</div>
+			<div class="form-group">
+				<label for="billPaidTotal" class="control-label col-sm-2">Total Paid</label>
+				<div class="controls col-sm-2">
+					<p class="form-control-static">{{usage_form.billPaidTotal | currency:"USD $"}}</p>
 				</div>
+			</div>
 
-				<div class="form-group">
-					<label for="lastBillDate" class="col-sm-2 control-label">Last
-						Date Paid: </label> <span for="Name" class="fields">{{usage_form.lastBillPaidDate
+			<div class="form-group">
+				<label for="lastBillDate" class="col-sm-2 control-label">Last
+					Date Paid: </label> <span for="Name" class="fields">{{usage_form.lastBillPaidDate
 						| date:'EEE MMM dd yyyy'}}</span>
-				</div>
+			</div>
 
-				<div class="form-group">
-					<label for="accountStatus" class="col-sm-2 control-label">Project
-						Status</label> <span for="Name" class="fields">{{usage_form.projectStatus}}</span>
-				</div>
-			</fieldset>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-8">
-						<button ng-click="save()" ng-hide = "projectEnded" class="btn btn-default">Save</button>
-						<a ng-click="currentProject()" class="btn btn-default"
-							ng-href="#/payment_list/{{currentProjectID}}">Payment History</a>
-						<button class="btn btn-default btn-danger" ng-hide = "projectEnded"
+			<div class="form-group">
+				<label for="accountStatus" class="col-sm-2 control-label">Project
+					Status</label> <span for="Name" class="fields">{{usage_form.projectStatus}}</span>
+			</div>
+		</fieldset>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-8">
+				<button ng-click="save()" ng-hide = "projectEnded" class="btn btn-default">Save</button>
+				<a ng-click="currentProject()" class="btn btn-default"
+				   ng-href="#/payment_list/{{currentProjectID}}">Payment History</a>
+				<button class="btn btn-default btn-danger" ng-hide = "projectEnded"
 						ng-confirm-click="Are you sure you want to end this project with the given end date?" confirmed-click="endProject()">End Project</button>
-						<button class="btn btn-default" ng-show = "projectEnded && !projectFinished"  ng-disabled = "paymentPending" ng-click = "finishProject()">Finish Project</button>
-						<a class="btn btn-default" ng-href="#/usage_list">Go Back</a>
-					</div>
-				</div>
-
-			</form>
+				<button class="btn btn-default" ng-show = "projectEnded && !projectFinished"  ng-disabled = "paymentPending" ng-click = "finishProject()">Finish Project</button>
+				<a class="btn btn-default" ng-href="#/usage_list">Go Back</a>
+			</div>
 		</div>
-	</div>
+
+	</form>
 </div>
+
 
 <div ng-show="showAlertMessage" id="alert_placeholder"
 	class="col-sm-offset-2 col-sm-8">

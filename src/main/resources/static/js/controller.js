@@ -415,31 +415,11 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 		var options={
 				format: 'D M dd yyyy',
-				/*  format: {
-
-				 * Say our UI should display a week ahead,
-				 * but textbox should store the actual date.
-				 * This is useful if we need UI to select local dates,
-				 * but store in UTC
-	    		        toDisplay: function (date, format, language) {
-	    		            var d = new Date(date);
-      //	    		            d.setDate(d.getDate() - 7);
-      //	    		            return d.toISOString();
-	    		            return d.toISOString();
-      //	    		            return d.toDateString();
-	    		        },
-	    		        toValue: function (date, format, language) {
-	    		            var d = new Date(date);
-      //	    		            d.setDate(d.getDate() - 7);
-	    		            return d.toDateString();
-      //	    		            return new Date(d);
-	    		        }
-	    		    }	, */
-	        container: container,
-	        todayHighlight: true,
-	        autoclose: true,
-	      };
-	      date_input.datepicker(options);
+	        	container: container,
+	        	todayHighlight: true,
+	        	autoclose: true,
+		};
+		date_input.datepicker(options);
 	    })
 	/**
 	 * Get All chambers from the chambers page and display in the drop down
@@ -473,29 +453,43 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 				$scope.chambers.splice(i,1);
 			}
 		}
+
+		var addedChamber = $scope.selectedChamber;
+        addedChamber.allocationDate = $scope.startDate;
+		addedChamber.deallocationDate = $scope.endDate;
+        addedChamber.allocatedCarts = $scope.selectedChamber.chamberCarts;
+
 		// Display the total sum of the carts in each chamber in the finalised chambers.
 		$scope.project_form.carts = parseInt($scope.project_form.carts) + parseInt($scope.selectedChamber.chamberCarts);
 		// Save the selected chamber id in the chamberId variable to send to back-end
-		$scope.project_form.chambers.push($scope.selectedChamber);
+		$scope.project_form.chambers.push(addedChamber);
+		// debug
+		console.log($scope.project_form.chambers);
 	};
 
 	/**
 	 * Removes rows from the table, and adds them back to the drop down.
 	 */
 	$scope.removeRow = function ($index) {
-		$scope.project_form.carts = parseInt($scope.project_form.carts) - parseInt($scope.project_form.chambers[$index].chamberCarts);
+		//$scope.project_form.carts = parseInt($scope.project_form.carts) - parseInt($scope.project_form.chambers[$index].chamberCarts);
 		// adding the removed chamber back to the list.
-		$scope.chambers.push($scope.project_form.chambers[$index]);
+		var chamber = {
+			chamberName:"",
+			chamberCarts:0
+		};
+		chamber.chamberName = $scope.project_form.chambers[$index].chamberName;
+		chamber.chamberCarts = $scope.project_form.chambers[$index].chamberCarts;
+
+		$scope.chambers.push(chamber);
+		$scope.chambers.sort(compareChambers );
+
 		// Removing the chamber from the final chamber ids to be sent.
 		$scope.project_form.chambers.splice($index, 1);
 	}
 
-	$scope.resourcesToggled = function(){
-		console.log($scope.project_form.requiresAdditionalResources);
-	};
+    function compareChambers(a,b) {return (a.chamberName > b.chamberName) ? 1 : ((b.chamberName > a.chamberName) ? -1 : 0);}
 
-
-	//Get all resources from the resource table and show it in a drop down
+    //Get all resources from the resource table and show it in a drop down
 
 	$scope.savedResources = $http.get('/resourceController/getAllResources/')
 		.then(function success(response){
@@ -517,19 +511,13 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
 
     $scope.currentResourceId;
     $scope.currentResourceName;
-    $scope.currentResourceDescription;
-    $scope.currentResourceRate;
-    $scope.currentResourceUnitsConsumed;
-    $scope.currentResourceStartDate;
-    $scope.currentResourceEndDate;
-    $scope.currentResourceComments;
-
+    $scope.currentResourceUnitOfMeasure;
 
 	//Set resourceName and resourceId when resource select box is changed
-
     $scope.updateCurrentResourceNameId = function(){
     	$scope.currentResourceName = $scope.selectedResource.resourceName;
     	$scope.currentResourceId = $scope.selectedResource.id;
+    	$scope.currentResourceUnitOfMeasure = $scope.selectedResource.unitOfMeasure;
 	}
 
 
@@ -540,25 +528,17 @@ billingApp.controller("start_project_Controller", function($rootScope,$scope,$ht
     		alert("select a resource to add");
     		return;
 		}
-        if(!$scope.currentResourceRate){
-            alert("Enter unit rate");
-            return;
-        }
-        if(!$scope.currentResourceUnitsConsumed){
-            alert("Enter units consumed");
-            return;
-        }
+
     	var currentResource = {
             resourceId: $scope.currentResourceId,
             resourceName: $scope.currentResourceName,
-            resourceDescription: $scope.currentResourceDescription,
-            rate: $scope.currentResourceRate,
-            unitsConsumed: $scope.currentResourceUnitsConsumed,
-            allocationDate: new Date($scope.currentResourceStartDate),
-			displayAllocationDate: $scope.currentResourceStartDate,
-            deallocationDate: new Date($scope.currentResourceEndDate),
-			displayDeallocationDate: $scope.currentResourceEndDate,
-            comments: $scope.currentResourceComments
+			resourceUnitType: $scope.currentResourceUnitOfMeasure,
+            resourceDescription: "",
+            rate: "",
+            unitsConsumed: "",
+            allocationDate: $scope.startDate,
+            deallocationDate: $scope.endDate,
+            comments: ""
 		};
     	$scope.project_form.projectResourceMappingList.push(currentResource);
         //showHideResourcesToggleButton();
