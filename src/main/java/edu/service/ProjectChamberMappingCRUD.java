@@ -18,7 +18,7 @@ public interface ProjectChamberMappingCRUD extends CrudRepository<ProjectChamber
     //ProjectChamberMapping findTopByChamberIdAAndStatusEqualsOrderByAllocatedCartsDesc(String chamberId, String status);
 
     @Query("select p from ProjectChamberMapping p where p.status = :status and " +
-            "p.deAllocationDate>= :startDate " +
+            "p.deallocationDate>= :startDate " +
             "and p.allocationDate <= :endDate")
     List<ProjectChamberMapping> getChamberUsageSummary(@Param("status") String status,
                                               @Param("startDate") Date startDate,
