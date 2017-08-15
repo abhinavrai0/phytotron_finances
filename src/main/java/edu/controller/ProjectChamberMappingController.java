@@ -26,27 +26,17 @@ public class ProjectChamberMappingController {
     @Autowired
     ChamberCRUD chamberCRUDRepo;
 
-    /*@RequestMapping(value = "/getAvailableChambers/{startDate}/{endDate}", method = RequestMethod.GET)
-    public List<ProjectChamberMapping> getAvailableChambers(@PathVariable("startDate") String startDateString, @PathVariable("endDate") String endDateString){
-        List<ProjectChamberMapping> projectChamberMappingList = null;
+    @RequestMapping(value = "/getAvailableChambers/{startDate}/{endDate}", method = RequestMethod.GET)
+    public List<ProjectChamberMapping> getChamberUsageSummary(String startDateString, String endDateString){
+        List<ProjectChamberMapping> projectChamberMappingList = new ArrayList<>();
+        String datePattern = "";
+        Date startDate = DateUtil.convertStringDateToUtilDate(startDateString,datePattern);
+        Date endDate = DateUtil.convertStringDateToUtilDate(endDateString,datePattern);
 
-        Date startDate = DateUtil.convertStringDateToSQLDate(startDateString);
-        Date endDate = DateUtil.convertStringDateToSQLDate(endDateString);
+        projectChamberMappingList = projectChamberMappingCRUDRepo.getChamberUsageSummary("ACTIVE",startDate,endDate);
 
-        List<ProjectChamberMapping> resultList = projectChamberMappingCRUDRepo.findDistinctByChamberNameAndStatusEqualsAndAllocationDateBetweenAndDeAllocationDateBetween(
-                "ACTIVE", startDate, endDate, startDate, endDate);
-
-        if(resultList!=null && !resultList.isEmpty()){
-            projectChamberMappingList = new ArrayList<>(resultList.size());
-            for(ProjectChamberMapping projectChamberMapping : resultList){
-                ProjectChamberMapping temp = projectChamberMappingCRUDRepo.findTopByChamberIdAAndStatusEqualsOrderByAllocatedCartsDesc(projectChamberMapping.getChamberName(),"ACTIVE");
-                if(temp!=null){
-                    projectChamberMappingList.add(temp);
-                }
-            }
-        }
         return projectChamberMappingList;
-    }*/
+    }
 
     @RequestMapping(value = "/listChambersForProject/{projectId}", method = RequestMethod.GET)
     public List<ProjectChamberMapping> listAllChambersForProject(@PathVariable("projectId") String projectId){
