@@ -138,6 +138,7 @@ public class ProjectController {
 			if(projectChamberMappingList!=null && !projectChamberMappingList.isEmpty()){
 				for (ProjectChamberMapping projectChamberMapping : projectChamberMappingList){
 					projectChamberMapping.setStatus("ACTIVE");
+					projectChamberMapping.setProjectId(project.getProject_id());
 					projectChamberMappingCRUDRepo.save(projectChamberMapping);
 				}
 			}
