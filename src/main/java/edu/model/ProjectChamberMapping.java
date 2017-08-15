@@ -31,7 +31,7 @@ public class ProjectChamberMapping {
     @Temporal(value = TemporalType.DATE)
     @NotNull
     @Column(name = "end_date")
-    private Date deAllocationDate;
+    private Date deallocationDate;
 
     @Column(name = "carts_used")
     private Integer allocatedCarts;
@@ -78,12 +78,12 @@ public class ProjectChamberMapping {
         this.allocationDate = allocationDate;
     }
 
-    public Date getDeAllocationDate() {
-        return deAllocationDate;
+    public Date getDeallocationDate() {
+        return deallocationDate;
     }
 
-    public void setDeAllocationDate(Date deAllocationDate) {
-        this.deAllocationDate = deAllocationDate;
+    public void setDeallocationDate(Date deallocationDate) {
+        this.deallocationDate = deallocationDate;
     }
 
     public Integer getAllocatedCarts() {
