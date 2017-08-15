@@ -21,7 +21,7 @@ public class ProjectChamberMapping {
 
     @Column(name = "chamber_id")
     @NotNull
-    private Long chamberId;
+    private String chamberName;
 
     @Temporal(value = TemporalType.DATE)
     @NotNull
@@ -62,12 +62,12 @@ public class ProjectChamberMapping {
         this.projectId = projectId;
     }
 
-    public Long getChamberId() {
-        return chamberId;
+    public String getChamberName() {
+        return chamberName;
     }
 
-    public void setChamberId(Long chamberId) {
-        this.chamberId = chamberId;
+    public void setChamberName(String chamberName) {
+        this.chamberName = chamberName;
     }
 
     public Date getAllocationDate() {

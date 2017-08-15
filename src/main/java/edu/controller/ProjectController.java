@@ -50,6 +50,7 @@ public class ProjectController {
 	@Autowired
 	private ProjectResourceMappingCRUD projectResourceMappingCRUDRepo;
 
+	@Autowired
 	private ProjectChamberMappingCRUD projectChamberMappingCRUDRepo;
 
 	static final Logger logger = LogManager.getLogger(ProjectController.class.getName());
@@ -252,4 +253,27 @@ public class ProjectController {
 	}
 
 
+	public ProjectCRUD getProjectCrudRepo() {
+		return projectCrudRepo;
+	}
+
+	public void setProjectCrudRepo(ProjectCRUD projectCrudRepo) {
+		this.projectCrudRepo = projectCrudRepo;
+	}
+
+	public ProjectResourceMappingCRUD getProjectResourceMappingCRUDRepo() {
+		return projectResourceMappingCRUDRepo;
+	}
+
+	public void setProjectResourceMappingCRUDRepo(ProjectResourceMappingCRUD projectResourceMappingCRUDRepo) {
+		this.projectResourceMappingCRUDRepo = projectResourceMappingCRUDRepo;
+	}
+
+	public ProjectChamberMappingCRUD getProjectChamberMappingCRUDRepo() {
+		return projectChamberMappingCRUDRepo;
+	}
+
+	public void setProjectChamberMappingCRUDRepo(ProjectChamberMappingCRUD projectChamberMappingCRUDRepo) {
+		this.projectChamberMappingCRUDRepo = projectChamberMappingCRUDRepo;
+	}
 }
