@@ -29,7 +29,7 @@ public class ProjectChamberMappingController {
     @RequestMapping(value = "/getAvailableChambers/{startDate}/{endDate}", method = RequestMethod.GET)
     public List<ProjectChamberMapping> getChamberUsageSummary(String startDateString, String endDateString){
         List<ProjectChamberMapping> projectChamberMappingList = new ArrayList<>();
-        String datePattern = "";
+        String datePattern = "yyyy-MM-dd";
         Date startDate = DateUtil.convertStringDateToUtilDate(startDateString,datePattern);
         Date endDate = DateUtil.convertStringDateToUtilDate(endDateString,datePattern);
 
